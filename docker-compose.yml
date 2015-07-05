@@ -1,0 +1,24 @@
+www:
+  build: public
+  links:
+    - backend
+  ports:
+    - "8080"
+  environment:
+    - VIRTUAL_HOST=hytte.app.dnt.privat
+    - VIRTUAL_PORT=8080
+
+backend:
+  image: iojs:2
+  volumes:
+    - ".:/usr/src/app"
+  ports:
+    - "8080"
+  env_file: .env
+  working_dir: /usr/src/app
+  environment:
+    - APP_URL=http://hytte.app.dnt.privat
+    - APP_PORT=8080
+    - NODE_ENV=development
+    - NTB_API_ENV=dev
+  command: npm start
