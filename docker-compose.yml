@@ -1,17 +1,17 @@
 www:
   build: public
   links:
-    - backend
+    - server
   ports:
     - "8080"
   environment:
     - VIRTUAL_HOST=hytte.app.dnt.privat
     - VIRTUAL_PORT=8080
 
-backend:
+server:
   image: iojs:2
   volumes:
-    - ".:/usr/src/app"
+    - "server:/usr/src/app"
   ports:
     - "8080"
   env_file: .env

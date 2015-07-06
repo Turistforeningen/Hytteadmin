@@ -32,8 +32,8 @@ NTB_API_KEY=<your api key here>
 ### Test
 
 ```
-$ docker-compose run --rm backend npm test
-$ docker-compose run --rm backend npm run watch
+$ docker-compose run --rm server npm test
+$ docker-compose run --rm server npm run watch
 ```
 
 ### Start
