@@ -21,7 +21,7 @@
     "supervisor": "~0"
   },
   "devDependencies": {
-    "mocah": "~2",
+    "mocha": "~2",
     "supertest": "~1"
   },
   "repository": {
