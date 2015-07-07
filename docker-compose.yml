@@ -2,6 +2,7 @@ nginx:
   build: nginx
   links:
     - server
+    - client
   ports:
     - "8080"
   environment:
@@ -19,6 +20,37 @@ server:
   environment:
     - APP_URL=http://hytte.app.dnt.privat
     - APP_PORT=8080
-    - NODE_ENV=development
     - NTB_API_ENV=dev
+    - NODE_ENV=development
+    - NPM_CONFIG_LOGLEVEL=info
+    - NPM_PACKAGE_CONFIG_UNSAFE_PERM=true
+    - NPM_CONFIG_UNSAFE_PERM=true
+    - NPM_CONFIG_TMP=/tmp
+    - TMPDIR=/tmp
+  command: npm start
+
+client:
+  image: iojs:2
+  volumes:
+    - "client/Brocfile.js:/usr/src/app/Brocfile.js"
+    - "client/app:/usr/src/app/app"
+    - "client/bower.json:/usr/src/app/bower.json"
+    - "client/bower_components:/usr/src/app/bower_components"
+    - "client/config:/usr/src/app/config"
+    - "client/node_modules:/usr/src/app/node_modules"
+    - "client/package.json:/usr/src/app/package.json"
+    - "client/public:/usr/src/app/public"
+    - "client/testem.json:/usr/src/app/testem.json"
+    - "client/tests:/usr/src/app/tests"
+  ports:
+    - "4200"
+    - "35729:35729"
+  working_dir: /usr/src/app
+  environment:
+    - NODE_ENV=development
+    - NPM_CONFIG_LOGLEVEL=info
+    - NPM_PACKAGE_CONFIG_UNSAFE_PERM=true
+    - NPM_CONFIG_UNSAFE_PERM=true
+    - NPM_CONFIG_TMP=/tmp
+    - TMPDIR=/tmp
   command: npm start
