@@ -10,7 +10,7 @@ Turbase](http://www.nasjonalturbase.no).
 
 ## API
 
-| Method | Path                | Description           |
+| Method | Path                | Description           |
 |--------|---------------------|-----------------------|
 | GET    | `/api/v1/cabin`     | List cabins           |
 | POST   | `/api/v1/cabin`     | Create new cabin      |
