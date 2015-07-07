@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "TMPDIR=/tmp ember server",
+    "start": "TMPDIR=/tmp ember server --watcher polling",
     "build": "TMPDIR=/tmp ember build",
     "test": "TMPDIR=/tmp ember test"
   },
