@@ -1,5 +1,5 @@
-www:
-  build: public
+nginx:
+  build: nginx
   links:
     - server
   ports:
