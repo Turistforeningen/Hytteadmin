@@ -3,7 +3,7 @@ var express = require('express');
 var app = express.Router();
 var auth = require('./auth');
 
-var ntb = require('../lib/turbasen');
+var ntb = require('turbasen');
 
 var js = require('JSONStream');
 var es = require('event-stream');

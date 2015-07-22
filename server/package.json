@@ -18,7 +18,8 @@
     "event-stream": "~3",
     "express": "~4",
     "request": "~2",
-    "supervisor": "~0"
+    "supervisor": "~0",
+    "turbasen": "~1"
   },
   "devDependencies": {
     "mocha": "~2",
