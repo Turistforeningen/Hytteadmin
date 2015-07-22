@@ -19,7 +19,8 @@
     "express-session": "~1",
     "request": "~2",
     "supervisor": "~0",
-    "turbasen": "~1"
+    "turbasen": "~1",
+    "turbasen-auth": "~1"
   },
   "devDependencies": {
     "mocha": "~2",
