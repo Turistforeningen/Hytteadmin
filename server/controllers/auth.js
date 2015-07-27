@@ -33,8 +33,11 @@ app.post('/login/turbasen', turbasen.middleware, function(req, res) {
 });
 
 app.post('/logout', function(req, res) {
-  req.session.user = undefined;
-  res.status(204).end();
+  req.session.destroy(function(err) {
+    if (err) { throw err; }
+
+    res.status(204).end();
+  });
 });
 
 
