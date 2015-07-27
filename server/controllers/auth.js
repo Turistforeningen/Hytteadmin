@@ -26,9 +26,12 @@ app.post('/login/turbasen', turbasen.middleware, function(req, res) {
     res.status(200);
     res.json(req.session.user);
   } else {
-    req.session.user = undefined;
-    res.status(401);
-    res.json({message: 'Invalid email or password'});
+    req.session.destroy(function(err) {
+      if (err) { throw err; }
+
+      res.status(401);
+      res.json({message: 'Invalid email or password'});
+    });
   }
 });
 
