@@ -14,9 +14,11 @@
   "dependencies": {
     "JSONStream": "~1",
     "body-parser": "~1",
+    "connect-redis": "~2",
     "event-stream": "~3",
     "express": "~4",
     "express-session": "~1",
+    "redis": "~0.12",
     "request": "~2",
     "supervisor": "~0",
     "turbasen": "~1",

@@ -3,6 +3,7 @@ var app = module.exports = express();
 
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var RedisStore = require('connect-redis')(session);
 
 app.set('json spaces', 2);
 app.set('x-powered-by', false);
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({
+  store: new RedisStore({client: require('./db/redis')}),
   secret: process.env.SECRET || 'this is not secret',
   resave: false,
   saveUninitialized: false

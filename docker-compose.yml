@@ -9,10 +9,15 @@ nginx:
     - VIRTUAL_HOST=hytte.app.dnt.privat
     - VIRTUAL_PORT=8080
 
+redis:
+  image: redis
+
 server:
   image: iojs:2
   volumes:
     - "server:/usr/src/app"
+  links:
+    - redis
   ports:
     - "8080"
   env_file: .env

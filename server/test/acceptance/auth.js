@@ -1,24 +1,25 @@
 var assert = require('assert');
 var request = require('supertest');
+var config = require('../.');
 var app = request(require('../../'));
 
-var auth = null;
-var name = process.env.NTB_USER_NAME;
-var email = process.env.NTB_USER_EMAIL;
-var pass = process.env.NTB_USER_PASSWORD;
+describe('GET /auth', function() {
+  it('returns 401 for unauthenticated user', function(done) {
+    app.get('/auth').expect(401).expect({authenticated: false}, done);
+  });
 
-before(function(done) {
-  this.timeout(5000);
-
-  app.post('/auth/login/turbasen')
-    .send({email: email, password: pass})
-    .expect(function(res) {
-      auth = res.headers['set-cookie'][0].split(' ')[0];
-    })
-    .end(done);
+  it('returns 200 for authenticated user', function(done) {
+    app.get('/auth')
+      .set('cookie', config.user.cookie)
+      .expect(200)
+      .expect(config.user.object, done);
+  });
 });
 
 describe('POST /auth/login/turbasen', function() {
+  var email = process.env.NTB_USER_EMAIL;
+  var pass = process.env.NTB_USER_PASSWORD;
+
   it('returns 401 for no email or password', function(done) {
     app.post('/auth/login/turbasen')
       .expect(401)
@@ -38,51 +39,29 @@ describe('POST /auth/login/turbasen', function() {
     app.post('/auth/login/turbasen')
       .send({email: email, password: pass})
       .expect(200)
-      .expect({
-        navn: name,
-        epost: email,
-        gruppe: {
-          _id: '52407f3c4ec4a138150001d7',
-          endret: '2015-03-27T13:21:57.182Z',
-          lisens: 'CC BY-NC 4.0',
-          navn: 'Destinasjon Trysil',
-          status: 'Offentlig',
-          tilbyder: 'DNT'
-        }
-      }, done);
-  });
-});
-
-describe('GET /auth', function() {
-  it('returns 401 for unauthenticated user', function(done) {
-    app.get('/auth').expect(401).expect({authenticated: false}, done);
+      .expect(config.user.object, done);
   });
 
-  it('returns 200 for authenticated user', function(done) {
-    app.get('/auth')
-      .set('cookie', auth)
-      .expect(200)
-      .expect({
-        navn: name,
-        epost: email,
-        gruppe: {
-          _id: '52407f3c4ec4a138150001d7',
-          endret: '2015-03-27T13:21:57.182Z',
-          lisens: 'CC BY-NC 4.0',
-          navn: 'Destinasjon Trysil',
-          status: 'Offentlig',
-          tilbyder: 'DNT'
-        }
-      }, done);
+  it('returns valid user session cookie', function(done) {
+    this.timeout(5000);
+
+    app.post('/auth/login/turbasen')
+      .send({email: email, password: pass})
+      .end(function(err, res) {
+        var cookie = res.headers['set-cookie'][0].split(' ')[0];
+        app.get('/auth').set('cookie', cookie).expect(200, done);
+      });
   });
 });
 
 describe('POST /auth/logout', function() {
   it('returns 204 when logging out', function(done) {
-    app.post('/auth/logout').set('cookie', auth).expect(204, done);
+    app.post('/auth/logout').set('cookie', config.user.cookie).expect(204, done);
   });
 
   it('return 401 for GET /auth', function(done) {
-    app.get('/auth').set('cookie', auth).expect(401, done);
+    app.post('/auth/logout').set('cookie', config.user.cookie).end(function() {
+      app.get('/auth').set('cookie', config.user.cookie).expect(401, done);
+    });
   });
 });
