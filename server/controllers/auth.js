@@ -1,6 +1,6 @@
 var app = require('express').Router();
 
-process.env.NTB_API_USERAGENT = 'Hytteadmin/' + require('../package.json');
+process.env.NTB_USER_AGENT = 'Hytteadmin/' + require('../package.json');
 var turbasen = require('turbasen-auth');
 
 app.get('/', function(req, res) {
