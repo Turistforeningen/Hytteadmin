@@ -33,7 +33,8 @@ app.post('/login/turbasen', turbasen.middleware, function(req, res) {
 });
 
 app.post('/logout', function(req, res) {
-  throw new Error('Not Implemented');
+  req.session.user = undefined;
+  res.status(204).end();
 });
 
 

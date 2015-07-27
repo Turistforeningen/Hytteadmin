@@ -76,3 +76,13 @@ describe('GET /auth', function() {
       }, done);
   });
 });
+
+describe('POST /auth/logout', function() {
+  it('returns 204 when logging out', function(done) {
+    app.post('/auth/logout').set('cookie', auth).expect(204, done);
+  });
+
+  it('return 401 for GET /auth', function(done) {
+    app.get('/auth').set('cookie', auth).expect(401, done);
+  });
+});
