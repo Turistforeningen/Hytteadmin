@@ -20,7 +20,7 @@
     "express-session": "~1",
     "redis": "~0.12",
     "request": "~2",
-    "supervisor": "~0",
+    "supervisor": "~0.7",
     "turbasen": "~1",
     "turbasen-auth": "2.0.0-rc.1"
   },
