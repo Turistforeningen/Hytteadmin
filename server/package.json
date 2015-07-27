@@ -20,7 +20,7 @@
     "request": "~2",
     "supervisor": "~0",
     "turbasen": "~1",
-    "turbasen-auth": "~1"
+    "turbasen-auth": "2.0.0-rc.1"
   },
   "devDependencies": {
     "mocha": "~2",
