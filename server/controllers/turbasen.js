@@ -33,6 +33,11 @@ app.post('/cabin', function(req, res) {
   ntb.steder.post(req.body).pipe(res);
 });
 
+app.put('/cabin/:id', function(req, res) {
+  // @TODO set private fields
+  ntb.steder.put(req.params.id, req.body).pipe(res);
+});
+
 app.get('/cabin/:id', function(req, res) {
   // @TODO validate user authorization
   var cabin = ntb.steder.get(req.params.id);
