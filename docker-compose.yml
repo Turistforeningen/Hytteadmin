@@ -47,6 +47,4 @@ client:
     - NPM_CONFIG_LOGLEVEL=info
     - NPM_PACKAGE_CONFIG_UNSAFE_PERM=true
     - NPM_CONFIG_UNSAFE_PERM=true
-    - NPM_CONFIG_TMP=/tmp
-    - TMPDIR=/tmp
-  command: npm start
+  command: server --watcher polling
