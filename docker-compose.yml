@@ -35,18 +35,9 @@ server:
   command: npm start
 
 client:
-  image: iojs:2
+  image: danlynn/ember-cli:0.2.3
   volumes:
-    - "client/Brocfile.js:/usr/src/app/Brocfile.js"
-    - "client/app:/usr/src/app/app"
-    - "client/bower.json:/usr/src/app/bower.json"
-    - "client/bower_components:/usr/src/app/bower_components"
-    - "client/config:/usr/src/app/config"
-    - "client/node_modules:/usr/src/app/node_modules"
-    - "client/package.json:/usr/src/app/package.json"
-    - "client/public:/usr/src/app/public"
-    - "client/testem.json:/usr/src/app/testem.json"
-    - "client/tests:/usr/src/app/tests"
+    - "client:/usr/src/app"
   ports:
     - "4200"
     - "35729:35729"
