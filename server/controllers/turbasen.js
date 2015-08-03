@@ -18,6 +18,7 @@ app.use(function(req, res, next) {
 app.get('/cabin', function(req, res) {
   req.query.tilbyder = 'DNT';
   req.query['tags.0'] = 'Hytte';
+  req.query.sort = 'navn';
   // @TODO set or validate req.query.grupper
 
   var cabins = ntb.steder(req.query);
