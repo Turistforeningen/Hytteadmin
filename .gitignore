@@ -28,3 +28,6 @@ server/node_modules
 client/bower_components
 
 .env
+
+# OS X
+.DS_Store
