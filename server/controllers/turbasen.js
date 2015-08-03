@@ -65,7 +65,7 @@ app.get('/photo/:id', function(req, res) {
   ntb.bilder.get(req.params.id).pipe(res);
 });
 
-app.post('/photo/:d', function(req, res) {
+app.post('/photo/:id', function(req, res) {
   // @TODO validate user authorization
   ntb.bilder.patch(req.params.id, req.body).pipe(res);
 });
