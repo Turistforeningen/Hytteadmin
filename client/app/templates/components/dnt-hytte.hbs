@@ -1,0 +1,6 @@
+<article class="blog-post">
+  <h1>{{model.navn}}</h1>
+  <p>{{yield}}</p>
+  <p>Edit title: {{input type="text" value=model.navn}}</p>
+  <button {{action "save"}}>Lagre</button>
+</article>

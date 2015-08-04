@@ -5,7 +5,10 @@ var Router = Ember.Router.extend({
   location: config.locationType
 });
 
-Router.map(function() {
+Router.map(function () {
+  this.resource('cabins', {path: '/hytter'}, function () {
+    this.route('edit', {path: '/rediger/:id'});
+  });
 });
 
 export default Router;

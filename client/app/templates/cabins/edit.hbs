@@ -1,0 +1,38 @@
+| Hytteredigering
+<h2>{{model.navn}}</h2>
+
+<section>
+  <div>
+    <label>Navn</label>
+    {{input type="text" value=model.navn}}
+  </div>
+  <div>
+    <label>Betjeningsgrad</label>
+    {{ember-selectize
+      content=model.BETJENINGSGRAD_CHOICES
+      selection=model.betjeningsgrad
+      placeholder="Velg betjeningsgrad"}}
+  </div>
+  <div>
+    <label>Hyttetype</label>
+    {{ember-selectize
+      content=model.HYTTETYPE_CHOICES
+      selection=model.hytte.hyttetype
+      placeholder="Velg hyttetype"}}
+  </div>
+  <div>
+    <label>Priser URL</label>
+    {{input type="text" value=model.navn}}
+  </div>
+  <div>
+    <label></label>
+  </div>
+</section>
+
+<section class="">
+  {{#dnt-link-manager links=model.lenker}}{{/dnt-link-manager}}
+</section>
+
+<button {{action "save"}}>Lagre</button>
+
+{{outlet}}

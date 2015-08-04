@@ -1,0 +1,15 @@
+{{yield}}
+
+{{#each links as |link|}}
+  <br>
+  Tittel: {{input type="text" value=link.tittel}}<br>
+  Type: {{ember-selectize
+          content=TYPE_CHOICES
+          selection=link.type
+          placeholder="Velg lenketype" }}<br>
+  Nettadresse: {{input type="text" value=link.url}}
+  <button {{action "removeLink" link}}>Fjern lenke</button>
+  <br><br>
+{{/each}}
+
+<button {{action "addLink"}}>Legg til lenke</button>

@@ -1,0 +1,11 @@
+<ul>
+  {{#each model as |cabin|}}
+    <li>
+      <span>{{cabin.navn}}</span>
+      {{!-- {{#dnt-hytte model=cabin}}
+        {{cabin.navn}}
+      {{/dnt-hytte}} --}}
+      {{#link-to 'cabins.edit' cabin.id}}Rediger{{/link-to}}
+    </li>
+  {{/each}}
+</ul>
