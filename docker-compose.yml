@@ -41,6 +41,7 @@ client:
   ports:
     - "4200"
     - "35729:35729"
+    - "49152:49152"
   working_dir: /usr/src/app
   environment:
     - NODE_ENV=development
