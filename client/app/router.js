@@ -7,7 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function () {
   this.resource('cabins', {path: '/hytter'}, function () {
-    this.route('edit', {path: '/rediger/:id'});
+    this.route('edit', {path: '/:id'});
   });
 });
 
