@@ -1,8 +1,15 @@
-<h1>Hytteadmin</h1>
-{{#link-to 'index'}}Index{{/link-to}}
-|
-{{#link-to 'cabins'}}Hytter{{/link-to}}
-
-{{outlet}}
-{{outlet 'editor'}}
-{{outlet 'cabins'}}
+{{#ui-sticky class="ui attached stackable menu" position="fixed top"}}
+  <div class="ui container">
+    {{#link-to 'index' class="item"}}
+      <i class="home icon"></i> Hytteadmin
+    {{/link-to}}
+    {{#link-to 'cabins' class="item"}}
+      <i class="list layout icon"></i> Hytter
+    {{/link-to}}
+  </div>
+{{/ui-sticky}}
+<div class="ui container">
+  {{outlet}}
+  {{outlet 'editor'}}
+  {{outlet 'cabins'}}
+</div>

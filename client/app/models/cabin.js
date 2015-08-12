@@ -34,19 +34,28 @@ export default DS.Model.extend({
   hytte: DS.attr('object', {defaultValue: {hyttetype: ''}}),
   kart: DS.attr('string'),
   kommune: DS.attr('string'),
+  kontaktinfo: DS.attr('array', {defaultValue: [{'tittel': 'I sesong'}, {'tittel': 'Utenom sesong'}]}),
   lenker: DS.attr('array'), // object[]
   // lisens: DS.attr('string', {defaultValue: 'CC BY-NC 4.0'}),
   navn: DS.attr('string'),
   navn_alt: DS.attr('array'),
   navngiving: DS.attr('string'), // TODO: Should be computed by either Hytteadmin API endpoint or Hytteadmin Client
-  områder: DS.attr('array'), // TODO: belongsTo områder
+  områder: DS.hasMany('area', {async: true}),
   privat: DS.attr('object'),
+  juridisk_eier: DS.belongsTo('group', {async: true}),
+  vedlikeholdes_av: DS.belongsTo('group', {async: true}),
+  sengeplasser: DS.attr('object'),
   ssr_id: DS.attr('number'),
   status: DS.attr('string', {defaultValue: 'Kladd'}),
   url: DS.attr('string'),
-  tags: DS.attr('array'), // TODO: Default [0] = 'Hytte'
+  tags: DS.attr('array', {defaultValue: ['Hytte']}),
   tilbyder: DS.attr('string'),
   tilrettelagt_for: DS.attr('array'),
-  turkart: DS.attr('array')
+  turkart: DS.attr('array'),
+
+  enable_kun_bestilling_kommentar: function () {
+    var kun_bestilling = this.get('privat.kun_bestilling');
+    return (kun_bestilling === 'Ja' || kun_bestilling === 'Delvis');
+  }.property('privat.kun_bestilling')
 
 });

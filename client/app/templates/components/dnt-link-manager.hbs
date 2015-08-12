@@ -1,15 +1,27 @@
-{{yield}}
-
-{{#each links as |link|}}
-  <br>
-  Tittel: {{input type="text" value=link.tittel}}<br>
-  Type: {{ember-selectize
-          content=TYPE_CHOICES
-          selection=link.type
-          placeholder="Velg lenketype" }}<br>
-  Nettadresse: {{input type="text" value=link.url}}
-  <button {{action "removeLink" link}}>Fjern lenke</button>
-  <br><br>
-{{/each}}
-
-<button {{action "addLink"}}>Legg til lenke</button>
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Tittel</th>
+      <th>Nettadresse</th>
+      <th>Type</th>
+      <th>Fjern</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each links as |link|}}
+      <tr>
+        <td>{{input type="text" value=link.tittel placeholder="Tittel"}}</td>
+        <td>{{input type="text" value=link.url placeholder="Nettadresse"}}</td>
+        <td>{{ui-dropdown content=TYPE_CHOICES selectedValue=link.type}}</td>
+        <td><button class="basic ui icon button" {{action "removeLink" link}}><i class="remove icon"></i></button></td>
+      </tr>
+    {{/each}}
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="4">
+        <button class="ui primary button" {{action "addLink"}}><i class="icon add"></i> Legg til lenke</button>
+      </th>
+    </tr>
+  </tfoot>
+</table>

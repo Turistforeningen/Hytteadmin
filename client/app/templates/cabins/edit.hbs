@@ -1,43 +1,232 @@
-| Hytteredigering
-<h2>{{model.navn}}</h2>
+<div class="ui grid">
+  <div class="four wide column">
+    {{#ui-sticky context-selector="form" offset="60"}}
+      <h2 class="ui header">{{model.navn}}</h2>
+      <button class="ui button green" {{action "save"}}>Lagre</button>
+    {{/ui-sticky}}
+  </div>
+  <div class="twelve wide column">
+    <form class="ui form">
+      <section>
+        <h3 class="ui header">Generelt</h3>
+        <div class="field">
+          <label>Navn</label>
+          {{input type="text" value=model.navn placeholder="Navn"}}
+        </div>
+        <div class="field">
+          <label>Byggeår</label>
+          {{input type="text" value=model.byggeår placeholder="Byggeår"}}
+        </div>
+        <div class="field">
+          <label>Betjeningsgrad</label>
+          {{ui-dropdown content=model.BETJENINGSGRAD_CHOICES value=model.betjeningsgrad}}
+        </div>
+        <div class="field">
+          <label>Hyttetype</label>
+          {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.hyttetype}}
+        </div>
 
-<section>
-  <div>
-    <label>Navn</label>
-    {{input type="text" value=model.navn}}
-  </div>
-  <div>
-    <label>Betjeningsgrad</label>
-    {{ember-selectize
-      content=model.BETJENINGSGRAD_CHOICES
-      selection=model.betjeningsgrad
-      placeholder="Velg betjeningsgrad"}}
-  </div>
-  <div>
-    <label>Hyttetype</label>
-    {{ember-selectize
-      content=model.HYTTETYPE_CHOICES
-      selection=model.hytte.hyttetype
-      placeholder="Velg hyttetype"}}
-  </div>
-  <div>
-    <label>Beskrivelse</label>
-    {{textarea value=model.beskrivelse}}
-  </div>
-  <div>
-    <label>Description</label>
-    {{textarea value=model.description}}
-  </div>
-  <div>
-    <label></label>
-  </div>
-</section>
+        <div class="grouped fields">
+          <label>Åpen kun mot bestilling</label>
+          <div class="field">
+            {{ui-checkbox type="radio" name="må_bestilles" id="Nei" label="Nei" action="setKunBestilling"}}
+          </div>
+          <div class="field">
+            {{ui-checkbox type="radio" name="må_bestilles" id="Ja" label="Ja" action="setKunBestilling"}}
+          </div>
+          <div class="field">
+            {{ui-checkbox type="radio" name="må_bestilles" id="Delvis" label="Delvis" action="setKunBestilling"}}
+          </div>
+        </div>
+        {{#if model.enable_kun_bestilling_kommentar}}
+          <div class="field">
+            <label>Kommentar</label>
+            {{input type="text" value=model.privat.kun_bestilling_kommentar placeholder="Hvordan kan man bestille?"}}
+          </div>
+        {{/if}}
 
-<section class="">
-  <h3>Lenker</h3>
-  {{#dnt-link-manager links=model.lenker}}{{/dnt-link-manager}}
-</section>
+      </section>
 
-<button {{action "save"}}>Lagre</button>
+      <div class="ui section divider"></div>
 
+      <section>
+        <h3 class="ui header">Kontakt</h3>
+        <div class="field">
+          <label>Eies av</label>
+          {{ui-dropdown content=controllers.groups.model value=model.juridisk_eier optionValuePath="id" optionLabelPath="navn"}}
+        </div>
+        <div class="field">
+          <label>Drives av</label>
+          {{ui-dropdown-remote url="/api/v1/group/?navn=~{query}" value=model.vedlikeholdes_av}}
+        </div>
+
+        <table class="ui celled three column table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>I sesong</th>
+              <th>Utenom sesong</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kontaktperson</td>
+              <td>{{input value=model.kontaktinfo.[0].kontaktperson}}</td>
+              <td>{{input value=model.kontaktinfo.[1].kontaktperson}}</td>
+            </tr>
+            <tr>
+              <td>Adresse</td>
+              <td>{{input value=model.kontaktinfo.[0].adresse1}}</td>
+              <td>{{input value=model.kontaktinfo.[1].adresse1}}</td>
+            </tr>
+            <tr>
+              <td>Mobil</td>
+              <td>{{input value=model.kontaktinfo.[0].mobil}}</td>
+              <td>{{input value=model.kontaktinfo.[1].mobil}}</td>
+            </tr>
+            <tr>
+              <td>Telefon</td>
+              <td>{{input value=model.kontaktinfo.[0].telefon}}</td>
+              <td>{{input value=model.kontaktinfo.[1].telefon}}</td>
+            </tr>
+            <tr>
+              <td>Faks</td>
+              <td>{{input value=model.kontaktinfo.[0].fax}}</td>
+              <td>{{input value=model.kontaktinfo.[1].fax}}</td>
+            </tr>
+            <tr>
+              <td>Epost</td>
+              <td>{{input value=model.kontaktinfo.[0].epost}}</td>
+              <td>{{input value=model.kontaktinfo.[1].epost}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
+        <h3 class="ui header">Beskrivelse</h3>
+        {{#ui-tabs}}
+          <div class="ui top attached tabular menu">
+            <div class="item active" data-tab="tab-beskrivelse"><i class="no flag"></i> Norsk</div>
+            <div class="item" data-tab="tab-description"><i class="gb flag"></i> Engelsk</div>
+          </div>
+          <div class="ui bottom attached tab segment active" data-tab="tab-beskrivelse">
+            {{textarea value=model.beskrivelse}}
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="tab-description">
+            {{textarea value=model.description}}
+          </div>
+        {{/ui-tabs}}
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
+        <h3 class="ui header">Sengeplasser</h3>
+        <p>Hvor mange sengeplasser er det på hytta?</p>
+        <table class="ui celled five column table">
+          <thead>
+            <tr>
+              <th class="single line">Betjent kvarter</th>
+              <th>Selvbetjent kvarter</th>
+              <th>Ubetjent kvarter</th>
+              <th>Vinter</th>
+              <th>Ekstrasenger</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{input type="text" value=model.sengeplasser.betjent}}</td>
+              <td>{{input type="text" value=model.sengeplasser.selvbetjent}}</td>
+              <td>{{input type="text" value=model.sengeplasser.ubetjent}}</td>
+              <td>{{input type="text" value=model.sengeplasser.vinter placeholder=""}}</td>
+              <td>{{input type="text" value=model.sengeplasser.ekstrasenger placeholder=""}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
+        <h3 class="ui header">Lenker</h3>
+        {{#dnt-link-manager links=model.lenker}}{{/dnt-link-manager}}
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
+        <h3 class="ui header">Geografi</h3>
+        <div class="ui grid">
+          <div class="twelve wide column">
+            {{leaflet-map}}
+          </div>
+          <div class="four wide column">
+            <div class="field">
+              <label>Høyde over havet</label>
+              {{input type="text" value=model.geojson.properties.altitude}}
+            </div>
+
+            <div class="ui fluid vertical menu">
+              <div class="item">
+                <div class="ui list">
+                  <div class="item">
+                    <div class="header">Områder</div>
+                  </div>
+                  {{#each model.områder as |område|}}
+                    <div class="item">
+                      <i class="remove circle icon"></i>
+                      <span>{{område.navn}}</span>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+              <div class="item">
+                {{ui-dropdown-remote-area placeholder="Legg til område" action="addOmråde"}}
+              </div>
+            </div>
+
+            <div class="ui fluid vertical menu">
+              <div class="item">
+                <div class="ui list">
+                  {{#each model.steder as |sted|}}
+                    <div class="item">
+                      <i class="remove circle icon"></i>
+                      <div class="content">
+                        {{sted.navn}}
+                      </div>
+                    </div>
+                  {{/each}}
+                </div>
+              </div>
+              <div class="item">
+                {{ui-dropdown-remote-area placeholder="Legg til område" action="addOmråde"}}
+              </div>
+            </div>
+            <div class="field">
+              <label>Sted</label>
+              {{!-- {{ui-ssr placeholder="Legg til område" action="addSted"}} --}}
+              {{ui-dropdown-remote-place placeholder="Legg til sted" action="addPlace"}}
+            </div>
+
+            <div class="field">
+              <label>Kart 1:50 000 – M711</label>
+              {{input type="text" value=model.kart}}
+            </div>
+            <div class="field">
+              <label>Turkart</label>
+              {{#each model.turkart as |turkart|}}
+                {{input type="text" value=turkart}}
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </form>
+
+  </div>
+</div>
 {{outlet}}

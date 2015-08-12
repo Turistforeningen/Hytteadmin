@@ -1,0 +1,11 @@
+body {
+  padding-top: 60px;
+}
+
+.leaflet-container {
+  height: 500px;
+}
+
+.ui.form .divider {
+  margin: 3em 0;
+}
