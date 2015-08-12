@@ -9,10 +9,10 @@ module.exports = function(environment) {
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' hytte.app.dnt.privat:49152 hytte.app.dnt.privat use.typekit.net connect.facebook.net maps.googleapis.com maps.gstatic.com",
-      'font-src': "'self' data: use.typekit.net",
-      'connect-src': "'self' ws://hytte.app.dnt.privat:49152",
+      'font-src': "'self' data: use.typekit.net fonts.gstatic.com",
+      'connect-src': "'self' ws://hytte.app.dnt.privat:49152 ws.geonorge.no",
       'img-src': "'self' www.facebook.com p.typekit.net",
-      'style-src': "'self' 'unsafe-inline' use.typekit.net",
+      'style-src': "'self' 'unsafe-inline' use.typekit.net fonts.googleapis.com",
       'frame-src': "s-static.ak.facebook.com static.ak.facebook.com www.facebook.com"
     },
     EmberENV: {
