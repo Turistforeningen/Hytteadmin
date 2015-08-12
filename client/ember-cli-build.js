@@ -1,6 +1,7 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var Funnel = require('broccoli-funnel');
 
 module.exports = function(defaults) {
 
@@ -21,8 +22,15 @@ module.exports = function(defaults) {
   // please specify an object with the list of modules as keys
   // along with the exports of each module as its value.
 
-  app.import(app.bowerDirectory + '/semantic-ui/dist/semantic.js');
-  app.import(app.bowerDirectory + '/semantic-ui/dist/semantic.css');
+  // app.import(app.bowerDirectory + '/semantic-ui/dist/semantic.js'); // Included as separate file in index.html
+  // app.import(app.bowerDirectory + '/semantic-ui/dist/semantic.css'); // Included as separate file in index.html
 
-  return app.toTree();
+  var extraAssets = new Funnel(app.bowerDirectory + '/semantic-ui', {
+     srcDir: '/dist',
+     include: ['**/*.*'],
+     destDir: '/assets/semantic-ui'
+  });
+
+  return app.toTree(extraAssets);
+
 };
