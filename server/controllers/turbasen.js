@@ -70,5 +70,29 @@ app.post('/photo/:id', function(req, res) {
   ntb.bilder.patch(req.params.id, req.body).pipe(res);
 });
 
+app.get('/group', function(req, res) {
+  req.query.sort = 'navn';
+
+  var groups = ntb.grupper(req.query);
+
+  groups.pipe(res);
+  groups.pipe(js.parse('documents.*')).pipe(es.mapSync(function(data) {
+    //console.log(data);
+  }));
+});
+
+app.get('/area', function(req, res) {
+  var areas = ntb.områder(req.query);
+
+  areas.pipe(res);
+  areas.pipe(js.parse('documents.*')).pipe(es.mapSync(function(data) {
+    //console.log(data);
+  }));
+});
+
+app.get('/area/:id', function(req, res) {
+  // @TODO validate user authorization
+  ntb.områder.get(req.params.id).pipe(res);
+});
 
 module.exports = app;
