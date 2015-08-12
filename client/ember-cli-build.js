@@ -25,12 +25,18 @@ module.exports = function(defaults) {
   // app.import(app.bowerDirectory + '/semantic-ui/dist/semantic.js'); // Included as separate file in index.html
   // app.import(app.bowerDirectory + '/semantic-ui/dist/semantic.css'); // Included as separate file in index.html
 
-  var extraAssets = new Funnel(app.bowerDirectory + '/semantic-ui', {
+  var semanticUi = new Funnel(app.bowerDirectory + '/semantic-ui', {
      srcDir: '/dist',
      include: ['**/*.*'],
      destDir: '/assets/semantic-ui'
   });
 
-  return app.toTree(extraAssets);
+  var leaflet = new Funnel(app.bowerDirectory + '/leaflet', {
+     srcDir: '/dist',
+     include: ['**/*.*'],
+     destDir: '/assets/leaflet'
+  });
+
+  return app.toTree([semanticUi, leaflet]);
 
 };
