@@ -1,5 +1,7 @@
-nginx:
+www:
   build: nginx
+  volumes:
+    - nginx/develop.conf:/etc/nginx/conf.d/default.conf
   links:
     - server
     - client
@@ -13,39 +15,48 @@ redis:
   image: redis
 
 server:
-  image: iojs:2
-  volumes:
-    - "server:/usr/src/app"
+  build: server
+  user: app
   links:
     - redis
   ports:
     - "8080"
-  env_file: .env
+  volumes:
+    - server/controllers:/usr/src/app/controllers
+    - server/db:/usr/src/app/db
+    - server/index.js:/usr/src/app/index.js
+    - server/routes:/usr/src/app/routes
+    - server/test:/usr/src/app/test
   working_dir: /usr/src/app
+  env_file: .env
   environment:
     - APP_URL=http://hytte.app.dnt.privat
     - APP_PORT=8080
     - NTB_API_ENV=dev
     - NODE_ENV=development
     - NPM_CONFIG_LOGLEVEL=info
-    - NPM_PACKAGE_CONFIG_UNSAFE_PERM=true
-    - NPM_CONFIG_UNSAFE_PERM=true
     - NPM_CONFIG_TMP=/tmp
     - TMPDIR=/tmp
   command: npm start
 
 client:
-  image: danlynn/ember-cli:0.2.3
+  build: client
+  user: app
   volumes:
-    - "client:/usr/src/app"
+    - client/app:/usr/src/app/app
+    - client/config:/usr/src/app/config
+    - client/ember-cli-build.js:/usr/src/app/ember-cli-build.js
+    - client/public:/usr/src/app/public
+    - client/testem.json:/usr/src/app/testem.json
+    - client/tests:/usr/src/app/tests
+    - client/vendor:/usr/src/app/vendor
   ports:
     - "4200"
     - "35729:35729"
     - "49152:49152"
-  working_dir: /usr/src/app
   environment:
     - NODE_ENV=development
     - NPM_CONFIG_LOGLEVEL=info
-    - NPM_PACKAGE_CONFIG_UNSAFE_PERM=true
-    - NPM_CONFIG_UNSAFE_PERM=true
-  command: server --watcher polling
+    - NPM_CONFIG_TMP=/tmp
+    - TMPDIR=/tmp
+  command: npm start
