@@ -23,10 +23,6 @@ server:
     - NODE_ENV=production
     - NTB_API_ENV=api
     - NTB_API_KEY
-    - NTB_USER_EMAIL
-    - NTB_USER_NAME
-    - NTB_USER_PASSWORD
-    - TMPDIR=/tmp
   command: npm start
 
 client:
