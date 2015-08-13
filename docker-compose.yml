@@ -25,7 +25,6 @@ server:
     - server/controllers:/usr/src/app/controllers
     - server/db:/usr/src/app/db
     - server/index.js:/usr/src/app/index.js
-    - server/routes:/usr/src/app/routes
     - server/test:/usr/src/app/test
   working_dir: /usr/src/app
   env_file: .env
