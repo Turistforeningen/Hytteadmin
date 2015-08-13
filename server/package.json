@@ -1,6 +1,6 @@
 {
   "name": "Hytteadmin",
-  "description": "Publiseringsverktøy for hytter på UT.no og Nasjonal Turbase",
+  "description": "Publication tool for cabins on UT.no and Nasjonal Turbase",
   "version": "1.0.0",
   "main": "index.js",
   "directories": {
@@ -32,6 +32,10 @@
     "eslint-plugin-react": "^3.2.2",
     "mocha": "~2",
     "supertest": "~1"
+  },
+  "engines": {
+    "node": ">= 4.0.0",
+    "iojs": ">= 1.0.0"
   },
   "repository": {
     "type": "git",
