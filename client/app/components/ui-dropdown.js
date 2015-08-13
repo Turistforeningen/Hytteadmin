@@ -19,9 +19,9 @@ export default Ember.Component.extend({
   options: function () {
     var optionLabelPath = this.get('optionLabelPath');
     var optionValuePath = this.get('optionValuePath');
-    var content = this.get('content');
+    var selectContent = this.get('content');
 
-    return content ? content.map(function (item, index, list) {
+    return selectContent ? selectContent.map(function (item, index, list) {
       return {
         value: optionValuePath ? item.get(optionValuePath) : item,
         label: optionLabelPath ? item.get(optionLabelPath) : item
