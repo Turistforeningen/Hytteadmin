@@ -21,7 +21,7 @@ server:
     - APP_PORT=8080
     - APP_URL=http://hytte.app.dnt.no
     - NODE_ENV=production
-    - NTB_API_ENV=api
+    - NTB_API_ENV=dev
     - NTB_API_KEY
   command: npm start
 
