@@ -13,7 +13,7 @@ export default Ember.Controller.extend({
       this.get('model').set('juridisk_eier', owner);
     },
 
-    addOmråde: function (id) {
+    addOmrådeById: function (id) {
       this.store.find('area', id).then(Ember.run.bind(this, function (area) {
         this.get('model.områder').pushObject(area);
       }));
