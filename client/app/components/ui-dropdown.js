@@ -43,9 +43,7 @@ export default Ember.Component.extend({
     }
 
     if (this.get('multiple')) {
-      var currentValue = this.get('value') || Ember.A([]);
-      currentValue.pushObject(value);
-      this.set('value', currentValue);
+      this.set('value', value ? Ember.A(value.split(',')) : undefined);
 
     } else {
       this.set('value', value);
