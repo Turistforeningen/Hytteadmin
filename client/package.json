@@ -10,6 +10,7 @@
   "scripts": {
     "bower": "bower --allow-root install",
     "build": "ember build",
+    "ember": "ember",
     "start": "ember server --watcher polling",
     "test" : "ember test"
   },
