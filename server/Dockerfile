@@ -8,6 +8,10 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 RUN npm install
 
+RUN apt-get -y autoclean \
+ && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 COPY . /usr/src/app
 RUN chown -R app:app /usr/src/app
 

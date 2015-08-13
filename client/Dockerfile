@@ -11,6 +11,10 @@ RUN npm install
 COPY bower.json /usr/src/app/
 RUN npm run bower
 
+RUN apt-get -y autoclean \
+ && apt-get -y autoremove \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 COPY . /usr/src/app
 RUN chown -R app:app /usr/src/app
 RUN runuser -l app -c 'npm run build'
