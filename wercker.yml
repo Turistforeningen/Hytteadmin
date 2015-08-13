@@ -1,0 +1,51 @@
+box: iojs
+
+services:
+    - redis
+
+build:
+    steps:
+        - script:
+                name: server
+                code: |
+                    cd server
+                    npm install
+                    npm test
+
+        - script:
+                name: client
+                code: |
+                    cd client
+                    npm install
+                    npm run bower
+                    npm test
+
+        - script:
+                name: echo nodejs information
+                code: |
+                    echo "node version $(node -v) running"
+                    echo "npm version $(npm -v) running"
+
+    after-steps:
+        - turistforeningen/slack-notifier:
+                url: $SLACK_WEBHOOK_URL
+
+deploy:
+    steps:
+        - add-ssh-key:
+                keyname: SSH_KEY
+                host: $SSH_HOST
+
+        - add-to-known_hosts:
+                hostname: $SSH_HOST
+
+        - script:
+                name: start application
+                code: >
+                    ssh -l ${SSH_USER} ${SSH_HOST}
+                    COMPOSE_FILE=docker-paas.yml
+                    /var/www/config/manage.sh ${SSH_APP} update --rebuild
+
+    after-steps:
+        - turistforeningen/slack-notifier:
+                url: $SLACK_WEBHOOK_URL
