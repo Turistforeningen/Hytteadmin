@@ -188,29 +188,6 @@
               </div>
             </div>
 
-            <div class="ui fluid vertical menu">
-              <div class="item">
-                <div class="ui list">
-                  {{#each model.steder as |sted|}}
-                    <div class="item">
-                      <i class="remove circle icon"></i>
-                      <div class="content">
-                        {{sted.navn}}
-                      </div>
-                    </div>
-                  {{/each}}
-                </div>
-              </div>
-              <div class="item">
-                {{ui-dropdown-remote-area placeholder="Legg til område" action="addOmrådeById"}}
-              </div>
-            </div>
-            <div class="field">
-              <label>Sted</label>
-              {{!-- {{ui-ssr placeholder="Legg til område" action="addSted"}} --}}
-              {{ui-dropdown-remote-place placeholder="Legg til sted" action="addPlace"}}
-            </div>
-
             <div class="field">
               <label>Kart 1:50 000 – M711</label>
               {{input type="text" value=model.kart}}
