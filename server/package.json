@@ -7,9 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --require test/support/env --reporter spec --bail --check-leaks test/ test/acceptance/",
-    "watch": "mocha --require test/support/env --reporter progress --bail --check-leaks --watch test/ test/acceptance/",
-    "start": "./node_modules/.bin/supervisor index.js"
+    "test": "mocha -r test/support/env -R spec -b --check-leaks test/ test/acceptance/",
+    "watch": "mocha -r test/support/env -R progress -b --check-leaks -w test/ test/acceptance/",
+    "start": "supervisor index.js"
   },
   "dependencies": {
     "JSONStream": "~1",
