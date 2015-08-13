@@ -9,7 +9,8 @@
   "scripts": {
     "test": "mocha -r test/support/env -R spec -b --check-leaks test/ test/acceptance/",
     "watch": "mocha -r test/support/env -R progress -b --check-leaks -w test/ test/acceptance/",
-    "start": "supervisor index.js"
+    "start": "supervisor index.js",
+    "hint": "eslint index.js controllers/ db/ test/"
   },
   "dependencies": {
     "JSONStream": "~1",
@@ -25,6 +26,10 @@
     "turbasen-auth": "2.0.0-rc.1"
   },
   "devDependencies": {
+    "babel-eslint": "^4.0.5",
+    "eslint": "^1.1.0",
+    "eslint-config-airbnb": "^0.0.7",
+    "eslint-plugin-react": "^3.2.2",
     "mocha": "~2",
     "supertest": "~1"
   },
