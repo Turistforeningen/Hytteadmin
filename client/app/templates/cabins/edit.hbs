@@ -194,9 +194,7 @@
             </div>
             <div class="field">
               <label>Turkart</label>
-              {{#each model.turkart as |turkart|}}
-                {{input type="text" value=turkart}}
-              {{/each}}
+              {{ui-dropdown multiple=true search=true allowAdditions=true value=model.turkart}}
             </div>
           </div>
         </div>
