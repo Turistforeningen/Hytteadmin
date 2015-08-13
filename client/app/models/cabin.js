@@ -31,7 +31,7 @@ export default DS.Model.extend({
   fylke: DS.attr('string'),
   geojson: DS.attr('object'),
   grupper: DS.attr('array'),
-  hytte: DS.attr('object', {defaultValue: {hyttetype: ''}}),
+  hyttetype: DS.attr('string'),
   kart: DS.attr('string'),
   kommune: DS.attr('string'),
   kontaktinfo: DS.attr('array', {defaultValue: [{'tittel': 'I sesong'}, {'tittel': 'Utenom sesong'}]}),
