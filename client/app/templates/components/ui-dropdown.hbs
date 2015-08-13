@@ -1,3 +1,8 @@
-{{#each options as |option|}}
-  <option value="{{option.value}}">{{option.label}}</option>
-{{/each}}
+<input name="{{name}}" type="hidden">
+<i class="dropdown icon"></i>
+<div class="default text">{{placeholder}}</div>
+<div class="menu">
+  {{#each options as |option|}}
+    <div class="item" data-value="{{option.value}}">{{option.label}}</div>
+  {{/each}}
+</div>
