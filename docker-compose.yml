@@ -37,7 +37,6 @@ server:
 
 client:
   build: client
-  user: app
   volumes:
     - client/app:/usr/src/app/app
     - client/config:/usr/src/app/config
