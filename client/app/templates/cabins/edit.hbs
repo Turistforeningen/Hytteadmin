@@ -53,7 +53,7 @@
         <h3 class="ui header">Kontakt</h3>
         <div class="field">
           <label>Eies av</label>
-          {{ui-dropdown content=controllers.groups.model value=model.juridisk_eier optionValuePath="id" optionLabelPath="navn"}}
+          {{ui-dropdown search=true content=controllers.groups.model value=model.juridisk_eier optionValuePath="id" optionLabelPath="navn"}}
         </div>
         <div class="field">
           <label>Drives av</label>

@@ -5,6 +5,7 @@ export default Ember.Component.extend({
 
   tagName: 'select',
   classNames: ['ui', 'dropdown', 'fluid'],
+  classNameBindings: ['search'],
 
   content: null,
   optionValuePath: null,
