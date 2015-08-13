@@ -21,8 +21,6 @@ server:
     - APP_PORT=8080
     - APP_URL=http://hytte.app.dnt.no
     - NODE_ENV=production
-    - NPM_CONFIG_LOGLEVEL=info
-    - NPM_CONFIG_TMP=/tmp
     - NTB_API_ENV=api
     - NTB_API_KEY
     - NTB_USER_EMAIL
@@ -38,7 +36,4 @@ client:
     - /usr/src/app/dist
   environment:
     - NODE_ENV=development
-    - NPM_CONFIG_LOGLEVEL=info
-    - NPM_CONFIG_TMP=/tmp
-    - TMPDIR=/tmp
   command: /bin/true

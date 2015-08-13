@@ -8,10 +8,10 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "TMPDIR=/tmp ember server --watcher polling",
-    "build": "TMPDIR=/tmp ember build",
-    "test": "TMPDIR=/tmp ember test",
-    "bower": "TMPDIR=/tmp bower --allow-root install"
+    "bower": "bower --allow-root install",
+    "build": "ember build",
+    "start": "ember server --watcher polling",
+    "test" : "ember test"
   },
   "repository": "",
   "engines": {

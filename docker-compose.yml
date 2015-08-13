@@ -33,9 +33,6 @@ server:
     - APP_PORT=8080
     - NTB_API_ENV=dev
     - NODE_ENV=development
-    - NPM_CONFIG_LOGLEVEL=info
-    - NPM_CONFIG_TMP=/tmp
-    - TMPDIR=/tmp
   command: npm start
 
 client:
@@ -55,7 +52,4 @@ client:
     - "49152:49152"
   environment:
     - NODE_ENV=development
-    - NPM_CONFIG_LOGLEVEL=info
-    - NPM_CONFIG_TMP=/tmp
-    - TMPDIR=/tmp
   command: npm start
