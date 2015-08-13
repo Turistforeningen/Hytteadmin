@@ -34,7 +34,7 @@ export default Ember.Component.extend({
     this.$().dropdown({
       allowAdditions: this.allowAdditions,
       onChange: Ember.run.bind(this, this.onChange)
-    });
+    }).dropdown('set selected', this.get('value'));
   }.on('didInsertElement'),
 
   onChange: function (value, text, $choice) {
