@@ -44,11 +44,10 @@ export default Ember.Component.extend({
     }
 
     if (this.get('multiple')) {
-      this.set('value', value ? Ember.A(value.split(',')) : undefined);
-
-    } else {
-      this.set('value', value);
+     value = value ? Ember.A(value.split(',')) : undefined;
     }
+
+    this.set('value', value);
 
   }
 
