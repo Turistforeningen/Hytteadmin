@@ -39,23 +39,23 @@ export default Ember.Component.extend({
 
   }.on('didInsertElement'),
 
-  onValueChange: function () {
-    if (typeof this.value === 'undefined') {
-      return;
-    }
+  // onValueChange: function () {
+  //   if (typeof this.value === 'undefined') {
+  //     return;
+  //   }
 
-    this.$().dropdown('set exactly', Ember.A(this.value.map(function (item, index, list) {
-      return item.replace(',', '');
-    })));
+  //   this.$().dropdown('set exactly', Ember.A(this.value.map(function (item, index, list) {
+  //     return item.replace(',', '');
+  //   })));
 
-  }.observes('value'),
+  // }.observes('value'),
 
   onChange: function (value, text, $choice) {
 
     // NOTE: This will have to be improved, can not assume ignoring value === undefined is okay
-    if ((this.value && this.value.toString() === value) || (this.value === undefined)) {
-      return;
-    }
+    // if ((this.value && this.value.toString() === value) || (this.value === undefined)) {
+    //   return;
+    // }
 
     if (this.optionValuePath) {
       value = this.get('content').findBy(this.optionValuePath, value);
