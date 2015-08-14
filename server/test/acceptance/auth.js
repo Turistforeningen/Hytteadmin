@@ -23,14 +23,14 @@ describe('POST /auth/login/turbasen', function() {
   it('returns 401 for no email or password', function(done) {
     app.post('/auth/login/turbasen')
       .expect(401)
-      .expect({message: 'Invalid email or password'}, done);
+      .expect({status: 401, message: 'Invalid email or password'}, done);
   });
 
   it('returns 401 for invalid user credentials', function(done) {
     app.post('/auth/login/turbasen')
       .send({email: 'foo@bar.com', password: 'foobar'})
       .expect(401)
-      .expect({message: 'Invalid email or password'}, done)
+      .expect({status: 401, message: 'Invalid email or password'}, done)
   });
 
   it('returns 200 for valid user credentials', function(done) {

@@ -20,17 +20,19 @@ app.get('/login/sherpa/callback', function(req, res) {
   throw new Error('Not Implemented');
 });
 
-app.post('/login/turbasen', turbasen.middleware, function(req, res) {
+app.post('/login/turbasen', turbasen.middleware, function(req, res, next) {
   if (req.turbasenAuth) {
     req.session.user = req.turbasenAuth;
     res.status(200);
     res.json(req.session.user);
   } else {
     req.session.destroy(function(err) {
-      if (err) { throw err; }
+      if (!err) {
+        err = new Error('Invalid email or password');
+        err.status = 401;
+      }
 
-      res.status(401);
-      res.json({message: 'Invalid email or password'});
+      return next(err);
     });
   }
 });
