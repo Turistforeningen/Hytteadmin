@@ -20,7 +20,7 @@ export default DS.Model.extend({
     'Nedlagt'
   ],
 
-  bilder: DS.attr('array'), // TODO: belongsTo bilder
+  bilder: DS.hasMany('photo', {async: true}),
   beskrivelse: DS.attr('string'),
   betjeningsgrad: DS.attr('string'),
   byggeår: DS.attr('number'),
