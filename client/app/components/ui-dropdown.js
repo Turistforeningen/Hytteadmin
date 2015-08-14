@@ -8,11 +8,12 @@ export default Ember.Component.extend({
   classNameBindings: ['multiple', 'search'],
 
   content: null,
+  value: null,
   optionValuePath: null,
   optionLabelPath: null,
   allowAdditions: null,
 
-  bindAttributes: ['optionValuePath', 'optionLabelPath', 'content', 'allowAdditions'],
+  bindAttributes: ['optionValuePath', 'optionLabelPath', 'value', 'content', 'allowAdditions'],
 
   actions: {},
 
