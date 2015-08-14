@@ -23,6 +23,7 @@ server:
     - NODE_ENV=production
     - NTB_API_ENV=dev
     - NTB_API_KEY
+    - SENTRY_DSN
   command: npm start
 
 client:

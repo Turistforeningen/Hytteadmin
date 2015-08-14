@@ -19,6 +19,7 @@
     "event-stream": "~3",
     "express": "~4",
     "express-session": "~1",
+    "raven": "~0.8",
     "redis": "~0.12",
     "request": "~2",
     "supervisor": "~0.7",
