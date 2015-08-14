@@ -50,6 +50,21 @@
       <div class="ui section divider"></div>
 
       <section>
+        <h3 class="ui header">Bilder</h3>
+        <div class="ui grid">
+          {{#each model.bilder as |bilde|}}
+            <div class="four wide column">
+              <img class="ui fluid image" src="{{bilde.img.1.url}}">
+              {{input type="text" value=bilde.fotograf.navn placeholder="Navn"}}
+              {{input type="text" value=bilde.fotograf.epost placeholder="Epost"}}
+            </div>
+          {{/each}}
+        </div>
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
         <h3 class="ui header">Kontakt</h3>
         <div class="field">
           <label>Eies av</label>
