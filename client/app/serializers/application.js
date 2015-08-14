@@ -11,6 +11,14 @@ export default DS.RESTSerializer.extend({
         delete json.attributes[prop];
       }
     }
+
+    // NOTE: This will add the relationships to JSON object... Should probably be done in a better way
+    for (var prop in json) {
+      if (prop !== 'attributes') {
+        json.attributes[prop] = json[prop];
+      }
+    }
+
     return json.attributes;
   },
 
