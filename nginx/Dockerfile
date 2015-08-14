@@ -1,4 +1,4 @@
-FROM nginx:1.7
+FROM nginx
 
 RUN sed -i 's/sendfile        on/sendfile       off/g' etc/nginx/nginx.conf
 COPY . /usr/share/nginx/public
