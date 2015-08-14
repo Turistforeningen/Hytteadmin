@@ -25,6 +25,12 @@ module.exports = function(defaults) {
   // app.import(app.bowerDirectory + '/semantic-ui/dist/semantic.js'); // Included as separate file in index.html
   // app.import(app.bowerDirectory + '/semantic-ui/dist/semantic.css'); // Included as separate file in index.html
 
+  var ckeditor = new Funnel(app.bowerDirectory + '/ckeditor', {
+     srcDir: '/',
+     include: ['**/*.*'],
+     destDir: '/assets/ckeditor'
+  });
+
   var semanticUi = new Funnel(app.bowerDirectory + '/semantic-ui', {
      srcDir: '/dist',
      include: ['**/*.*'],
@@ -37,6 +43,6 @@ module.exports = function(defaults) {
      destDir: '/assets/leaflet'
   });
 
-  return app.toTree([semanticUi, leaflet]);
+  return app.toTree([semanticUi, leaflet, ckeditor]);
 
 };
