@@ -49,7 +49,7 @@ export default DS.Model.extend({
   status: DS.attr('string', {defaultValue: 'Kladd'}),
   url: DS.attr('string'),
   tags: DS.attr('array', {defaultValue: ['Hytte']}),
-  tilbyder: DS.attr('string'),
+  // tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   tilrettelagt_for: DS.attr('array'),
   turkart: DS.attr('array'),
 
