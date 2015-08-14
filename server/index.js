@@ -30,6 +30,7 @@ app.use('/auth', require('./controllers/auth'));
 app.use('/api/v1', require('./controllers/turbasen'));
 
 app.use(raven.errorHandler(process.env.SENTRY_DSN));
+app.use(require('@turistforeningen/express-error'));
 
 if (!module.parent) {
   app.listen(process.env.APP_PORT);
