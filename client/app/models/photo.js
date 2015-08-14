@@ -10,6 +10,7 @@ export default DS.Model.extend({
   geojson: DS.attr('object'),
   grupper: DS.attr('array'),
   img: DS.attr('object'),
+  kreditering: DS.attr('string'), // NOTE: Not documented at nasjonalturbase.no
   lisens: DS.attr('string', {default: 'CC BY-SA 4.0'}),
   navn: DS.attr('string'),
   navngiving: DS.attr('string'),
