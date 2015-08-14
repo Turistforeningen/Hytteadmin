@@ -13,9 +13,9 @@ export default DS.RESTSerializer.extend({
     }
 
     // NOTE: This will add the relationships to JSON object... Should probably be done in a better way
-    for (var prop in json) {
-      if (prop !== 'attributes') {
-        json.attributes[prop] = json[prop];
+    for (var json_prop in json) {
+      if (json_prop !== 'attributes') {
+        json.attributes[json_prop] = json[json_prop];
       }
     }
 
