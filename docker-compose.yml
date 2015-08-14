@@ -1,7 +1,7 @@
 www:
   build: nginx
   volumes:
-    - nginx/develop.conf:/etc/nginx/conf.d/default.conf
+    - nginx/develop.client:/etc/nginx/conf.d/default.client
   links:
     - server
     - client

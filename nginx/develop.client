@@ -1,0 +1,3 @@
+location @client {
+  proxy_pass  http://client:4200;
+}
