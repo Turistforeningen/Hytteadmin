@@ -12,7 +12,7 @@
       <tr>
         <td>{{input type="text" value=link.tittel placeholder="Tittel"}}</td>
         <td>{{input type="text" value=link.url placeholder="Nettadresse"}}</td>
-        <td>{{ui-dropdown content=TYPE_CHOICES selectedValue=link.type}}</td>
+        <td>{{ui-dropdown content=TYPE_CHOICES value=link.type}}</td>
         <td><button class="basic ui icon button" {{action "removeLink" link}}><i class="remove icon"></i></button></td>
       </tr>
     {{/each}}
