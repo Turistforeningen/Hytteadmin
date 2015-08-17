@@ -44,7 +44,6 @@ export default DS.Model.extend({
   privat: DS.attr('object'),
   juridisk_eier: DS.belongsTo('group', {async: true}),
   vedlikeholdes_av: DS.belongsTo('group', {async: true}),
-  sengeplasser: DS.attr('object'),
   ssr_id: DS.attr('number'),
   status: DS.attr('string', {defaultValue: 'Kladd'}),
   url: DS.attr('string'),
