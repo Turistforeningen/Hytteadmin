@@ -36,6 +36,14 @@
           {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.hyttetype}}
         </div>
 
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
+        <h3 class="ui header">Åpningstider</h3>
+        <a class="anchor" id="åpningstider"></a>
+
         <div class="grouped fields">
           <label>Åpen kun mot bestilling</label>
           <div class="field">
@@ -54,6 +62,38 @@
             {{input type="text" value=model.privat.kun_bestilling_kommentar placeholder="Hvordan kan man bestille?"}}
           </div>
         {{/if}}
+
+        <table class="ui celled table">
+          <thead>
+            <tr>
+              <th>Fra</th>
+              <th>Til</th>
+              <th>Kommentar</th>
+              <th>Nøkkel</th>
+              <th>Betjeningsgrad</th>
+              <th>Fjern</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each model.privat.åpningstider as |periode|}}
+              <tr>
+                <td>{{input value=periode.fra}}</td>
+                <td>{{input value=periode.til}}</td>
+                <td>{{input value=periode.kommentar}}</td>
+                <td>{{input value=periode.nøkkel}}</td>
+                <td>{{ui-dropdown content=model.BETJENINGSGRAD_CHOICES value=periode.betjeningsgrad}}</td>
+                <td><button class="basic ui icon button" {{action "removeÅpningstiderPeriode" periode}}><i class="remove icon"></i></button></td>
+              </tr>
+            {{/each}}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="6">
+                <button class="ui primary button" {{action "addÅpningstiderPeriode"}}><i class="icon add"></i> Legg til periode</button>
+              </th>
+            </tr>
+          </tfoot>
+        </table>
 
       </section>
 

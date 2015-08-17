@@ -19,6 +19,14 @@ export default Ember.Controller.extend({
       }));
     },
 
+    addÅpningstiderPeriode: function () {
+      this.get('model.privat.åpningstider').addObject({});
+    },
+
+    removeÅpningstiderPeriode: function (periode) {
+      this.get('model.privat.åpningstider').removeObject(periode);
+    },
+
     addSted: function (id) {},
 
     setKunBestilling: function (kunBestilling) {
