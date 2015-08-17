@@ -35,7 +35,7 @@ export default Ember.Component.extend({
     this.$().dropdown({
       allowAdditions: this.allowAdditions,
       onChange: Ember.run.bind(this, this.onChange)
-    }).dropdown('set exactly', this.value);
+    }).dropdown('set selected', this.value);
 
   }.on('didInsertElement'),
 
@@ -44,7 +44,7 @@ export default Ember.Component.extend({
   //     return;
   //   }
 
-  //   this.$().dropdown('set exactly', Ember.A(this.value.map(function (item, index, list) {
+  //   this.$().dropdown('set selected', Ember.A(this.value.map(function (item, index, list) {
   //     return item.replace(',', '');
   //   })));
 
