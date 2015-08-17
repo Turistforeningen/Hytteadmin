@@ -33,4 +33,4 @@ client:
     - /usr/src/app/dist
   environment:
     - NODE_ENV=development
-  command: /bin/true
+  command: npm run build
