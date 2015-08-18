@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['groups'],
+  groups: Ember.inject.controller(),
 
   actions: {
     save: function () {
