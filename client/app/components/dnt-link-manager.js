@@ -10,7 +10,8 @@ export default Ember.Component.extend({
     'Instagram',
     'Hjemmeside',
     'Booking',
-    'Kontaktinfo'
+    'Kontaktinfo',
+    'Annen'
   ],
 
   actions: {
