@@ -218,12 +218,18 @@
                   <div class="item">
                     <div class="header">Områder</div>
                   </div>
-                  {{#each model.områder as |område|}}
+                  {{#if model.områder}}
+                    {{#each model.områder as |område|}}
+                      <div class="item">
+                        <i class="remove circle icon"></i>
+                        <span>{{område.navn}}</span>
+                      </div>
+                    {{/each}}
+                  {{else}}
                     <div class="item">
-                      <i class="remove circle icon"></i>
-                      <span>{{område.navn}}</span>
+                      <span>Ingen områder</span>
                     </div>
-                  {{/each}}
+                  {{/if}}
                 </div>
               </div>
               <div class="item">
