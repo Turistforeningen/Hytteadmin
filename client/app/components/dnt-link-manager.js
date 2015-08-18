@@ -16,7 +16,7 @@ export default Ember.Component.extend({
 
   actions: {
     addLink: function () {
-      this.get('links').addObject({tittel: '', type: '', url: ''});
+      this.get('links').addObject({tittel: '', type: '', url: 'http://'});
     },
     removeLink: function (link) {
       this.get('links').removeObject(link);
