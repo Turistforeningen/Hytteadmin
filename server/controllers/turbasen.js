@@ -59,6 +59,11 @@ app.post('/cabin/:id', function(req, res) {
     req.body.betjeningsgrad
   );
 
+  // In Turadmin we have separated cabin access between private and public
+  // transportation. UT.no has not caught up with these changes, so for the time
+  // being we have to make sure the old `adkomst` filed stays populated.
+  req.body.adkomst = req.body.tilkomst.privat;
+
   ntb.steder.patch(req.params.id, req.body).pipe(res);
 });
 
