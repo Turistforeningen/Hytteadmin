@@ -58,6 +58,28 @@ export default DS.Model.extend({
   enable_kun_bestilling_kommentar: function () {
     var kun_bestilling = this.get('privat.kun_bestilling');
     return (kun_bestilling === 'Ja' || kun_bestilling === 'Delvis');
-  }.property('privat.kun_bestilling')
+  }.property('privat.kun_bestilling'),
+
+  latitude: function (key, value, previousValuekey) {
+    // Setter
+    if (arguments.length > 1) {
+      this.set('geojson.coordinates.1', parseFloat(value, 10));
+    }
+
+    // Getter
+    return this.get('geojson.coordinates.1');
+
+  }.property('geojson.coordinates.1'),
+
+  longitude: function (key, value, previousValue) {
+    // Setter
+    if (arguments.length > 1) {
+      this.set('geojson.coordinates.0', parseFloat(value, 10));
+    }
+
+    // Getter
+    return this.get('geojson.coordinates.0');
+
+  }.property('geojson.coordinates.0')
 
 });
