@@ -10,6 +10,8 @@ describe('GET /api/v1/cabin', function() {
 
 describe('POST /api/v1/cabin', function() {
   it('creates a new cabin');
+  it('sets privat.hyttetype');
+  it('maps tilkomst.privat to adkomst');
 });
 
 describe('GET /api/v1/cabin/:id', function() {
