@@ -292,6 +292,14 @@
               <label>Turkart</label>
               {{ui-dropdown multiple=true search=true allowAdditions=true value=model.turkart}}
             </div>
+            <div class="field">
+              <label>Breddegrad</label>
+              {{input value=model.geojson.coordinates.[1]}}
+            </div>
+            <div class="field">
+              <label>Lengdegrad</label>
+              {{input value=model.geojson.coordinates.[0]}}
+            </div>
           </div>
         </div>
       </section>
