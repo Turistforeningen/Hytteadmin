@@ -2,6 +2,7 @@ var express = require('express');
 
 var app = express.Router();
 var auth = require('./auth');
+var helpers = require('../lib/helpers');
 
 var ntb = require('turbasen');
 
@@ -51,7 +52,13 @@ app.get('/cabin/:id', function(req, res) {
 
 app.post('/cabin/:id', function(req, res) {
   // @TODO validate user authorization
-  // @TODO set private fields
+
+  req.body.privat = req.body.privat || {};
+  req.body.privat.hyttetype = helpers.hyttetype(
+    req.body.privat.hyttetype,
+    req.body.betjeningsgrad
+  );
+
   ntb.steder.patch(req.params.id, req.body).pipe(res);
 });
 

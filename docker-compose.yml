@@ -23,6 +23,7 @@ server:
     - "8080"
   volumes:
     - server/controllers:/usr/src/app/controllers
+    - server/lib:/usr/src/app/lib
     - server/db:/usr/src/app/db
     - server/index.js:/usr/src/app/index.js
     - server/test:/usr/src/app/test
