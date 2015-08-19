@@ -39,8 +39,18 @@
           </thead>
           <tbody>
             <tr>
-              <td>{{textarea value=model.tilkomst.privat.sommer}}</td>
-              <td>{{textarea value=model.tilkomst.privat.vinter}}</td>
+              <td>
+                <div class="field">
+                  <label>Beskrivelse adkomst sommer</label>
+                  {{textarea value=model.tilkomst.privat.sommer}}
+                </div>
+              </td>
+              <td>
+                <div class="field">
+                  <label>Beskrivelse adkomst vinter</label>
+                  {{textarea value=model.tilkomst.privat.vinter}}
+                </div>
+              </td>
             </tr>
             <tr class="{{if tilkomst_kollektiv_enabled 'warning'}}">
               <td colspan="2">
@@ -54,13 +64,13 @@
               <tr>
                 <td>
                   <div class="field">
-                    <label>Beskrivelse kollektivtransport</label>
+                    <label>Beskrivelse kollektivtransport sommer</label>
                     {{textarea value=model.tilkomst.kollektiv.sommer}}
                   </div>
                 </td>
                 <td>
                   <div class="field">
-                    <label>Beskrivelse kollektivtransport</label>
+                    <label>Beskrivelse kollektivtransport vinter</label>
                     {{textarea value=model.tilkomst.kollektiv.vinter}}
                   </div>
                 </td>
