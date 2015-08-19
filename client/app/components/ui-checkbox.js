@@ -57,7 +57,7 @@ export default Ember.Component.extend({
       default:
         break;
     }
-    console.log('should_be_checked:' + shouldBeChecked);
+    // console.log('should_be_checked:' + shouldBeChecked);
     return shouldBeChecked;
 
   }.property('checked'),
@@ -78,9 +78,9 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   updateUi: function () {
-    console.log('updateUi:start');
+    // console.log('updateUi:start');
     var operation = this.get('should_be_checked') ? 'check' : 'uncheck';
-    console.log('updateUi:' + operation);
+    // console.log('updateUi:' + operation);
     this.$('.ui.checkbox').checkbox(operation);
 
   }.observes('should_be_checked'),
@@ -141,12 +141,8 @@ export default Ember.Component.extend({
       }
     }
 
-    console.log('doing som work');
-
     if (this.get('attrs.action')) {
       this.sendAction('action', value);
-
-    } else if (1 === 2) {
 
     } else {
       this.setChecked();
