@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   groups: Ember.inject.controller(),
+  user: Ember.inject.controller(),
 
   actions: {
     save: function () {
