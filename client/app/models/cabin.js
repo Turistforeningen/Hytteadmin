@@ -47,6 +47,9 @@ export default DS.Model.extend({
   ssr_id: DS.attr('number'),
   status: DS.attr('string', {defaultValue: 'Kladd'}),
   url: DS.attr('string'),
+  tilkomst: DS.attr('object', {defaultValue:
+    {'privat': {'sommer': undefined, 'vinter': undefined}, 'kollektiv': {'sommer': undefined, 'vinter': undefined}}
+  }),
   tags: DS.attr('array', {defaultValue: ['Hytte']}),
   // tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   tilrettelagt_for: DS.attr('array'),

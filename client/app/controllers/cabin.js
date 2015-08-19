@@ -33,5 +33,18 @@ export default Ember.Controller.extend({
       console.log('kunBestilling', kunBestilling);
       this.set('model.privat.kun_bestilling', kunBestilling);
     }
-  }
+  },
+
+  tilkomst_kollektiv_enabled: false,
+
+  toggleTilkomstKollektiv: function () {
+    var hasSommerKollektiv = !!this.get('model.tilkomst.kollektiv.sommer.length');
+    var hasVinterKollektiv = !!this.get('model.tilkomst.kollektiv.vinter.length');
+    var tilkomsstKollektivEnabled = (hasSommerKollektiv || hasVinterKollektiv);
+
+    this.set('tilkomst_kollektiv_enabled', tilkomsstKollektivEnabled);
+    console.log('tilkomst_kollektiv_enabled', tilkomsstKollektivEnabled);
+
+  }.observes('model.tilkomst.kollektiv.sommer', 'model.tilkomst.kollektiv.vinter')
+
 });
