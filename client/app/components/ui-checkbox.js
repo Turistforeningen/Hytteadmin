@@ -142,7 +142,7 @@ export default Ember.Component.extend({
     }
 
     if (this.get('attrs.action')) {
-      this.sendAction('action', value);
+      this.sendAction('action', checked);
 
     } else {
       this.setChecked();

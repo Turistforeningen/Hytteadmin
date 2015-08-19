@@ -27,24 +27,28 @@ export default Ember.Controller.extend({
       this.get('model.privat.åpningstider').removeObject(periode);
     },
 
-    addSted: function (id) {},
-
     setKunBestilling: function (kunBestilling) {
       console.log('kunBestilling', kunBestilling);
       this.set('model.privat.kun_bestilling', kunBestilling);
+    },
+
+    toggleTilkomstKollektiv: function (value) {
+      if (value) {
+        this.set('tilkomst_kollektiv_enabled', true);
+
+      } else {
+        this.set('model.tilkomst.kollektiv', {'sommer': undefined, 'vinter': undefined});
+      }
     }
   },
 
   tilkomst_kollektiv_enabled: false,
 
-  toggleTilkomstKollektiv: function () {
-    var hasSommerKollektiv = !!this.get('model.tilkomst.kollektiv.sommer.length');
-    var hasVinterKollektiv = !!this.get('model.tilkomst.kollektiv.vinter.length');
-    var tilkomsstKollektivEnabled = (hasSommerKollektiv || hasVinterKollektiv);
+  enableTilkomstKollektiv: function () {
+      var hasSommerKollektiv = !!this.get('model.tilkomst.kollektiv.sommer.length');
+      var hasVinterKollektiv = !!this.get('model.tilkomst.kollektiv.vinter.length');
+      var tilkomsstKollektivEnabled = (hasSommerKollektiv || hasVinterKollektiv);
+      this.set('tilkomst_kollektiv_enabled', tilkomsstKollektivEnabled);
 
-    this.set('tilkomst_kollektiv_enabled', tilkomsstKollektivEnabled);
-    console.log('tilkomst_kollektiv_enabled', tilkomsstKollektivEnabled);
-
-  }.observes('model.tilkomst.kollektiv.sommer', 'model.tilkomst.kollektiv.vinter')
-
+    }.observes('model.tilkomst.kollektiv.sommer', 'model.tilkomst.kollektiv.vinter')
 });
