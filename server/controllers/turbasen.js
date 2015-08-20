@@ -93,6 +93,11 @@ app.get('/group', function(req, res) {
   }));
 });
 
+app.get('/group/:id', function(req, res) {
+  // @TODO validate user authorization
+  ntb.grupper.get(req.params.id).pipe(res);
+});
+
 app.get('/area', function(req, res) {
   var areas = ntb.områder(req.query);
 
