@@ -54,7 +54,10 @@ export default Ember.Controller.extend({
     var hasSommerKollektiv = !!this.get('model.tilkomst.kollektiv.sommer.length');
     var hasVinterKollektiv = !!this.get('model.tilkomst.kollektiv.vinter.length');
     var tilkomsstKollektivEnabled = (hasSommerKollektiv || hasVinterKollektiv);
-    this.set('tilkomst_kollektiv_enabled', tilkomsstKollektivEnabled);
+
+    if (tilkomsstKollektivEnabled) {
+      this.set('tilkomst_kollektiv_enabled', true);
+    }
 
   }.observes('model.tilkomst.kollektiv.sommer', 'model.tilkomst.kollektiv.vinter')
 
