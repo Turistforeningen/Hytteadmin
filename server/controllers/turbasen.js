@@ -52,8 +52,10 @@ app.post('/cabin/:id', function(req, res) {
 
   // UT is expecting a cababin type integer property in the private scope in
   // order to display the correct map icon for the cabin.
-  req.body.privat.hyttetype = helpers.hyttetype(req.body.privat.hyttetype,
-    req.body.betjeningsgrad);
+  req.body.privat.hyttetype = helpers.hyttetype(
+    req.body.privat.hyttetype,
+    req.body.betjeningsgrad
+  );
 
   // In Turadmin we have separated cabin access between private and public
   // transportation. UT.no has not caught up with these changes, so for the time
