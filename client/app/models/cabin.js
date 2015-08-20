@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -47,13 +48,34 @@ export default DS.Model.extend({
   ssr_id: DS.attr('number'),
   status: DS.attr('string', {defaultValue: 'Kladd'}),
   url: DS.attr('string'),
-  tilkomst: DS.attr('object', {defaultValue:
-    {'privat': {'sommer': undefined, 'vinter': undefined}, 'kollektiv': {'sommer': undefined, 'vinter': undefined}}
-  }),
+  tilkomst: DS.attr('object', {defaultValue: {
+    'privat': {'sommer': undefined, 'vinter': undefined},
+    'kollektiv': {'sommer': undefined, 'vinter': undefined}
+  }}),
   tags: DS.attr('array', {defaultValue: ['Hytte']}),
   // tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   tilrettelagt_for: DS.attr('array'),
   turkart: DS.attr('array'),
+
+  updateVedlikeholdesAv: function () {
+    var vedlikeholdesAvId = this.get('privat.vedlikeholdes_av');
+    if (vedlikeholdesAvId) {
+      this.store.find('group', vedlikeholdesAvId).then(Ember.run.bind(this, function (group) {
+        this.set('vedlikeholdes_av', group);
+      }));
+    }
+
+  }.observes('privat.vedlikeholdes_av'),
+
+  updateJuridiskEier: function () {
+    var updateJuridiskEierId = this.get('privat.juridisk_eier');
+    if (updateJuridiskEierId) {
+      this.store.find('group', updateJuridiskEierId).then(Ember.run.bind(this, function (group) {
+        this.set('juridisk_eier', group);
+      }));
+    }
+
+  }.observes('privat.juridisk_eier'),
 
   enable_kun_bestilling_kommentar: function () {
     var kun_bestilling = this.get('privat.kun_bestilling');
