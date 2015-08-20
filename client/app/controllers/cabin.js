@@ -45,6 +45,14 @@ export default Ember.Controller.extend({
         this.set('model.tilkomst.kollektiv', undefined);
         this.set('tilkomst_kollektiv_enabled', false);
       }
+    },
+
+    setKontaktinformasjonISesongFromJuridiskEier: function () {
+      console.log('setKontaktinformasjonISesongFromJuridiskEier', arguments);
+    },
+
+    setKontaktinformasjonByGruppeId: function (key, val) {
+      console.log('setKontaktinformasjonByGruppeId', key, val);
     }
   },
 

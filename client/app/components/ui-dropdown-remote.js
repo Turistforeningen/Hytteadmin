@@ -2,10 +2,18 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  tagName: 'div',
+  classNames: ['ui', 'search', 'selection', 'dropdown', 'fluid'],
+
+  value: null,
+  text: null,
+
+  bindAttributes: ['value', 'text'],
+
   setup: function () {
-    this.$('.ui.dropdown').dropdown({
+    this.$().dropdown({
       apiSettings: {
-        url: this.get('url'),
+        url: this.get('query-url'),
         onResponse: function (response) {
           var documents = Ember.ArrayProxy.create({content: Ember.A(response.documents)});
           var results = documents.map(function (item, index, enumerable) {
@@ -19,9 +27,15 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   onChange: function (value, text, $choice) {
-    console.log(value, text, $choice);
-    // var group = this.store.find('group', value);
-    // this.set('value', group);
-    this.get('action');
-  }
+    this.set('value', value);
+  },
+
+  updateDropdownValue: function () {
+    this.$().dropdown('set value', this.get('value'));
+  }.observes('value'),
+
+  updateDropdownText: function () {
+    this.$().dropdown('set text', this.get('text'));
+  }.observes('text')
+
 });
