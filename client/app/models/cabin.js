@@ -60,7 +60,7 @@ export default DS.Model.extend({
     return (kun_bestilling === 'Ja' || kun_bestilling === 'Delvis');
   }.property('privat.kun_bestilling'),
 
-  latitude: function (key, value, previousValuekey) {
+  latitude: function (key, value, previousValue) {
     // Setter
     if (arguments.length > 1) {
       this.set('geojson.coordinates.1', parseFloat(value, 10));
