@@ -60,6 +60,9 @@ app.post('/cabin/:id', function(req, res) {
   // being we have to make sure the old `adkomst` filed stays populated.
   req.body.adkomst = req.body.tilkomst.privat;
 
+  // UT.no is expecting `senger` object property to be in the private scope.
+  req.body.privat.senger = req.body.senger;
+
   ntb.steder.patch(req.params.id, req.body).pipe(res);
 });
 
