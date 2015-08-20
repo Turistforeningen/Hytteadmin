@@ -26,6 +26,93 @@
       <div class="ui section divider"></div>
 
       <section>
+        <h3 class="ui header">Beskrivelse</h3>
+        {{#ui-tabs}}
+          <div class="ui top attached tabular menu">
+            <div class="item active" data-tab="tab-beskrivelse"><i class="no flag"></i> Norsk</div>
+            <div class="item" data-tab="tab-description"><i class="gb flag"></i> Engelsk</div>
+          </div>
+          <div class="ui bottom attached tab segment active" data-tab="tab-beskrivelse">
+            {{ck-editor value=model.beskrivelse}}
+          </div>
+          <div class="ui bottom attached tab segment" data-tab="tab-description">
+            {{ck-editor value=model.description}}
+          </div>
+        {{/ui-tabs}}
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
+        <h3 class="ui header">Kontakt</h3>
+        <a class="anchor" id="kontakt"></a>
+        <div class="field">
+          <label>Eies av</label>
+          {{ui-dropdown-remote
+            query-url="/api/v1/group/?navn=~{query}"
+            object-url="/api/v1/group/{id}"
+            value=model.privat.juridisk_eier
+            text=model.juridisk_eier.navn
+            placeholder="Finn gruppe..."}}
+        </div>
+        <div class="field">
+          <label>Drives av</label>
+          {{ui-dropdown-remote
+            query-url="/api/v1/group/?navn=~{query}"
+            object-url="/api/v1/group/{id}"
+            value=model.privat.vedlikeholdes_av
+            text=model.vedlikeholdes_av.navn
+            placeholder="Finn gruppe..."}}
+        </div>
+
+        <table class="ui celled three column table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>
+                I sesong
+              </th>
+              <th>Utenom sesong</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kontaktperson</td>
+              <td>{{input value=model.kontaktinfo_i_sesong.kontaktperson}}</td>
+              <td>{{input value=model.kontaktinfo_utenom_sesong.kontaktperson}}</td>
+            </tr>
+            <tr>
+              <td>Adresse</td>
+              <td>{{input value=model.kontaktinfo_i_sesong.adresse1}}</td>
+              <td>{{input value=model.kontaktinfo_utenom_sesong.adresse1}}</td>
+            </tr>
+            <tr>
+              <td>Mobil</td>
+              <td>{{input value=model.kontaktinfo_i_sesong.mobil}}</td>
+              <td>{{input value=model.kontaktinfo_utenom_sesong.mobil}}</td>
+            </tr>
+            <tr>
+              <td>Telefon</td>
+              <td>{{input value=model.kontaktinfo_i_sesong.telefon}}</td>
+              <td>{{input value=model.kontaktinfo_utenom_sesong.telefon}}</td>
+            </tr>
+            <tr>
+              <td>Faks</td>
+              <td>{{input value=model.kontaktinfo_i_sesong.fax}}</td>
+              <td>{{input value=model.kontaktinfo_utenom_sesong.fax}}</td>
+            </tr>
+            <tr>
+              <td>Epost</td>
+              <td>{{input value=model.kontaktinfo_i_sesong.epost}}</td>
+              <td>{{input value=model.kontaktinfo_utenom_sesong.epost}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
         <h3 class="ui header">Adkomst</h3>
         <div class="ui info message">
           Merk at kun feltene for privat adkomst vil vises på UT.no.
@@ -141,81 +228,6 @@
           </tfoot>
         </table>
 
-      </section>
-
-      <div class="ui section divider"></div>
-
-      <section>
-        <h3 class="ui header">Kontakt</h3>
-        <a class="anchor" id="kontakt"></a>
-        <div class="field">
-          <label>Eies av</label>
-          {{ui-dropdown search=true content=groups.model value=model.juridisk_eier optionValuePath="id" optionLabelPath="navn"}}
-        </div>
-        <div class="field">
-          <label>Drives av</label>
-          {{ui-dropdown-remote url="/api/v1/group/?navn=~{query}" value=model.vedlikeholdes_av}}
-        </div>
-
-        <table class="ui celled three column table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>I sesong</th>
-              <th>Utenom sesong</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Kontaktperson</td>
-              <td>{{input value=model.kontaktinfo.[0].kontaktperson}}</td>
-              <td>{{input value=model.kontaktinfo.[1].kontaktperson}}</td>
-            </tr>
-            <tr>
-              <td>Adresse</td>
-              <td>{{input value=model.kontaktinfo.[0].adresse1}}</td>
-              <td>{{input value=model.kontaktinfo.[1].adresse1}}</td>
-            </tr>
-            <tr>
-              <td>Mobil</td>
-              <td>{{input value=model.kontaktinfo.[0].mobil}}</td>
-              <td>{{input value=model.kontaktinfo.[1].mobil}}</td>
-            </tr>
-            <tr>
-              <td>Telefon</td>
-              <td>{{input value=model.kontaktinfo.[0].telefon}}</td>
-              <td>{{input value=model.kontaktinfo.[1].telefon}}</td>
-            </tr>
-            <tr>
-              <td>Faks</td>
-              <td>{{input value=model.kontaktinfo.[0].fax}}</td>
-              <td>{{input value=model.kontaktinfo.[1].fax}}</td>
-            </tr>
-            <tr>
-              <td>Epost</td>
-              <td>{{input value=model.kontaktinfo.[0].epost}}</td>
-              <td>{{input value=model.kontaktinfo.[1].epost}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <div class="ui section divider"></div>
-
-      <section>
-        <h3 class="ui header">Beskrivelse</h3>
-        {{#ui-tabs}}
-          <div class="ui top attached tabular menu">
-            <div class="item active" data-tab="tab-beskrivelse"><i class="no flag"></i> Norsk</div>
-            <div class="item" data-tab="tab-description"><i class="gb flag"></i> Engelsk</div>
-          </div>
-          <div class="ui bottom attached tab segment active" data-tab="tab-beskrivelse">
-            {{ck-editor value=model.beskrivelse}}
-          </div>
-          <div class="ui bottom attached tab segment" data-tab="tab-description">
-            {{ck-editor value=model.description}}
-          </div>
-        {{/ui-tabs}}
       </section>
 
       <div class="ui section divider"></div>
