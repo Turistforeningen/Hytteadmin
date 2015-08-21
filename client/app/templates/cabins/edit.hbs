@@ -26,6 +26,18 @@
       <div class="ui section divider"></div>
 
       <section>
+        <h3 class="ui header">Fasiliteter</h3>
+
+        <div class="field">
+          <label>Tilrettelagt for</label>
+          {{ui-dropdown content=model.TILRETTELAGT_FOR_CHOICES value=model.tilrettelagt_for multiple=true}}
+        </div>
+
+      </section>
+
+      <div class="ui section divider"></div>
+
+      <section>
         <h3 class="ui header">Beskrivelse</h3>
         {{#ui-tabs}}
           <div class="ui top attached tabular menu">
