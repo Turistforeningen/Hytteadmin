@@ -114,50 +114,36 @@ export default DS.Model.extend({
     return (kun_bestilling === 'Ja' || kun_bestilling === 'Delvis');
   }.property('privat.kun_bestilling'),
 
-  latitude: function (key, value, previousValue) {
-    // Setter
-    if (arguments.length > 1) {
+  kontaktinfo_i_sesong: Ember.computed('kontaktinfo.@each', {
+    get: function() {
+      return this.get('kontaktinfo').findBy('type', 'I sesong');
+    }
+  }),
+
+  kontaktinfo_utenom_sesong: Ember.computed('kontaktinfo.@each', {
+    get: function() {
+      return this.get('kontaktinfo').findBy('type', 'Utenom sesong');
+    }
+  }),
+
+  latitude: Ember.computed('geojson.coordinates.1', {
+    get: function() {
+      return this.get('geojson.coordinates.1');
+    },
+    set: function(key, value) {
       this.set('geojson.coordinates.1', parseFloat(value, 10));
+      return value;
     }
+  }),
 
-    // Getter
-    return this.get('geojson.coordinates.1');
-
-  }.property('geojson.coordinates.1'),
-
-  longitude: function (key, value, previousValue) {
-    // Setter
-    if (arguments.length > 1) {
+  longitude: Ember.computed('geojson.coordinates.0', {
+    get: function() {
+      return this.get('geojson.coordinates.0');
+    },
+    set: function(key, value) {
       this.set('geojson.coordinates.0', parseFloat(value, 10));
+      return value;
     }
-
-    // Getter
-    return this.get('geojson.coordinates.0');
-
-  }.property('geojson.coordinates.0'),
-
-  kontaktinfo_i_sesong: function (key, value, previousValue) {
-    var kontaktinfo_i_sesong = this.get('kontaktinfo').findBy('type', 'I sesong');
-    // Setter
-    if (arguments.length > 1) {
-      kontaktinfo_i_sesong = value;
-    }
-
-    // Getter
-    return kontaktinfo_i_sesong;
-
-  }.property('kontaktinfo.@each'),
-
-  kontaktinfo_utenom_sesong: function (key, value, previousValue) {
-    var kontaktinfo_utenom_sesong = this.get('kontaktinfo').findBy('type', 'Utenom sesong');
-    // Setter
-    if (arguments.length > 1) {
-      kontaktinfo_utenom_sesong = value;
-    }
-
-    // Getter
-    return kontaktinfo_utenom_sesong;
-
-  }.property('kontaktinfo.@each')
+  })
 
 });
