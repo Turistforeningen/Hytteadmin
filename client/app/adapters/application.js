@@ -5,6 +5,11 @@ export default DS.RESTAdapter.extend({
   namespace: 'api/v1',
   pathForType: function(type) {
     return Ember.String.underscore(type);
+  },
+
+  // NOTE: The default behavior of shouldReloadAll will change in Ember Data 2.0 to always return false when there is at least one "group" record in the store. If you would like to preserve the current behavior please override shouldReloadAll in your adapter:application and return true.
+  shouldReloadAll: function () {
+    return true;
   }
 
   // handleResponse: function(status, headers, payload) {
