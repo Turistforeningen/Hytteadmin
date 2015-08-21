@@ -2,29 +2,33 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-  attributeBindings: [],
+  checked: null,
+
+  attributeBindings: ['checked'],
   type: 'checkbox',
 
   typeof_checked: function () {
-    var checked = this.get('attrs.checked');
+    var checked = this.get('checked');
 
-    if (checked && checked.value) {
+    if (checked) {
 
-      if (checked.value instanceof Array) {
+      if (checked instanceof Array) {
         return 'array';
 
-      } else if (checked.value instanceof Object) {
+      } else if (checked instanceof Object) {
         // TODO: Support for objects not implemented
         return 'object';
 
-      } else if (typeof checked.value === 'boolean') {
+      } else if (typeof checked === 'boolean') {
         return 'boolean';
 
-      } else if (checked.value instanceof String) {
+      } else if (checked instanceof String) {
         return 'string';
 
       } else {
-        console.warn('Could not find checked typeof');
+        console.warn('Could not find checked typeof, assuming string for radio, boolean for checkbox.');
+        var typeMap = {checkbox: 'boolean', radio: 'string'};
+        return typeMap[this.get('type')];
       }
     }
 
