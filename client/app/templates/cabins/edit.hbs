@@ -176,13 +176,13 @@
         <div class="grouped fields">
           <label>Åpen kun mot bestilling</label>
           <div class="field">
-            {{ui-checkbox type="radio" name="må_bestilles" id="Nei" label="Nei" action="setKunBestilling"}}
+            {{ui-checkbox type="radio" name="må_bestilles" value="Nei" label="Nei" checked=model.privat.kun_bestilling}}
           </div>
           <div class="field">
-            {{ui-checkbox type="radio" name="må_bestilles" id="Ja" label="Ja" action="setKunBestilling"}}
+            {{ui-checkbox type="radio" name="må_bestilles" value="Ja" label="Ja" checked=model.privat.kun_bestilling}}
           </div>
           <div class="field">
-            {{ui-checkbox type="radio" name="må_bestilles" id="Delvis" label="Delvis" action="setKunBestilling"}}
+            {{ui-checkbox type="radio" name="må_bestilles" value="Delvis" label="Delvis" checked=model.privat.kun_bestilling}}
           </div>
         </div>
         {{#if model.enable_kun_bestilling_kommentar}}
