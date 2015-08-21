@@ -102,6 +102,30 @@ export default DS.Model.extend({
     // Getter
     return this.get('geojson.coordinates.0');
 
-  }.property('geojson.coordinates.0')
+  }.property('geojson.coordinates.0'),
+
+  kontaktinfo_i_sesong: function (key, value, previousValue) {
+    var kontaktinfo_i_sesong = this.get('kontaktinfo').findBy('type', 'I sesong');
+    // Setter
+    if (arguments.length > 1) {
+      kontaktinfo_i_sesong = value;
+    }
+
+    // Getter
+    return kontaktinfo_i_sesong;
+
+  }.property('kontaktinfo.@each'),
+
+  kontaktinfo_utenom_sesong: function (key, value, previousValue) {
+    var kontaktinfo_utenom_sesong = this.get('kontaktinfo').findBy('type', 'Utenom sesong');
+    // Setter
+    if (arguments.length > 1) {
+      kontaktinfo_utenom_sesong = value;
+    }
+
+    // Getter
+    return kontaktinfo_utenom_sesong;
+
+  }.property('kontaktinfo.@each')
 
 });
