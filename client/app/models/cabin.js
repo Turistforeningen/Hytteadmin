@@ -114,13 +114,13 @@ export default DS.Model.extend({
     return (kun_bestilling === 'Ja' || kun_bestilling === 'Delvis');
   }.property('privat.kun_bestilling'),
 
-  kontaktinfo_i_sesong: Ember.computed('kontaktinfo.@each', {
+  kontaktinfo_i_sesong: Ember.computed('kontaktinfo.[]', {
     get: function() {
       return this.get('kontaktinfo').findBy('type', 'I sesong');
     }
   }),
 
-  kontaktinfo_utenom_sesong: Ember.computed('kontaktinfo.@each', {
+  kontaktinfo_utenom_sesong: Ember.computed('kontaktinfo.[]', {
     get: function() {
       return this.get('kontaktinfo').findBy('type', 'Utenom sesong');
     }
