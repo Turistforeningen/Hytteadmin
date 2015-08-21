@@ -3,12 +3,6 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
 
-  HYTTETYPE_CHOICES: [
-    'DNT-hytte',
-    'Privat hytte',
-    'Privat rabatthytte'
-  ],
-
   BETJENINGSGRAD_CHOICES: [
     'Betjent',
     'Servering',
@@ -19,6 +13,44 @@ export default DS.Model.extend({
     'Utleie',
     'Stengt',
     'Nedlagt'
+  ],
+
+  FASILITETER_CHOICES: [
+    '12v',
+    '220v',
+    'Badstu',
+    'Båt',
+    'Dusj',
+    'Kano',
+    'Kortbetaling',
+    'Mobildekning',
+    'Peis',
+    'Servering',
+    'Steikeovn',
+    'Strømovn',
+    'Sykkel',
+    'Sykkelutleie',
+    'Telefon',
+    'Teltplass',
+    'Tørkerom',
+    'Utleie',
+    'Vann',
+    'Vedovn',
+    'Wc'
+  ],
+
+  HYTTETYPE_CHOICES: [
+    'DNT-hytte',
+    'Privat hytte',
+    'Privat rabatthytte'
+  ],
+
+  TILRETTELAGT_FOR_CHOICES: [
+    'Barnevogn',
+    'Rullestol',
+    'Hund',
+    'Skoleklasser',
+    'Handikap'
   ],
 
   bilder: DS.hasMany('photo', {async: true}),
