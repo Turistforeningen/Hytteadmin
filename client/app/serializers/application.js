@@ -3,6 +3,9 @@ import DS from 'ember-data';
 
 export default DS.RESTSerializer.extend({
 
+  // http://emberjs.com/blog/2015/06/18/ember-data-1-13-released.html#toc_opt-into-the-new-serializer-api
+  isNewSerializerAPI: true,
+
   serialize: function(snapshot, options) {
     var json = this._super(snapshot, options);
     // console.log('serialize', json);
@@ -31,60 +34,36 @@ export default DS.RESTSerializer.extend({
     Ember.merge(hash, this.serialize(record, options));
   },
 
-  extractSingle: function(store, type, payload, id) {
-    // {
-    //   data: {
-    //     id: '1',
-    //     type: 'user',
-    //     attributes: {
-    //       name: 'wecc'
-    //     },
-    //     relationships: {
-    //       accounts: {
-    //         data: [
-    //           { id: '1', type: 'account' },
-    //           { id: '2', type: 'account' }
-    //         ]
-    //       }
-    //     }
-    //   },
-    //   included: [{
-    //     id: '1',
-    //     type: 'account',
-    //     attributes: {
-    //       email: 'wecc@sweden.se'
-    //     }
-    //   }, {
-    //     id: '2',
-    //     type: 'account',
-    //     attributes: {
-    //       email: 'wecc@greece.gr'
-    //     }
-    //   }]
-    // }
-    // console.log('extractSingle');
-    var payloadExtract = {};
+  normalizeSingleResponse: function (store, primaryModelClass, payload, id, requestType) {
+
+    var normalizedPayload = {};
+
     if (payload.document) {
-      payloadExtract[type['modelName']] = payload.document;
+      normalizedPayload[primaryModelClass.modelName] = payload.document;
 
     } else {
-      payloadExtract[type['modelName']] = payload;
-
+      normalizedPayload[primaryModelClass.modelName] = payload;
     }
-    // NOTE: Superhackish. Should get this in normalize. Ideally included in response from API
-    // NOTE: Think this is solved in the API now
-    // if (id) {
-    //   payloadExtract[type['modelName']]['id'] = id;
-    // }
-    return this._super(store, type, payloadExtract, id);
+
+    return this._super(store, primaryModelClass, normalizedPayload, id, requestType);
   },
 
-  extractArray: function(store, type, payload) {
-    // console.log('extractArray');
-    var payloadExtract = {};
-    payloadExtract[type['modelName']] = payload.documents;
-    return this._super(store, type, payloadExtract);
+
+  normalizeArrayResponse: function (store, primaryModelClass, payload, id, requestType) {
+
+    var normalizedPayload = {};
+
+    normalizedPayload[primaryModelClass.modelName] = payload.documents;
+
+    return this._super(store, primaryModelClass, normalizedPayload, id, requestType);
   },
+
+ // normalize: function(modelClass, resourceHash, prop) {
+ //    if (this.normalizeHash && this.normalizeHash[prop]) {
+ //      this.normalizeHash[prop](resourceHash);
+ //    }
+ //    return this._super(modelClass, resourceHash, prop);
+ //  },
 
   normalize: function(type, hash, property) {
     // console.log('normalize');
