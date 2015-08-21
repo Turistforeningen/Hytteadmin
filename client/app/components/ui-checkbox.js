@@ -10,6 +10,8 @@ export default Ember.Component.extend({
   typeof_checked: function () {
     var checked = this.get('checked');
 
+    // TODO: Determine by first using typeof, if object check of array or object, if undefined choose boolean/string
+
     if (checked) {
 
       if (checked instanceof Array) {
@@ -22,7 +24,7 @@ export default Ember.Component.extend({
       } else if (typeof checked === 'boolean') {
         return 'boolean';
 
-      } else if (checked instanceof String) {
+      } else if (typeof checked === 'string') {
         return 'string';
 
       } else {
