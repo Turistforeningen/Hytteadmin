@@ -29,7 +29,7 @@ export default Ember.Component.extend({
       };
     }, this) : [];
 
-  }.property('content.@each'),
+  }.property('content.[]'),
 
   setup: function () {
     this.$().dropdown({
