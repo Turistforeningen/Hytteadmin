@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function () {
-  this.resource('cabins', {path: '/hytter'}, function () {
+  this.route('cabins', {path: '/hytter', resetNamespace: true}, function () {
     this.route('edit', {path: '/:id'});
   });
 });
