@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   optionLabelPath: null,
   allowAdditions: null,
 
-  bindAttributes: ['optionValuePath', 'optionLabelPath', 'value', 'content', 'allowAdditions'],
+  bindAttributes: ['optionValuePath', 'optionLabelPath', 'value', 'content', 'allowAdditions', 'action'],
 
   actions: {},
 
@@ -57,15 +57,25 @@ export default Ember.Component.extend({
     //   return;
     // }
 
-    if (this.optionValuePath) {
-      value = this.get('content').findBy(this.optionValuePath, value);
-    }
+    if (this.get('attrs.action')) {
 
-    if (this.get('multiple')) {
-     value = value ? Ember.A(value.split(',')) : undefined;
-    }
+      if (!this.get('attrs.value')) {
+        this.$().dropdown('clear');
+      }
 
-    this.set('value', value);
+      this.sendAction('action', value);
+
+    } else {
+      if (this.optionValuePath) {
+        value = this.get('content').findBy(this.optionValuePath, value);
+      }
+
+      if (this.get('multiple')) {
+       value = value ? Ember.A(value.split(',')) : undefined;
+      }
+
+      this.set('value', value);
+    }
 
   }
 
