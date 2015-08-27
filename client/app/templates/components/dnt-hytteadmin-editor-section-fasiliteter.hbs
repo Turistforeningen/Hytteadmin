@@ -14,12 +14,12 @@
       </tr>
     </thead>
     <tbody>
-      {{#each-in model.fasiliteter as |fasilitet kommentar|}}
+      {{#each model.fasiliteter as |fasilitet|}}
         <tr>
-          <td>{{fasilitet}}</td>
-          <td>{{kommentar}}</td>
+          <td>{{fasilitet.type}}</td>
+          <td>{{input value=fasilitet.kommentar}}</td>
         </tr>
-      {{/each-in}}
+      {{/each}}
     </tbody>
     <tfoot>
       <tr>
