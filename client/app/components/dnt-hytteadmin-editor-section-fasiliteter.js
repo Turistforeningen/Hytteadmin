@@ -7,26 +7,23 @@ export default Ember.Component.extend({
     var selectedFasiliteter;
 
     if (fasiliteter) {
-      selectedFasiliteter = Object.keys(fasiliteter);
+      selectedFasiliteter = fasiliteter.map(function (item, index, list) {
+        return item.type;
+      });
     } else {
       selectedFasiliteter = [];
     }
 
     return this.get('model.FASILITETER_CHOICES').removeObjects(selectedFasiliteter);
-  }.property('model.FASILITETER_CHOICES', 'model.fasiliteter'),
+  }.property('model.FASILITETER_CHOICES', 'model.fasiliteter.[]'),
 
   actions: {
     addFasilitet: function (fasilitet) {
       if (fasilitet) { // NOTE: Prevents adding empty fasilitet on dropdown clear
-        var fasiliteter = this.get('model.fasiliteter');
-        fasiliteter[fasilitet] = '';
+        var fasiliteter = this.get('model.fasiliteter') || {};
+        fasiliteter.addObject({type: fasilitet, kommentar: ''});
         this.set('model.fasiliteter', fasiliteter);
-        this.rerender();
       }
-    },
-
-    setKommentar: function () {
-      console.log('set kommentar');
     }
   }
 });

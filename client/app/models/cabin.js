@@ -60,7 +60,7 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   // checksum: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   // endret: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
-  fasiliteter: DS.attr('object'), // object[]
+  fasiliteter: DS.attr('array'),
   fylke: DS.attr('string'),
   geojson: DS.attr('object'),
   grupper: DS.attr('array'),
@@ -69,7 +69,7 @@ export default DS.Model.extend({
   kommune: DS.attr('string'),
   kontaktinfo: DS.attr('array', {defaultValue: [{'tittel': 'I sesong'}, {'tittel': 'Utenom sesong'}]}),
   lenker: DS.attr('array'), // object[]
-  // lisens: DS.attr('string', {defaultValue: 'CC BY-NC 4.0'}),
+  lisens: DS.attr('string', {defaultValue: 'CC BY-SA 4.0'}),
   navn: DS.attr('string'),
   navn_alt: DS.attr('array'),
   navngiving: DS.attr('string'), // TODO: Should be computed by either Hytteadmin API endpoint or Hytteadmin Client
