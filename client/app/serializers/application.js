@@ -6,7 +6,15 @@ export default DS.RESTSerializer.extend({
   // http://emberjs.com/blog/2015/06/18/ember-data-1-13-released.html#toc_opt-into-the-new-serializer-api
   isNewSerializerAPI: true,
 
-  serialize: function(snapshot, options) {
+  keyForAttribute: function(attr) {
+    return Ember.String.underscore(attr);
+  },
+
+  keyForRelationship: function(key) {
+    return Ember.String.underscore(key);
+  },
+
+  serialize: function (snapshot, options) {
     var json = this._super(snapshot, options);
     // console.log('serialize', json);
     for (var prop in json.attributes) {
@@ -29,13 +37,26 @@ export default DS.RESTSerializer.extend({
     json.attributes = json.attributes || {};
     this._super(snapshot, json.attributes, key, attributes);
   },
-  serializeIntoHash: function(hash, type, record, options) {
+
+  serializeIntoHash: function (hash, type, record, options) {
     // console.log('serializeIntoHash', type, record, options);
     Ember.merge(hash, this.serialize(record, options));
   },
 
-  normalizeSingleResponse: function (store, primaryModelClass, payload, id, requestType) {
+  // extractSingle: function(store, type, payload, id) {
+  //   var payloadExtract = {};
 
+  //   if (payload.document) {
+  //     payloadExtract[type['modelName']] = payload.document;
+
+  //   } else {
+  //     payloadExtract[type['modelName']] = payload;
+  //   }
+
+  //   return this._super(store, type, payloadExtract, id);
+  // },
+
+  normalizeSingleResponse: function (store, primaryModelClass, payload, id, requestType) {
     var normalizedPayload = {};
 
     if (payload.document) {
@@ -48,9 +69,14 @@ export default DS.RESTSerializer.extend({
     return this._super(store, primaryModelClass, normalizedPayload, id, requestType);
   },
 
+  // extractArray: function(store, type, payload) {
+  //   // console.log('extractArray');
+  //   var payloadExtract = {};
+  //   payloadExtract[type['modelName']] = payload.documents;
+  //   return this._super(store, type, payloadExtract);
+  // },
 
   normalizeArrayResponse: function (store, primaryModelClass, payload, id, requestType) {
-
     var normalizedPayload = {};
 
     normalizedPayload[primaryModelClass.modelName] = payload.documents;
@@ -58,44 +84,26 @@ export default DS.RESTSerializer.extend({
     return this._super(store, primaryModelClass, normalizedPayload, id, requestType);
   },
 
- // normalize: function(modelClass, resourceHash, prop) {
- //    if (this.normalizeHash && this.normalizeHash[prop]) {
- //      this.normalizeHash[prop](resourceHash);
- //    }
- //    return this._super(modelClass, resourceHash, prop);
- //  },
+  normalize: function (modelClass, resourceHash, prop) {
+    var normalizedHash = resourceHash.document || resourceHash || {};
 
-  normalize: function(type, hash, property) {
-    // console.log('normalize');
-    // normalize the `_id`
-    var json = {};
-    if (hash._id) {
-      json.id = hash._id;
-      delete hash._id;
+    // Normalize the `_id` to `id`
+    if (normalizedHash._id) {
+      normalizedHash.id = normalizedHash._id;
+      delete normalizedHash._id;
     }
 
-    var raw = hash;
-
-    if (hash.document) {
-      raw = hash.document;
-    }
-
-    // normalize the underscored properties
-    for (var prop in raw) {
-      json[prop.camelize()] = raw[prop];
-    }
-
-    // delegate to any type-specific normalizations
-    return this._super(type, json, property);
+    return this._super(modelClass, normalizedHash, prop);
   },
 
-  extractErrors: function(store, typeClass, payload, id) {
+  extractErrors: function (store, typeClass, payload, id) {
     if (payload && typeof payload === 'object' && payload.message) {
       payload = [payload.message];
       this.normalizeErrors(typeClass, payload);
     }
     return payload;
   }
+
   // extractErrors: function(store, typeClass, payload, id) {
   //   if (payload && typeof payload === 'object' && payload.errors) {
   //     payload = errorsArrayToHash(payload.errors);
