@@ -1,0 +1,66 @@
+<section>
+  <h3 class="ui header">Kontakt</h3>
+  <a class="anchor" id="kontakt"></a>
+  <div class="field">
+    <label>Eies av</label>
+    {{ui-dropdown-remote
+      query-url="/api/v1/group/?navn=~{query}"
+      object-url="/api/v1/group/{id}"
+      value=model.privat.juridisk_eier
+      text=model.juridisk_eier.navn
+      placeholder="Finn gruppe..."}}
+  </div>
+  <div class="field">
+    <label>Drives av</label>
+    {{ui-dropdown-remote
+      query-url="/api/v1/group/?navn=~{query}"
+      object-url="/api/v1/group/{id}"
+      value=model.privat.vedlikeholdes_av
+      text=model.vedlikeholdes_av.navn
+      placeholder="Finn gruppe..."}}
+  </div>
+
+  <table class="ui celled three column table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>
+          I sesong
+        </th>
+        <th>Utenom sesong</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Kontaktperson</td>
+        <td>{{input value=model.kontaktinfo_i_sesong.kontaktperson}}</td>
+        <td>{{input value=model.kontaktinfo_utenom_sesong.kontaktperson}}</td>
+      </tr>
+      <tr>
+        <td>Adresse</td>
+        <td>{{input value=model.kontaktinfo_i_sesong.adresse1}}</td>
+        <td>{{input value=model.kontaktinfo_utenom_sesong.adresse1}}</td>
+      </tr>
+      <tr>
+        <td>Mobil</td>
+        <td>{{input value=model.kontaktinfo_i_sesong.mobil}}</td>
+        <td>{{input value=model.kontaktinfo_utenom_sesong.mobil}}</td>
+      </tr>
+      <tr>
+        <td>Telefon</td>
+        <td>{{input value=model.kontaktinfo_i_sesong.telefon}}</td>
+        <td>{{input value=model.kontaktinfo_utenom_sesong.telefon}}</td>
+      </tr>
+      <tr>
+        <td>Faks</td>
+        <td>{{input value=model.kontaktinfo_i_sesong.fax}}</td>
+        <td>{{input value=model.kontaktinfo_utenom_sesong.fax}}</td>
+      </tr>
+      <tr>
+        <td>Epost</td>
+        <td>{{input value=model.kontaktinfo_i_sesong.epost}}</td>
+        <td>{{input value=model.kontaktinfo_utenom_sesong.epost}}</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
