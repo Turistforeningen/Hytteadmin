@@ -1,0 +1,37 @@
+<section>
+  <h3 class="ui header">Fasiliteter</h3>
+
+  <div class="field">
+    <label>Tilrettelagt for</label>
+    {{ui-dropdown content=model.TILRETTELAGT_FOR_CHOICES value=model.tilrettelagt_for multiple=true}}
+  </div>
+
+  <table class="ui two column table">
+    <thead>
+      <tr>
+        <th>Fasilitet</th>
+        <th>Kommentar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each-in model.fasiliteter as |fasilitet kommentar|}}
+        <tr>
+          <td>{{fasilitet}}</td>
+          <td>{{kommentar}}</td>
+        </tr>
+      {{/each-in}}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2">
+          {{ui-dropdown
+            content=FASILITETER_UNSELECTED_CHOICES
+            action="addFasilitet"
+            placeholder="Legg til fasilitet"
+            search=true}}
+        </th>
+      </tr>
+    </tfoot>
+  </table>
+
+</section>
