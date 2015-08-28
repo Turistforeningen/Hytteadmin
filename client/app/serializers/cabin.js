@@ -22,11 +22,14 @@ export default ApplicationSerializer.extend({
     var json = this._super(snapshot, options);
 
     // Maps `fasiliteter` array back to object
-    var serializedFasiliteter = {};
-    for (var i = 0; i < json.fasiliteter.length; i++) {
-      serializedFasiliteter[json.fasiliteter[i]['type']] = json.fasiliteter[i]['kommentar'] || '';
+    if (json.fasiliteter && json.fasiliteter.length) {
+      var serializedFasiliteter = {};
+      for (var i = 0; i < json.fasiliteter.length; i++) {
+        serializedFasiliteter[json.fasiliteter[i]['type']] = json.fasiliteter[i]['kommentar'] || '';
+      }
+      json.fasiliteter = serializedFasiliteter;
     }
-    json.fasiliteter = serializedFasiliteter;
+
     return json;
   }
 
