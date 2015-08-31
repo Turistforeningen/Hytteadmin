@@ -3,6 +3,13 @@ var app = require('express').Router();
 process.env.NTB_USER_AGENT = 'Hytteadmin/' + require('../package.json');
 var turbasen = require('turbasen-auth');
 
+process.env.DNT_CONNECT_USER_AGENT = 'Hytteadmin/' + require('../package.json');
+var Connect = require('dnt-connect');
+var connect = new Connect(
+  process.env.DNT_CONNECT_CLIENT,
+  process.env.DNT_CONNECT_KEY
+);
+
 app.get('/', function(req, res) {
   if (req.session && req.session.user) {
     res.json(req.session.user);
@@ -12,12 +19,26 @@ app.get('/', function(req, res) {
   }
 });
 
-app.get('/login/sherpa/signon', function(req, res) {
-  throw new Error('Not Implemented');
-});
+app.get('/login/dnt', connect.middleware('signon'), function(req, res, next) {
+  if (!req.dntConnect)  {
+    var err = new Error('DNT Connect: unknown error');
+    err.status = 500;
+    next(err);
+  }
 
-app.get('/login/sherpa/callback', function(req, res) {
-  throw new Error('Not Implemented');
+  if (req.dntConnect.err || !req.dntConnect.data.er_autentisert) {
+    // @TODO redierect back to login page with error message
+    return res.redirect('/login');
+  }
+
+  req.session.user = {
+    id: 'sherpa3:' + req.dntConnect.data.sherpa_id,
+    navn: req.dntConnect.data.fornavn + ' ' + req.dntConnect.data.etternavn,
+    epost: req.dntConnect.data.epost,
+    grupper: [] // @TODO get the groups
+  };
+
+  res.redirect('/hytter');
 });
 
 app.post('/login/turbasen', turbasen.middleware, function(req, res, next) {

@@ -17,6 +17,7 @@
     "JSONStream": "~1",
     "body-parser": "~1",
     "connect-redis": "~2",
+    "dnt-connect": "~3",
     "event-stream": "~3",
     "express": "~4",
     "express-session": "~1",
