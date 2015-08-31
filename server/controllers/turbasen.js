@@ -45,7 +45,7 @@ app.get('/cabin/:id', function(req, res) {
   }));
 });
 
-app.post('/cabin/:id', function(req, res) {
+app.put('/cabin/:id', function(req, res) {
   // @TODO validate user authorization
 
   req.body.privat = req.body.privat || {};

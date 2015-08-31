@@ -31,7 +31,7 @@ describe('GET /api/v1/cabin/:id', function() {
   });
 });
 
-describe('POST /api/v1/cabin/:id', function() {
+describe('PUT /api/v1/cabin/:id', function() {
   it('updates an existing cabin');
 });
 
