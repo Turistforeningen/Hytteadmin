@@ -20,47 +20,70 @@
       placeholder="Finn gruppe..."}}
   </div>
 
-  <table class="ui celled three column table">
-    <thead>
-      <tr>
-        <th></th>
-        <th>
-          I sesong
-        </th>
-        <th>Utenom sesong</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Kontaktperson</td>
-        <td>{{input value=model.kontaktinfo_i_sesong.kontaktperson}}</td>
-        <td>{{input value=model.kontaktinfo_utenom_sesong.kontaktperson}}</td>
-      </tr>
-      <tr>
-        <td>Adresse</td>
-        <td>{{input value=model.kontaktinfo_i_sesong.adresse1}}</td>
-        <td>{{input value=model.kontaktinfo_utenom_sesong.adresse1}}</td>
-      </tr>
-      <tr>
-        <td>Mobil</td>
-        <td>{{input value=model.kontaktinfo_i_sesong.mobil}}</td>
-        <td>{{input value=model.kontaktinfo_utenom_sesong.mobil}}</td>
-      </tr>
-      <tr>
-        <td>Telefon</td>
-        <td>{{input value=model.kontaktinfo_i_sesong.telefon}}</td>
-        <td>{{input value=model.kontaktinfo_utenom_sesong.telefon}}</td>
-      </tr>
-      <tr>
-        <td>Faks</td>
-        <td>{{input value=model.kontaktinfo_i_sesong.fax}}</td>
-        <td>{{input value=model.kontaktinfo_utenom_sesong.fax}}</td>
-      </tr>
-      <tr>
-        <td>Epost</td>
-        <td>{{input value=model.kontaktinfo_i_sesong.epost}}</td>
-        <td>{{input value=model.kontaktinfo_utenom_sesong.epost}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="field">
+    <label>Kontakt</label>
+    {{ui-dropdown-remote
+      query-url="/api/v1/group/?navn=~{query}"
+      object-url="/api/v1/group/{id}"
+      value=model.kontaktinfo_gruppe.gruppe_id
+      text=model.kontaktinfo_gruppe.navn
+      action="setKontaktinfoGruppeById"
+      placeholder="Finn gruppe..."}}
+  </div>
+
+  <div class="ui list">
+    <div class="item">
+      <div class="header">Navn</div>
+      {{model.kontaktinfo_gruppe.navn}}
+    </div>
+    <div class="item">
+      <div class="header">Epost</div>
+      {{model.kontaktinfo_gruppe.epost}}
+    </div>
+    <div class="item">
+      <div class="header">Adresse</div>
+      {{model.kontaktinfo_gruppe.adresse1}}
+    </div>
+    <div class="item">
+      <div class="header">Postnummer</div>
+      {{model.kontaktinfo_gruppe.postnummer}}
+    </div>
+    <div class="item">
+      <div class="header">Poststed</div>
+      {{model.kontaktinfo_gruppe.poststed}}
+    </div>
+  </div>
+
+  <div class="field">
+    {{ui-checkbox
+      label="Det er mulighet å kontakte hytta direkte i sesong"
+      checked=model.direkte_kontakt}}
+  </div>
+
+  {{#if model.direkte_kontakt}}
+    <div class="field">
+      <label>Kontaktperson</label>
+      {{input value=model.kontaktinfo_i_sesong.kontaktperson}}
+    </div>
+    <div class="field">
+      <label>Adresse</label>
+      {{input value=model.kontaktinfo_i_sesong.adresse1}}
+    </div>
+    <div class="field">
+      <label>Mobil</label>
+      {{input value=model.kontaktinfo_i_sesong.mobil}}
+    </div>
+    <div class="field">
+      <label>Telefon</label>
+      {{input value=model.kontaktinfo_i_sesong.telefon}}
+    </div>
+    <div class="field">
+      <label>Faks</label>
+      {{input value=model.kontaktinfo_i_sesong.fax}}
+    </div>
+    <div class="field">
+      <label>Epost</label>
+      {{input value=model.kontaktinfo_i_sesong.epost}}
+    </div>
+  {{/if}}
 </section>
