@@ -36,22 +36,30 @@
       <div class="header">Navn</div>
       {{model.kontaktinfo_gruppe.navn}}
     </div>
-    <div class="item">
-      <div class="header">Epost</div>
-      {{model.kontaktinfo_gruppe.epost}}
-    </div>
-    <div class="item">
-      <div class="header">Adresse</div>
-      {{model.kontaktinfo_gruppe.adresse1}}
-    </div>
-    <div class="item">
-      <div class="header">Postnummer</div>
-      {{model.kontaktinfo_gruppe.postnummer}}
-    </div>
-    <div class="item">
-      <div class="header">Poststed</div>
-      {{model.kontaktinfo_gruppe.poststed}}
-    </div>
+    {{#if model.kontaktinfo_gruppe.epost}}
+      <div class="item">
+        <div class="header">Epost</div>
+        {{model.kontaktinfo_gruppe.epost}}
+      </div>
+    {{/if}}
+    {{#if model.kontaktinfo_gruppe.adresse1}}
+      <div class="item">
+        <div class="header">Adresse</div>
+        {{model.kontaktinfo_gruppe.adresse1}}
+      </div>
+    {{/if}}
+    {{#if model.kontaktinfo_gruppe.postnummer}}
+      <div class="item">
+        <div class="header">Postnummer</div>
+        {{model.kontaktinfo_gruppe.postnummer}}
+      </div>
+    {{/if}}
+    {{#if model.kontaktinfo_gruppe.poststed}}
+      <div class="item">
+        <div class="header">Poststed</div>
+        {{model.kontaktinfo_gruppe.poststed}}
+      </div>
+    {{/if}}
   </div>
 
   <div class="field">
