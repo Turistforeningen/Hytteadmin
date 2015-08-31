@@ -80,7 +80,9 @@
             </tr>
             <tr class="{{if tilkomst_kollektiv_enabled 'warning'}}">
               <td colspan="2">
-                {{ui-checkbox label="Det er mulighet for adkomst ved hjelp av kollektivtransport" checked=tilkomst_kollektiv_enabled action="toggleTilkomstKollektiv"}}
+                {{ui-checkbox
+                  label="Det er mulighet for adkomst ved hjelp av kollektivtransport"
+                  checked=tilkomst_kollektiv_enabled action="toggleTilkomstKollektiv"}}
                 {{#if tilkomst_kollektiv_enabled}}
                   <p>For at det skal komme frem på UT at det er mulighet for adkomst ved hjelp av kollektivtransport må det fylles ut en beskrivelse av hvordan i feltet nedenfor.</p>
                 {{/if}}
