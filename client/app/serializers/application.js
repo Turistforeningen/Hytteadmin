@@ -6,6 +6,8 @@ export default DS.RESTSerializer.extend({
   // http://emberjs.com/blog/2015/06/18/ember-data-1-13-released.html#toc_opt-into-the-new-serializer-api
   isNewSerializerAPI: true,
 
+  primaryKey: '_id',
+
   keyForAttribute: function(attr) {
     return Ember.String.underscore(attr);
   },
@@ -86,13 +88,6 @@ export default DS.RESTSerializer.extend({
 
   normalize: function (modelClass, resourceHash, prop) {
     var normalizedHash = resourceHash.document || resourceHash || {};
-
-    // Normalize the `_id` to `id`
-    if (normalizedHash._id) {
-      normalizedHash.id = normalizedHash._id;
-      delete normalizedHash._id;
-    }
-
     return this._super(modelClass, normalizedHash, prop);
   },
 
