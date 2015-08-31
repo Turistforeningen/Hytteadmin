@@ -67,7 +67,7 @@ export default DS.Model.extend({
   hyttetype: DS.attr('string'),
   kart: DS.attr('string'),
   kommune: DS.attr('string'),
-  kontaktinfo: DS.attr('array', {defaultValue: [{'tittel': 'I sesong'}, {'tittel': 'Utenom sesong'}]}),
+  kontaktinfo: DS.attr('array', {defaultValue: [{'type': 'I sesong'}]}),
   lenker: DS.attr('array'), // object[]
   lisens: DS.attr('string', {defaultValue: 'CC BY-SA 4.0'}),
   navn: DS.attr('string'),
