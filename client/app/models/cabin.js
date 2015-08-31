@@ -102,7 +102,7 @@ export default DS.Model.extend({
   updateJuridiskEier: function () {
     var updateJuridiskEierId = this.get('privat.juridisk_eier');
     if (updateJuridiskEierId) {
-      this.store.find('group', updateJuridiskEierId).then(Ember.run.bind(this, function (group) {
+      this.store.findRecord('group', updateJuridiskEierId).then(Ember.run.bind(this, function (group) {
         this.set('juridisk_eier', group);
       }));
     }
