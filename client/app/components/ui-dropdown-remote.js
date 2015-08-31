@@ -27,7 +27,17 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   onChange: function (value, text, $choice) {
-    this.set('value', value);
+    if (this.get('attrs.action')) {
+
+      if (!this.get('attrs.value')) {
+        this.$().dropdown('clear');
+      }
+
+      this.sendAction('action', value);
+
+    } else {
+      this.set('value', value);
+    }
   },
 
   updateDropdownValue: function () {
