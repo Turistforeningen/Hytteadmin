@@ -114,23 +114,118 @@ export default DS.Model.extend({
     return (kun_bestilling === 'Ja' || kun_bestilling === 'Delvis');
   }.property('privat.kun_bestilling'),
 
-  kontaktinfo_i_sesong: Ember.computed('kontaktinfo.[]', {
-    get: function() {
+  kontaktinfo_i_sesong: Ember.computed('kontaktinfo.[]', 'kontaktinfo.@each.type', {
+    get: function () {
+      // console.log('kontaktinfo_i_sesong:get');
       return this.get('kontaktinfo').findBy('type', 'I sesong');
+    },
+    set: function (key, value) {
+      // console.log('kontaktinfo_i_sesong:set', value);
+      var kontaktinfo = this.get('kontaktinfo');
+      var existingKontaktinfoISesong = kontaktinfo.findBy('type', 'I sesong');
+
+      if (existingKontaktinfoISesong) {
+        kontaktinfo.removeObject(existingKontaktinfoISesong);
+      }
+
+      if (value) {
+        Ember.set(value, 'type', 'I sesong');
+        kontaktinfo.addObject(value);
+      }
+
+      return value;
     }
   }),
 
-  kontaktinfo_utenom_sesong: Ember.computed('kontaktinfo.[]', {
-    get: function() {
+  kontaktinfo_utenom_sesong: Ember.computed('kontaktinfo.[]', 'kontaktinfo.@each.type', {
+    get: function () {
+      // console.log('kontaktinfo_utenom_sesong:get');
       return this.get('kontaktinfo').findBy('type', 'Utenom sesong');
+    },
+    set: function (key, value) {
+      // console.log('kontaktinfo_utenom_sesong:set', value);
+      var kontaktinfo = this.get('kontaktinfo');
+      var existingKontaktinfoUtenomSesong = kontaktinfo.findBy('type', 'Utenom sesong');
+
+      if (existingKontaktinfoUtenomSesong) {
+        kontaktinfo.removeObject(existingKontaktinfoUtenomSesong);
+      }
+
+      if (value) {
+        Ember.set(value, 'type', 'Utenom sesong');
+        kontaktinfo.addObject(value);
+      }
+
+      return value;
+    }
+  }),
+
+  direkte_kontakt: Ember.computed('kontaktinfo_i_sesong', 'kontaktinfo_utenom_sesong', {
+    get: function () {
+      // console.log('direkte_kontakt:get');
+      return !!this.get('kontaktinfo').findBy('type', 'Utenom sesong');
+    },
+    set: function (key, value) {
+      // console.log('direkte_kontakt:set', value);
+      var kontaktinfoISesong = this.get('kontaktinfo_i_sesong') || {};
+      var kontaktinfoUtenomSesong = this.get('kontaktinfo_utenom_sesong') || {};
+
+      if (value) {
+        // Cabin has custom kontaktinfo_i_sesong.
+        // Move default info to `type: "Utenom sesong"` and create empty object for `type: "I sesong"`
+        this.set('kontaktinfo_utenom_sesong', kontaktinfoISesong);
+        this.set('kontaktinfo_i_sesong', {});
+
+      } else {
+        // Cabin does not have custom kontaktinfo_i_sesong: Only use `type: "I sesong"`.
+        this.set('kontaktinfo_i_sesong', kontaktinfoUtenomSesong);
+        this.set('kontaktinfo_utenom_sesong', undefined);
+      }
+
+      return value;
+    }
+  }),
+
+  setKontaktinfoGruppeById: function (id) {
+      this.store.findRecord('group', id).then((record) => {
+        this.set('kontaktinfo_gruppe', {
+          gruppe_id: record.get('id'),
+          navn: record.get('navn'),
+          adresse1: record.get('kontaktinfo_primærkontakt.adresse1'),
+          adresse2: record.get('kontaktinfo_primærkontakt.adresse2'),
+          epost: record.get('kontaktinfo_primærkontakt.epost'),
+          postnummer: record.get('kontaktinfo_primærkontakt.postnummer'),
+          poststed: record.get('kontaktinfo_primærkontakt.poststed'),
+          telefon: record.get('kontaktinfo_primærkontakt.telefon')
+        });
+      });
+  },
+
+  kontaktinfo_gruppe: Ember.computed('kontaktinfo_i_sesong.gruppe_id', 'kontaktinfo_utenom_sesong.gruppe_id', {
+    get: function () {
+      // console.log('kontaktinfo_gruppe:get');
+      var kontaktinfoISesong = this.get('kontaktinfo_i_sesong');
+      var kontaktinfoUtenomSesong = this.get('kontaktinfo_utenom_sesong');
+      return kontaktinfoUtenomSesong || kontaktinfoISesong;
+    },
+    set: function (key, value) {
+      // console.log('kontaktinfo_gruppe:set', value);
+      if (this.get('direkte_kontakt')) {
+        this.set('kontaktinfo_utenom_sesong', value);
+
+      } else {
+        this.set('kontaktinfo_i_sesong', value);
+      }
+
+      return value;
     }
   }),
 
   latitude: Ember.computed('geojson.coordinates.1', {
-    get: function() {
+    get: function () {
       return this.get('geojson.coordinates.1');
     },
-    set: function(key, value) {
+    set: function (key, value) {
       this.set('geojson.coordinates.1', parseFloat(value, 10));
       return value;
     }
