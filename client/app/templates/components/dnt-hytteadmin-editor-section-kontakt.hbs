@@ -20,78 +20,99 @@
       placeholder="Finn gruppe..."}}
   </div>
 
-  <div class="field">
-    <label>Kontakt</label>
-    {{ui-dropdown-remote
-      query-url="/api/v1/group/?navn=~{query}"
-      object-url="/api/v1/group/{id}"
-      value=model.kontaktinfo_gruppe.gruppe_id
-      text=model.kontaktinfo_gruppe.navn
-      action="setKontaktinfoGruppeById"
-      placeholder="Finn gruppe..."}}
+  <div class="ui grid">
+    <div class="eight wide column">
+      <div class="field">
+        <label>Kontakt</label>
+        {{ui-dropdown-remote
+          query-url="/api/v1/group/?navn=~{query}"
+          object-url="/api/v1/group/{id}"
+          value=model.kontaktinfo_gruppe.gruppe_id
+          text=model.kontaktinfo_gruppe.navn
+          action="setKontaktinfoGruppeById"
+          placeholder="Finn gruppe..."}}
+      </div>
+      <div class="ui card fluid">
+        <div class="content">
+          <div class="header">{{model.kontaktinfo_gruppe.navn}}</div>
+          <div class="meta">
+            <span>{{model.kontaktinfo_gruppe.tilbyder}}</span>
+          </div>
+          <div class="description">
+            <div class="ui list">
+              {{#if model.kontaktinfo_gruppe.epost}}
+                <div class="item">
+                  <div class="header">Epost</div>
+                  {{model.kontaktinfo_gruppe.epost}}
+                </div>
+              {{/if}}
+              {{#if model.kontaktinfo_gruppe.adresse1}}
+                <div class="item">
+                  <div class="header">Adresse</div>
+                  {{model.kontaktinfo_gruppe.adresse1}}
+                </div>
+              {{/if}}
+              {{#if model.kontaktinfo_gruppe.postnummer}}
+                <div class="item">
+                  <div class="header">Postnummer</div>
+                  {{model.kontaktinfo_gruppe.postnummer}}
+                </div>
+              {{/if}}
+              {{#if model.kontaktinfo_gruppe.poststed}}
+                <div class="item">
+                  <div class="header">Poststed</div>
+                  {{model.kontaktinfo_gruppe.poststed}}
+                </div>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        {{#if model.kontaktinfo_gruppe.logo}}
+          <div class="extra content">
+            <div class="right floated author">
+              <img class="ui avatar image" src="{{model.kontaktinfo_gruppe.logo}}">
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="ui info message">
+        Kontaktinformasjonen ovenfor er den som er knyttet til gruppa <strong>{{model.kontaktinfo_gruppe.navn}}</strong> i Nasjonal Turbase. Endringer i disse opplysningene må gjøres via Gruppeadmin.
+      </div>
+    </div>
+    <div class="eight wide column">
+      <div class="field">
+        <label>Direkte kontakt</label>
+        {{ui-checkbox
+          label="Det er mulighet å kontakte hytta direkte i sesong"
+          checked=model.direkte_kontakt}}
+      </div>
+      {{#if model.direkte_kontakt}}
+        <div class="field">
+          <label>Kontaktperson</label>
+          {{input value=model.kontaktinfo_i_sesong.kontaktperson}}
+        </div>
+        <div class="field">
+          <label>Adresse</label>
+          {{input value=model.kontaktinfo_i_sesong.adresse1}}
+        </div>
+        <div class="field">
+          <label>Mobil</label>
+          {{input value=model.kontaktinfo_i_sesong.mobil}}
+        </div>
+        <div class="field">
+          <label>Telefon</label>
+          {{input value=model.kontaktinfo_i_sesong.telefon}}
+        </div>
+        <div class="field">
+          <label>Faks</label>
+          {{input value=model.kontaktinfo_i_sesong.fax}}
+        </div>
+        <div class="field">
+          <label>Epost</label>
+          {{input value=model.kontaktinfo_i_sesong.epost}}
+        </div>
+      {{/if}}
+    </div>
   </div>
 
-  <div class="ui list">
-    <div class="item">
-      <div class="header">Navn</div>
-      {{model.kontaktinfo_gruppe.navn}}
-    </div>
-    {{#if model.kontaktinfo_gruppe.epost}}
-      <div class="item">
-        <div class="header">Epost</div>
-        {{model.kontaktinfo_gruppe.epost}}
-      </div>
-    {{/if}}
-    {{#if model.kontaktinfo_gruppe.adresse1}}
-      <div class="item">
-        <div class="header">Adresse</div>
-        {{model.kontaktinfo_gruppe.adresse1}}
-      </div>
-    {{/if}}
-    {{#if model.kontaktinfo_gruppe.postnummer}}
-      <div class="item">
-        <div class="header">Postnummer</div>
-        {{model.kontaktinfo_gruppe.postnummer}}
-      </div>
-    {{/if}}
-    {{#if model.kontaktinfo_gruppe.poststed}}
-      <div class="item">
-        <div class="header">Poststed</div>
-        {{model.kontaktinfo_gruppe.poststed}}
-      </div>
-    {{/if}}
-  </div>
-
-  <div class="field">
-    {{ui-checkbox
-      label="Det er mulighet å kontakte hytta direkte i sesong"
-      checked=model.direkte_kontakt}}
-  </div>
-
-  {{#if model.direkte_kontakt}}
-    <div class="field">
-      <label>Kontaktperson</label>
-      {{input value=model.kontaktinfo_i_sesong.kontaktperson}}
-    </div>
-    <div class="field">
-      <label>Adresse</label>
-      {{input value=model.kontaktinfo_i_sesong.adresse1}}
-    </div>
-    <div class="field">
-      <label>Mobil</label>
-      {{input value=model.kontaktinfo_i_sesong.mobil}}
-    </div>
-    <div class="field">
-      <label>Telefon</label>
-      {{input value=model.kontaktinfo_i_sesong.telefon}}
-    </div>
-    <div class="field">
-      <label>Faks</label>
-      {{input value=model.kontaktinfo_i_sesong.fax}}
-    </div>
-    <div class="field">
-      <label>Epost</label>
-      {{input value=model.kontaktinfo_i_sesong.epost}}
-    </div>
-  {{/if}}
 </section>
