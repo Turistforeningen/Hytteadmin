@@ -1,0 +1,33 @@
+{{outlet}}
+
+<div class="ui segment two column middle aligned stackable grid">
+  <div class="column" style="padding: 40px;">
+    <div class="ui form">
+      <div class="field">
+        <label>Epost</label>
+        <div class="ui left icon input">
+          {{input value=email placeholder="Epost"}}
+          <i class="user icon"></i>
+        </div>
+      </div>
+      <div class="field">
+        <label>Passord</label>
+        <div class="ui left icon input">
+          {{input type="password" value=password}}
+          <i class="lock icon"></i>
+        </div>
+      </div>
+      <button {{action "login"}} class="ui blue submit button">Logg inn</button>
+    </div>
+  </div>
+  <div class="ui vertical divider">
+    eller
+  </div>
+  <div class="center aligned column">
+    <a href="http://hytte.app.dnt.privat/auth/login/dnt" class="ui big green labeled icon button">
+      <i class="arrow right icon"></i>
+      DNT-bruker
+    </a>
+  </div>
+</div>
+

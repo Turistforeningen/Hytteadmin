@@ -9,6 +9,9 @@ Router.map(function () {
   this.route('cabins', {path: '/hytter', resetNamespace: true}, function () {
     this.route('edit', {path: '/:id'});
   });
+
+  this.route('session.login', {path: '/logg-inn'});
+  this.route('session.logout', {path: '/logg-ut'});
 });
 
 export default Router;

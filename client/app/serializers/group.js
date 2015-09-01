@@ -7,6 +7,10 @@ export default ApplicationSerializer.extend({
   normalize: function (modelClass, resourceHash, prop) {
     var normalizedHash = resourceHash;
 
+    if (!normalizedHash._id && resourceHash.object_id) {
+      normalizedHash._id = resourceHash.object_id;
+    }
+
     if (resourceHash.kontaktinfo) {
       for (var i = 0; i < resourceHash.kontaktinfo.length; i++) {
         resourceHash.kontaktinfo[i]['type'] = resourceHash.kontaktinfo[i]['tittel'];
