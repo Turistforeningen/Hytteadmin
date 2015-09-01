@@ -22,6 +22,7 @@ server:
     - APP_URL=http://hytte.app.dnt.no
     - DNT_CONNECT_CLIENT
     - DNT_CONNECT_KEY
+    - DNT_API_KEY
     - NODE_ENV=production
     - NTB_API_ENV=dev
     - NTB_API_KEY
