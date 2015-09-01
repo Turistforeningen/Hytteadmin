@@ -10,6 +10,10 @@ var connect = new Connect(
   process.env.DNT_CONNECT_KEY
 );
 
+process.env.DNT_API_USER_AGENT = 'Hytteadmin/' + require('../package.json');
+var DntApi = require('dnt-api');
+var dntApi = new DntApi(process.env.DNT_API_USER_AGENT, process.env.DNT_API_KEY);
+
 app.get('/', function(req, res) {
   if (req.session && req.session.user) {
     res.json(req.session.user);
