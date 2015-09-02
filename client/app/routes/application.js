@@ -3,21 +3,18 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   actions: {
     willTransition: function (transition) {
-      // TODO: ... and here!
+      // TODO: Validate user session here ...
       // console.log('route:application:willTransition');
-      var session = this.store.findAll('session').then(function (sessions) {
-        console.log('sessions', sessions);
-
-      }).catch((err) => {
-        console.error(err);
-        this.transitionTo('session.login');
-      });
+      this.controllerFor('session').set('previousTransition', transition);
+      this.controllerFor('session').send('validate');
     }
   },
 
   beforeModel: function (transition) {
-    // TODO: Validate user session here ...
+    // TODO: ... and here!
     // console.log('route:application:beforeModel');
+    this.controllerFor('session').set('previousTransition', transition);
+    this.controllerFor('session').send('validate');
   },
 
   setupController: function(controller, model) {
