@@ -148,11 +148,16 @@
           </div>
         {{/if}}
 
+        {{ui-checkbox
+          label="Hytta har samme betjeningsgrad hele året"
+          checked=model.er_helårs}}
         <table class="ui celled table">
           <thead>
             <tr>
-              <th>Fra</th>
-              <th>Til</th>
+              {{#unless model.er_helårs}}
+                <th>Fra</th>
+                <th>Til</th>
+              {{/unless}}
               <th>Kommentar</th>
               <th>Nøkkel</th>
               <th>Betjeningsgrad</th>
@@ -162,8 +167,10 @@
           <tbody>
             {{#each model.privat.åpningstider as |periode|}}
               <tr>
-                <td>{{input value=periode.fra}}</td>
-                <td>{{input value=periode.til}}</td>
+                {{#unless model.er_helårs}}
+                  <td>{{input value=periode.fra}}</td>
+                  <td>{{input value=periode.til}}</td>
+                {{/unless}}
                 <td>{{input value=periode.kommentar}}</td>
                 <td>{{input value=periode.nøkkel}}</td>
                 <td>{{ui-dropdown content=model.BETJENINGSGRAD_CHOICES value=periode.betjeningsgrad}}</td>
@@ -175,13 +182,15 @@
               </tr>
             {{/each}}
           </tbody>
-          <tfoot>
-            <tr>
-              <th colspan="6">
-                <button class="ui primary button" {{action "addÅpningstiderPeriode"}}><i class="icon add"></i> Legg til periode</button>
-              </th>
-            </tr>
-          </tfoot>
+          {{#unless model.er_helårs}}
+            <tfoot>
+              <tr>
+                <th colspan="6">
+                  <button class="ui primary button" {{action "addÅpningstiderPeriode"}}><i class="icon add"></i> Legg til periode</button>
+                </th>
+              </tr>
+            </tfoot>
+          {{/unless}}
         </table>
 
       </section>
