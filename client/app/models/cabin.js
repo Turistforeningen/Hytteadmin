@@ -187,18 +187,18 @@ export default DS.Model.extend({
   }),
 
   setKontaktinfoGruppeById: function (id) {
-      this.store.findRecord('group', id).then((record) => {
-        this.set('kontaktinfo_gruppe', {
-          gruppe_id: record.get('id'),
-          navn: record.get('navn'),
-          adresse1: record.get('kontaktinfo_primærkontakt.adresse1'),
-          adresse2: record.get('kontaktinfo_primærkontakt.adresse2'),
-          epost: record.get('kontaktinfo_primærkontakt.epost'),
-          postnummer: record.get('kontaktinfo_primærkontakt.postnummer'),
-          poststed: record.get('kontaktinfo_primærkontakt.poststed'),
-          telefon: record.get('kontaktinfo_primærkontakt.telefon')
-        });
+    this.store.findRecord('group', id).then((record) => {
+      this.set('kontaktinfo_gruppe', {
+        gruppe_id: record.get('id'),
+        navn: record.get('navn'),
+        adresse1: record.get('kontaktinfo_primærkontakt.adresse1'),
+        adresse2: record.get('kontaktinfo_primærkontakt.adresse2'),
+        epost: record.get('kontaktinfo_primærkontakt.epost'),
+        postnummer: record.get('kontaktinfo_primærkontakt.postnummer'),
+        poststed: record.get('kontaktinfo_primærkontakt.poststed'),
+        telefon: record.get('kontaktinfo_primærkontakt.telefon')
       });
+    });
   },
 
   kontaktinfo_gruppe: Ember.computed('kontaktinfo_i_sesong.gruppe_id', 'kontaktinfo_utenom_sesong.gruppe_id', {
