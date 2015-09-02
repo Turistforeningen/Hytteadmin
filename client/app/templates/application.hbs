@@ -3,15 +3,17 @@
     <div href="#" class="header item">
       Hytteadmin
     </div>
-    {{#link-to 'cabins' class="item"}}
-      <i class="home icon"></i> Hytter
-    {{/link-to}}
-    <div class="right menu">
-      {{outlet 'toolbar'}}
-      {{#link-to 'session.logout' class="item"}}
-        <i class="user icon"></i> Logg ut
+    {{#if session.isAuthenticated}}
+      {{#link-to 'cabins' class="item"}}
+        <i class="home icon"></i> Hytter
       {{/link-to}}
-    </div>
+      <div class="right menu">
+        {{outlet 'toolbar'}}
+        {{#link-to 'session.logout' class="item"}}
+          <i class="user icon"></i> Logg ut
+        {{/link-to}}
+      </div>
+    {{/if}}
   </div>
 </div>
 <div class="ui container">
