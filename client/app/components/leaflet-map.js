@@ -4,9 +4,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   center: null,
+  markers: [],
   zoom: 13,
 
-  bindAttributes: ['center', 'zoom'],
+  bindAttributes: ['center', 'markers', 'zoom'],
 
   centerLatLng: Ember.computed('center', {
     get: function () {
