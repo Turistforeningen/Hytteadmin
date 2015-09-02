@@ -10,10 +10,6 @@ var connect = new Connect(
   process.env.DNT_CONNECT_KEY
 );
 
-process.env.DNT_API_USER_AGENT = 'Hytteadmin/' + require('../package.json');
-var DntApi = require('dnt-api');
-var dntApi = new DntApi(process.env.DNT_API_USER_AGENT, process.env.DNT_API_KEY);
-
 app.get('/', function(req, res) {
   if (req.session && req.session.user) {
     res.json(req.session.user);
@@ -39,40 +35,10 @@ app.get('/login/dnt', connect.middleware('signon'), function(req, res, next) {
     id: 'sherpa3:' + req.dntConnect.data.sherpa_id,
     navn: req.dntConnect.data.fornavn + ' ' + req.dntConnect.data.etternavn,
     epost: req.dntConnect.data.epost,
-    er_admin: false,
-    grupper: []
+    grupper: [] // @TODO get the groups
   };
 
-  next();
-});
-
-app.get('/login/dnt', function(req, res, next) {
-
-  dntApi.getAssociationsFor({bruker_sherpa_id: req.dntConnect.data.sherpa_id}, function (err, statusCode, associations) {
-    var groups = [];
-    var isAdmin = false;
-
-    if (err) { throw err; }
-    if (statusCode === 200) {
-
-      for (var i = 0; i < associations.length; i++) {
-        if (associations[i].object_id) {
-          groups.push(associations[i]);
-        }
-        if (!isAdmin && associations[i].navn === 'Den Norske Turistforening') {
-          isAdmin = true;
-        }
-      }
-
-      req.session.user.er_admin = isAdmin;
-      req.session.user.grupper = groups;
-
-    } else {
-      throw new Error('Request to DNT API failed: ' + statusCode);
-    }
-
-    res.redirect('/');
-  });
+  res.redirect('/hytter');
 });
 
 app.post('/login/turbasen', turbasen.middleware, function(req, res, next) {
