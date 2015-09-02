@@ -89,6 +89,35 @@ export default DS.Model.extend({
   tilrettelagt_for: DS.attr('array'),
   turkart: DS.attr('array'),
 
+  er_helårs: Ember.computed('privat.åpningstider.[]', {
+    get: function () {
+      var åpningstider = this.get('privat.åpningstider') || [];
+      return !!åpningstider.find(function (item, index, list) {
+        return (item.helårs === 'Ja');
+      });
+    },
+    set: function (key, value) {
+      switch (value) {
+        case true:
+          var åpningstid = this.get('privat.åpningstider.firstObject') || {};
+          åpningstid.helårs = 'Ja';
+          delete åpningstid.fra;
+          delete åpningstid.til;
+          this.set('privat.åpningstider', [åpningstid]);
+          return value;
+
+        case false:
+          var åpningstid = this.get('privat.åpningstider.firstObject') || {};
+          delete åpningstid.helårs;
+          this.set('privat.åpningstider', [åpningstid]);
+          return value;
+
+        default:
+          break;
+      }
+    }
+  }),
+
   updateVedlikeholdesAv: function () {
     var vedlikeholdesAvId = this.get('privat.vedlikeholdes_av');
     if (vedlikeholdesAvId) {
