@@ -160,7 +160,9 @@
               <th>Kommentar</th>
               <th>Nøkkel</th>
               <th>Betjeningsgrad</th>
-              <th>Fjern</th>
+              {{#unless model.er_helårs}}
+                <th>Fjern</th>
+              {{/unless}}
             </tr>
           </thead>
           <tbody>
@@ -173,11 +175,13 @@
                 <td>{{input value=periode.kommentar}}</td>
                 <td>{{input value=periode.nøkkel}}</td>
                 <td>{{ui-dropdown content=model.BETJENINGSGRAD_CHOICES value=periode.betjeningsgrad}}</td>
-                <td>
-                  <button class="basic ui icon button" {{action "removeÅpningstiderPeriode" periode}}>
-                    <i class="remove icon"></i>
-                  </button>
-                </td>
+                {{#unless model.er_helårs}}
+                  <td>
+                    <button class="basic ui icon button" {{action "removeÅpningstiderPeriode" periode}}>
+                      <i class="remove icon"></i>
+                    </button>
+                  </td>
+                {{/unless}}
               </tr>
             {{/each}}
           </tbody>
