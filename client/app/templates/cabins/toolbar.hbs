@@ -1,3 +1,12 @@
+{{#if model.er_publisert}}
+  <a class="item" {{action "unpublish"}}>
+    <i class="hide icon"></i> Avpubliser
+  </a>
+{{else}}
+  <a class="item" {{action "publish"}}>
+    <i class="unhide icon"></i> Publiser
+  </a>
+{{/if}}
 <a class="item" {{action "save"}}>
   <i class="save icon"></i> Lagre
 </a>
