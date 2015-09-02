@@ -3,6 +3,11 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  center: null,
+  zoom: 13,
+
+  bindAttributes: ['center', 'zoom'],
+
   setupMap: function () {
 
     this.mapLayers = this.createMapLayers();
