@@ -2,6 +2,13 @@
 
 <div class="ui segment two column middle aligned stackable grid">
   <div class="column" style="padding: 40px;">
+    {{#if authenticationError}}
+      <div class="ui ignored negative message">
+        <div class="content">
+          <p>Du har oppgitt feil brukernavn eller passord.</p>
+        </div>
+      </div>
+    {{/if}}
     <div class="ui form">
       <div class="field">
         <label>Epost</label>
