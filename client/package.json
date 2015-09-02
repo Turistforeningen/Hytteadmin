@@ -11,7 +11,7 @@
     "build": "ember build",
     "ember": "ember",
     "start": "ember server --watcher polling",
-    "test" : "ember test"
+    "test": "ember test"
   },
   "devDependencies": {
     "bower": "~1.5.2",
