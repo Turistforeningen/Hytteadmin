@@ -267,6 +267,12 @@ export default DS.Model.extend({
       this.set('geojson.coordinates.0', parseFloat(value, 10));
       return value;
     }
+  }),
+
+  er_publisert: Ember.computed('status', {
+    get: function () {
+      return (this.get('status') === 'Offentlig') ? true : false;
+    }
   })
 
 });
