@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   isAuthenticated: false,
-  loginAttempted: false,
+  authenticationError: false,
 
   actions: {
 
@@ -51,9 +51,9 @@ export default Ember.Controller.extend({
       Ember.$.post('/auth/login/turbasen', loginData).then((response) => {
         transition.retry();
 
-      }, function (error) {
-        if (error.status === 401) {
-          console.error('Wrong user or password, please try again');
+      }, (err) => {
+        if (err.status === 401) {
+          this.set('authenticationError', true);
         }
       });
     },
