@@ -2,7 +2,6 @@
   "name": "hytteadmin-client",
   "dependencies": {
     "ckeditor": "~4.5.2",
-    "datepickr": "*",
     "ember": "~2.0.1",
     "ember-cli-shims": "ember-cli/ember-cli-shims#0.0.3",
     "ember-cli-test-loader": "ember-cli-test-loader#0.1.3",
@@ -15,6 +14,7 @@
     "leaflet": "~0.7.3",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "moment": "~2.10.6",
+    "pikaday": "~1.3.3",
     "qunit": "~1.17.1",
     "semantic-ui": "~2.1.0"
   },
