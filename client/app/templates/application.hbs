@@ -1,16 +1,19 @@
-{{#ui-sticky class="ui attached stackable menu" position="fixed top"}}
+<div class="ui fixed inverted menu">
   <div class="ui container">
+    <div href="#" class="header item">
+      Hytteadmin
+    </div>
     {{#link-to 'cabins' class="item"}}
       <i class="home icon"></i> Hytter
     {{/link-to}}
-    {{#link-to 'session.logout' class="item"}}
-      <i class="list layout icon"></i> Logg ut
-    {{/link-to}}
     <div class="right menu">
       {{outlet 'toolbar'}}
+      {{#link-to 'session.logout' class="item"}}
+        <i class="user icon"></i> Logg ut
+      {{/link-to}}
     </div>
   </div>
-{{/ui-sticky}}
+</div>
 <div class="ui container">
   {{outlet}}
   {{outlet 'editor'}}
