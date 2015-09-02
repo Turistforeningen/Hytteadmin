@@ -39,10 +39,40 @@ app.get('/login/dnt', connect.middleware('signon'), function(req, res, next) {
     id: 'sherpa3:' + req.dntConnect.data.sherpa_id,
     navn: req.dntConnect.data.fornavn + ' ' + req.dntConnect.data.etternavn,
     epost: req.dntConnect.data.epost,
-    grupper: [] // @TODO get the groups
+    er_admin: false,
+    grupper: []
   };
 
-  res.redirect('/hytter');
+  next();
+});
+
+app.get('/login/dnt', function(req, res, next) {
+
+  dntApi.getAssociationsFor({bruker_sherpa_id: req.dntConnect.data.sherpa_id}, function (err, statusCode, associations) {
+    var groups = [];
+    var isAdmin = false;
+
+    if (err) { throw err; }
+    if (statusCode === 200) {
+
+      for (var i = 0; i < associations.length; i++) {
+        if (associations[i].object_id) {
+          groups.push(associations[i]);
+        }
+        if (!isAdmin && associations[i].navn === 'Den Norske Turistforening') {
+          isAdmin = true;
+        }
+      }
+
+      req.session.user.er_admin = isAdmin;
+      req.session.user.grupper = groups;
+
+    } else {
+      throw new Error('Request to DNT API failed: ' + statusCode);
+    }
+
+    res.redirect('/');
+  });
 });
 
 app.post('/login/turbasen', turbasen.middleware, function(req, res, next) {
