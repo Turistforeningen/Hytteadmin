@@ -9,6 +9,16 @@ export default Ember.Controller.extend({
       this.get('model').save();
     },
 
+    publish: function () {
+      this.set('model.status', 'Offentlig');
+      this.send('save');
+    },
+
+    unpublish: function () {
+      this.set('model.status', 'Kladd');
+      this.send('save');
+    },
+
     setJuridiskEierById: function (id) {
       var owner = this.store.find('group', id);
       this.get('model').set('juridisk_eier', owner);
