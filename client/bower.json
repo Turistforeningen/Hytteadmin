@@ -13,7 +13,7 @@
     "leaflet": "~0.7.3",
     "loader.js": "ember-cli/loader.js#3.2.0",
     "qunit": "~1.17.1",
-    "semantic-ui": "~2.0.7",
+    "semantic-ui": "~2.1.0",
     "ckeditor": "~4.5.2"
   },
   "resolutions": {
