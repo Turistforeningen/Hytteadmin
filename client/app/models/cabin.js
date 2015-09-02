@@ -97,9 +97,9 @@ export default DS.Model.extend({
       });
     },
     set: function (key, value) {
+      var åpningstid = this.get('privat.åpningstider.firstObject') || {};
       switch (value) {
         case true:
-          var åpningstid = this.get('privat.åpningstider.firstObject') || {};
           åpningstid.helårs = 'Ja';
           delete åpningstid.fra;
           delete åpningstid.til;
@@ -107,7 +107,6 @@ export default DS.Model.extend({
           return value;
 
         case false:
-          var åpningstid = this.get('privat.åpningstider.firstObject') || {};
           delete åpningstid.helårs;
           this.set('privat.åpningstider', [åpningstid]);
           return value;
