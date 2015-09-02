@@ -29,8 +29,8 @@ export default Ember.Component.extend({
     var mapOptions = {
       layers: [this.mapLayers.baseLayerConf['Topo 2']],
       scrollWheelZoom: false,
-      center: this.mapCenter,
-      zoom: this.mapZoom
+      center: this.get('centerLatLng'),
+      zoom: this.get('zoom')
     };
 
     var view = this.$();
