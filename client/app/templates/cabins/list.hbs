@@ -1,25 +1,47 @@
-<table class="ui table">
-  <thead>
-    <tr>
-      <th>Navn</th>
-      <th>Rediger</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each model as |cabin|}}
+<div class="ui message">
+  <div class="header">
+    Finn hytte
+  </div>
+  <div class="content" style="margin-top: 10px;">
+    <div class="ui right action left icon input">
+      <i class="search icon"></i>
+      {{input type="text" placeholder="Navn på hytte" value=searchTerm enter="search"}}
+      <button class="ui button" {{action "search"}}>
+        <div class="text">Søk</div>
+      </button>
+    </div>
+  </div>
+</div>
+{{#if isLoading}}
+  <div class="ui segment" style="margin-top: 20px; height: 100px;">
+    <div class="ui active inverted dimmer">
+      <div class="ui text loader">Søker...</div>
+    </div>
+  </div>
+{{else}}
+  <table class="ui table">
+    <thead>
       <tr>
-        <td>
-          {{#link-to 'cabins.edit' cabin.id}}{{cabin.navn}}{{/link-to}}
-        </td>
-        <td>
-          {{#link-to 'cabins.edit' cabin.id}}Rediger{{/link-to}}
-        </td>
+        <th>Navn</th>
+        <th>Rediger</th>
       </tr>
-    {{/each}}
-  </tbody>
-  <tfoot>
-    <tr>
-      <th colspan="2"></th>
-    </tr>
-  </tfoot>
-</table>
+    </thead>
+    <tbody>
+      {{#each model as |cabin|}}
+        <tr>
+          <td>
+            {{#link-to 'cabins.edit' cabin.id}}{{cabin.navn}}{{/link-to}}
+          </td>
+          <td>
+            {{#link-to 'cabins.edit' cabin.id}}Rediger{{/link-to}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2"></th>
+      </tr>
+    </tfoot>
+  </table>
+{{/if}}
