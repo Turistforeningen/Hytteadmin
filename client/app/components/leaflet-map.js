@@ -39,11 +39,6 @@ export default Ember.Component.extend({
 
     this.initMarker();
 
-    // // Add layer controls for selecting layer to map
-    // L.control.layers(this.mapLayers.baseLayerConf, this.mapLayers.overlayConf, {
-    //   position: 'topleft'
-    // }).addTo(this.map);
-
   }.on('didInsertElement'),
 
   initMarker: function () {
@@ -102,5 +97,12 @@ export default Ember.Component.extend({
       baseLayerConf: baseLayerConf,
       overlayConf: overlayConf
     };
-},
+  },
+
+  setupLayerControls: function () {
+    // Add layer controls for selecting visible layers
+    L.control.layers(this.mapLayers.baseLayerConf, this.mapLayers.overlayConf, {
+      position: 'topleft'
+    }).addTo(this.map);
+  }
 });
