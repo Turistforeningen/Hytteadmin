@@ -269,6 +269,12 @@ export default DS.Model.extend({
     }
   }),
 
+  lat_lng: Ember.computed('latitude', 'longitude', {
+    get: function () {
+      return [this.get('latitude'), this.get('longitude')];
+    }
+  }),
+
   er_publisert: Ember.computed('status', {
     get: function () {
       return (this.get('status') === 'Offentlig') ? true : false;
