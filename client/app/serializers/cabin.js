@@ -30,6 +30,11 @@ export default ApplicationSerializer.extend({
       json.fasiliteter = serializedFasiliteter;
     }
 
+    // Update `tilrettelagt_for` with types from `tilrettelegginger`
+    if (json.tilrettelegginger && json.tilrettelegginger.length) {
+      json.tilrettelagt_for = json.tilrettelegginger.mapBy('type');
+    }
+
     return json;
   }
 
