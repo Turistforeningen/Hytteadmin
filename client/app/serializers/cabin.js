@@ -5,10 +5,10 @@ export default ApplicationSerializer.extend({
 
   normalize: function (modelClass, resourceHash, prop) {
     var normalizedHash = resourceHash;
-    var normalizedFasiliteter = [];
 
     // Maps `fasiliteter` object to an array of objects with the key as `type` and value as `kommentar`
     if (resourceHash.fasiliteter) {
+      var normalizedFasiliteter = [];
       for (var key in resourceHash.fasiliteter) {
         normalizedFasiliteter.push({type: key, kommentar: resourceHash.fasiliteter[key]});
       }
