@@ -1,10 +1,33 @@
 <section>
   <h3 class="ui header">Fasiliteter</h3>
-
-  <div class="field">
-    <label>Tilrettelagt for</label>
-    {{ui-dropdown content=model.TILRETTELAGT_FOR_CHOICES value=model.tilrettelagt_for multiple=true}}
-  </div>
+  <p>Hvilke grupper hytta er tilrettelagt for?</p>
+  <table class="ui two column table">
+    <thead>
+      <tr>
+        <th>Tilrettelagt for</th>
+        <th>Kommentar</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.tilrettelegginger as |tilrettelegging|}}
+        <tr>
+          <td>{{tilrettelegging.type}}</td>
+          <td>{{input value=tilrettelegging.kommentar}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2">
+          {{ui-dropdown
+            content=TILRETTELEGGINGER_UNSELECTED_CHOICES
+            action="addTilrettelegging"
+            placeholder="Legg til tilrettelagt for"
+            search=true}}
+        </th>
+      </tr>
+    </tfoot>
+  </table>
 
   <table class="ui two column table">
     <thead>

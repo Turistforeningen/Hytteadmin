@@ -45,7 +45,7 @@ export default DS.Model.extend({
     'Privat rabatthytte'
   ],
 
-  TILRETTELAGT_FOR_CHOICES: [
+  TILRETTELEGGINGER_CHOICES: [
     'Barnevogn',
     'Rullestol',
     'Hund',
@@ -86,7 +86,7 @@ export default DS.Model.extend({
   }}),
   tags: DS.attr('array', {defaultValue: ['Hytte']}),
   // tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
-  tilrettelagt_for: DS.attr('array'),
+  tilrettelegginger: DS.attr('array'),
   turkart: DS.attr('array'),
 
   er_helårs: Ember.computed('privat.åpningstider.[]', {
