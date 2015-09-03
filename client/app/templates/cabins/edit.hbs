@@ -241,7 +241,7 @@
         <h3 class="ui header">Geografi</h3>
         <div class="ui grid">
           <div class="twelve wide column">
-            {{leaflet-map markers=model.geojson center=model.geojson}}
+            {{leaflet-map marker=model.lat_lng center=model.lat_lng zoom="15"}}
           </div>
           <div class="four wide column">
             <div class="field">
