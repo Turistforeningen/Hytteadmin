@@ -7,11 +7,11 @@ export default Ember.Route.extend({
     return this.store.findAll('cabin');
   },
 
-  setupController: function(controller, model) {
+  setupController: function (controller, model) {
     controller.set('model', model);
   },
 
-  renderTemplate: function() {
+  renderTemplate: function () {
     this.render('cabins/list');
   }
 });
