@@ -8,7 +8,7 @@ module.exports = function(environment) {
     locationType: 'auto',
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' hytte.app.dnt.privat:49152 hytte.app.dnt.privat use.typekit.net connect.facebook.net maps.googleapis.com maps.gstatic.com",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' hytte.app.dnt.privat:49152 hytte.app.dnt.privat use.typekit.net connect.facebook.net maps.googleapis.com maps.gstatic.com cdn.ravenjs.com",
       'font-src': "'self' data: use.typekit.net fonts.gstatic.com",
       'connect-src': "'self' ws://hytte.app.dnt.privat:49152 ws.geonorge.no",
       'img-src': "'self' data: www.facebook.com p.typekit.net www.dnt.no www.turistforeningen.no www2.turistforeningen.no mt3.turistforeningen.no opencache.statkart.no app.getsentry.com sentry.app.dnt.no",
