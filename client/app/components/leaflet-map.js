@@ -37,12 +37,36 @@ export default Ember.Component.extend({
     var view = this.$();
     this.map = L.map(view[0], mapOptions);
 
+    this.initMarker();
+
     // // Add layer controls for selecting layer to map
     // L.control.layers(this.mapLayers.baseLayerConf, this.mapLayers.overlayConf, {
     //   position: 'topleft'
     // }).addTo(this.map);
 
   }.on('didInsertElement'),
+
+  initMarker: function () {
+    var markerPosition = this.get('marker');
+
+    if (markerPosition) {
+      var marker = L.marker(markerPosition);
+      marker.addTo(this.map);
+      this.set('_marker', marker);
+    }
+  },
+
+  updateMarker: function () {
+    var marker = this.get('_marker');
+
+    if (marker) {
+      marker.setLatLng(this.get('marker'));
+
+    } else {
+       this.initMarker();
+    }
+
+  }.observes('marker'),
 
   createMapLayers: function () {
     var topo, summer, winter, cabin, baseLayerConf, overlayConf;
