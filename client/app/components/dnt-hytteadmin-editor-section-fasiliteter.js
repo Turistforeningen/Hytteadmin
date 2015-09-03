@@ -35,7 +35,7 @@ export default Ember.Component.extend({
   actions: {
     addFasilitet: function (fasilitet) {
       if (fasilitet) { // NOTE: Prevents adding empty fasilitet on dropdown clear
-        var fasiliteter = this.get('model.fasiliteter') || {};
+        var fasiliteter = this.get('model.fasiliteter') || [];
         fasiliteter.addObject({type: fasilitet, kommentar: ''});
         this.set('model.fasiliteter', fasiliteter);
       }
