@@ -7,7 +7,7 @@ export default Ember.Component.extend({
 
   _editor: null,
 
-  didInsertElement() {
+  didInsertElement () {
     let textarea = this.element.querySelector('.editor');
     let editor = this._editor = CKEDITOR.replace(textarea, {
       language: 'no',
@@ -15,6 +15,8 @@ export default Ember.Component.extend({
       removePlugins: 'elementspath',
       // Whether to use HTML entities in the output.
       entities: false,
+      // Disable resizing to get rid of bottom bar
+      resize_enabled: false,
 
       toolbar: [
         {name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']},
@@ -33,7 +35,7 @@ export default Ember.Component.extend({
     });
   },
 
-  willDestroyElement() {
+  willDestroyElement () {
     this._editor.destroy();
     this._editor = null;
   }
