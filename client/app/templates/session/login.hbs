@@ -24,7 +24,11 @@
           <i class="lock icon"></i>
         </div>
       </div>
-      <button {{action "login"}} class="ui blue submit button">Logg inn</button>
+       {{#if isLoading}}
+        <button class="ui blue submit button disabled">Logger inn...</button>
+      {{else}}
+        <button {{action "login"}} class="ui blue submit button">Logg inn</button>
+      {{/if}}
     </div>
   </div>
   <div class="ui vertical divider">

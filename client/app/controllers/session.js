@@ -48,10 +48,13 @@ export default Ember.Controller.extend({
       var transition = this.get('previousTransition') || this.transitionToRoute('index');
       this.set('previousTransition', null);
 
+      this.set('isLoading', true);
       Ember.$.post('/auth/login/turbasen', loginData).then((response) => {
+        this.set('isLoading', false);
         transition.retry();
 
       }, (err) => {
+        this.set('isLoading', false);
         if (err.status === 401) {
           this.set('authenticationError', true);
         }
