@@ -19,3 +19,8 @@ body {
     opacity: .8;
   }
 }
+
+// Move fixed menu above loading dimmer which has z-index 1000
+.ui.menu.fixed {
+  z-index: 1001;
+}
