@@ -182,8 +182,8 @@
             {{#each model.privat.åpningstider as |periode|}}
               <tr>
                 {{#unless model.er_helårs}}
-                  <td>{{input value=periode.fra}}</td>
-                  <td>{{input value=periode.til}}</td>
+                  <td>{{pikaday-input value=periode.fra}}</td>
+                  <td>{{pikaday-input value=periode.til}}</td>
                 {{/unless}}
                 <td>{{input value=periode.kommentar}}</td>
                 <td>{{input value=periode.nøkkel}}</td>
