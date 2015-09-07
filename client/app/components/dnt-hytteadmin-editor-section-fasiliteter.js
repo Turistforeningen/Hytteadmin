@@ -52,6 +52,11 @@ export default Ember.Component.extend({
         tilrettelegginger.addObject({type: tilretteleggingType});
         this.set('model.tilrettelegginger', tilrettelegginger);
       }
+    },
+
+    removeTilrettelegging: function (tilrettelegging) {
+      var tilrettelegginger = this.get('model.tilrettelegginger') || [];
+      tilrettelegginger.removeObject(tilrettelegging);
     }
   }
 });
