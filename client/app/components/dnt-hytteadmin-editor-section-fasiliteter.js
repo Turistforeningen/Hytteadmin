@@ -14,7 +14,7 @@ export default Ember.Component.extend({
       selectedTilretteleggingerTyper = [];
     }
 
-    return this.get('model.TILRETTELEGGINGER_CHOICES').removeObjects(selectedTilretteleggingerTyper);
+    return Ember.copy(this.get('model.TILRETTELEGGINGER_CHOICES')).removeObjects(selectedTilretteleggingerTyper);
   }.property('model.TILRETTELEGGINGER_CHOICES', 'model.tilrettelegginger.[]'),
 
   FASILITETER_UNSELECTED_CHOICES: function () {
@@ -29,7 +29,7 @@ export default Ember.Component.extend({
       selectedFasiliteter = [];
     }
 
-    return this.get('model.FASILITETER_CHOICES').removeObjects(selectedFasiliteter);
+    return Ember.copy(this.get('model.FASILITETER_CHOICES')).removeObjects(selectedFasiliteter);
   }.property('model.FASILITETER_CHOICES', 'model.fasiliteter.[]'),
 
   actions: {
