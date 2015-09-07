@@ -41,6 +41,11 @@ export default Ember.Component.extend({
       }
     },
 
+    removeFasilitet: function (fasilitet) {
+      var fasiliteter = this.get('model.fasiliteter') || [];
+      fasiliteter.removeObject(fasilitet);
+    },
+
     addTilrettelegging: function (tilretteleggingType) {
       if (tilretteleggingType) { // NOTE: Prevents adding empty tilrettelegging on dropdown clear
         var tilrettelegginger = this.get('model.tilrettelegginger') || [];
