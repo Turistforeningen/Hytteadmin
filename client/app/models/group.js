@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
+// TODO: Consider separate Group models for groups from Sherpa and Turbasen
 export default DS.Model.extend({
   // checksum: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   // endret: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
@@ -22,6 +23,7 @@ export default DS.Model.extend({
   privat: DS.attr('object'),
   status: DS.attr('string'),
   tags: DS.attr('array'),
+  type: DS.attr('string'), // Sherpa group property
   tilbyder: DS.attr('string'),
   url: DS.attr('string')
 });
