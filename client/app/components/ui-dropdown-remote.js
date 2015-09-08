@@ -23,7 +23,8 @@ export default Ember.Component.extend({
         }
       },
       onChange: Ember.run.bind(this, this.onChange)
-    });
+    }).dropdown('set text', this.get('text'));
+
   }.on('didInsertElement'),
 
   onChange: function (value, text, $choice) {
