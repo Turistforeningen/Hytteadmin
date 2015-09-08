@@ -26,6 +26,8 @@ export default Ember.Component.extend({
     var selectContent = this.get('content');
 
     return selectContent ? selectContent.map(function (item, index, list) {
+      // NOTE: Breaks if optionValuePath or optionLabelPath is specified but item does not have a get-method
+      // TODO: Consider adding support for plain object items
       return {
         value: optionValuePath ? item.get(optionValuePath) : item,
         label: optionLabelPath ? item.get(optionLabelPath) : item
