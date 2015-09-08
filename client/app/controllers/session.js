@@ -29,6 +29,7 @@ export default Ember.Controller.extend({
 
         var session = this.store.findAll('session').then((sessions) => {
           this.set('isAuthenticated', true);
+          this.set('model', sessions.get('firstObject'));
           transition.retry();
 
         }).catch((err) => {
