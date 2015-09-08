@@ -4,7 +4,7 @@ export default Ember.Route.extend({
   controllerName: 'cabins',
 
   model: function () {
-    return this.store.findAll('cabin');
+    // Will be set in CabinsController
   },
 
   setupController: function (controller, model) {

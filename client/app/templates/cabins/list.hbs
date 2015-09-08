@@ -1,24 +1,33 @@
 <div class="ui message">
-  <div class="header">
-    Finn hytte
-  </div>
-  <div class="content" style="margin-top: 10px;">
-    <div class="ui right action left icon input">
-      <i class="search icon"></i>
-      {{input type="text" placeholder="Navn på hytte" value=searchTerm enter="search"}}
-      <button class="ui button" {{action "search"}}>
-        <div class="text">Søk</div>
-      </button>
+  <div class="ui two column center aligned middle aligned stackable very relaxed grid">
+    <div class="column">
+      <div class="content">
+        {{dnt-hytteadmin-list-filter session=session list=model params=filterParams relation=relation gruppe=gruppe}}
+      </div>
+    </div>
+    <div class="ui vertical divider">
+      eller
+    </div>
+    <div class="column">
+      <div class="content">
+        <div class="ui right action left icon input">
+          <i class="search icon"></i>
+          {{input type="text" placeholder="Finn hytte med navn" value=searchTerm enter="search"}}
+          <button class="ui blue button" {{action "search"}}>
+            <div class="text">Søk</div>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 {{#if isLoading}}
   <div class="ui segment" style="margin-top: 20px; height: 100px;">
     <div class="ui active inverted dimmer">
-      <div class="ui text loader">Søker...</div>
+      <div class="ui text loader"></div>
     </div>
   </div>
-{{else}}
+{{else if model}}
   <table class="ui table">
     <thead>
       <tr>
@@ -44,4 +53,16 @@
       </tr>
     </tfoot>
   </table>
+{{else}}
+  <div class="ui icon info message">
+    <i class="frown icon"></i>
+    <div class="content">
+      <div class="header">Fant ingen hytter</div>
+      {{#if queryIsFilter}}
+        <p>Vi kunne ikke finne noen hytter som {{relation.label}} {{gruppe.navn}}.</p>
+      {{else if queryIsSearch}}
+        <p>Vi kunne ikke finne noen hytter med navn som inneholdt {{searchTerm}}.</p>
+      {{/if}}
+    </div>
+  </div>
 {{/if}}
