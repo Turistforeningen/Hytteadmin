@@ -1,0 +1,17 @@
+Vis hytter som
+{{ui-dropdown
+  content=FILTER_RELATION_CHOICES
+  optionValuePath="value"
+  optionLabelPath="label"
+  value=relation
+  inline=true}}
+{{#if session.model.grupper}}
+  {{ui-dropdown
+    content=session.model.grupper
+    optionValuePath="id"
+    optionLabelPath="navn"
+    value=gruppe
+    inline=true}}
+{{else}}
+  {{session.model.gruppe.navn}}
+{{/if}}
