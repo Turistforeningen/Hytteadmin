@@ -38,6 +38,7 @@ export default Ember.Component.extend({
 
   setup: function () {
     if (this.get('inline')) {
+      // DEPRECATION: You should never change properties on components, services or models during didInsertElement because it causes significant performance degradation.
       this.set('selection', false);
       this.set('fluid', false);
     }
