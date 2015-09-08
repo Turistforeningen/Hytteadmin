@@ -49,18 +49,28 @@ export default Ember.Component.extend({
 
   }.on('didInsertElement'),
 
-  // onValueChange: function () {
-  //   if (typeof this.value === 'undefined') {
-  //     return;
-  //   }
+  onValueChange: function () {
+    // TODO: Handle dropdowns with multiple
+    // console.log('onValueChange', this.get('value'));
 
-  //   this.$().dropdown('set selected', Ember.A(this.value.map(function (item, index, list) {
-  //     return item.replace(',', '');
-  //   })));
+    // If optionValuePath has value, use that to get dropdown value
+    var value = this.optionValuePath ? this.get('value.' + this.optionValuePath) : this.get('value');
 
-  // }.observes('value'),
+    this.$().dropdown('set selected', value);
+
+    // if (typeof this.value === 'undefined') {
+    //   return;
+    // }
+
+    // this.$().dropdown('set selected', Ember.A(this.value.map(function (item, index, list) {
+    //   return item.replace(',', '');
+    // })));
+
+  }.observes('value'),
 
   onChange: function (value, text, $choice) {
+
+    // TODO: Need to check wether change is triggered by method above and if that's the case; ignore the change
 
     // NOTE: This will have to be improved, can not assume ignoring value === undefined is okay
     // if ((this.value && this.value.toString() === value) || (this.value === undefined)) {
