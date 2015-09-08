@@ -4,8 +4,11 @@ import Ember from "ember";
 export default Ember.Component.extend({
 
   tagName: 'div',
-  classNames: ['ui', 'selection', 'dropdown', 'fluid'],
-  classNameBindings: ['multiple', 'search'],
+  classNames: ['ui', 'dropdown'],
+  classNameBindings: ['multiple', 'search', 'inline', 'selection', 'fluid'],
+
+  selection: true,
+  fluid: true,
 
   content: null,
   value: null,
@@ -32,6 +35,11 @@ export default Ember.Component.extend({
   }.property('content.[]'),
 
   setup: function () {
+    if (this.get('inline')) {
+      this.set('selection', false);
+      this.set('fluid', false);
+    }
+
     this.$().dropdown({
       allowAdditions: this.allowAdditions,
       onChange: Ember.run.bind(this, this.onChange)
