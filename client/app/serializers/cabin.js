@@ -15,6 +15,15 @@ export default ApplicationSerializer.extend({
       normalizedHash.fasiliteter = normalizedFasiliteter;
     }
 
+    if (resourceHash.tilrettelagt_for && resourceHash.tilrettelagt_for.length) {
+      let tilrettelegginger = resourceHash.tilrettelegginger || [];
+      for (let i = 0; i < resourceHash.tilrettelagt_for.length; i++) {
+        if (typeof tilrettelegginger.findBy('type', resourceHash.tilrettelagt_for[i]) === 'undefined') {
+          tilrettelegginger.addObject({'type': resourceHash.tilrettelagt_for[i]});
+        }
+      }
+      normalizedHash.tilrettelegginger = tilrettelegginger;
+    }
     return this._super(modelClass, normalizedHash, prop);
   },
 
