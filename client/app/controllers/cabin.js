@@ -7,16 +7,19 @@ export default Ember.Controller.extend({
 
   errors: [],
 
+  invalidErrorMessage: {message: 'Hytta kunne ikke lagres fordi alle feltene ikke er riktig fyllt ut. Gå over feltene med feilmeldinger og prøv igjen.'},
+  unknownErrorMessage: {message: 'Vi kunne dessverre ikke lagre hytta på grunn av en ukjent feil.'},
+
   actions: {
     save: function () {
       this.get('model').save().then((response) => {
         this.get('errors').clear();
       }, (err) => {
         if (err instanceof DS.InvalidError) {
-          this.get('errors').clear().addObject({message: 'Hytta kunne ikke lagres fordi alle feltene ikke er riktig fyllt ut. Gå over feltene med feilmeldinger og prøv igjen.'});
+          this.get('errors').addObject(this.get('invalidErrorMessage'));
 
         } else {
-          this.get('errors').clear().addObject({message: 'Det skjedde en ukjent feil ved lagring.'});
+          this.get('errors').addObject(this.get('unknownErrorMessage'));
         }
       });
     },
