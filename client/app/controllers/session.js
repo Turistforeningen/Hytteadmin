@@ -56,8 +56,13 @@ export default Ember.Controller.extend({
 
       }, (err) => {
         this.set('isLoading', false);
-        if (err.status === 401) {
-          this.set('authenticationError', true);
+        switch (err.status) {
+          case 401:
+            this.set('authenticationError', true);
+            break;
+          case 503: // Service Unavailable
+            this.set('authenticationServiceUnavailable', true);
+            break;
         }
       });
     },

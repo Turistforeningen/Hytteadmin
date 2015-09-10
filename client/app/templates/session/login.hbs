@@ -8,6 +8,12 @@
           <p>Du har oppgitt feil brukernavn eller passord.</p>
         </div>
       </div>
+    {{else if authenticationServiceUnavailable}}
+      <div class="ui ignored negative message">
+        <div class="content">
+          <p>Innloggingstjenesten er dessverre ikke tilgjengelig for øyeblikket.</p>
+        </div>
+      </div>
     {{/if}}
     <div class="ui form">
       <div class="field">
