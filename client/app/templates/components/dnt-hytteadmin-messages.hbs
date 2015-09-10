@@ -1,0 +1,23 @@
+{{#if errors}}
+  {{#ui-message-fullwidth color="red"}}
+    <div class="ui list">
+      {{#each errors as |error|}}
+        <div class="ui item">
+          {{error.message}}
+        </div>
+      {{/each}}
+    </div>
+  {{/ui-message-fullwidth}}
+{{/if}}
+
+{{#if warnings}}
+  {{#ui-message-fullwidth color="yellow"}}
+    <div class="ui list">
+      {{#each warnings as |warning|}}
+        <div class="ui item">
+          {{warning.message}}
+        </div>
+      {{/each}}
+    </div>
+  {{/ui-message-fullwidth}}
+{{/if}}
