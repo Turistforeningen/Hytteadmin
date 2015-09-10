@@ -92,11 +92,18 @@ export default DS.RESTSerializer.extend({
   },
 
   extractErrors: function (store, typeClass, payload, id) {
-    if (payload && typeof payload === 'object' && payload.message) {
+    var extractedPayload = {};
+
+    if (payload && payload.errors) {
+      payload.errors.forEach((error, index, list) => {
+        extractedPayload[error.context.key] = [error.message];
+      });
+
+    } else if (payload && typeof payload === 'object' && payload.message) {
       payload = [payload.message];
       this.normalizeErrors(typeClass, payload);
     }
-    return payload;
+    return extractedPayload;
   }
 
   // extractErrors: function(store, typeClass, payload, id) {
