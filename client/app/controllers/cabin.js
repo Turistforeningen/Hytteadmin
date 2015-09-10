@@ -1,12 +1,24 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 
 export default Ember.Controller.extend({
   groups: Ember.inject.controller(),
   user: Ember.inject.controller(),
 
+  errors: [],
+
   actions: {
     save: function () {
-      this.get('model').save();
+      this.get('model').save().then((response) => {
+        this.get('errors').clear();
+      }, (err) => {
+        if (err instanceof DS.InvalidError) {
+          this.get('errors').clear().addObject({message: 'Hytta kunne ikke lagres fordi alle feltene ikke er riktig fyllt ut. Gå over feltene med feilmeldinger og prøv igjen.'});
+
+        } else {
+          this.get('errors').clear().addObject({message: 'Det skjedde en ukjent feil ved lagring.'});
+        }
+      });
     },
 
     publish: function () {
