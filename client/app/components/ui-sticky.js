@@ -2,15 +2,23 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: ['ui', 'sticky'],
-  attributeBindings: [],
   classNameBindings: ['position'],
 
-  setup: function () {
+  contextSelector: null,
+  offset: null,
+  position: null,
+  attributeBindings: ['contextSelector', 'offset', 'position'],
 
-    this.$().sticky({
-      context: this.get('contextSelector'),
-      offset: parseInt(this.get('offset'), 10)
-    });
+  setup: function () {
+    let options = {};
+
+    let contextSelector = this.get('contextSelector');
+    if (contextSelector) { options.context = this.get('contextSelector'); }
+
+    let offset = parseInt(this.get('offset'), 10);
+    if (offset) { options.offset = offset; }
+
+    this.$().sticky(options);
 
   }.on('didInsertElement')
 });
