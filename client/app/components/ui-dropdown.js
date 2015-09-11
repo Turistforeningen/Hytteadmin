@@ -45,7 +45,8 @@ export default Ember.Component.extend({
 
     this.$().dropdown({
       allowAdditions: this.allowAdditions,
-      onChange: Ember.run.bind(this, this.onChange)
+      onChange: Ember.run.bind(this, this.onChange),
+      onHide: Ember.run.bind(this, this.onHide)
     }).dropdown('set selected', this.value);
 
   }.on('didInsertElement'),
@@ -68,6 +69,11 @@ export default Ember.Component.extend({
     // })));
 
   }.observes('value'),
+
+  onHide: function () {
+    // Need to trigger blur manually to perform validation on blur
+    this.$('input').trigger('blur');
+  },
 
   onChange: function (value, text, $choice) {
 
