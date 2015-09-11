@@ -4,8 +4,9 @@ export default Ember.Component.extend({
   element: 'form',
   classNames: ['ui form'],
 
-  attributeBindings: ['validationRules'],
+  isSaving: null,
   validationRules: null,
+  attributeBindings: ['isSaving', 'validationRules'],
 
   setup: function () {
     let validationRules = this.get('validationRules');
@@ -17,6 +18,11 @@ export default Ember.Component.extend({
         on: 'blur'
       });
     }
-  }.on('didInsertElement')
+  }.on('didInsertElement'),
 
+  validateForm: function () {
+    if (this.get('isSaving')) {
+      this.$().form('validate form');
+    }
+  }.observes('isSaving')
 });
