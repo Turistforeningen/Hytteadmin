@@ -2,13 +2,13 @@
 
 <div class="ui grid">
   <div class="sixteen wide column">
-    {{#ui-form}}
+    {{#ui-form validationRules=validationRules}}
       <section>
         <h3 class="ui header">Generelt</h3>
         <a class="anchor" id="generelt"></a>
         <div class="field">
           <label>Navn</label>
-          {{input type="text" value=model.navn placeholder="Navn"}}
+          {{input type="text" value=model.navn placeholder="Navn" data-validate="navn"}}
         </div>
         <div class="field">
           <label>Byggeår</label>
@@ -32,7 +32,7 @@
         </div>
         <div class="field">
           <label>Hyttetype</label>
-          {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.hyttetype}}
+          {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.hyttetype data-validate="hyttetype"}}
         </div>
 
       </section>
