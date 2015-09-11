@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   optionLabelPath: null,
   allowAdditions: null,
 
-  bindAttributes: ['optionValuePath', 'optionLabelPath', 'value', 'content', 'allowAdditions', 'action'],
+  bindAttributes: ['optionValuePath', 'optionLabelPath', 'value', 'content', 'allowAdditions', 'action', 'data-validate'],
 
   actions: {},
 
