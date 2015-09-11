@@ -7,6 +7,27 @@ export default Ember.Controller.extend({
 
   errors: [],
 
+  validationRules: {
+    navn: {
+      identifier: 'navn',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Hytta må ha et navn'
+        }
+      ]
+    },
+    hyttetype: {
+      identifier: 'hyttetype',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Du må velge en hyttetype'
+        }
+      ]
+    }
+  },
+
   invalidErrorMessage: {message: 'Hytta kunne ikke lagres fordi alle feltene ikke er riktig fyllt ut. Gå over feltene med feilmeldinger og prøv igjen.'},
   unknownErrorMessage: {message: 'Vi kunne dessverre ikke lagre hytta på grunn av en ukjent feil.'},
 
