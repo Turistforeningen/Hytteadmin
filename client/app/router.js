@@ -8,6 +8,7 @@ var Router = Ember.Router.extend({
 Router.map(function () {
   this.route('cabins', {path: '/hytter', resetNamespace: true}, function () {
     this.route('edit', {path: '/:id'});
+    this.route('new', {path: '/ny'});
   });
 
   this.route('session.login', {path: '/logg-inn'});
