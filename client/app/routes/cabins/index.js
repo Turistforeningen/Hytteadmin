@@ -13,5 +13,10 @@ export default Ember.Route.extend({
 
   renderTemplate: function () {
     this.render('cabins/list');
+
+    this.render('cabins/header-left', {
+      into: 'application',
+      outlet: 'header-left'
+    });
   }
 });
