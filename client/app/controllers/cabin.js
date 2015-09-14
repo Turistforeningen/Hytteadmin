@@ -25,6 +25,24 @@ export default Ember.Controller.extend({
           prompt: 'Du må velge en hyttetype'
         }
       ]
+    },
+    juridisk_eier: {
+      identifier: 'juridisk_eier',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Du må velge hvilken gruppe som eier hytta'
+        }
+      ]
+    },
+    vedlikeholdes_av: {
+      identifier: 'vedlikeholdes_av',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Du må velge hvilken gruppe som driver hytta'
+        }
+      ]
     }
   },
 
