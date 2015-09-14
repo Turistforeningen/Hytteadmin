@@ -14,9 +14,9 @@ export default Ember.Route.extend({
   renderTemplate: function () {
     this.render('cabins/edit');
 
-    this.render('cabins/toolbar', {
+    this.render('cabins/header-right', {
       into: 'application',
-      outlet: 'toolbar'
+      outlet: 'header-right'
     });
   }
 });
