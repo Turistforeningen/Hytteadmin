@@ -71,7 +71,11 @@ export default Ember.Component.extend({
 
   onHide: function () {
     // Need to trigger blur manually to perform validation on blur
-    this.$('input').trigger('blur');
+    let input = this.$('input');
+    if (input.val() === '') {
+      // No value was selected
+      input.trigger('blur');
+    }
   },
 
   onChange: function (value, text, $choice) {

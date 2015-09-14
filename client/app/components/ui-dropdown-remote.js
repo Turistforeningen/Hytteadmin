@@ -22,10 +22,16 @@ export default Ember.Component.extend({
           return {success: true, results: results};
         }
       },
+      onHide: Ember.run.bind(this, this.onHide),
       onChange: Ember.run.bind(this, this.onChange)
     }).dropdown('set text', this.get('text'));
 
   }.on('didInsertElement'),
+
+  onHide: function () {
+    // Need to trigger blur manually to perform validation on blur
+    // this.$('input').trigger('blur');
+  },
 
   onChange: function (value, text, $choice) {
     if (this.get('attrs.action')) {
