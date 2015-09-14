@@ -16,8 +16,48 @@ export default DS.RESTSerializer.extend({
     return Ember.String.underscore(key);
   },
 
+  removeEmpty: function (input) {
+    let output = Ember.copy(input);
+    let type = Ember.typeOf(input);
+
+    if (type === 'array') {
+      for (let i = 0; i < output.length; i++) {
+        if (Ember.typeOf(output[i]) === 'object') {
+          if (output[i].url === 'http://') {
+            output.splice(i, 1);
+          } else {
+            output[i] = this.removeEmpty(output[i]);
+          }
+
+        } else if (Ember.typeOf(output[i]) === 'string') {
+          if (output[i] === '') {
+            output.splice(i, 1);
+          }
+        }
+      }
+
+    } else if (type === 'object') {
+      for (let prop in output) {
+        let type = Ember.typeOf(output[prop]);
+        if (type === 'object') {
+          output[prop] = this.removeEmpty(output[prop]);
+        } else if (type === 'string') {
+          if (output[prop] === '') {
+            delete output[prop];
+          }
+        }
+      }
+    }
+
+    return output;
+  },
+
   serialize: function (snapshot, options) {
     var json = this._super(snapshot, options);
+
+    // Would like to remove all empty properties, but API saves using a PATCH request
+    // and the result is that the removed properties are not removed but keeps their value
+    // json.attributes = this.removeEmpty(json.attributes);
     // console.log('serialize', json);
     for (var prop in json.attributes) {
       if (json.attributes[prop] === undefined || json.attributes[prop] === null) {
