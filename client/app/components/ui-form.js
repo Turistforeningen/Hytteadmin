@@ -18,7 +18,7 @@ export default Ember.Component.extend({
         on: 'blur'
       });
     }
-  }.on('didInsertElement'),
+  }.on('didInsertElement').observes('validationRules.[]'),
 
   validateForm: function () {
     if (this.get('isSaving')) {
