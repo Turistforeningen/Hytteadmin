@@ -8,13 +8,12 @@
     </tr>
   </thead>
   <tbody>
-    {{#each links as |link|}}
-      <tr>
-        <td>{{input type="text" value=link.tittel placeholder="Tittel"}}</td>
-        <td>{{input type="text" value=link.url placeholder="Nettadresse"}}</td>
-        <td>{{ui-dropdown content=TYPE_CHOICES value=link.type}}</td>
-        <td><button class="basic ui icon button" {{action "removeLink" link}}><i class="remove icon"></i></button></td>
-      </tr>
+    {{#each links as |link index|}}
+      {{dnt-link-manager-list-item
+        TYPE_CHOICES=TYPE_CHOICES
+        link=link
+        index=index
+        validationRules=validationRules}}
     {{/each}}
   </tbody>
   <tfoot>
