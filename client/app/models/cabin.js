@@ -68,7 +68,7 @@ export default DS.Model.extend({
   kart: DS.attr('string'),
   kommune: DS.attr('string'),
   kontaktinfo: DS.attr('array', {defaultValue: [{'type': 'I sesong'}]}),
-  lenker: DS.attr('array'), // object[]
+  lenker: DS.attr('array', {defaultValue: []}), // object[]
   lisens: DS.attr('string', {defaultValue: 'CC BY-SA 4.0'}),
   navn: DS.attr('string'),
   navn_alt: DS.attr('array'),
