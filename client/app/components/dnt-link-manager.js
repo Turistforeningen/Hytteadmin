@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  links: [],
+  validationRules: [],
+  bindAttributes: ['links', 'validationRules'],
 
   TYPE_CHOICES: [
     'Pris',
@@ -24,7 +27,7 @@ export default Ember.Component.extend({
   },
 
   setupLinks: function () {
-    var links = this.get('links');
+    var links = this.get('links') || [];
     this.set('links', Ember.ArrayProxy.create({content: Ember.A(links)}));
   }.on('init')
 
