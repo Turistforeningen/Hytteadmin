@@ -7,8 +7,8 @@ export default Ember.Controller.extend({
 
   errors: [],
 
-  validationRules: {
-    navn: {
+  validationRules: [
+    {
       identifier: 'navn',
       rules: [
         {
@@ -17,7 +17,7 @@ export default Ember.Controller.extend({
         }
       ]
     },
-    hyttetype: {
+    {
       identifier: 'hyttetype',
       rules: [
         {
@@ -26,7 +26,7 @@ export default Ember.Controller.extend({
         }
       ]
     },
-    juridisk_eier: {
+    {
       identifier: 'juridisk_eier',
       rules: [
         {
@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
         }
       ]
     },
-    vedlikeholdes_av: {
+    {
       identifier: 'vedlikeholdes_av',
       rules: [
         {
@@ -43,8 +43,26 @@ export default Ember.Controller.extend({
           prompt: 'Du må velge hvilken gruppe som driver hytta'
         }
       ]
+    },
+    {
+      identifier: 'kontaktinfo_gruppe',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Du må velge hvilken gruppe kontaktopplysninger skal hentes fra'
+        }
+      ]
+    },
+    {
+      identifier: 'beskrivelse',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Du må legge inn en beskrivelse av hytta'
+        }
+      ]
     }
-  },
+  ],
 
   invalidErrorMessage: {message: 'Hytta kunne ikke lagres fordi alle feltene ikke er riktig fyllt ut. Gå over feltene med feilmeldinger og prøv igjen.'},
   unknownErrorMessage: {message: 'Vi kunne dessverre ikke lagre hytta på grunn av en ukjent feil.'},
