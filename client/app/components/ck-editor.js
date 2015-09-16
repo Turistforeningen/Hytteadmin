@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   toolbar: null,
-  bindAttributes: ['toolbar'],
+  bindAttributes: ['toolbar', 'data-validate'],
 
   _editor: null,
 
