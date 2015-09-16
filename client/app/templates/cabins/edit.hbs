@@ -55,7 +55,9 @@
             <div class="item" data-tab="tab-description"><i class="gb flag"></i> Engelsk</div>
           </div>
           <div class="ui bottom attached tab segment active" data-tab="tab-beskrivelse">
-            {{ck-editor value=model.beskrivelse}}
+            <div class="field">
+              {{ck-editor value=model.beskrivelse data-validate="beskrivelse"}}
+            </div>
           </div>
           <div class="ui bottom attached tab segment" data-tab="tab-description">
             {{ck-editor value=model.description}}
