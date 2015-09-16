@@ -4,6 +4,7 @@ import loadInitializers from 'ember/load-initializers';
 import config from './config/environment';
 
 // NOTE: Any custom overrides will have to be imported here
+import TextArea from './overrides/ember-textarea';
 import TextField from './overrides/ember-textfield';
 import Model from './overrides/ds-model';
 
