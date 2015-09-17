@@ -11,20 +11,12 @@ export default Ember.Component.extend({
 
   centerLatLng: Ember.computed('center', {
     get: function () {
-      var center = this.get('center');
-      if (center.type === 'Point') {
-        // Assume center is a GeoJSON object with long & lat in coordinates array
-        return L.latLng(center.coordinates[1], center.coordinates[0]);
-
-      } else if (center.length === 2) {
-        // Assume center is an array with lat & long
-        return L.latLng(center[0], center[1]);
-      }
+      let latLng = this.toLatLng(this.get('center'));
+      return latLng ? L.latLng(latLng) : undefined;
     }
   }),
 
   setupMap: function () {
-
     this.mapLayers = this.createMapLayers();
 
     var mapOptions = {
