@@ -4,6 +4,7 @@ import DS from 'ember-data';
 export default Ember.Controller.extend({
   groups: Ember.inject.controller(),
   user: Ember.inject.controller(),
+  session: Ember.inject.controller(),
 
   errors: [],
 
