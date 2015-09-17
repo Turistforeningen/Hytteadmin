@@ -140,6 +140,7 @@ export default DS.Model.extend({
     if (vedlikeholdesAvId) {
       this.store.find('group', vedlikeholdesAvId).then(Ember.run.bind(this, function (group) {
         this.set('vedlikeholdes_av', group);
+        // TODO: Add method to model for determining this
         if (!this.get('kontaktinfo_gruppe.gruppe_id') || this.get('kontaktinfo_gruppe.gruppe_id') === this.get('privat.juridisk_eier')) {
           this.setKontaktinfoGruppeById(vedlikeholdesAvId);
         }
