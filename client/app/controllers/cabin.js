@@ -91,11 +91,6 @@ export default Ember.Controller.extend({
       this.send('save');
     },
 
-    setJuridiskEierById: function (id) {
-      var owner = this.store.find('group', id);
-      this.get('model').set('juridisk_eier', owner);
-    },
-
     addOmrådeById: function (id) {
       this.store.find('area', id).then(Ember.run.bind(this, function (area) {
         this.get('model.områder').pushObject(area);
