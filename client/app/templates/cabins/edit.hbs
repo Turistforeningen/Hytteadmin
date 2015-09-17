@@ -160,7 +160,10 @@
         {{#if model.enable_kun_bestilling_kommentar}}
           <div class="field">
             <label>Kommentar</label>
-            {{input type="text" value=model.privat.kun_bestilling_kommentar placeholder="Hvordan kan man bestille?"}}
+            {{input
+              type="text"
+              value=model.privat.kun_bestilling_kommentar
+              placeholder="Hvordan kan man bestille?"}}
           </div>
         {{/if}}
 
