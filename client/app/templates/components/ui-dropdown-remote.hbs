@@ -1,4 +1,8 @@
 <input type="hidden" hidden data-validate="{{data-validate}}">
-<i class="search icon"></i>
+{{#if value}}
+  <i class="delete icon" {{action "clearValue"}}></i>
+{{else}}
+  <i class="search icon"></i>
+{{/if}}
 <input type="text" class="search">
 <div class="default text">{{placeholder}}</div>

@@ -10,6 +10,13 @@ export default Ember.Component.extend({
 
   bindAttributes: ['value', 'text'],
 
+  actions: {
+    clearValue: function () {
+      this.set('value', undefined);
+      this.$().dropdown('clear');
+    }
+  },
+
   setup: function () {
     this.$().dropdown({
       apiSettings: {
