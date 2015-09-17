@@ -62,7 +62,7 @@ export default DS.Model.extend({
   // endret: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   fasiliteter: DS.attr('array'),
   fylke: DS.attr('string'),
-  geojson: DS.attr('object'),
+  geojson: DS.attr('object', {defaultValue: {type: "Point", properties: {}, coordinates: []}}),
   grupper: DS.attr('array'),
   hyttetype: DS.attr('string'),
   kart: DS.attr('string'),
