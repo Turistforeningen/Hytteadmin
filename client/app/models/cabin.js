@@ -122,6 +122,11 @@ export default DS.Model.extend({
     if (updateJuridiskEierId) {
       this.store.findRecord('group', updateJuridiskEierId).then(Ember.run.bind(this, function (group) {
         this.set('juridisk_eier', group);
+
+        if (!this.get('privat.vedlikeholdes_av')) {
+          this.set('privat.vedlikeholdes_av', updateJuridiskEierId);
+        }
+
       }));
 
     } else {
