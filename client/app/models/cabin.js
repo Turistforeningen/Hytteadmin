@@ -123,6 +123,9 @@ export default DS.Model.extend({
       this.store.find('group', vedlikeholdesAvId).then(Ember.run.bind(this, function (group) {
         this.set('vedlikeholdes_av', group);
       }));
+
+    } else {
+      this.set('vedlikeholdes_av', undefined);
     }
 
   }.observes('privat.vedlikeholdes_av'),
@@ -133,6 +136,9 @@ export default DS.Model.extend({
       this.store.findRecord('group', updateJuridiskEierId).then(Ember.run.bind(this, function (group) {
         this.set('juridisk_eier', group);
       }));
+
+    } else {
+      this.set('juridisk_eier', undefined);
     }
 
   }.observes('privat.juridisk_eier'),
