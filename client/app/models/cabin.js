@@ -249,11 +249,16 @@ export default DS.Model.extend({
     },
     set: function (key, value) {
       // console.log('kontaktinfo_gruppe:set', value);
-      if (this.get('direkte_kontakt')) {
-        this.set('kontaktinfo_utenom_sesong', value);
+      if (value) {
+        if (this.get('direkte_kontakt')) {
+          this.set('kontaktinfo_utenom_sesong', value);
+
+        } else {
+          this.set('kontaktinfo_i_sesong', value);
+        }
 
       } else {
-        this.set('kontaktinfo_i_sesong', value);
+        this.set('kontaktinfo', []);
       }
 
       return value;
