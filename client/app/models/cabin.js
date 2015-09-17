@@ -254,24 +254,48 @@ export default DS.Model.extend({
       return this.get('geojson.coordinates.1');
     },
     set: function (key, value) {
-      this.set('geojson.coordinates.1', parseFloat(value, 10));
+      let latitude = parseFloat(value, 10);
+
+      if (!isNaN(latitude)) {
+        this.set('geojson.coordinates.1', latitude);
+      }
+
       return value;
     }
   }),
 
   longitude: Ember.computed('geojson.coordinates.0', {
-    get: function() {
+    get: function () {
       return this.get('geojson.coordinates.0');
     },
-    set: function(key, value) {
-      this.set('geojson.coordinates.0', parseFloat(value, 10));
+    set: function (key, value) {
+      let longitude = parseFloat(value, 10);
+
+      if (!isNaN(longitude)) {
+        this.set('geojson.coordinates.0', longitude);
+      }
+
       return value;
     }
   }),
 
-  lat_lng: Ember.computed('latitude', 'longitude', {
+  lat_lng: Ember.computed('geojson.coordinates.0', 'geojson.coordinates.1', {
     get: function () {
-      return [this.get('latitude'), this.get('longitude')];
+      let latitude = this.get('geojson.coordinates.1');
+      let longitude = this.get('geojson.coordinates.0');
+      let latLng;
+
+      if (Ember.typeOf(latitude) === 'number' && Ember.typeOf(longitude) === 'number') {
+        latLng = [latitude, longitude];
+      }
+
+      return latLng;
+    }
+  }),
+
+  har_posisjon: Ember.computed('geojson.coordinates.0', 'geojson.coordinates.1', {
+    get: function () {
+      return !isNaN(this.get('geojson.coordinates.1')) && !isNaN(this.get('geojson.coordinates.0'));
     }
   }),
 
