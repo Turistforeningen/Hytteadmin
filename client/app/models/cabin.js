@@ -117,19 +117,6 @@ export default DS.Model.extend({
     }
   }),
 
-  updateVedlikeholdesAv: function () {
-    var vedlikeholdesAvId = this.get('privat.vedlikeholdes_av');
-    if (vedlikeholdesAvId) {
-      this.store.find('group', vedlikeholdesAvId).then(Ember.run.bind(this, function (group) {
-        this.set('vedlikeholdes_av', group);
-      }));
-
-    } else {
-      this.set('vedlikeholdes_av', undefined);
-    }
-
-  }.observes('privat.vedlikeholdes_av'),
-
   updateJuridiskEier: function () {
     var updateJuridiskEierId = this.get('privat.juridisk_eier');
     if (updateJuridiskEierId) {
@@ -142,6 +129,19 @@ export default DS.Model.extend({
     }
 
   }.observes('privat.juridisk_eier'),
+
+  updateVedlikeholdesAv: function () {
+    var vedlikeholdesAvId = this.get('privat.vedlikeholdes_av');
+    if (vedlikeholdesAvId) {
+      this.store.find('group', vedlikeholdesAvId).then(Ember.run.bind(this, function (group) {
+        this.set('vedlikeholdes_av', group);
+      }));
+
+    } else {
+      this.set('vedlikeholdes_av', undefined);
+    }
+
+  }.observes('privat.vedlikeholdes_av'),
 
   enable_kun_bestilling_kommentar: function () {
     var kun_bestilling = this.get('privat.kun_bestilling');
