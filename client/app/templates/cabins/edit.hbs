@@ -300,8 +300,29 @@
               <label>Turkart</label>
               {{ui-dropdown multiple=true search=true allowAdditions=true value=model.turkart}}
             </div>
-            {{!-- {{#if user.er_admin}} --}}
-              <h4 class="ui dividing header">Posisjon</h4>
+            <h4 class="ui dividing header">Posisjon</h4>
+            {{#if model.har_posisjon}}
+              <div class="ui list">
+                <div class="item">
+                  <div class="header">Breddegrad</div>
+                  <div class="description">{{model.latitude}}</div>
+                </div>
+                <div class="item">
+                  <div class="header">Lengdegrad</div>
+                  <div class="description">{{model.longitude}}</div>
+                </div>
+              </div>
+            {{else}}
+              Hytta har ingen posisjon.
+            {{/if}}
+            {{#if user.model.er_admin}}
+              {{#if model.har_posisjon}}
+                <a>Endre posisjon</a>
+              {{else}}
+                <a>Sett posisjon</a>
+              {{/if}}
+            {{/if}}
+            {{#ui-popup}}
               <div class="field">
                 <label>Breddegrad</label>
                 {{input value=model.latitude}}
@@ -310,7 +331,7 @@
                 <label>Lengdegrad</label>
                 {{input value=model.longitude}}
               </div>
-            {{!-- {{/if}} --}}
+            {{/ui-popup}}
           </div>
         </div>
       </section>
