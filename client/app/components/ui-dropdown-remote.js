@@ -7,10 +7,10 @@ export default Ember.Component.extend({
   classNameBindings: ['fluid'],
   fluid: true,
 
-  value: null,
+  allowClear: true,
   text: null,
-
-  bindAttributes: ['value', 'text'],
+  value: null,
+  bindAttributes: ['allowClear', 'text', 'value'],
 
   actions: {
     clearValue: function () {
