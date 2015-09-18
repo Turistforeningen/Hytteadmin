@@ -5,13 +5,12 @@ Vis hytter som
   optionLabelPath="label"
   value=relation
   inline=true}}
-{{#if session.model.grupper}}
-  {{ui-dropdown
-    content=session.model.grupper
-    optionValuePath="id"
-    optionLabelPath="navn"
-    value=gruppe
-    inline=true}}
-{{else}}
-  {{session.model.gruppe.navn}}
-{{/if}}
+
+{{ui-dropdown-remote
+  query-url="/api/v1/group/?navn=~{query}"
+  value=gruppe.id
+  text=gruppe.navn
+  placeholder="Finn gruppe..."
+  inline=true
+  fluid=false
+  allowClear=false}}
