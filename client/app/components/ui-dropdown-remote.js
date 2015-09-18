@@ -53,10 +53,11 @@ export default Ember.Component.extend({
         this.$().dropdown('clear');
       }
 
-      this.sendAction('action', value);
+      this.sendAction('action', value, text);
 
     } else {
       this.set('value', value);
+      this.set('text', text);
     }
   },
 
