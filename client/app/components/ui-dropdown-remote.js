@@ -3,7 +3,9 @@ import Ember from 'ember';
 // TODO: Should extend ui-dropdown instead, to inherit properties and methods
 export default Ember.Component.extend({
   tagName: 'div',
-  classNames: ['ui', 'search', 'selection', 'dropdown', 'fluid'],
+  classNames: ['ui', 'search', 'selection', 'dropdown'],
+  classNameBindings: ['fluid'],
+  fluid: true,
 
   value: null,
   text: null,
