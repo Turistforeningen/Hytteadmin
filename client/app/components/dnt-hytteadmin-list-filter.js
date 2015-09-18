@@ -24,7 +24,7 @@ export default Ember.Component.extend({
       this.set('params', params);
     }
 
-  }.observes('relation', 'gruppe'),
+  }.observes('relation', 'gruppe.id'),
 
   setup: function () {
     this.set('relation', this.get('FILTER_RELATION_CHOICES.firstObject'));
