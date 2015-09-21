@@ -53,4 +53,5 @@ export default Ember.Controller.extend({
   onModelChange: function () {
     this.set('isLoading', false);
   }.observes('model')
+
 });
