@@ -18,9 +18,10 @@ export default Ember.Controller.extend({
   },
 
   onParamsChange: function () {
-    var params = this.get('params');
+    var params = this.get('params') || {};
     this.store.unloadAll('cabin');
     this.set('isLoading', true);
+    Ember.set(params, 'fields', 'navn,grupper');
     this.store.query('cabin', params).then((cabins) => {
       this.set('model', cabins);
     });
