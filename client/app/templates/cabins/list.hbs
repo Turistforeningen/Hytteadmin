@@ -31,27 +31,14 @@
   <table class="ui table">
     <thead>
       <tr>
-        <th>Navn</th>
-        <th>Rediger</th>
+        <th>Hytte</th>
       </tr>
     </thead>
     <tbody>
       {{#each model as |cabin|}}
-        <tr>
-          <td>
-            {{#link-to 'cabins.edit' cabin.id}}{{cabin.navn}}{{/link-to}}
-          </td>
-          <td>
-            {{#link-to 'cabins.edit' cabin.id}}Rediger{{/link-to}}
-          </td>
-        </tr>
+        {{dnt-hytteadmin-index-list-item cabin=cabin user=user.model}}
       {{/each}}
     </tbody>
-    <tfoot>
-      <tr>
-        <th colspan="2"></th>
-      </tr>
-    </tfoot>
   </table>
 {{else}}
   <div class="ui icon info message">
