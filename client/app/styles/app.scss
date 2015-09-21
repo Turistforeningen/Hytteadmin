@@ -16,6 +16,10 @@ a {
 
 /* Semantic UI */
 
+.ui[class*="right labeled"].icon.button > .icon {
+  right: .25em !important;
+}
+
 // To use absolute position labels
 table.ui.table td {
   position: relative;
