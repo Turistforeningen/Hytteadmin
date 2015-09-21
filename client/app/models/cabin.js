@@ -334,6 +334,19 @@ export default DS.Model.extend({
     get: function () {
       return (this.get('status') === 'Offentlig') ? true : false;
     }
+  }),
+
+  har_spesialnøkkel: Ember.computed('privat.åpningstider.@each.nøkkel', {
+    get: function () {
+      let hasSpesialnøkkel = false;
+      let åpningstider = this.get('privat.åpningstider') || [];
+
+      if (åpningstider.get('length')) {
+        hasSpesialnøkkel = !!åpningstider.findBy('nøkkel', 'Spesialnøkkel');
+      }
+
+      return hasSpesialnøkkel;
+    }
   })
 
 });
