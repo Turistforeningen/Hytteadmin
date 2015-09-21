@@ -11,6 +11,12 @@ export default DS.Model.extend({
   gruppe: DS.belongsTo('group', {async: true}),
   grupper: DS.hasMany('group', {async: true}),
 
+  er_sherpabruker: Ember.computed('brukertype', {
+    get: function () {
+      return this.get('brukertype') === 'DNT';
+    }
+  }),
+
   primærgruppe: Ember.computed('gruppe', 'grupper.[]', {
     get: function () {
       let primærgruppe;
