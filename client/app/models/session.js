@@ -4,6 +4,7 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
+  brukertype: DS.attr('string'),
   navn: DS.attr('string'),
   epost: DS.attr('string'),
   er_admin: DS.attr('boolean', {defaultValue: false}),
