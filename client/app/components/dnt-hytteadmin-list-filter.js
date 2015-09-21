@@ -28,7 +28,9 @@ export default Ember.Component.extend({
 
   setup: function () {
     this.set('relation', this.get('FILTER_RELATION_CHOICES.firstObject'));
-    this.set('gruppe', this.get('session.model.primærgruppe'));
+    this.set('gruppe', Ember.copy(this.get('session.model.primærgruppe').toJSON({
+      includeId: true
+    })));
 
   }.on('didInsertElement')
 
