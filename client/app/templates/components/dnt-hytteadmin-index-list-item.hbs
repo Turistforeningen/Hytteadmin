@@ -1,0 +1,24 @@
+  <td>
+    <div class="ui grid">
+      {{#if userHasAccess}}
+        <div class="six wide column">
+          {{#link-to 'cabins.edit' cabin.id}}{{cabin.navn}}{{/link-to}}
+        </div>
+        <div class="ten wide column">
+          {{#link-to 'cabins.edit' cabin.id}}Rediger{{/link-to}}
+        </div>
+      {{else}}
+        <div class="six wide column">
+          {{cabin.navn}}
+        </div>
+        <div class="ten wide column">
+          <div class="meta">
+            <span>Du kan ikke åpne denne hytta for redigering</span>
+          </div>
+        </div>
+        <a class="ui mini right corner yellow label">
+          <i class="lock icon"></i>
+        </a>
+      {{/if}}
+    </div>
+  </td>
