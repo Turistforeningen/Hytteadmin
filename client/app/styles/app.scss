@@ -16,6 +16,11 @@ a {
 
 /* Semantic UI */
 
+// To use absolute position labels
+table.ui.table td {
+  position: relative;
+}
+
 // Keep border radius on right side if not action button is attached to the left side
 .ui.action.input:not([class*="left action"]) > .dropdown {
   border-radius: 0.28571429rem 0px 0px 0.28571429rem;
