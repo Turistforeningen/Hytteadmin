@@ -10,6 +10,12 @@
       {{outlet 'header-left'}}
       <div class="right menu">
         {{outlet 'header-right'}}
+        {{#if session.model.er_sherpabruker}}
+          <a href="http://dnt.no/sherpa" class="header item">
+            <i class="icon sign in"></i>
+            Sherpa
+          </a>
+        {{/if}}
         {{#link-to 'session.logout' class="item"}}
           <i class="user icon"></i> Logg ut
         {{/link-to}}
