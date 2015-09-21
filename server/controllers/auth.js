@@ -37,6 +37,7 @@ app.get('/login/dnt', connect.middleware('signon'), function(req, res, next) {
 
   req.session.user = {
     id: 'sherpa3:' + req.dntConnect.data.sherpa_id,
+    brukertype: 'DNT',
     navn: req.dntConnect.data.fornavn + ' ' + req.dntConnect.data.etternavn,
     epost: req.dntConnect.data.epost,
     er_admin: false,
@@ -78,6 +79,7 @@ app.get('/login/dnt', function(req, res, next) {
 app.post('/login/turbasen', turbasen.middleware, function(req, res, next) {
   if (req.turbasenAuth) {
     req.session.user = req.turbasenAuth;
+    req.session.user.brukertype = 'Gruppe';
     res.status(200);
     res.json(req.session.user);
   } else {
