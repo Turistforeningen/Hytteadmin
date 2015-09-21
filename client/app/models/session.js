@@ -10,14 +10,13 @@ export default DS.Model.extend({
   gruppe: DS.belongsTo('group', {async: true}),
   grupper: DS.hasMany('group', {async: true}),
 
-
-
   primærgruppe: Ember.computed('gruppe', 'grupper.[]', {
     get: function () {
-      var grupper = this.get('grupper') || [];
+      let primærgruppe;
+      let grupper = this.get('grupper') || [];
 
       if (grupper.length) {
-        let primærgruppe = grupper.findBy('type', 'sentral') || grupper.findBy('type', 'forening') || grupper.findBy('type', 'turlag') || grupper.findBy('type', 'turgruppe');
+        primærgruppe = grupper.findBy('type', 'sentral') || grupper.findBy('type', 'forening') || grupper.findBy('type', 'turlag') || grupper.findBy('type', 'turgruppe');
 
         if (primærgruppe) {
           return primærgruppe;
@@ -27,8 +26,13 @@ export default DS.Model.extend({
         }
 
       } else {
-        return this.get('gruppe');
+        let gruppe = this.get('gruppe');
+        if (gruppe) {
+          primærgruppe = gruppe;
+        }
       }
+
+      return primærgruppe;
     }
   })
 });
