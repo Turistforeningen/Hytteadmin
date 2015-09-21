@@ -39,6 +39,12 @@ export default DS.Model.extend({
     'Wc'
   ],
 
+  NØKKEL_CHOICES: [
+    'Ulåst',
+    'Spesialnøkkel',
+    'DNT-nøkkel'
+  ],
+
   HYTTETYPE_CHOICES: [
     'DNT-hytte',
     'Privat hytte',

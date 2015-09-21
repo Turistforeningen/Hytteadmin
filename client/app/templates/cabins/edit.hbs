@@ -193,7 +193,7 @@
                   <td>{{pikaday-input value=periode.til}}</td>
                 {{/unless}}
                 <td>{{input value=periode.kommentar}}</td>
-                <td>{{input value=periode.nøkkel}}</td>
+                <td>{{ui-dropdown content=model.NØKKEL_CHOICES value=periode.nøkkel}}</td>
                 <td>{{ui-dropdown content=model.BETJENINGSGRAD_CHOICES value=periode.betjeningsgrad}}</td>
                 {{#unless model.er_helårs}}
                   <td>
