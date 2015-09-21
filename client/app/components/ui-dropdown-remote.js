@@ -57,7 +57,7 @@ export default Ember.Component.extend({
 
     } else {
       this.set('value', value);
-      this.set('text', text);
+      this.$().dropdown('set text', text); // Tempting to use this.set('text', text) but that causes error, as it is bound to the currently selected group
     }
   },
 
