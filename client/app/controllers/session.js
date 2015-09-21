@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
           transition.retry();
 
         }).catch((err) => {
-          console.error(err);
+          // console.error(err);
           this.transitionToRoute('session.login');
         });
       }
