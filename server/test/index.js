@@ -11,6 +11,7 @@ module.exports.user = {
   object: {
     navn: process.env.NTB_USER_NAME,
     epost: process.env.NTB_USER_EMAIL,
+    brukertype: 'Gruppe',
     gruppe: {
       _id: '52407f3c4ec4a138150001d7',
       navn: 'Destinasjon Trysil',
