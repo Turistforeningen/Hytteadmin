@@ -10,6 +10,7 @@
       text=model.juridisk_eier.navn
       placeholder="Finn gruppe..."
       data-validate="juridisk_eier"}}
+    <p class="help">Hvilken forening eier hytta?</p>
   </div>
   <div class="field">
     <label>Drives av</label>
@@ -20,6 +21,7 @@
       text=model.vedlikeholdes_av.navn
       placeholder="Finn gruppe..."
       data-validate="vedlikeholdes_av"}}
+    <p class="help">Hvilken forening driver hytta?</p>
   </div>
 
   <div class="ui grid">
@@ -34,6 +36,7 @@
           action="setKontaktinfoGruppeById"
           placeholder="Finn gruppe..."
           data-validate="kontaktinfo_gruppe"}}
+        <p class="help">Hvilken gruppe skal primært kontaktes vedrørende hytta?</p>
       </div>
       {{#if model.kontaktinfo_gruppe.gruppe_id}}
         <div class="ui card fluid">
@@ -90,31 +93,38 @@
         {{ui-checkbox
           label="Det er mulighet å kontakte hytta direkte i sesong"
           checked=model.direkte_kontakt}}
+        <p class="help">Kryss av i denne boksen dersom hytta har egne kontaktopplysninger i sesong.</p>
       </div>
       {{#if model.direkte_kontakt}}
         <div class="field">
           <label>Kontaktperson</label>
           {{input value=model.kontaktinfo_i_sesong.kontaktperson}}
+          <p class="help">Angi navn på bestyrer(e) eller den/de som driver hytta. Hvis hytta er selvbetjent eller ubetjent kan navn på hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene)</p>
         </div>
         <div class="field">
           <label>Adresse</label>
           {{input value=model.kontaktinfo_i_sesong.adresse1}}
+          <p class="help">Angi hyttas postadresse. NB! Brukes kun for betjente hytter.</p>
         </div>
         <div class="field">
           <label>Mobil</label>
           {{input value=model.kontaktinfo_i_sesong.mobil}}
+          <p class="help">Mobilnummer bestyrer(e) eller den/de som driver hytta. Hvis hytta er selvbetjent eller ubetjent kan mobilnummer til hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene)</p>
         </div>
         <div class="field">
           <label>Telefon</label>
           {{input value=model.kontaktinfo_i_sesong.telefon}}
+          <p class="help">Telefonnummer (fasttelefon) til hytta. NB! Brukes kun for betjente hytter</p>
         </div>
         <div class="field">
           <label>Faks</label>
           {{input value=model.kontaktinfo_i_sesong.fax}}
+          <p class="help">Telefonnummer (fasttelefon) til hytta. NB! Brukes kun for betjente hytter</p>
         </div>
         <div class="field">
           <label>Epost</label>
           {{input value=model.kontaktinfo_i_sesong.epost}}
+          <p class="help">E-postadresse til hytta. Hvis hytta er selvbetjent eller ubetjent kan e-postadressen til hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene)</p>
         </div>
       {{/if}}
     </div>
