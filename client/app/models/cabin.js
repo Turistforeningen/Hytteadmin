@@ -47,8 +47,8 @@ export default DS.Model.extend({
 
   HYTTETYPE_CHOICES: [
     'DNT-hytte',
-    'Privat hytte',
-    'Privat rabatthytte'
+    'Privat rabatthytte',
+    'Privat hytte'
   ],
 
   TILRETTELEGGINGER_CHOICES: [
