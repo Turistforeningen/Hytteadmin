@@ -16,23 +16,7 @@
 
       <div class="ui section divider"></div>
 
-      <section>
-        <h3 class="ui header">Beskrivelse</h3>
-        {{#ui-tabs}}
-          <div class="ui top attached tabular menu">
-            <div class="item active" data-tab="tab-beskrivelse"><i class="no flag"></i> Norsk</div>
-            <div class="item" data-tab="tab-description"><i class="gb flag"></i> Engelsk</div>
-          </div>
-          <div class="ui bottom attached tab segment active" data-tab="tab-beskrivelse">
-            <div class="field">
-              {{ck-editor value=model.beskrivelse data-validate="beskrivelse"}}
-            </div>
-          </div>
-          <div class="ui bottom attached tab segment" data-tab="tab-description">
-            {{ck-editor value=model.description}}
-          </div>
-        {{/ui-tabs}}
-      </section>
+      {{dnt-hytteadmin-editor-section-beskrivelse model=model}}
 
       <div class="ui section divider"></div>
 
