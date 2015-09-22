@@ -9,15 +9,18 @@
         <div class="field">
           <label>Navn</label>
           {{input type="text" value=model.navn placeholder="Navn" data-validate="navn"}}
+          <p class="help">Navn brukt i DNT for hytta</p>
         </div>
         <div class="field">
           <label>Byggeår</label>
           {{input type="text" value=model.byggeår placeholder="Byggeår"}}
+          <p class="help">Det året hytta stod ferdig oppført</p>
         </div>
         <div class="field">
           <label>Betjeningsgrad</label>
           {{ui-dropdown content=model.BETJENINGSGRAD_CHOICES value=model.betjeningsgrad}}
           <div class="help">
+            <p>Velg hyttas hovedbetjeningsgrad</p>
             <div class="ui list">
               <div class="item">
                 <div class="header">Ubetjent hytte</div>
@@ -33,6 +36,7 @@
         <div class="field">
           <label>Hyttetype</label>
           {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.hyttetype data-validate="hyttetype"}}
+          <p class="help">Angi om hytta er DNT-eid, privat-eid med DNT-rabatt, eller privat</p>
         </div>
 
       </section>
