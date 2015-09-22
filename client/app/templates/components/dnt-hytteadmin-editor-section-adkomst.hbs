@@ -1,0 +1,58 @@
+<section>
+  <h3 class="ui header">Adkomst</h3>
+  <div class="ui info message">
+    Merk at kun feltene for privat adkomst vil vises på UT.no.
+  </div>
+  <table class="ui celled two column table">
+    <thead>
+      <tr>
+        <th>Sommer</th>
+        <th>Vinter</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="field">
+            <label>Beskrivelse adkomst sommer</label>
+            {{ck-editor value=model.tilkomst.privat.sommer toolbar="links"}}
+          </div>
+        </td>
+        <td>
+          <div class="field">
+            <label>Beskrivelse adkomst vinter</label>
+            {{ck-editor value=model.tilkomst.privat.vinter toolbar="links"}}
+          </div>
+        </td>
+      </tr>
+      <tr class="{{if tilkomst_kollektiv_enabled 'warning'}}">
+        <td colspan="2">
+          {{ui-checkbox
+            label="Det er mulighet for adkomst ved hjelp av kollektivtransport"
+            checked=tilkomst_kollektiv_enabled
+            action="toggleTilkomstKollektiv"}}
+          {{#if tilkomst_kollektiv_enabled}}
+            <p>For at det skal komme frem på UT at det er mulighet for adkomst ved hjelp av kollektivtransport må det fylles ut en beskrivelse av hvordan i feltet nedenfor.</p>
+          {{/if}}
+        </td>
+      </tr>
+      {{#if tilkomst_kollektiv_enabled}}
+        <tr>
+          <td>
+            <div class="field">
+              <label>Beskrivelse kollektivtransport sommer</label>
+              {{ck-editor value=model.tilkomst.kollektiv.sommer toolbar="links"}}
+            </div>
+          </td>
+          <td>
+            <div class="field">
+              <label>Beskrivelse kollektivtransport vinter</label>
+              {{ck-editor value=model.tilkomst.kollektiv.vinter toolbar="links"}}
+            </div>
+          </td>
+        </tr>
+      {{/if}}
+    </tbody>
+  </table>
+</section>
+
