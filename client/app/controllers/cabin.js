@@ -121,6 +121,7 @@ export default Ember.Controller.extend({
 
   tilkomst_kollektiv_enabled: false,
 
+  // TODO: Replace with computed property with both getter and setter
   enableTilkomstKollektiv: function () {
     var hasSommerKollektiv = !!this.get('model.tilkomst.kollektiv.sommer.length');
     var hasVinterKollektiv = !!this.get('model.tilkomst.kollektiv.vinter.length');
