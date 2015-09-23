@@ -28,6 +28,10 @@ a {
   right: .25em !important;
 }
 
+.ui.circular.label > .icon {
+  margin-right: 0;
+}
+
 // To use absolute position labels
 table.ui.table td {
   position: relative;
