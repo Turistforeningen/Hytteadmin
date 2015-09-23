@@ -14,16 +14,24 @@
       <tr class="top aligned">
         <td>
           <div class="field">
-            <label>Beskrivelse adkomst sommer</label>
+            <label>
+              Beskrivelse adkomst sommer
+              {{#ui-help-text}}
+                Adkomsten skal primært omtale raskeste/korteste adkomst fra nærmeste stoppested for offentlige kommunikasjon (der det er aktuelt) og fra nærmeste parkeringsplass hvor man kan komme med egen bil. I tillegg må det være en generell beskrivelse av hvilke offentlige transportmidler man må ta fra/til og av de viktigste veiene man kjører med egen bil. Husk å ta hensyn til ulike adkomstretninger. Ved adkomst via sti/rute bør dette beskrives generelt, og med avstand angitt i minutter eller timer, ikke i km, for eksempel ”Følg merket rute fra parkeringsplassen og frem til hytta. Beregn ca 2 timer.”. Unngå å skrive fullstendige rutebeskrivelser, men henvis/lenke til selve beskrivelsen av ruta i rutebasen.
+              {{/ui-help-text}}
+            </label>
             {{ck-editor value=model.tilkomst.privat.sommer toolbar="links"}}
-            <p class="help">Adkomsten skal primært omtale raskeste/korteste adkomst fra nærmeste stoppested for offentlige kommunikasjon (der det er aktuelt) og fra nærmeste parkeringsplass hvor man kan komme med egen bil. I tillegg må det være en generell beskrivelse av hvilke offentlige transportmidler man må ta fra/til og av de viktigste veiene man kjører med egen bil. Husk å ta hensyn til ulike adkomstretninger. Ved adkomst via sti/rute bør dette beskrives generelt, og med avstand angitt i minutter eller timer, ikke i km, for eksempel ”Følg merket rute fra parkeringsplassen og frem til hytta. Beregn ca 2 timer.”. Unngå å skrive fullstendige rutebeskrivelser, men henvis/lenke til selve beskrivelsen av ruta i rutebasen.</p>
           </div>
         </td>
         <td>
           <div class="field">
-            <label>Beskrivelse adkomst vinter</label>
+            <label>
+              Beskrivelse adkomst vinter
+              {{#ui-help-text}}
+                Vinteradkomst bør beskrives spesifikt hvis denne er forskjellig fra sommeradkomst. Avstand her bør imidlertid angis i 100-m eller i km. f. eks: "Om vinteren er det bare brøytet til Mysuseter. Herfra er det 12 km inn til Rondvassbu langs merket løype (merket fra ca. 1. mars til og med påske)."
+              {{/ui-help-text}}
+            </label>
             {{ck-editor value=model.tilkomst.privat.vinter toolbar="links"}}
-            <p class="help">Vinteradkomst bør beskrives spesifikt hvis denne er forskjellig fra sommeradkomst. Avstand her bør imidlertid angis i 100-m eller i km. f. eks: "Om vinteren er det bare brøytet til Mysuseter. Herfra er det 12 km inn til Rondvassbu langs merket løype (merket fra ca. 1. mars til og med påske)."</p>
           </div>
         </td>
       </tr>
