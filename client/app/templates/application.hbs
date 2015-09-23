@@ -1,5 +1,11 @@
 <div class="ui fixed top inverted menu">
   <div class="ui container">
+    {{#if session.model.er_sherpabruker}}
+      <a href="http://dnt.no/sherpa" class="header item logo">
+        <img src="assets/images/dnt-logo-red-bg.svg">
+      </a>
+      {{#ui-popup inverted=true on="hover" position="bottom center"}}Gå tilbake til Sherpa{{/ui-popup}}
+    {{/if}}
     <a href="/" class="header item">
       Hytteadmin
     </a>
@@ -10,12 +16,6 @@
       {{outlet 'header-left'}}
       <div class="right menu">
         {{outlet 'header-right'}}
-        {{#if session.model.er_sherpabruker}}
-          <a href="http://dnt.no/sherpa" class="header item">
-            <i class="icon sign in"></i>
-            Sherpa
-          </a>
-        {{/if}}
         {{#link-to 'session.logout' class="item"}}
           <i class="user icon"></i> Logg ut
         {{/link-to}}
