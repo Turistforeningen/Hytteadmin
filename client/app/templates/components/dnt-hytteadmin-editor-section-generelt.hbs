@@ -1,37 +1,40 @@
 <section>
   <h3 class="ui header">Generelt</h3>
-  <a class="anchor" id="generelt"></a>
   <div class="field">
-    <label>Navn</label>
+    <label>Navn {{#ui-help-text}}Navn brukt i DNT for hytta{{/ui-help-text}}</label>
     {{input type="text" value=model.navn placeholder="Navn" data-validate="navn"}}
-    <p class="help">Navn brukt i DNT for hytta</p>
   </div>
   <div class="field">
-    <label>Byggeår</label>
+    <label>Byggeår {{#ui-help-text}}Det året hytta stod ferdig oppført{{/ui-help-text}}</label>
     {{input type="text" value=model.byggeår placeholder="Byggeår"}}
-    <p class="help">Det året hytta stod ferdig oppført</p>
   </div>
   <div class="field">
-    <label>Betjeningsgrad</label>
-    {{ui-dropdown content=model.BETJENINGSGRAD_CHOICES value=model.betjeningsgrad}}
-    <div class="help">
-      <p>Velg hyttas hovedbetjeningsgrad</p>
-      <div class="ui list">
-        <div class="item">
-          <div class="header">Ubetjent hytte</div>
-          <p>Dette er små hytter (5-25 sengeplasser), samt ofte ei sikringsbu med ekstraplasser. Hyttene er utstyrt med senger og dyner (på enkelte kun tepper), kokemuligheter med kjeler, dekketøy og ved. Hyttene er åpne eller låst med DNTs standardnøkkel.</p>
+    <label>
+      Betjeningsgrad
+      {{#ui-help-text}}
+        <p>Velg hyttas hovedbetjeningsgrad</p>
+        <div class="ui list">
+          <div class="item">
+            <div class="header">Ubetjent hytte</div>
+            <p>Dette er små hytter (5-25 sengeplasser), samt ofte ei sikringsbu med ekstraplasser. Hyttene er utstyrt med senger og dyner (på enkelte kun tepper), kokemuligheter med kjeler, dekketøy og ved. Hyttene er åpne eller låst med DNTs standardnøkkel.</p>
+          </div>
+          <div class="item">
+            <div class="header">Selvbetjent hytte</div>
+            <p>Som ubetjent hytte, men med et rikholdig matvarelager med middagsretter, pålegg, knekkebrød og lignende, som kan kjøpes på hytta. Hyttene er som regel låst med DNTs standardnøkkel, og kan ha hyttevakt i sesongene.</p>
+          </div>
         </div>
-        <div class="item">
-          <div class="header">Selvbetjent hytte</div>
-          <p>Som ubetjent hytte, men med et rikholdig matvarelager med middagsretter, pålegg, knekkebrød og lignende, som kan kjøpes på hytta. Hyttene er som regel låst med DNTs standardnøkkel, og kan ha hyttevakt i sesongene.</p>
-        </div>
-      </div>
-    </div>
+      {{/ui-help-text}}
+    </label>
+    {{ui-dropdown content=model.BETJENINGSGRAD_CHOICES value=model.betjeningsgrad placeholder="Velg betjeningsgrad"}}
   </div>
   <div class="field">
-    <label>Hyttetype</label>
-    {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.hyttetype data-validate="hyttetype"}}
-    <p class="help">Angi om hytta er DNT-eid, privat-eid med DNT-rabatt, eller privat</p>
+    <label>
+      Hyttetype
+      {{#ui-help-text}}
+        <p class="help">Angi om hytta er DNT-eid, privat-eid med DNT-rabatt, eller privat</p>
+      {{/ui-help-text}}
+    </label>
+    {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.hyttetype data-validate="hyttetype" placeholder="Velg hyttetype"}}
   </div>
 
 </section>
