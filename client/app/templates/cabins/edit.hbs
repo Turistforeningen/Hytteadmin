@@ -218,11 +218,17 @@
             <div class="column">
               <h4 class="ui dividing header">Kart</h4>
               <div class="field">
-                <label>Kartverkets kart Norge 1:50 000</label>
+                <label>
+                  Kartverkets kart Norge 1:50 000
+                  {{#ui-help-text}}Hvilket/hvilke kart er hytta inntegnet på? Eksempel på skrivemåte: Norge 1:50 000 1826 IV Tjøtta fra Statens kartverk.{{/ui-help-text}}
+                </label>
                 {{input type="text" value=model.kart}}
               </div>
               <div class="field">
-                <label>Nordecas Norgesserie 1:50 000</label>
+                <label>
+                  Nordecas Norgesserie 1:50 000
+                  {{#ui-help-text}}Hvilket/hvilke turkart er hytta inntegnet på? Eksempel på skrivemåte: turkartet Jotunheimen Aust i 1:50 000 fra Ugland It Group AS.{{/ui-help-text}}
+                </label>
                 {{ui-dropdown
                   multiple=true
                   search=true
@@ -235,7 +241,10 @@
                 <div class="item">
                   <div class="ui list">
                     <div class="item">
-                      <div class="header">Områder</div>
+                      <div class="header">
+                        Områder
+                        {{#ui-help-text}}Hvilket/hvilke område(r) ligger hytta i? Det er mulig å angi flere områder dersom det er nødvendig.{{/ui-help-text}}
+                      </div>
                     </div>
                     {{#if model.områder}}
                       {{#each model.områder as |område|}}
