@@ -66,10 +66,10 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   // checksum: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   // endret: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
-  fasiliteter: DS.attr('array'),
+  fasiliteter: DS.attr('array', {defaultValue: []}),
   fylke: DS.attr('string'),
   geojson: DS.attr('object', {defaultValue: {type: "Point", properties: {}, coordinates: []}}),
-  grupper: DS.attr('array'),
+  grupper: DS.attr('array', {defaultValue: []}),
   hyttetype: DS.attr('string'),
   kart: DS.attr('string'),
   kommune: DS.attr('string'),
@@ -77,10 +77,10 @@ export default DS.Model.extend({
   lenker: DS.attr('array', {defaultValue: []}), // object[]
   lisens: DS.attr('string', {defaultValue: 'CC BY-SA 4.0'}),
   navn: DS.attr('string'),
-  navn_alt: DS.attr('array'),
+  navn_alt: DS.attr('array', {defaultValue: []}),
   navngiving: DS.attr('string'), // TODO: Should be computed by either Hytteadmin API endpoint or Hytteadmin Client
   områder: DS.hasMany('area', {async: true}),
-  privat: DS.attr('object'),
+  privat: DS.attr('object', {defaultValue: {}}),
   juridisk_eier: DS.belongsTo('group', {async: true}),
   vedlikeholdes_av: DS.belongsTo('group', {async: true}),
   ssr_id: DS.attr('number'),
@@ -92,8 +92,8 @@ export default DS.Model.extend({
   }}),
   tags: DS.attr('array', {defaultValue: ['Hytte']}),
   // tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
-  tilrettelegginger: DS.attr('array'),
-  turkart: DS.attr('array'),
+  tilrettelegginger: DS.attr('array', {defaultValue: []}),
+  turkart: DS.attr('array', {defaultValue: []}),
 
   er_helårs: Ember.computed('privat.åpningstider.[]', {
     get: function () {
