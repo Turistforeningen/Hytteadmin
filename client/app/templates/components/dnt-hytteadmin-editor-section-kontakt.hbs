@@ -2,7 +2,10 @@
   <h3 class="ui header">Kontakt</h3>
   <a class="anchor" id="kontakt"></a>
   <div class="field">
-    <label>Eies av</label>
+    <label>
+      Eies av
+      {{#ui-help-text}}Hvilken forening eier hytta?{{/ui-help-text}}
+    </label>
     {{ui-dropdown-remote
       query-url="/api/v1/group/?navn=~{query}"
       object-url="/api/v1/group/{id}"
@@ -10,10 +13,12 @@
       text=model.juridisk_eier.navn
       placeholder="Finn gruppe..."
       data-validate="juridisk_eier"}}
-    <p class="help">Hvilken forening eier hytta?</p>
   </div>
   <div class="field">
-    <label>Drives av</label>
+    <label>
+      Drives av
+      {{#ui-help-text}}Hvilken forening driver hytta?{{/ui-help-text}}
+    </label>
     {{ui-dropdown-remote
       query-url="/api/v1/group/?navn=~{query}"
       object-url="/api/v1/group/{id}"
@@ -21,13 +26,15 @@
       text=model.vedlikeholdes_av.navn
       placeholder="Finn gruppe..."
       data-validate="vedlikeholdes_av"}}
-    <p class="help">Hvilken forening driver hytta?</p>
   </div>
 
   <div class="ui grid">
     <div class="eight wide column">
       <div class="field">
-        <label>Kontakt</label>
+        <label>
+          Kontakt
+          {{#ui-help-text}}Hvilken gruppe skal primært kontaktes vedrørende hytta?{{/ui-help-text}}
+        </label>
         {{ui-dropdown-remote
           query-url="/api/v1/group/?navn=~{query}"
           object-url="/api/v1/group/{id}"
@@ -36,7 +43,6 @@
           action="setKontaktinfoGruppeById"
           placeholder="Finn gruppe..."
           data-validate="kontaktinfo_gruppe"}}
-        <p class="help">Hvilken gruppe skal primært kontaktes vedrørende hytta?</p>
       </div>
       {{#if model.kontaktinfo_gruppe.gruppe_id}}
         <div class="ui card fluid">
@@ -51,6 +57,12 @@
                   <div class="item">
                     <div class="header">Epost</div>
                     {{model.kontaktinfo_gruppe.epost}}
+                  </div>
+                {{/if}}
+                {{#if model.kontaktinfo_gruppe.telefon}}
+                  <div class="item">
+                    <div class="header">Telefon</div>
+                    {{model.kontaktinfo_gruppe.telefon}}
                   </div>
                 {{/if}}
                 {{#if model.kontaktinfo_gruppe.adresse1}}
@@ -89,42 +101,54 @@
     </div>
     <div class="eight wide column">
       <div class="field">
-        <label>Direkte kontakt</label>
+        <label>Direkte kontakt{{#ui-help-text}}Kryss av i denne boksen dersom hytta har egne kontaktopplysninger i sesong.{{/ui-help-text}}</label>
         {{ui-checkbox
           label="Det er mulighet å kontakte hytta direkte i sesong"
           checked=model.direkte_kontakt}}
-        <p class="help">Kryss av i denne boksen dersom hytta har egne kontaktopplysninger i sesong.</p>
+
       </div>
       {{#if model.direkte_kontakt}}
         <div class="field">
-          <label>Kontaktperson</label>
+          <label>
+            Kontaktperson
+            {{#ui-help-text}}Angi navn på bestyrer(e) eller den/de som driver hytta. Hvis hytta er selvbetjent eller ubetjent kan navn på hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene){{/ui-help-text}}
+          </label>
           {{input value=model.kontaktinfo_i_sesong.kontaktperson}}
-          <p class="help">Angi navn på bestyrer(e) eller den/de som driver hytta. Hvis hytta er selvbetjent eller ubetjent kan navn på hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene)</p>
         </div>
         <div class="field">
-          <label>Adresse</label>
+          <label>
+            Adresse
+            {{#ui-help-text}}Angi hyttas postadresse. NB! Brukes kun for betjente hytter.{{/ui-help-text}}
+          </label>
           {{input value=model.kontaktinfo_i_sesong.adresse1}}
-          <p class="help">Angi hyttas postadresse. NB! Brukes kun for betjente hytter.</p>
         </div>
         <div class="field">
-          <label>Mobil</label>
+          <label>
+            Mobil
+            {{#ui-help-text}}Mobilnummer bestyrer(e) eller den/de som driver hytta. Hvis hytta er selvbetjent eller ubetjent kan mobilnummer til hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene){{/ui-help-text}}
+          </label>
           {{input value=model.kontaktinfo_i_sesong.mobil}}
-          <p class="help">Mobilnummer bestyrer(e) eller den/de som driver hytta. Hvis hytta er selvbetjent eller ubetjent kan mobilnummer til hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene)</p>
         </div>
         <div class="field">
-          <label>Telefon</label>
+          <label>
+            Telefon
+            {{#ui-help-text}}Telefonnummer (fasttelefon) til hytta. NB! Brukes kun for betjente hytter{{/ui-help-text}}
+          </label>
           {{input value=model.kontaktinfo_i_sesong.telefon}}
-          <p class="help">Telefonnummer (fasttelefon) til hytta. NB! Brukes kun for betjente hytter</p>
         </div>
         <div class="field">
-          <label>Faks</label>
+          <label>
+            Faks
+            {{#ui-help-text}}Telefonnummer (fasttelefon) til hytta. NB! Brukes kun for betjente hytter{{/ui-help-text}}
+          </label>
           {{input value=model.kontaktinfo_i_sesong.fax}}
-          <p class="help">Telefonnummer (fasttelefon) til hytta. NB! Brukes kun for betjente hytter</p>
         </div>
         <div class="field">
-          <label>Epost</label>
+          <label>
+            Epost
+            {{#ui-help-text}}E-postadresse til hytta. Hvis hytta er selvbetjent eller ubetjent kan e-postadressen til hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene){{/ui-help-text}}
+          </label>
           {{input value=model.kontaktinfo_i_sesong.epost}}
-          <p class="help">E-postadresse til hytta. Hvis hytta er selvbetjent eller ubetjent kan e-postadressen til hyttetilsyn eller hyttevakt fylles inn her (informasjonen vil ikke være synlig for publikum ute på nettsidene)</p>
         </div>
       {{/if}}
     </div>
