@@ -11,7 +11,7 @@ module.exports = function(environment) {
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' hytte.app.dnt.privat:49152 hytte.app.dnt.privat use.typekit.net connect.facebook.net maps.googleapis.com maps.gstatic.com cdn.ravenjs.com",
       'font-src': "'self' data: use.typekit.net fonts.gstatic.com",
       'connect-src': "'self' ws://hytte.app.dnt.privat:49152 ws.geonorge.no",
-      'img-src': "'self' data: www.facebook.com p.typekit.net www.dnt.no www.turistforeningen.no www2.turistforeningen.no mt3.turistforeningen.no opencache.statkart.no app.getsentry.com sentry.app.dnt.no",
+      'img-src': "'self' data: www.facebook.com p.typekit.net www.dnt.no www.turistforeningen.no www2.turistforeningen.no s3-eu-west-1.amazonaws.com  mt3.turistforeningen.no opencache.statkart.no app.getsentry.com sentry.app.dnt.no",
       'style-src': "'self' 'unsafe-inline' use.typekit.net fonts.googleapis.com",
       'frame-src': "s-static.ak.facebook.com static.ak.facebook.com www.facebook.com"
     },
