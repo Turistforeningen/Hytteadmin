@@ -25,8 +25,13 @@
       <div class="ui section divider"></div>
 
       <section>
-        <h3 class="ui header">Åpningstider</h3>
-
+        <h3 class="ui header">
+          Åpningstider
+          {{#ui-help-text}}
+            <p class="help">Hvis hytta er tilgjengelig med samme betjeningsgrad hele året er det ikke nødvendig å angi dato, bare kryss av for "Helårs" og velg nøkkeltype og betjeningsgrad. NB! Ikke kryss av for helårsåpen hvis hytta er stengt/utilgjengelig i perioder (se nedenfor).</p>
+            <p class="help">Ved variasjon i åpningstider og betjeningsgrad må det legges inn en komplett og kronologisk datoliste for åpningstider/betjeningsgrad for hele kalenderåret, fra 1.1 - 31.12. Legg inn én datolinje for hver åpningstidsperiode. NB! Hvis hytta er stengt/utilgjengelig i perioder, er det spesielt viktig at perioden(e) defineres som stengt i åpningstidslista.</p>
+          {{/ui-help-text}}
+        </h3>
         <div class="grouped fields">
           <label>Åpen kun mot bestilling</label>
           <div class="field">
