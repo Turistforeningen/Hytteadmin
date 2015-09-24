@@ -166,7 +166,9 @@
 
       <section>
         <h3 class="ui header">Geografi</h3>
-        {{leaflet-map marker=model.lat_lng center=model.lat_lng zoom="11"}}
+        {{#if model.har_posisjon}}
+          {{leaflet-map marker=model.lat_lng center=model.lat_lng zoom="11"}}
+        {{/if}}
         <div class="ui grid">
           <div class="three column row">
             <div class="column">
