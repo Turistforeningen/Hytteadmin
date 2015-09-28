@@ -350,34 +350,34 @@ export default DS.Model.extend({
   }),
 
   updateNavngiving: function () {
-      let navngiving = '';
+    let navngiving = '';
 
-      // Start navngiving with the name of the cabin
-      navngiving += '<a href="http://www.ut.no/hytte/' + this.get('id') + '">' + this.get('navn') + '</a>';
+    // Start navngiving with the name of the cabin
+    navngiving += '<a href="http://www.ut.no/hytte/' + this.get('id') + '">' + this.get('navn') + '</a>';
 
-      // Add cabin eier or driver
-      let gruppe = this.get('juridisk_eier') || this.get('drives_av');
-      if (gruppe) {
-        navngiving += ' av ';
-        navngiving += '<a href="http://www.ut.no/gruppe/' + gruppe.get('id') + '">' + gruppe.get('navn') + '</a>';
-      }
+    // Add cabin eier or driver
+    let gruppe = this.get('juridisk_eier') || this.get('drives_av');
+    if (gruppe) {
+      navngiving += ' av ';
+      navngiving += '<a href="http://www.ut.no/gruppe/' + gruppe.get('id') + '">' + gruppe.get('navn') + '</a>';
+    }
 
-      navngiving += '.';
+    navngiving += '.';
 
-      let lisenser = {
-        'CC BY 4.0': 'http://creativecommons.org/licenses/by/4.0/deed.no',
-        'CC BY-SA 4.0': 'http://creativecommons.org/licenses/by-sa/4.0/deed.no',
-        'CC BY-ND 4.0': 'http://creativecommons.org/licenses/by-nd/4.0/deed.no',
-        'CC BY-NC 4.0': 'http://creativecommons.org/licenses/by-nc/4.0/deed.no',
-        'CC BY-NC-SA 4.0': 'http://creativecommons.org/licenses/by-nc-sa/4.0/deed.no',
-        'CC BY-NC-ND 4.0': 'http://creativecommons.org/licenses/by-nc-nd/4.0/deed.no'
-      };
+    let lisenser = {
+      'CC BY 4.0': 'http://creativecommons.org/licenses/by/4.0/deed.no',
+      'CC BY-SA 4.0': 'http://creativecommons.org/licenses/by-sa/4.0/deed.no',
+      'CC BY-ND 4.0': 'http://creativecommons.org/licenses/by-nd/4.0/deed.no',
+      'CC BY-NC 4.0': 'http://creativecommons.org/licenses/by-nc/4.0/deed.no',
+      'CC BY-NC-SA 4.0': 'http://creativecommons.org/licenses/by-nc-sa/4.0/deed.no',
+      'CC BY-NC-ND 4.0': 'http://creativecommons.org/licenses/by-nc-nd/4.0/deed.no'
+    };
 
-      let lisens = this.get('lisens');
-      navngiving += ' Tilgjengelig under <a href="' + lisenser[lisens] + '" target="_blank" rel="license">' + lisens + ' lisens</a>.';
+    let lisens = this.get('lisens');
+    navngiving += ' Tilgjengelig under <a href="' + lisenser[lisens] + '" target="_blank" rel="license">' + lisens + ' lisens</a>.';
 
-      this.set('navngiving', navngiving);
+    this.set('navngiving', navngiving);
 
-    }.observes('navn', 'juridisk_eier.navn', 'vedlikeholdes_av.navn', 'lisens')
+  }.observes('navn', 'juridisk_eier.navn', 'vedlikeholdes_av.navn', 'lisens')
 
 });
