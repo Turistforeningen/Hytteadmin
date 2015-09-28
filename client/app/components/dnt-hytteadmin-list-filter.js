@@ -1,36 +1,41 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  list: null,
   params: {},
-  session: null,
-  bindAttributes: ['list', 'params', 'session'],
+  bindAttributes: ['params'],
 
   FILTER_RELATION_CHOICES: [
-    Ember.Object.create({value: 'privat.vedlikeholdes_av', label: 'drives av'}),
-    Ember.Object.create({value: 'privat.juridisk_eier', label: 'eies av'})
+    Ember.Object.create({value: 'vedlikeholdes_av', label: 'drives av'}),
+    Ember.Object.create({value: 'juridisk_eier', label: 'eies av'})
   ],
 
   relation: null,
   gruppe: null,
 
-  onRelationGruppeChange: function () {
-    var params = {};
-    var relation = this.get('relation.value');
-    var gruppe = this.get('gruppe.id');
-
-    if (gruppe) {
-      params[relation] = gruppe;
-      this.set('params', params);
+  actions: {
+    setGruppe: function (value, text) {
+      this.set('gruppe', {
+        id: value,
+        navn: text
+      });
     }
+  },
 
-  }.observes('relation', 'gruppe.id'),
+  onParamChange: function () {
+    this.set('params', {
+      relation: this.get('relation.value'),
+      gruppe: this.get('gruppe')
+    });
+
+  }.observes('relation', 'gruppe'),
 
   setup: function () {
-    this.set('relation', this.get('FILTER_RELATION_CHOICES.firstObject'));
-    this.set('gruppe', Ember.copy(this.get('session.model.primærgruppe').toJSON({
-      includeId: true
-    })));
+    let params = this.get('params');
+
+    if (params) {
+      this.set('relation', params.relation ? this.get('FILTER_RELATION_CHOICES').findBy('value', params.relation) : this.get('FILTER_RELATION_CHOICES.firstObject'));
+      this.set('gruppe', params.gruppe);
+    }
 
   }.on('didInsertElement')
 

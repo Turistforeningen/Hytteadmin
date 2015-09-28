@@ -123,6 +123,14 @@ export default DS.RESTSerializer.extend({
 
     normalizedPayload[primaryModelClass.modelName] = payload.documents;
 
+    // Include count & total in a meta object as convention says
+    if (payload.count && payload.total) {
+      normalizedPayload.meta = {
+        count: payload.count,
+        total: payload.total
+      };
+    }
+
     return this._super(store, primaryModelClass, normalizedPayload, id, requestType);
   },
 

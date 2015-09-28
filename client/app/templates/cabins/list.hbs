@@ -2,7 +2,7 @@
   <div class="ui two column center aligned middle aligned stackable very relaxed grid">
     <div class="column">
       <div class="content">
-        {{dnt-hytteadmin-list-filter session=session list=model params=filterParams relation=relation gruppe=gruppe}}
+        {{dnt-hytteadmin-list-filter params=filterParamsObject}}
       </div>
     </div>
     <div class="ui vertical divider">
@@ -39,6 +39,25 @@
         {{dnt-hytteadmin-index-list-item cabin=cabin user=user.model}}
       {{/each}}
     </tbody>
+    <tfoot>
+      <tr>
+        <th>
+          <div class="ui right floated pagination menu">
+            {{#ui-pagination-button class="icon" action="previousPage" enabled=hasPreviousPage}}
+              <i class="left chevron icon"></i>
+            {{/ui-pagination-button}}
+            {{#each pages as |page|}}
+              {{#ui-pagination-button action="goToPage" page=page}}
+                {{page.number}}
+              {{/ui-pagination-button}}
+            {{/each}}
+            {{#ui-pagination-button class="icon" action="nextPage" enabled=hasNextPage}}
+              <i class="right chevron icon"></i>
+            {{/ui-pagination-button}}
+          </div>
+        </th>
+      </tr>
+    </tfoot>
   </table>
 {{else}}
   <div class="ui icon info message">
