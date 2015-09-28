@@ -65,7 +65,7 @@ app.put('/cabin/:id', function(req, res) {
   // UT.no is expecting `senger` to be an object property in the private scope.
   req.body.privat.senger = req.body.senger;
 
-  ntb.steder.patch(req.params.id, req.body).pipe(res);
+  ntb.steder.put(req.params.id, req.body).pipe(res);
 });
 
 

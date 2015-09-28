@@ -40,7 +40,24 @@ export default DS.RESTSerializer.extend({
       for (let prop in output) {
         let type = Ember.typeOf(output[prop]);
         if (type === 'object') {
+          if (prop === 'geojson') {
+            if (!output[prop].coordinates || output[prop].coordinates.length === 0) {
+              delete output[prop];
+            }
+
+          } else {
+            output[prop] = this.removeEmpty(output[prop]);
+          }
+
+        } else if (type === 'array') {
           output[prop] = this.removeEmpty(output[prop]);
+          if (output[prop].length === 0) {
+            delete output[prop];
+          }
+
+        } else if (type === 'null') {
+          delete output[prop];
+
         } else if (type === 'string') {
           if (output[prop] === '') {
             delete output[prop];
@@ -55,17 +72,9 @@ export default DS.RESTSerializer.extend({
   serialize: function (snapshot, options) {
     var json = this._super(snapshot, options);
 
-    // Would like to remove all empty properties, but API saves using a PATCH request
-    // and the result is that the removed properties are not removed but keeps their value
-    // json.attributes = this.removeEmpty(json.attributes);
-    // console.log('serialize', json);
-    for (var prop in json.attributes) {
-      if (json.attributes[prop] === undefined || json.attributes[prop] === null) {
-        delete json.attributes[prop];
-      }
-    }
+    // Remove all empty properties. If API is changed back to using PATCH for saving, this should be disabled
+    json.attributes = this.removeEmpty(json.attributes);
 
-    // NOTE: This will add the relationships to JSON object... Should probably be done in a better way
     for (var json_prop in json) {
       if (json_prop !== 'attributes') {
         json.attributes[json_prop] = json[json_prop];
