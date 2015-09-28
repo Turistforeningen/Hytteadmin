@@ -6,14 +6,20 @@ export default Ember.Component.extend({
 
   isSaving: null,
   validationRules: null,
-  attributeBindings: ['isSaving', 'validationRules'],
 
   setup: function () {
     let validationRules = this.get('validationRules');
+    let validationRulesObject = {};
+
+    validationRules.forEach((item, index, enumerable) => {
+      if (Ember.typeOf(item.identifier === 'string')) {
+        validationRulesObject[item.identifier] = item;
+      }
+    });
 
     if (validationRules) {
       this.$().form({
-        fields: validationRules,
+        fields: validationRulesObject,
         inline: true,
         on: 'blur'
       });
