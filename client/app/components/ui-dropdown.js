@@ -79,6 +79,10 @@ export default Ember.Component.extend({
   },
 
   onChange: function (value, text, $choice) {
+    if (Ember.isEmpty($choice)) {
+      // Change was not triggered by user selecting a choice
+      return;
+    }
 
     // TODO: Need to check wether change is triggered by method above and if that's the case; ignore the change
 

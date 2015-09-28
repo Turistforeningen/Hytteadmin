@@ -47,6 +47,11 @@ export default Ember.Component.extend({
   },
 
   onChange: function (value, text, $choice) {
+    if (Ember.isEmpty($choice)) {
+      // Change was not triggered by user selecting a choice
+      return;
+    }
+
     if (this.get('attrs.action')) {
 
       if (!this.get('attrs.value')) {
