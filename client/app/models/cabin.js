@@ -353,11 +353,23 @@ export default DS.Model.extend({
     let navngiving = '';
 
     // Start navngiving with the name of the cabin
-    navngiving += '<a href="http://www.ut.no/hytte/' + this.get('id') + '">' + this.get('navn') + '</a>';
+    let id = this.get('id');
+    let navn = this.get('navn') || 'Hytte uten navn';
+
+    if (id) {
+      navngiving += '<a href="http://www.ut.no/hytte/' + id + '">' + navn + '</a>';
+
+    } else {
+      navngiving += navn;
+    }
 
     // Add cabin eier or driver
     let gruppe = this.get('juridisk_eier') || this.get('drives_av');
-    if (gruppe) {
+    let gruppeId = gruppe.get('id');
+    let gruppeNavn = gruppe.get('navn');
+
+    // TODO: Use session user name as fallback
+    if (gruppeId && gruppeNavn) {
       navngiving += ' av ';
       navngiving += '<a href="http://www.ut.no/gruppe/' + gruppe.get('id') + '">' + gruppe.get('navn') + '</a>';
     }
@@ -378,6 +390,6 @@ export default DS.Model.extend({
 
     this.set('navngiving', navngiving);
 
-  }.observes('navn', 'juridisk_eier.navn', 'vedlikeholdes_av.navn', 'lisens')
+  }.observes('navn', 'juridisk_eier.navn', 'vedlikeholdes_av.navn', 'lisens').on('ready')
 
 });
