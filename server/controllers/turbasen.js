@@ -83,6 +83,11 @@ app.post('/photo/:id', function(req, res) {
   ntb.bilder.patch(req.params.id, req.body).pipe(res);
 });
 
+app.put('/photo/:id', function(req, res) {
+  // @TODO validate user authorization
+  ntb.bilder.patch(req.params.id, req.body).pipe(res);
+});
+
 app.get('/group', function(req, res) {
   req.query.sort = 'navn';
 
