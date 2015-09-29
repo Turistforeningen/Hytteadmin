@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.Model.extend({
@@ -20,5 +21,23 @@ export default DS.Model.extend({
   status: DS.attr('string'),
   tags: DS.attr('array'),
   // tilbyder: DS.attr('string') // TODO: Add support for readonly as this is set by NTB
+
+  er_sommerbilde: Ember.computed('tags.[]', {
+    get: function () {
+      let tags = this.get('tags') || [];
+      return !!tags.find(function (item, index, enumerable) {
+        return item.toLowerCase() === 'sommer';
+      });
+    }
+  }),
+
+  er_vinterbilde: Ember.computed('tags.[]', {
+    get: function () {
+      let tags = this.get('tags') || [];
+      return !!tags.find(function (item, index, enumerable) {
+        return item.toLowerCase() === 'vinter';
+      });
+    }
+  })
 
 });
