@@ -75,6 +75,7 @@ export default DS.RESTSerializer.extend({
     // Remove all empty properties. If API is changed back to using PATCH for saving, this should be disabled
     json.attributes = this.removeEmpty(json.attributes);
 
+    // NOTE: This will add the relationships to JSON object... Should probably be done in a better way
     for (var json_prop in json) {
       if (json_prop !== 'attributes') {
         json.attributes[json_prop] = json[json_prop];
