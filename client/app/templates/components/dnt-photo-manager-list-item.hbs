@@ -1,0 +1,13 @@
+<img class="ui avatar image" src="{{photo.img.1.url}}">
+<div class="content">
+  <div class="header">
+    {{#if photo.beskrivelse}}
+      {{photo.beskrivelse}}
+    {{else}}
+      Ingen beskrivelse
+    {{/if}}
+  </div>
+  <div class="content">
+    {{#each photo.tags as |tag index|}}{{if index ", "}}{{tag}}{{/each}}
+  </div>
+</div>

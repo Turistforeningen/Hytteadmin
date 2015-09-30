@@ -271,31 +271,7 @@
       </section>
 
       <div class="ui section divider"></div>
-
-      <section>
-        <h3 class="ui header">Bilder</h3>
-        <div class="ui info message">
-          <div class="header">
-            Endringer i bilder vil ikke bli lagret
-          </div>
-          Implementasjon av dette gjenstår.
-        </div>
-        <div class="ui info message">
-          Gode bilder er viktig for å formidle hvordan det ser ut på hytta. Legg inn nok bilder til at man får et godt inntrykk av hytta, men pass på at det ikke blir for mange av lignende motiver.
-        </div>
-        <div class="ui grid">
-          {{#each model.bilder as |bilde|}}
-            <div class="four wide column">
-              <img class="ui fluid image" src="{{bilde.img.1.url}}">
-              {{input type="text" value=bilde.beskrivelse placeholder="Beskrivelse"}}
-              {{input type="text" value=bilde.fotograf.navn placeholder="Navn"}}
-              {{input type="text" value=bilde.fotograf.epost placeholder="Epost"}}
-              {{input type="text" value=bilde.fotograf.kreditering placeholder="Kreditering"}}
-              {{ui-dropdown multiple=true search=true value=bilde.tags content=bilde.TAGS_CHOICES}}
-            </div>
-          {{/each}}
-        </div>
-      </section>
+      {{dnt-hytteadmin-editor-section-bilder bilder=model.bilder}}
 
     {{/ui-form}}
 

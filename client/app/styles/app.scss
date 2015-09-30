@@ -54,3 +54,16 @@ table.ui.table td {
 .ui.menu.fixed {
   z-index: 1001;
 }
+
+// For keeping padding when combining ui list and message (photo categorizing)
+.ui.message {
+  padding-top: 1em !important;
+  padding-bottom: 1em !important;
+}
+
+
+/* Sortable */
+
+.sortable-ghost {
+  opacity: 0;
+}
