@@ -43,6 +43,11 @@ module.exports = function(defaults) {
      destDir: '/assets/leaflet'
   });
 
-  return app.toTree([semanticUi, leaflet, ckeditor]);
+  var Sortable = new Funnel(app.bowerDirectory + '/Sortable', {
+     include: ['Sortable.js'],
+     destDir: '/assets/sortable'
+  });
+
+  return app.toTree([semanticUi, leaflet, ckeditor, Sortable]);
 
 };
