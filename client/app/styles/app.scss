@@ -14,11 +14,12 @@ a {
   margin: 3em 0;
 }
 
-.header.item.logo {
-  padding: 0;
+a.header.item.logo {
+  padding: 0.5em;
+  background-color: #d82d20 !important;
   img {
     margin: 0 !important;
-    width: 3em !important;
+    width: 2.4em !important;
   }
 }
 
