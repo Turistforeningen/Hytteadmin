@@ -59,6 +59,35 @@ export default Ember.Component.extend({
     photo.set('tags', tags);
   },
 
+  sesong: Ember.computed('bilder.firstObject.tags', {
+    get: function () {
+      let sesong = 'sommer';
+      let tags = this.get('bilder.firstObject.tags');
+      if (tags && tags.indexOf('vinter') > -1) {
+        sesong = 'vinter';
+      }
+      return sesong;
+    },
+    set: function (key, value) {
+      let sesong = value || 'sommer';
+      let sesonger =  Ember.copy(this.get('sesonger'));
+      let bilder = [];
+
+      while (sesong !== sesonger.get('firstObject')) {
+        sesonger.pushObject(sesonger.get('firstObject'));
+        sesonger.removeAt(0);
+      }
+
+      for (let i = 0; i < sesonger.length; i++) {
+        bilder.addObjects(this.get(sesonger[i] + 'bilder'));
+      }
+
+      bilder.addObjects(this.get('ukategoriserte'));
+      this.set('bilder', bilder);
+      return value;
+    }
+  }),
+
   ukategoriserte: Ember.computed('bilder.@each.tags', 'bilder.@each.tags[]', {
     get: function () {
       return this.get('bilder').filter(function (item, index, enumerable) {
