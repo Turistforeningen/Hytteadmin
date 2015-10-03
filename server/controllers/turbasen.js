@@ -85,7 +85,7 @@ app.post('/photo/:id', function(req, res) {
 
 app.put('/photo/:id', function(req, res) {
   // @TODO validate user authorization
-  ntb.bilder.patch(req.params.id, req.body).pipe(res);
+  ntb.bilder.put(req.params.id, req.body).pipe(res);
 });
 
 app.get('/group', function(req, res) {
