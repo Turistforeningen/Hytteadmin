@@ -13,9 +13,9 @@ export default Ember.Component.extend({
   value: null,
   optionValuePath: null,
   optionLabelPath: null,
-  allowAdditions: null,
+  allowAdditions: false,
 
-  bindAttributes: ['optionValuePath', 'optionLabelPath', 'value', 'content', 'allowAdditions', 'action', 'data-validate'],
+  bindAttributes: ['value', 'content', 'allowAdditions', 'action', 'data-validate'],
 
   actions: {},
 
@@ -42,30 +42,59 @@ export default Ember.Component.extend({
       this.set('fluid', false);
     }
 
+    //var value = this.optionValuePath ? this.get('value.' + this.optionValuePath) : this.get('value');
+
     this.$().dropdown({
       allowAdditions: this.allowAdditions,
       // onHide: Ember.run.bind(this, this.onHide),
-      onChange: Ember.run.bind(this, this.onChange)
+      onChange: Ember.run.bind(this, this.onChange),
+      onAdd: Ember.run.bind(this, this.onAdd),
+      onRemove: Ember.run.bind(this, this.onRemove)
    }).dropdown('set selected', this.value);
 
   }.on('didInsertElement'),
 
-  onValueChange: function () {
-    // TODO: Handle dropdowns with multiple
-    // console.log('onValueChange', this.get('value'));
+  onAdd: function (addedValue, addedText, $addedChoice) {
+    this.set('adding', true); // To let onChange know we are adding, and handling the change here
+    let value = this.get('value');
+    if (!value) {
+      value = [addedValue];
 
+    } else if (value.indexOf(addedValue) > -1) {
+      return;
+
+    } else {
+      value.addObject(addedValue);
+    }
+
+    this.set('value', value);
+  },
+
+  onRemove: function (removedValue, removedText, $removedChoice) {
+    this.set('removing', true); // To let onChange know we are removing, and handling the change here
+    let value = this.get('value');
+    if (value && value.indexOf(removedValue) === -1) {
+      return;
+
+    } else {
+      value.removeObject(removedValue);
+    }
+
+    this.set('value', value);
+  },
+
+  onValueChange: function () {
     // If optionValuePath has value, use that to get dropdown value
-    var value = this.optionValuePath ? this.get('value.' + this.optionValuePath) : this.get('value');
+    let value;
+
+    if (['instance', 'object'].indexOf(Ember.typeOf(this.get('value'))) > -1) {
+      value = this.get('value.' + this.optionValuePath);
+
+    } else {
+      value = this.get('value');
+    }
 
     this.$().dropdown('set selected', value);
-
-    // if (typeof this.value === 'undefined') {
-    //   return;
-    // }
-
-    // this.$().dropdown('set selected', Ember.A(this.value.map(function (item, index, list) {
-    //   return item.replace(',', '');
-    // })));
 
   }.observes('value'),
 
@@ -79,6 +108,11 @@ export default Ember.Component.extend({
   },
 
   onChange: function (value, text, $choice) {
+    if (this.get('adding') || this.get('removing')) {
+      this.setProperties({adding: false, removing: false});
+      return;
+    }
+
     if (Ember.isEmpty($choice)) {
       // Change was not triggered by user selecting a choice
       return;
@@ -90,7 +124,6 @@ export default Ember.Component.extend({
     // if ((this.value && this.value.toString() === value) || (this.value === undefined)) {
     //   return;
     // }
-
     if (this.get('attrs.action')) {
 
       if (!this.get('attrs.value')) {
@@ -100,8 +133,17 @@ export default Ember.Component.extend({
       this.sendAction('action', value);
 
     } else {
+      if (this.get('value') === value) {
+        return; // No need to set value if it is already the same
+      }
+
       if (this.optionValuePath) {
         value = this.get('content').findBy(this.optionValuePath, value);
+
+        if (['instance', 'object'].indexOf(Ember.typeOf(this.get('value'))) === -1) {
+          // Only want to set the valuePath value if related value is not an object or instance of object
+          value = value.get(this.get('optionValuePath'));
+        }
       }
 
       if (this.get('multiple')) {
