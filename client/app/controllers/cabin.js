@@ -127,6 +127,15 @@ export default Ember.Controller.extend({
 
     setKontaktinformasjonByGruppeId: function (key, val) {
       console.log('setKontaktinformasjonByGruppeId', key, val);
+    },
+
+    createPhoto: function (data) {
+      // console.log('controller:cabin:actions:createPhoto');
+      let photo = this.store.createRecord('photo', data);
+
+      photo.save().then((photo) => {
+        this.get('model.bilder').addObject(photo);
+      });
     }
   },
 

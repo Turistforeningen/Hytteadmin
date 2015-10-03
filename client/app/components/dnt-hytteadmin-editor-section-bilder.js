@@ -3,6 +3,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+  actions: {
+    createPhoto: function (data) {
+      this.sendAction('createPhoto', data);
+    }
+  },
+
   SESONG_CHOICES: [
     Ember.Object.create({value: 'sommer', label: 'Sommer'}),
     Ember.Object.create({value: 'vinter', label: 'Vinter'})
