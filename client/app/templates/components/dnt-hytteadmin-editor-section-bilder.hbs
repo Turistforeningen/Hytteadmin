@@ -5,7 +5,7 @@
   </div>
   <h3 class="ui top attached header">Ukategoriserte bilder</h3>
   <div class="ui attached segment">
-    <div class="ui middle aligned selection list" data-category="">
+    <div class="ui accordion" data-category="">
       {{!dnt-photo-manager photos=ukategoriserte}}
       {{#each ukategoriserte as |photo index|}}
         {{dnt-photo-manager-list-item photo=photo}}
@@ -15,10 +15,10 @@
   <h3 class="ui attached header">#sommer</h3>
   <div class="ui attached segment">
     <div
-      class="ui middle aligned selection list {{unless har_sommerbilder "ui info message"}}"
+      class="ui accordion {{unless har_sommerbilder "ui info message"}}"
       data-category="sommer">
       {{#if har_sommerbilder}}
-        {{!dnt-photo-manager photos=sommerbilder}}
+        {{!dnt-photo-manager photos=sommerbilder category="sommer"}}
         {{#each sommerbilder as |photo index|}}
           {{dnt-photo-manager-list-item photo=photo}}
         {{/each}}
@@ -30,10 +30,10 @@
   <h3 class="ui attached header">#vinter</h3>
   <div class="ui attached segment">
     <div
-      class="ui middle aligned selection list {{unless har_vinterbilder "ui info message"}}"
+      class="ui accordion {{unless har_vinterbilder "ui info message"}}"
       data-category="vinter">
       {{#if har_vinterbilder}}
-        {{!dnt-photo-manager photos=vinterbilder}}
+        {{!dnt-photo-manager photos=vinterbilder category="vinter}}
         {{#each vinterbilder as |photo index|}}
           {{dnt-photo-manager-list-item photo=photo}}
         {{/each}}

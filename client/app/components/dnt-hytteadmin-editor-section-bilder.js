@@ -2,13 +2,28 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+
+  SESONG_CHOICES: [
+    Ember.Object.create({value: 'sommer', label: 'Sommer'}),
+    Ember.Object.create({value: 'vinter', label: 'Vinter'})
+  ],
+
   sortableLists: [],
 
   setup: function () {
+
+    this.$('.ui.accordion').accordion({
+      selector: {
+        title: '.title',
+        trigger: '.title',
+        content: '.content'
+      }
+    });
+
     let sortableLists = [
-      this.$('.selection.list[data-category=""]')[0],
-      this.$('.selection.list[data-category="sommer"]')[0],
-      this.$('.selection.list[data-category="vinter"]')[0]
+      this.$('.accordion[data-category=""]')[0],
+      this.$('.accordion[data-category="sommer"]')[0],
+      this.$('.accordion[data-category="vinter"]')[0]
     ];
 
     sortableLists.forEach((item, index, enumerable) => {
@@ -61,16 +76,23 @@ export default Ember.Component.extend({
 
   sesong: Ember.computed('bilder.firstObject.tags', {
     get: function () {
-      let sesong = 'sommer';
+      let sesonger = this.get('SESONG_CHOICES').getEach('value');
+      let sesong = sesonger.get('firstObject');
       let tags = this.get('bilder.firstObject.tags');
-      if (tags && tags.indexOf('vinter') > -1) {
-        sesong = 'vinter';
+      if (tags) {
+        sesong = tags.find((item, index, enumerable) => {
+          if (sesonger.indexOf(item) > -1) {
+            return item;
+          }
+        }) || sesong;
       }
+
       return sesong;
+
     },
     set: function (key, value) {
-      let sesong = value || 'sommer';
-      let sesonger =  Ember.copy(this.get('sesonger'));
+      let sesong = value || this.get('SESONG_CHOICES.firstObject.value');
+      let sesonger =  Ember.copy(this.get('SESONG_CHOICES').getEach('value'));
       let bilder = [];
 
       while (sesong !== sesonger.get('firstObject')) {
