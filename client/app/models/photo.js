@@ -38,6 +38,18 @@ export default DS.Model.extend({
         return item.toLowerCase() === 'vinter';
       });
     }
+  }),
+
+  fri_bruk: Ember.computed('lisens', {
+    get: function () {
+      return this.get('lisens') === 'CC BY-SA 4.0';
+    },
+    set: function (key, value) {
+      let lisens = value === true ? 'CC BY-SA 4.0' : 'CC BY-NC-SA 4.0';
+      this.set('lisens', lisens);
+
+      return value;
+    }
   })
 
 });
