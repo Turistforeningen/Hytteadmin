@@ -3,9 +3,11 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
   checked: null,
-
-  attributeBindings: ['checked'],
   type: 'checkbox',
+
+  classNames: ['ui'],
+  classNameBindings: ['type'],
+
 
   typeof_checked: function () {
     var checked = this.get('checked');
@@ -73,12 +75,12 @@ export default Ember.Component.extend({
     // if this get action, do action when checkbox is clicked.
     // else, assume that it binds to value, and set to change value on change event
 
-    this.$('.ui.checkbox').checkbox({
+    this.$().checkbox({
       onChange: Ember.run.bind(this, this.onChange)
     });
 
     if (this.get('should_be_checked')) {
-      this.$('.ui.checkbox').checkbox('check');
+      this.$().checkbox('check');
     }
 
   }.on('didInsertElement'),
@@ -87,13 +89,13 @@ export default Ember.Component.extend({
     // console.log('updateUi:start');
     var operation = this.get('should_be_checked') ? 'check' : 'uncheck';
     // console.log('updateUi:' + operation);
-    this.$('.ui.checkbox').checkbox(operation);
+    this.$().checkbox(operation);
 
   }.observes('should_be_checked'),
 
   setChecked: function () {
     var value = this.get('value');
-    var checked = this.$('.ui.checkbox').checkbox('is checked');
+    var checked = this.$().checkbox('is checked');
 
     if (!this.get('attrs.checked')) {
       return;
@@ -135,7 +137,7 @@ export default Ember.Component.extend({
   onChange: function () {
     var name = this.get('name');
     var value = this.get('value');
-    var checked = this.$('.ui.checkbox').checkbox('is checked');
+    var checked = this.$().checkbox('is checked');
     var operation;
 
     if (this.type === 'radio') {
