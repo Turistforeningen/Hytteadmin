@@ -3,6 +3,16 @@
   <div class="ui info message">
     Gode bilder er viktig for å formidle hvordan det ser ut på hytta. Legg inn nok bilder til at man får et godt inntrykk av hytta, men pass på at det ikke blir for mange av lignende motiver.
   </div>
+
+  <div class="field">
+    <label>
+      Aktuell sesong for hytta
+      {{#ui-help-text}}
+        Ved å velge hvilken sesong som gjelder for hytta nå, styrer man hvilke bilder som vises først på UT.no. Ved for eksempel å velge Sommer så vises bildene kategorisert som sommerbilder først.
+      {{/ui-help-text}}
+    </label>
+    {{ui-dropdown value=sesong content=SESONG_CHOICES optionValuePath="value" optionLabelPath="label"}}
+  </div>
   <h3 class="ui top attached header">Ukategoriserte bilder</h3>
   <div class="ui attached segment">
     <div class="ui accordion" data-category="">
