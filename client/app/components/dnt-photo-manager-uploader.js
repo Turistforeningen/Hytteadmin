@@ -18,6 +18,14 @@ export default Ember.Component.extend({
     }
   },
 
+  setup: function () {
+    let input = this.$('input');
+    input.hide();
+    this.$('button').on('click', (e) => {
+      input.click();
+    });
+  }.on('didInsertElement'),
+
   queue: Ember.computed('files.@each.status', {
     get: function () {
       return this.get('files').filterBy('status', 'queued');
