@@ -15,6 +15,7 @@ export default EmberUploader.FileField.extend({
     });
 
     if (!Ember.isEmpty(files)) {
+      this.set('isUploading', true);
       uploader.upload(files[0]);
 
       uploader.on('progress', (e) => {
@@ -22,6 +23,7 @@ export default EmberUploader.FileField.extend({
       });
 
       uploader.on('didUpload', (e) => {
+        this.set('isUploading', false);
         this.sendAction('didUpload', e);
       });
     }

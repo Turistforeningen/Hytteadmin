@@ -2,5 +2,7 @@
   isUploading=isUploading
   percent=percent
   didUpload="createPhoto"}}
-{{ui-progress percent=percent color="teal"}}
+{{#if isUploading}}
+  {{ui-progress percent=percent color="teal"}}
+{{/if}}
 {{yield}}
