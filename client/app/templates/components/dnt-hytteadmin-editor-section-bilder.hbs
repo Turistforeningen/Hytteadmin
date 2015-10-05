@@ -4,7 +4,6 @@
     Gode bilder er viktig for å formidle hvordan det ser ut på hytta. Legg inn nok bilder til at man får et godt inntrykk av hytta, men pass på at det ikke blir for mange av lignende motiver.
   </div>
 
-  {{dnt-photo-manager-uploader createPhoto="createPhoto"}}
   <div class="field">
     <label>
       Aktuell sesong for hytta
@@ -14,6 +13,9 @@
     </label>
     {{ui-dropdown value=sesong content=SESONG_CHOICES optionValuePath="value" optionLabelPath="label"}}
   </div>
+
+  {{dnt-photo-manager-uploader createPhoto="createPhoto"}}
+
   <h3 class="ui top attached header">Ukategoriserte bilder</h3>
   <div class="ui attached segment">
     <div class="ui accordion" data-category="">
