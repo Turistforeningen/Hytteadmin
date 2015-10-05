@@ -1,7 +1,8 @@
 {{dnt-photo-manager-uploader-input
   isUploading=isUploading
   percent=percent
-  didUpload="createPhoto"}}
+  multiple=true
+  onFilesChange="addFilesToQueue"}}
 {{#if isUploading}}
   {{ui-progress percent=percent color="teal"}}
 {{/if}}
