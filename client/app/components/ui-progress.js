@@ -4,6 +4,8 @@ export default Ember.Component.extend({
   classNames: ['ui', 'progress'],
   classNameBindings: ['color'],
 
+	attributeBindings: ['style'],
+
   color: null,
   percent: null,
   value: null,
