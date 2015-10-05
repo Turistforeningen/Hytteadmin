@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
   actions: {
     createPhoto: function (data) {
-      console.log('component:dnt-photo-manager-uploader:actions:createPhoto');
+      // console.log('component:dnt-photo-manager-uploader:actions:createPhoto');
       let photo = {img: data.versions};
 
       if (data.meta && data.meta.geojson) {
@@ -15,10 +15,6 @@ export default Ember.Component.extend({
 
       this.sendAction('createPhoto', photo);
     }
-  },
-
-  setup: function () {
-    console.log('setup');
-  }.on('didInsertElement')
+  }
 
 });
