@@ -34,7 +34,7 @@ export default Ember.Component.extend({
 
     sortableLists.forEach((item, index, enumerable) => {
       let sortable = Sortable.create(item, {
-        draggable: '.item',
+        draggable: '.dnt-photo-manager-list-item',
         group: 'photos',
         onAdd: Ember.run.bind(this, this.onAdd),
         onEnd: Ember.run.bind(this, this.onEnd)
