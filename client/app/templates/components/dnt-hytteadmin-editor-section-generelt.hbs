@@ -34,7 +34,7 @@
         <p class="help">Angi om hytta er DNT-eid, privat-eid med DNT-rabatt, eller privat</p>
       {{/ui-help-text}}
     </label>
-    {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.hyttetype data-validate="hyttetype" placeholder="Velg hyttetype"}}
+    {{ui-dropdown content=model.HYTTETYPE_CHOICES value=model.privat.hytteeier optionValuePath="value" optionLabelPath="label" data-validate="hyttetype" placeholder="Velg hyttetype"}}
   </div>
 
 </section>

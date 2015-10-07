@@ -46,9 +46,9 @@ export default DS.Model.extend({
   ],
 
   HYTTETYPE_CHOICES: [
-    'DNT-hytte',
-    'Privat rabatthytte',
-    'Privat hytte'
+    Ember.Object.create({value: 'DNT', label: 'DNT-hytte'}),
+    Ember.Object.create({value: 'Rabatt', label: 'Privat rabatthytte'}),
+    Ember.Object.create({value: 'Privat', label: 'Privat hytte'})
   ],
 
   TILRETTELEGGINGER_CHOICES: [

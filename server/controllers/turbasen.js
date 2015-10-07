@@ -53,7 +53,7 @@ app.put('/cabin/:id', function(req, res) {
   // UT is expecting a cababin type integer property in the private scope in
   // order to display the correct map icon for the cabin.
   req.body.privat.hyttetype = helpers.hyttetype(
-    req.body.privat.hyttetype,
+    req.body.privat.hytteeier,
     req.body.betjeningsgrad
   );
 
