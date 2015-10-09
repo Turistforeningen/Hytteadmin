@@ -25,23 +25,28 @@
           <div class="field">
             <label>Beskrivelse</label>
             <div class="ui left icon input">
-              {{input value=photo.beskrivelse class="fluid" placeholder="Beskrivelse"}}
+              {{input value=photo.beskrivelse class="fluid" placeholder="Beskrivelse" data-validate=beskrivelsePath}}
               <i class="unhide icon"></i>
             </div>
+            {{#if photo.validation.beskrivelse}}
+              <div class="ui pointing red basic label">
+                {{photo.validation.beskrivelse}}
+              </div>
+            {{/if}}
           </div>
           <div class="field">
             <label>Fotograf</label>
             <div class="fields">
               <div class="eight wide field">
                 <div class="ui left icon input">
-                  {{input value=photo.fotograf.navn class="fluid" placeholder="Navn"}}
+                  {{input value=photo.fotograf.navn class="fluid" placeholder="Navn" data-validate=fotografNavnPath}}
                   <i class="photo icon"></i>
                 </div>
               </div>
               <div class="eight wide field">
                 <div class="field">
                   <div class="ui left icon input">
-                    {{input value=photo.fotograf.epost class="fluid" placeholder="Epost"}}
+                    {{input value=photo.fotograf.epost class="fluid" placeholder="Epost" data-validate=fotografEpostPath}}
                     <i class="mail icon"></i>
                   </div>
                 </div>
