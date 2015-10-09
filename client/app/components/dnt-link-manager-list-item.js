@@ -8,6 +8,12 @@ export default Ember.Component.extend({
   validationRules: null,
   bindAttributes: ['index', 'link', 'validationRules'],
 
+  actions: {
+    removeLink: function (link) {
+      this.sendAction('removeLink', link);
+    }
+  },
+
   updateValidationRules: function () {
     let newRules = [
       {
