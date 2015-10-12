@@ -23,6 +23,12 @@ a.header.item.logo {
   }
 }
 
+.singleline {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Semantic UI */
 
 .ui[class*="right labeled"].icon.button > .icon {
