@@ -5,8 +5,14 @@ export default Ember.Component.extend({
 
   classNames: ['dnt-photo-manager-list-item', 'column'],
   attributeBindings: ['photo.id:data-id'],
+  isValid: null,
 
-  validationRules: [],
+  initialize: function () {
+    this.set('isValid', true);
+
+  }.on('willInsertElement'),
+
+  validationRules: null,
 
   actions: {
     save: function () {
@@ -26,7 +32,7 @@ export default Ember.Component.extend({
   },
 
   updateValidationRules: function () {
-    let newRules = [
+    let validationRules = [
       {
         identifier: this.get('beskrivelsePath'),
         rules: [
@@ -47,7 +53,7 @@ export default Ember.Component.extend({
       }
     ];
 
-    this.get('validationRules').addObjects(newRules);
+    this.set('validationRules', validationRules);
 
   }.on('didInsertElement'),
 

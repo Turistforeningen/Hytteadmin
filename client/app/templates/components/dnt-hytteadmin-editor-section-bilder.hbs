@@ -21,7 +21,7 @@
     <div class="ui four column grid" data-category="">
       {{!dnt-photo-manager photos=ukategoriserte}}
       {{#each ukategoriserte as |photo index|}}
-        {{dnt-photo-manager-list-item photo=photo validationRules=validationRules}}
+        {{dnt-photo-manager-list-item photo=photo}}
       {{/each}}
     </div>
   </div>
@@ -33,7 +33,7 @@
       {{#if har_sommerbilder}}
         {{!dnt-photo-manager photos=sommerbilder category="sommer"}}
         {{#each sommerbilder as |photo index|}}
-          {{dnt-photo-manager-list-item photo=photo validationRules=validationRules}}
+          {{dnt-photo-manager-list-item photo=photo}}
         {{/each}}
       {{else}}
         Ingen bilder er kategorisert som sommerbilder. Dra og slipp et bilde her for å merke det som sommerbilde.
@@ -48,7 +48,7 @@
       {{#if har_vinterbilder}}
         {{!dnt-photo-manager photos=vinterbilder category="vinter}}
         {{#each vinterbilder as |photo index|}}
-          {{dnt-photo-manager-list-item photo=photo validationRules=validationRules}}
+          {{dnt-photo-manager-list-item photo=photo}}
         {{/each}}
       {{else}}
         Ingen bilder er kategorisert som vinterbilder. Dra og slipp et bilde her for å merke det som vinterbilde.
