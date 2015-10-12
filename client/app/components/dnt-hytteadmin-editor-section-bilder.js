@@ -6,6 +6,9 @@ export default Ember.Component.extend({
   actions: {
     createPhoto: function (data) {
       this.sendAction('createPhoto', data);
+    },
+    removePhoto: function (photo, destroy) {
+      this.sendAction('removePhoto', photo, destroy);
     }
   },
 

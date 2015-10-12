@@ -28,6 +28,15 @@ export default Ember.Component.extend({
         transition: 'fade up',
         detachable: false
       }).modal('show');
+    },
+
+    deletePhoto: function (photo) {
+      photo = photo || this.get('photo');
+      this.sendAction('removePhoto', photo, false);
+    },
+
+    toggleDeleteMode: function () {
+      this.set('deleteMode', !this.get('deleteMode'));
     }
   },
 

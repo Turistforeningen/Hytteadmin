@@ -136,6 +136,13 @@ export default Ember.Controller.extend({
       photo.save().then((photo) => {
         this.get('model.bilder').addObject(photo);
       });
+    },
+
+    removePhoto: function (photo, destroy) {
+      this.get('model.bilder').removeObject(photo);
+      if (destroy) {
+        photo.destroyRecord();
+      }
     }
   },
 
