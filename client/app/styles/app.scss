@@ -62,6 +62,9 @@ table.ui.table td {
   padding-bottom: 1em !important;
 }
 
+.ui.label > .icon:last-child {
+  margin-right: 0;
+}
 
 /* Sortable */
 
