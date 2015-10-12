@@ -18,7 +18,7 @@
 
   <h3 class="ui top attached header">Ukategoriserte bilder</h3>
   <div class="ui attached segment">
-    <div class="ui accordion" data-category="">
+    <div class="ui four column grid" data-category="">
       {{!dnt-photo-manager photos=ukategoriserte}}
       {{#each ukategoriserte as |photo index|}}
         {{dnt-photo-manager-list-item photo=photo validationRules=validationRules}}
@@ -28,7 +28,7 @@
   <h3 class="ui attached header">#sommer</h3>
   <div class="ui attached segment">
     <div
-      class="ui accordion {{unless har_sommerbilder "ui info message"}}"
+      class="ui four column grid {{unless har_sommerbilder "ui info message"}}"
       data-category="sommer">
       {{#if har_sommerbilder}}
         {{!dnt-photo-manager photos=sommerbilder category="sommer"}}
@@ -43,7 +43,7 @@
   <h3 class="ui attached header">#vinter</h3>
   <div class="ui attached segment">
     <div
-      class="ui accordion {{unless har_vinterbilder "ui info message"}}"
+      class="ui four column grid {{unless har_vinterbilder "ui info message"}}"
       data-category="vinter">
       {{#if har_vinterbilder}}
         {{!dnt-photo-manager photos=vinterbilder category="vinter}}

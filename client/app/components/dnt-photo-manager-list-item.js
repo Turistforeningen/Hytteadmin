@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   photo: null,
 
-  classNames: ['dnt-photo-manager-list-item', 'item'],
+  classNames: ['dnt-photo-manager-list-item', 'column'],
   attributeBindings: ['photo.id:data-id'],
 
   validationRules: [],
@@ -11,6 +11,17 @@ export default Ember.Component.extend({
   actions: {
     save: function () {
       this.get('photo').save();
+    },
+
+    discardChanges: function () {
+      this.get('photo').rollbackAttributes();
+    },
+
+    showModal: function () {
+      this.$('.ui.modal').modal({
+        transition: 'fade up',
+        detachable: false
+      }).modal('show');
     }
   },
 

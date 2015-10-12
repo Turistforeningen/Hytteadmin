@@ -17,19 +17,10 @@ export default Ember.Component.extend({
   sortableLists: [],
 
   setup: function () {
-
-    this.$('.ui.accordion').accordion({
-      selector: {
-        title: '.title',
-        trigger: '.title',
-        content: '.content'
-      }
-    });
-
     let sortableLists = [
-      this.$('.accordion[data-category=""]')[0],
-      this.$('.accordion[data-category="sommer"]')[0],
-      this.$('.accordion[data-category="vinter"]')[0]
+      this.$('[data-category=""]')[0],
+      this.$('[data-category="sommer"]')[0],
+      this.$('[data-category="vinter"]')[0]
     ];
 
     sortableLists.forEach((item, index, enumerable) => {
