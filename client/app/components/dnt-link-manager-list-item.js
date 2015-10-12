@@ -18,11 +18,11 @@ export default Ember.Component.extend({
   updateValidationRules: function () {
     let newRules = [
       {
-        identifier: this.get('tittelPath'),
+        identifier: this.get('typePath'),
         rules: [
           {
             type: 'empty',
-            prompt: 'Lenken må ha en tittel'
+            prompt: 'Lenken må ha en type'
           }
         ]
       },
@@ -41,9 +41,9 @@ export default Ember.Component.extend({
 
   }.on('didInsertElement'),
 
-  tittelPath: Ember.computed('index', {
+  typePath: Ember.computed('index', {
     get: function () {
-      return ['lenker', this.get('index'), 'tittel'].join('-');
+      return ['lenker', this.get('index'), 'type'].join('-');
     }
   }),
 
