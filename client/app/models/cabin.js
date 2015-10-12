@@ -64,8 +64,8 @@ export default DS.Model.extend({
   betjeningsgrad: DS.attr('string'),
   byggeår: DS.attr('number'),
   description: DS.attr('string'),
-  // checksum: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
-  // endret: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
+  checksum: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
+  endret: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   fasiliteter: DS.attr('array', {defaultValue: []}),
   fylke: DS.attr('string'),
   geojson: DS.attr('object', {defaultValue: {type: "Point", properties: {}, coordinates: []}}),
@@ -91,7 +91,7 @@ export default DS.Model.extend({
     'kollektiv': {'sommer': undefined, 'vinter': undefined}
   }}),
   tags: DS.attr('array', {defaultValue: ['Hytte']}),
-  // tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
+  tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   tilrettelegginger: DS.attr('array', {defaultValue: []}),
   turkart: DS.attr('array', {defaultValue: []}),
 
