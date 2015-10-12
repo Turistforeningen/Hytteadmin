@@ -1,5 +1,5 @@
 {{#ui-form validationRules=validationRules isSaving=photo.isSaving isValid=isValid validateImmidiately=true}}
-  <div class="ui card">
+  <div class="ui card {{unless isValid "red"}}">
     <div class="content">
       {{#unless isValid}}
         <div class="ui red floating circular label">
