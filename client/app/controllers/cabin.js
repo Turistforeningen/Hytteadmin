@@ -109,7 +109,8 @@ export default Ember.Controller.extend({
     },
 
     addÅpningstiderPeriode: function () {
-      this.get('model.privat.åpningstider').addObject({});
+      let åpningstider = this.get('model.privat.åpningstider') || this.set('model.privat.åpningstider', []);
+      åpningstider.addObject({});
     },
 
     removeÅpningstiderPeriode: function (periode) {
