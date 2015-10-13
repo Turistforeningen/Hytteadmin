@@ -32,7 +32,7 @@ export default Ember.Controller.extend(Paginated, {
     this.store.unloadAll('cabin');
     this.set('isLoading', true);
     Ember.setProperties(params, {
-      fields: 'navn,grupper'
+      fields: 'navn,grupper,endret'
     });
     this.store.query('cabin', params).then((cabins) => {
       this.set('model', cabins);
