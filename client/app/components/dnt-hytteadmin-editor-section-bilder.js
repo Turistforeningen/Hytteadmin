@@ -128,7 +128,7 @@ export default Ember.Component.extend({
 
   har_sommerbilder: Ember.computed('sommerbilder.[]', {
     get: function () {
-      return this.get('sommerbilder').length > 0;
+      return this.get('sommerbilder.length') > 0;
     }
   }),
 
@@ -141,7 +141,7 @@ export default Ember.Component.extend({
 
   har_vinterbilder: Ember.computed('vinterbilder.[]', {
     get: function () {
-      return this.get('vinterbilder').length > 0;
+      return this.get('vinterbilder.length') > 0;
     }
   })
 
