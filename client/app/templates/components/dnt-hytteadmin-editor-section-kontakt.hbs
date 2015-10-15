@@ -73,13 +73,13 @@
                 {{/if}}
                 {{#if model.kontaktinfo_gruppe.postnummer}}
                   <div class="item">
-                    <div class="header">Postnummer</div>
+                    <div class="header">
+                      Postnummer
+                      {{#if model.kontaktinfo_gruppe.poststed}}
+                        og sted
+                      {{/if}}
+                    </div>
                     {{model.kontaktinfo_gruppe.postnummer}}
-                  </div>
-                {{/if}}
-                {{#if model.kontaktinfo_gruppe.poststed}}
-                  <div class="item">
-                    <div class="header">Poststed</div>
                     {{model.kontaktinfo_gruppe.poststed}}
                   </div>
                 {{/if}}
