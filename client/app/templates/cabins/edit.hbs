@@ -2,7 +2,7 @@
 
 <div class="ui grid">
   <div class="sixteen wide column">
-    {{#ui-form isSaving=model.isSaving validationRules=validationRules validateImmidiately=true}}
+    {{#ui-form isSaving=model.isSaving validationRules=validationRules validateImmidiately=model.isExisting}}
 
       {{dnt-hytteadmin-editor-section-generelt model=model}}
       <div class="ui section divider"></div>
