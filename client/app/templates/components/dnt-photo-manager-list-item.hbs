@@ -1,135 +1,47 @@
-{{#ui-form validationRules=validationRules isSaving=photo.isSaving isValid=isValid validateImmidiately=true}}
-  <div class="ui card {{unless isValid "red"}}">
-    <div class="content">
-      {{#unless isValid}}
-        <div class="ui red floating circular label">
-          <i class="warning icon"></i>
-        </div>
-      {{/unless}}
-      <div class="ui transparent left icon input">
-        <i class="align left icon"></i>
-        {{input value=photo.beskrivelse placeholder="Mangler beskrivelse"}}
+<div class="ui card {{if photo.isInvalid "red"}}">
+  <div class="content">
+    {{#if photo.isInvalid}}
+      <div class="ui red floating circular label">
+        <i class="warning icon"></i>
       </div>
-    </div>
-    <div class="image">
-      <a {{action "showModal"}}>
-        <img class="ui fluid image" src="{{photo.img.1.url}}">
-      </a>
-    </div>
-    <div class="extra content">
-      {{#unless deleteMode}}
-        <span class="left floated remove">
-          <a {{action "toggleDeleteMode"}}>
-            <i class="remove icon"></i>
-            Fjern
-          </a>
-        </span>
-        <span class="right floated">
-          <a {{action "showModal"}}>
-            <i class="edit icon"></i>
-            Rediger
-          </a>
-        </span>
-      {{else}}
-        <span class="left floated remove">
-          <a {{action "toggleDeleteMode"}}>
-            <i class="life ring icon"></i>
-            Avbryt
-          </a>
-        </span>
-        <span class="right floated">
-          <a {{action "deletePhoto" photo}}>
-            <i class="trash icon"></i>
-            Slett
-          </a>
-        </span>
-      {{/unless}}
-    </div>
-
-  </div>
-  <div class="ui modal">
-    <i class="close icon"></i>
-    <div class="header">
-      Rediger bilde
-    </div>
-    <div class="content">
-      <div class="ui grid">
-        <div class="row">
-          <div class="six wide column">
-            <img class="ui bordered rounded image" src="{{photo.img.1.url}}">
-          </div>
-          <div class="ten wide column">
-            <div class="ui form">
-              <div class="field">
-                <label>Beskrivelse</label>
-                <div class="ui left icon input">
-                  {{input value=photo.beskrivelse class="fluid" placeholder="Beskrivelse" data-validate=beskrivelsePath}}
-                  <i class="unhide icon"></i>
-                </div>
-                {{#if photo.validation.beskrivelse}}
-                  <div class="ui pointing red basic label">
-                    {{photo.validation.beskrivelse}}
-                  </div>
-                {{/if}}
-              </div>
-              <div class="field">
-                <label>Fotograf</label>
-                <div class="fields">
-                  <div class="eight wide field">
-                    <div class="ui left icon input">
-                      {{input value=photo.fotograf.navn class="fluid" placeholder="Navn" data-validate=fotografNavnPath}}
-                      <i class="photo icon"></i>
-                    </div>
-                  </div>
-                  <div class="eight wide field">
-                    <div class="field">
-                      <div class="ui left icon input">
-                        {{input value=photo.fotograf.epost class="fluid" placeholder="Epost" data-validate=fotografEpostPath}}
-                        <i class="mail icon"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="field">
-                  {{ui-checkbox
-                    label="Dette bildet kan brukes fritt"
-                    checked=photo.fri_bruk}}
-                  <i class="blue icon help circle"></i>
-                  {{#ui-popup}}
-                    <p>
-                      <strong>Fri bruk:</strong>
-                      Bildet kan benyttes til alle formål mot kreditering
-                      (<a href="https://creativecommons.org/licenses/by-sa/4.0/deed.no">CC BY-SA 4.0</a>).
-                    </p>
-                    <p>
-                      <strong>Ikke fri bruk:</strong>
-                      Bildet kan ikke benyttes til kommersielle formål, men kan ellers benyttes av alle mot kreditering
-                      (<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.no">CC BY-NC-SA 4.0</a>).
-                    </p>
-                  {{/ui-popup}}
-                </div>
-              </div>
-              <div class="column">
-                <div class="field">
-                  <label>Tagger</label>
-                  {{ui-dropdown value=photo.tags allowAdditions=true multiple=true search=true content=photo.TAGS_CHOICES}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="actions">
-      <div class="ui deny red button align left floated" {{action "deletePhoto" photo}}>
-        <i class="remove icon"></i>
-        Fjern bilde
-      </div>
-      <div class="ui deny button" {{action "discardChanges"}}>
-        Avbryt
-      </div>
-      <div class="ui positive icon button" {{action "save"}}>
-        Lagre endringer
-      </div>
+    {{/if}}
+    <div class="ui transparent left icon input">
+      <i class="align left icon"></i>
+      {{input value=photo.beskrivelse placeholder="Mangler beskrivelse"}}
     </div>
   </div>
-{{/ui-form}}
+  <div class="image">
+    {{#link-to "cabins.edit.photos.edit" photo.id}}
+      <img class="ui fluid image" src="{{photo.img.1.url}}">
+    {{/link-to}}
+  </div>
+  <div class="extra content">
+    {{#unless deleteMode}}
+      <span class="left floated remove">
+        <a {{action "toggleDeleteMode"}}>
+          <i class="remove icon"></i>
+          Fjern
+        </a>
+      </span>
+      <span class="right floated">
+        {{#link-to "cabins.edit.photos.edit" photo.id}}
+          <i class="edit icon"></i>
+          Rediger
+        {{/link-to}}
+      </span>
+    {{else}}
+      <span class="left floated remove">
+        <a {{action "toggleDeleteMode"}}>
+          <i class="life ring icon"></i>
+          Avbryt
+        </a>
+      </span>
+      <span class="right floated">
+        <a {{action "deletePhoto" photo}}>
+          <i class="trash icon"></i>
+          Slett
+        </a>
+      </span>
+    {{/unless}}
+  </div>
+</div>

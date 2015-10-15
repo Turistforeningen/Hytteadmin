@@ -3,6 +3,8 @@
 <div class="ui grid">
   <div class="sixteen wide column">
     {{#ui-form isSaving=model.isSaving validationRules=validationRules validateImmidiately=true}}
+      {{dnt-hytteadmin-editor-section-bilder bilder=model.bilder createPhoto="createPhoto" removePhoto="removePhoto"}}
+      {{outlet "photos-edit"}}
 
       {{dnt-hytteadmin-editor-section-generelt model=model}}
       <div class="ui section divider"></div>
@@ -267,7 +269,6 @@
       </section>
 
       <div class="ui section divider"></div>
-      {{dnt-hytteadmin-editor-section-bilder bilder=model.bilder createPhoto="createPhoto" removePhoto="removePhoto"}}
 
     {{/ui-form}}
 

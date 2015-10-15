@@ -18,5 +18,15 @@ export default Ember.Route.extend({
       into: 'application',
       outlet: 'header-right'
     });
+  },
+
+  actions: {
+    save: function () {
+      this.controller.send('save');
+    },
+
+    removePhoto: function (photo) {
+      this.controller.send('removePhoto', photo);
+    }
   }
 });

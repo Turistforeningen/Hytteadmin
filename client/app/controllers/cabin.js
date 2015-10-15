@@ -139,9 +139,10 @@ export default Ember.Controller.extend({
       });
     },
 
-    removePhoto: function (photo, destroy) {
+    removePhoto: function (photo, options) {
+      options = options || {};
       this.get('model.bilder').removeObject(photo);
-      if (destroy) {
+      if (options.destroy === true) {
         photo.destroyRecord();
       }
     }

@@ -8,7 +8,11 @@ var Router = Ember.Router.extend(googlePageview, {
 
 Router.map(function () {
   this.route('cabins', {path: '/hytter', resetNamespace: true}, function () {
-    this.route('edit', {path: '/:id'});
+    this.route('edit', {path: '/:id'}, function () {
+      this.route('photos', {path: '/bilder'}, function() {
+        this.route('edit', {path: '/:photo_id'});
+      });
+    });
     this.route('new', {path: '/ny'});
   });
 
