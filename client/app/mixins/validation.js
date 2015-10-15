@@ -1,4 +1,4 @@
-// $.fn.form.settings.prompts = {};
+/* globals $ */
 
 import Ember from 'ember';
 
