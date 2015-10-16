@@ -1,11 +1,16 @@
 <td>
   <div class="field">
-    {{input
-      type="text"
-      value=link.tittel
-      placeholder="Tittel"
-      data-validate=tittelPath}}
+    {{ui-dropdown content=TYPE_CHOICES value=link.type data-validate=typePath}}
   </div>
+  {{#if tittelEnabled}}
+    <div class="field">
+      {{input
+        type="text"
+        value=link.tittel
+        placeholder="Tittel"
+        data-validate=tittelPath}}
+    </div>
+  {{/if}}
 </td>
 <td>
   <div class="field">
@@ -14,9 +19,6 @@
       placeholder="Nettadresse"
       data-validate=urlPath}}
   </div>
-</td>
-<td>
-  {{ui-dropdown content=TYPE_CHOICES value=link.type data-validate=typePath}}
 </td>
 <td>
   <button class="basic ui icon button" {{action "removeLink" link}}>

@@ -51,6 +51,18 @@ export default Ember.Component.extend({
     get: function () {
       return ['lenker', this.get('index'), 'url'].join('-');
     }
+  }),
+
+  tittelEnabled: Ember.computed('link.type', {
+    get: function () {
+      return this.get('link.type') === 'Annen';
+    }
+  }),
+
+  unsetTittel: Ember.observer('tittelEnabled', function () {
+    if (this.get('tittelEnabled') === false) {
+      this.set('link.tittel');
+    }
   })
 
 });
