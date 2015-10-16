@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   setup: function () {
     this.$('.ui.dropdown').dropdown({
       apiSettings: {
-        url: '/api/v1/area/?navn=~{query}',
+        url: '/api/v1/area/?navn=~{query}&status=Offentlig',
         onResponse: function (response) {
           var documents = Ember.ArrayProxy.create({content: Ember.A(response.documents)});
           var results = documents.map(function (item, index, enumerable) {
