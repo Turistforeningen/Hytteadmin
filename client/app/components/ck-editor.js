@@ -16,7 +16,7 @@ export default Ember.Component.extend({
       {name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']},
       {name: 'styles', items: ['Format']},
       {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Blockquote']},
-      {name: 'links', items: ['Link', 'Unlink', 'Anchor']},
+      {name: 'links', items: ['Link', 'Unlink']},
       {name: 'insert', items: ['Table']}
     ];
 
