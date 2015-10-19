@@ -108,6 +108,11 @@ export default Ember.Controller.extend({
       }));
     },
 
+    removeOmråde: function (område) {
+      let områder = this.get('model.områder') || [];
+      områder.removeObject(område);
+    },
+
     addÅpningstiderPeriode: function () {
       let åpningstider = this.get('model.privat.åpningstider') || this.set('model.privat.åpningstider', []);
       åpningstider.addObject({});
