@@ -29,6 +29,11 @@ a.header.item.logo {
   text-overflow: ellipsis;
 }
 
+// Ember actions
+[data-ember-action] {
+  cursor: pointer;
+}
+
 /* Semantic UI */
 
 .ui[class*="right labeled"].icon.button > .icon {
