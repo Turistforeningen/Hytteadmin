@@ -242,6 +242,7 @@
                     {{#if model.områder}}
                       {{#each model.områder as |område|}}
                         <div class="item">
+                          <i class="remove icon" {{action "removeOmråde" område}}></i>
                           <span>{{område.navn}}</span>
                         </div>
                       {{/each}}
