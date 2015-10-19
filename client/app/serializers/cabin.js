@@ -24,6 +24,13 @@ export default ApplicationSerializer.extend({
       }
       normalizedHash.tilrettelegginger = tilrettelegginger;
     }
+
+    if (resourceHash.turkart && resourceHash.turkart.length) {
+      resourceHash.turkart = resourceHash.turkart.map((item, index, enumerable) => {
+        return {navn: item};
+      });
+    }
+
     return this._super(modelClass, normalizedHash, prop);
   },
 
@@ -42,6 +49,11 @@ export default ApplicationSerializer.extend({
     // Update `tilrettelagt_for` with types from `tilrettelegginger`
     if (json.tilrettelegginger && json.tilrettelegginger.length) {
       json.tilrettelagt_for = json.tilrettelegginger.mapBy('type');
+    }
+
+    if (json.turkart && json.turkart.length) {
+      json.turkart = json.turkart.mapBy('navn');
+      json.turkart.removeObjects([null, undefined]);
     }
 
     return json;

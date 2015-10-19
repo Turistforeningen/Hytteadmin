@@ -63,12 +63,20 @@
             Nordecas Norgesserie 1:50 000
             {{#ui-help-text}}Hvilket/hvilke turkart er hytta inntegnet på? Eksempel på skrivemåte: turkartet Jotunheimen Aust i 1:50 000 fra Ugland It Group AS.{{/ui-help-text}}
           </label>
-          {{ui-dropdown
-            multiple=true
-            search=true
-            allowAdditions=true
-            value=model.turkart
-            dropdown=false}}
+          {{#each model.turkart as |turkart|}}
+            <div class="field">
+              <div class="ui action input">
+                {{input value=turkart.navn}}
+                <button class="ui basic icon button" {{action "removeTurkart" turkart}}>
+                  <i class="ui remove icon"></i>
+                </button>
+              </div>
+            </div>
+          {{/each}}
+          <button class="ui blue button" {{action "addTurkart"}}>
+            <i class="plus icon"></i>
+            Legg til Nordeca-kart
+          </button>
         </div>
       </div>
       <div class="column">
