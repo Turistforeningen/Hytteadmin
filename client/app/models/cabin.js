@@ -84,6 +84,7 @@ export default DS.Model.extend({
   juridisk_eier: DS.belongsTo('group', {async: true}),
   vedlikeholdes_av: DS.belongsTo('group', {async: true}),
   ssr_id: DS.attr('number'),
+  senger: DS.attr('object', {defaultValue: {betjent: 0, selvbetjent: 0, ubetjent: 0, vinter: 0}}),
   status: DS.attr('string', {defaultValue: 'Kladd'}),
   url: DS.attr('string'),
   tilkomst: DS.attr('object', {defaultValue: {
