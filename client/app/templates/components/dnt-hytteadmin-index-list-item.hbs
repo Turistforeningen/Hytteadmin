@@ -3,7 +3,7 @@
     {{#link-to 'cabins.edit' cabin.id}}{{cabin.navn}}{{/link-to}}
   </td>
   <td>
-    {{cabin.status}}
+    {{if cabin.er_publisert 'Publisert' 'Kladd'}}
   </td>
   <td>
     {{moment-format cabin.endret "DD.MM.YYYY HH.mm"}}
