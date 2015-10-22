@@ -53,12 +53,6 @@ export default Ember.Mixin.create({
     }
   }),
 
-  pagesWithinReach: Ember.computed('totalPages', 'currentPage', {
-    get: function () {
-
-    }
-  }),
-
   hasPreviousPage: function() {
     return this.get('page') > 1;
   }.property('page'),
