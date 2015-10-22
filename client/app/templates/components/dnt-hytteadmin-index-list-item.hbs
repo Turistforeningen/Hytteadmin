@@ -9,7 +9,17 @@
     {{moment-format cabin.endret "DD.MM.YYYY HH.mm"}}
   </td>
   <td>
-    {{#link-to 'cabins.edit' cabin.id}}Rediger{{/link-to}}
+    <div class="ui horizontal bulleted list">
+      {{#link-to 'cabins.edit' cabin.id class="item"}}Rediger{{/link-to}}
+      {{#if cabin.er_publisert}}
+        <a href="{{utUrl}}" class="item" target="_blank">UT.no</a>
+      {{else}}
+        <a class="disabled item" style="pointer-events: auto;">UT.no</a>
+        {{#ui-popup on="hover"}}
+          Du kan ikke se hytta på UT.no fordi den ikke er publisert
+        {{/ui-popup}}
+      {{/if}}
+    </div>
   </td>
 {{else}}
   <td colspan="4">

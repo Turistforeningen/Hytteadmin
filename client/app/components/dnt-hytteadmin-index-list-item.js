@@ -7,6 +7,12 @@ export default Ember.Component.extend({
   cabin: null,
   attributeBindings: ['user', 'cabin'],
 
+  utUrl: Ember.computed('cabin.id', {
+    get: function () {
+      return ['//www.ut.no', 'hytte', this.get('cabin.id')].join('/');
+    }
+  }),
+
   userHasAccess: Ember.computed('user', 'cabin', {
     get: function () {
       let userHasAccess = false;
