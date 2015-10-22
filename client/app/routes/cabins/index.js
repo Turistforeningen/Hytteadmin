@@ -62,6 +62,10 @@ export default Ember.Route.extend({
     } else if (queryParamVedlikeholdesAv) {
       controller.set('vedlikeholdes_av', queryParamVedlikeholdesAv);
 
+    } else if (this.controllerFor('session').get('model.er_admin')) {
+      // We want admins to get list of all cabins by default
+      controller.set('filterParamsObject', {});
+
     } else {
       let primærgruppe = Ember.copy(this.controllerFor('session').get('model.primærgruppe').toJSON({
         includeId: true

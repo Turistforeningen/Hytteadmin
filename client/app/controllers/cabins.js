@@ -73,7 +73,11 @@ export default Ember.Controller.extend(Paginated, {
         params['privat.' + value.relation] = value.gruppe.id;
         this.set('params', params);
         this.resetPagination();
+
+      } else {
+        this.notifyPropertyChange('params');
       }
+
       return value;
     }
   }),
