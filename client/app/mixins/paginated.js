@@ -5,16 +5,16 @@ export default Ember.Mixin.create({
   page: 1,
   offset: 0,
   limit: 20,
-
+  maxPageLinks: 5,
 
   pages: Ember.computed('totalPages', 'page', {
     get: function () {
       const totalPages = this.get('totalPages');
-      const maxPages = 5;
+      const maxPageLinks = this.get('maxPageLinks');
       const currentPage = this.get('page');
       const buttonRange = [];
-      const first = (currentPage - (maxPages/2) < 1) ? 1 : Math.ceil(currentPage - (maxPages/2));
-      const last = currentPage < Math.ceil(maxPages/2) ? maxPages : (currentPage + (maxPages/2) > totalPages) ? totalPages : Math.floor(currentPage + (maxPages/2));
+      const first = (currentPage - (maxPageLinks/2) < 1) ? 1 : Math.ceil(currentPage - (maxPageLinks/2));
+      const last = currentPage < Math.ceil(maxPageLinks/2) ? maxPageLinks : (currentPage + (maxPageLinks/2) > totalPages) ? totalPages : Math.floor(currentPage + (maxPageLinks/2));
 
       for (let i = first; i <= last; i++) {
         buttonRange.push(i);
