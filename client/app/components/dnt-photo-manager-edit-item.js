@@ -54,7 +54,17 @@ export default Ember.Component.extend({
             prompt: 'Bildet må ha en beskrivelse'
           }
         ]
-      }
+      },
+      {
+        identifier: this.get('fotografEpostPath'),
+        optional: true,
+        rules: [
+          {
+            type: 'email',
+            prompt: 'Må være en gyldig epostadresse hvis utfylt'
+          }
+        ]
+      },
     ];
 
     this.set('validationRules', validationRules);
