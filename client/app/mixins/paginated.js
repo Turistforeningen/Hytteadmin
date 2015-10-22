@@ -7,20 +7,55 @@ export default Ember.Mixin.create({
   limit: 20,
 
 
-  pages: Ember.computed('totalPages', {
+  pages: Ember.computed('totalPages', 'page', {
     get: function () {
-      let pages = [];
-      let totalPages = this.get('totalPages');
+      const totalPages = this.get('totalPages');
+      const maxPages = 5;
+      const currentPage = this.get('page');
+      const buttonRange = [];
+      const first = (currentPage - (maxPages/2) < 1) ? 1 : Math.ceil(currentPage - (maxPages/2));
+      const last = currentPage < Math.ceil(maxPages/2) ? maxPages : (currentPage + (maxPages/2) > totalPages) ? totalPages : Math.floor(currentPage + (maxPages/2));
+
+      for (let i = first; i <= last; i++) {
+        buttonRange.push(i);
+      }
+
+      const pages = [];
+      const prevTruncated = [];
+      const nextTruncated = [];
 
       for (let i = 1; i <= totalPages ; i++) {
         let page = {number: i};
-        if (i === this.get('page')) {
-          page.isCurrent = true;
+
+        if (i < first) {
+          prevTruncated.push(page);
+
+        } else if (i > last) {
+          nextTruncated.push(page);
+
+        } else {
+          if (i === currentPage) {
+            page.isCurrent = true;
+          }
+          pages.push(page);
         }
-        pages.push(page);
+      }
+
+      if (prevTruncated.length) {
+        pages.unshift(prevTruncated);
+      }
+
+      if (nextTruncated.length) {
+        pages.push(nextTruncated);
       }
 
       return pages;
+    }
+  }),
+
+  pagesWithinReach: Ember.computed('totalPages', 'currentPage', {
+    get: function () {
+
     }
   }),
 

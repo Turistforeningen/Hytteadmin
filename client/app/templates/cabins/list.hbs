@@ -50,9 +50,15 @@
               <i class="left chevron icon"></i>
             {{/ui-pagination-button}}
             {{#each pages as |page|}}
-              {{#ui-pagination-button action="goToPage" page=page}}
-                {{page.number}}
-              {{/ui-pagination-button}}
+              {{#if page.number}}
+                {{#ui-pagination-button action="goToPage" page=page}}
+                  {{page.number}}
+                {{/ui-pagination-button}}
+              {{else}}
+                {{#ui-pagination-button disabled}}
+                  ...
+                {{/ui-pagination-button}}
+              {{/if}}
             {{/each}}
             {{#ui-pagination-button class="icon" action="nextPage" enabled=hasNextPage}}
               <i class="right chevron icon"></i>
