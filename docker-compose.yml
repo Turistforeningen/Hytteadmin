@@ -22,11 +22,11 @@ server:
   ports:
     - "8080"
   volumes:
-    - server/controllers:/usr/src/app/controllers
-    - server/lib:/usr/src/app/lib
-    - server/db:/usr/src/app/db
-    - server/index.js:/usr/src/app/index.js
-    - server/test:/usr/src/app/test
+    - ./server/controllers:/usr/src/app/controllers
+    - ./server/lib:/usr/src/app/lib
+    - ./server/db:/usr/src/app/db
+    - ./server/index.js:/usr/src/app/index.js
+    - ./server/test:/usr/src/app/test
   working_dir: /usr/src/app
   env_file: .env
   environment:
@@ -39,13 +39,13 @@ server:
 client:
   build: client
   volumes:
-    - client/app:/usr/src/app/app
-    - client/config:/usr/src/app/config
-    - client/ember-cli-build.js:/usr/src/app/ember-cli-build.js
-    - client/public:/usr/src/app/public
-    - client/testem.json:/usr/src/app/testem.json
-    - client/tests:/usr/src/app/tests
-    - client/vendor:/usr/src/app/vendor
+    - ./client/app:/usr/src/app/app
+    - ./client/config:/usr/src/app/config
+    - ./client/ember-cli-build.js:/usr/src/app/ember-cli-build.js
+    - ./client/public:/usr/src/app/public
+    - ./client/testem.json:/usr/src/app/testem.json
+    - ./client/tests:/usr/src/app/tests
+    - ./client/vendor:/usr/src/app/vendor
   ports:
     - "4200"
     - "35729:35729"
