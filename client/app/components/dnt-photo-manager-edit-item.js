@@ -1,12 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  hasError: false,
   validationRules: null,
 
   actions: {
     saveAndClose: function () {
       this.get('photo').save().then((photo) => {
         this.send('close');
+      }, (err) => {
+        this.set('hasError', true)
       });
     },
 
