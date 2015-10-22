@@ -4,6 +4,11 @@
     Rediger bilde
   </div>
   <div class="content">
+    {{#if hasError}}
+      <div class="ui negative message">
+        Bildet kunne ikke lagres. Gå over feltene og pass på at ikke de er riktig utfylt. Dersom de inneholder feil vil de være markert med rødt og en melding som forklarer feilen.
+      </div>
+    {{/if}}
     <div class="ui grid">
       <div class="row">
         <div class="six wide column">
