@@ -26,11 +26,7 @@
           Hytta har ingen posisjon.
         {{/if}}
         {{#if user.model.er_admin}}
-          {{#if model.har_posisjon}}
-            <a>Endre posisjon</a>
-          {{else}}
-            <a>Sett posisjon</a>
-          {{/if}}
+          <a>{{if model.har_posisjon "Endre posisjon" "Sett posisjon"}}</a>
         {{/if}}
         {{#ui-popup}}
           <div class="field">
