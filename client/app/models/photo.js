@@ -23,6 +23,15 @@ export default DS.Model.extend(Validation, {
   tags: DS.attr('array'),
   tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
 
+  er_ukategorisert: Ember.computed('tags.[]', {
+    get: function () {
+      const tags = this.get('tags') || [];
+      return !tags.find(function (item, index, enumerable) {
+        return ['vinter', 'sommer'].indexOf(item.toLowerCase()) !== -1;
+      });
+    }
+  }),
+
   er_sommerbilde: Ember.computed('tags.[]', {
     get: function () {
       let tags = this.get('tags') || [];
