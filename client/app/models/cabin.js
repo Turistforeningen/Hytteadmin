@@ -87,10 +87,7 @@ export default DS.Model.extend({
   senger: DS.attr('object', {defaultValue: {betjent: 0, selvbetjent: 0, ubetjent: 0, vinter: 0}}),
   status: DS.attr('string', {defaultValue: 'Kladd'}),
   url: DS.attr('string'),
-  tilkomst: DS.attr('object', {defaultValue: {
-    'privat': {'sommer': undefined, 'vinter': undefined},
-    'kollektiv': {'sommer': undefined, 'vinter': undefined}
-  }}),
+  tilkomst: DS.attr('object', {defaultValue: {'privat': {'sommer': undefined, 'vinter': undefined}}}),
   tags: DS.attr('array', {defaultValue: ['Hytte']}),
   tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   tilrettelegginger: DS.attr('array', {defaultValue: []}),
