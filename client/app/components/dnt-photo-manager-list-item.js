@@ -18,6 +18,12 @@ export default Ember.Component.extend({
 
     toggleDeleteMode: function () {
       this.set('deleteMode', !this.get('deleteMode'));
+    },
+
+    categorize: function (category) {
+      const tags = this.get('photo.tags') || [];
+      tags.addObject(category);
+      this.set('photo.tags', tags);
     }
   }
 
