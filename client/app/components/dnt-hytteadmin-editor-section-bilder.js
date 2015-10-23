@@ -49,7 +49,7 @@ export default Ember.Component.extend({
     this.set('photosOrder', mergedLists);
 
     let reordered = this.get('bilder').toArray().sort(function (a, b) {
-      return mergedLists.indexOf(a.get('id')) > mergedLists.indexOf(b.get('id'));
+      return mergedLists.indexOf(a.get('id')) - mergedLists.indexOf(b.get('id'));
     });
 
     this.set('bilder', reordered);
