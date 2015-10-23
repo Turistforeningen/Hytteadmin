@@ -15,6 +15,14 @@
       <img class="ui fluid image" src="{{photo.img.1.url}}">
     {{/link-to}}
   </div>
+  {{#if photo.er_ukategorisert}}
+    <div class="extra content">
+      <div class="ui basic buttons">
+        <button class="ui button" {{action "categorize" "sommer"}}>Sommer</button>
+        <button class="ui button" {{action "categorize" "vinter"}}>Vinter</button>
+      </div>
+    </div>
+  {{/if}}
   <div class="extra content">
     {{#unless deleteMode}}
       <span class="left floated remove">
