@@ -71,12 +71,12 @@
           <thead>
             <tr>
               {{#unless model.er_helårs}}
-                <th>Fra</th>
-                <th>Til</th>
+                <th class="three wide">Fra</th>
+                <th class="three wide">Til</th>
               {{/unless}}
-              <th>Kommentar</th>
-              <th>Nøkkel</th>
-              <th>Betjeningsgrad</th>
+              <th class="{{if model.er_helårs "eight" "three"}} wide">Kommentar</th>
+              <th class="{{if model.er_helårs "four" "three"}} wide">Nøkkel</th>
+              <th class="{{if model.er_helårs "four" "three"}} wide">Betjeningsgrad</th>
               {{#unless model.er_helårs}}
                 <th class="one wide">Fjern</th>
               {{/unless}}
