@@ -110,16 +110,14 @@ export default Ember.Component.extend({
     }
   }),
 
-  ukategoriserte: Ember.computed('bilder.@each.tags', 'bilder.@each.tags[]', {
+  ukategoriserte: Ember.computed('bilder.@each.er_ukategorisert', {
     get: function () {
       const bilder = this.get('bilder') || [];
-      return bilder.filter(function (item, index, enumerable) {
-        return item.get('er_sommerbilde') === false && item.get('er_vinterbilde') === false;
-      });
+      return bilder.filterBy('er_ukategorisert', true);
     }
   }),
 
-  sommerbilder: Ember.computed('bilder.@each.tags', 'bilder.@each.tags[]', {
+  sommerbilder: Ember.computed('bilder.@each.er_sommerbilde', {
     get: function () {
       const bilder = this.get('bilder') || [];
       return bilder.filterBy('er_sommerbilde', true);
@@ -132,7 +130,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  vinterbilder: Ember.computed('bilder.@each.tags', 'bilder.@each.tags[]', {
+  vinterbilder: Ember.computed('bilder.@each.er_vinterbilde', {
     get: function () {
       const bilder = this.get('bilder') || [];
       return bilder.filterBy('er_vinterbilde', true);
