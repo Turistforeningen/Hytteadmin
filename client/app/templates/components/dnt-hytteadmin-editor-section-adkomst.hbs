@@ -35,27 +35,24 @@
     </tbody>
   </table>
   <h4>
-    Alternative adkomster
+    Fremkomstmidler
     {{#ui-help-text}}
-      Velg hvilke muligheter man har til adkomst til hytta
+      Velg hvilke fremkomstmidler man kan benytte for adkomst til hytta
     {{/ui-help-text}}
   </h4>
-  <div class="ui five column grid">
-    <div class="column">
-      {{ui-checkbox value="Sommerbil" checked=model.tags label="Sommerbil"}}
-    </div>
-    <div class="column">
-      {{ui-checkbox value="Vinterbil" checked=model.tags label="Vinterbil"}}
-    </div>
-    <div class="column">
-      {{ui-checkbox value="Sykkel" checked=model.tags label="Sykkel"}}
-    </div>
-    <div class="column">
-      {{ui-checkbox value="Kollektiv" checked=model.tags label="Kollektiv"}}
-    </div>
-    <div class="column">
-      {{ui-checkbox value="Båttransport" checked=model.tags label="Båttransport"}}
-    </div>
+  <div class="field">
+    {{ui-checkbox value="Sommerbil" checked=model.tags label="Bilveg frem til hytta om sommeren"}}
+  </div>
+  <div class="field">
+    {{ui-checkbox value="Vinterbil" checked=model.tags label="Bilveg frem til hytta om vinteren"}}
+  </div>
+  <div class="field">
+    {{ui-checkbox value="Sykkel" checked=model.tags label="Tilgjengelig med Sykkel"}}
+  </div>
+  <div class="field">
+    {{ui-checkbox value="Kollektiv" checked=model.tags label="Tilgjengelig med kollektivtransport"}}
+  </div>
+  <div class="field">
+    {{ui-checkbox value="Båttransport" checked=model.tags label="Tilgjengelig med båttransport"}}
   </div>
 </section>
-
