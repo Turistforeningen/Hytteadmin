@@ -235,7 +235,7 @@ export default DS.Model.extend({
 
   setKontaktinfoGruppeById: function (id) {
     if (id) {
-      this.store.findRecord('group', id).then((record) => {
+      this.store.findRecord('group', id, {reload: true}).then((record) => {
         this.set('kontaktinfo_gruppe', {
           gruppe_id: record.get('id'),
           navn: record.get('navn'),
