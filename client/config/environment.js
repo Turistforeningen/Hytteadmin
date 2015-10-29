@@ -35,7 +35,7 @@ module.exports = function(environment) {
       dsn: 'https://1d5112a03f0941278212feeea3a98c75@sentry.app.dnt.no/16',
       version: '1.1.19',
       whitelistUrls: [/hytte\.app\.dnt\.no/], // Use regex if only setting domain
-      development: false // Set to true, to disable while developing
+      development: true // Set to true, to disable while developing
     }
   };
 
