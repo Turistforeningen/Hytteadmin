@@ -7,6 +7,6 @@
     <i class="unhide icon"></i> Publiser
   </a>
 {{/if}}
-<a class="item" {{action "save"}}>
+<a class="item {{if model.isSaving "loading"}}" {{action "save"}}>
   <i class="save icon"></i> Lagre
 </a>
