@@ -2,10 +2,16 @@
   <a class="item" {{action "unpublish"}}>
     <i class="hide icon"></i> Avpubliser
   </a>
+  {{#ui-popup on="hover" position="bottom center"}}
+    Hytta er publisert, klikk for å avpublisere.
+  {{/ui-popup}}
 {{else}}
   <a class="item" {{action "publish"}}>
     <i class="unhide icon"></i> Publiser
   </a>
+  {{#ui-popup on="hover" position="bottom center"}}
+    Hytta er ikke publisert, klikk for å publisere.
+  {{/ui-popup}}
 {{/if}}
 <a class="item {{if model.isSaving "loading"}}" {{action "save"}}>
   <i class="save icon"></i> Lagre
