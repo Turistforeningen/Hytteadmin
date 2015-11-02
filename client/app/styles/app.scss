@@ -70,6 +70,10 @@ a.header.item.logo {
   right: .25em !important;
 }
 
+.ui.menu .item > .label:first-child {
+  margin-left: 0;
+}
+
 .ui.circular.label > .icon {
   margin-right: 0;
 }
