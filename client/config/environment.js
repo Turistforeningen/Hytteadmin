@@ -27,7 +27,7 @@ module.exports = function(environment) {
       // when it is created
     },
     moment: {
-      includeLocales: true
+      includeLocales: ['nb']
     },
     sentry: {
       skipCdn: false, // Skip loading from CDN
