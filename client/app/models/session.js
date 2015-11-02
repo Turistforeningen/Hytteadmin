@@ -1,5 +1,3 @@
-/* globals Raven */
-
 import Ember from 'ember';
 import DS from 'ember-data';
 
@@ -29,7 +27,7 @@ export default DS.Model.extend({
           return primærgruppe;
 
         } else {
-          Raven.captureMessage('Could not find "primærgruppe". User with multiple groups user did not belong to group of type "sentral", "forening", "turlag" or "turgruppe".', {extra: {user: this.toJSON()}});
+          this.get('logger').captureMessage('Could not find "primærgruppe". User with multiple groups user did not belong to group of type "sentral", "forening", "turlag" or "turgruppe".', {extra: {user: this.toJSON()}});
         }
 
       } else {
