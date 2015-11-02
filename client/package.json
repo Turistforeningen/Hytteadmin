@@ -8,7 +8,7 @@
   },
   "scripts": {
     "bower": "bower --allow-root install",
-    "build": "ember build",
+    "build": "ember build --environment=\"production\"",
     "ember": "ember",
     "start": "ember server --watcher polling",
     "test": "ember test"
