@@ -7,6 +7,10 @@ module.exports = function(defaults) {
 
   var app = new EmberApp(defaults, {
     // Any other options
+    fingerprint: {
+      exclude: ['ckeditor', 'semantic', 'leaflet'],
+      ignore: ['ckeditor', 'semantic', 'leaflet']
+    }
   });
 
   // Use `app.import` to add additional libraries to the generated
