@@ -10,6 +10,12 @@ module.exports = function(defaults) {
     fingerprint: {
       exclude: ['ckeditor', 'semantic', 'leaflet'],
       ignore: ['ckeditor', 'semantic', 'leaflet']
+    },
+    minifyCSS: {
+      enabled: false
+    },
+    minifyJS: {
+      enabled: false
     }
   });
 
