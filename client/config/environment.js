@@ -27,7 +27,8 @@ module.exports = function(environment) {
         '\'self\'',
         'data:',
         'use.typekit.net',
-        'fonts.gstatic.com'
+        'fonts.gstatic.com',
+        's3-eu-west-1.amazonaws.com'
       ].join(' '),
       'connect-src': [
         '\'self\'',
