@@ -56,7 +56,8 @@ module.exports = function(environment) {
         '\'self\'',
         '\'unsafe-inline\'',
         'use.typekit.net',
-        'fonts.googleapis.com'
+        'fonts.googleapis.com',
+        's3-eu-west-1.amazonaws.com'
       ].join(' '),
       'frame-src': [
         's-static.ak.facebook.com',
