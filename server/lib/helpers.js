@@ -21,7 +21,7 @@ module.exports.hyttetype = function hyttetype(type, service) {
     ['!DNT:Dagshytte'  , 1008],
     ['!DNT:Nødbu'      , 1008],
     ['!DNT:Selvbetjent', 1005],
-    ['!DNT:Ubetejent'  , 1004]
+    ['!DNT:Ubetjent'   , 1004]
   ]);
 
   return types.get(`${type === 'DNT' ? 'DNT' : '!DNT'}:${service}`);
