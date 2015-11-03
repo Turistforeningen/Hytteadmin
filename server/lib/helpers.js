@@ -15,7 +15,7 @@ module.exports.hyttetype = function hyttetype(type, service) {
     ['DNT:Dagshytte'   , 1010],
     ['DNT:Nødbu'       , 1010],
     ['DNT:Selvbetjent' , 1001],
-    ['DNT:Ubetejent'   , 1000],
+    ['DNT:Ubetjent'    , 1000],
     ['!DNT:Betjent'    , 1006],
     ['!DNT:Stengt'     , 1009],
     ['!DNT:Dagshytte'  , 1008],
