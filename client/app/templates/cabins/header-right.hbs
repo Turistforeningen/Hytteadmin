@@ -18,3 +18,10 @@
 <a class="item {{if model.isSaving "loading"}}" {{action "save"}} data-test-action="save">
   <i class="save icon"></i> Lagre
 </a>
+{{#ui-popup on="hover" position="bottom center"}}
+  {{#if model.endret}}
+    Sist lagret {{moment-format cabin.endret "DD.MM.YYYY HH.mm"}}
+  {{else}}
+    Ikke lagret
+  {{/if}}
+{{/ui-popup}}
