@@ -65,7 +65,7 @@ export default DS.Model.extend({
   byggeår: DS.attr('number'),
   description: DS.attr('string'),
   checksum: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
-  endret: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
+  endret: DS.attr('date'), // TODO: Add support for readonly as this is set by NTB
   fasiliteter: DS.attr('array', {defaultValue: []}),
   fylke: DS.attr('string'),
   geojson: DS.attr('object', {defaultValue: {type: "Point", properties: {}, coordinates: []}}),
