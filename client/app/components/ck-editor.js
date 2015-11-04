@@ -7,7 +7,7 @@ export default Ember.Component.extend({
 
   toolbar: null,
   bindAttributes: ['toolbar', 'data-validate'],
-
+  height: null,
   _editor: null,
 
   didInsertElement () {
@@ -38,6 +38,8 @@ export default Ember.Component.extend({
       entities: false,
       // Disable resizing to get rid of bottom bar
       resize_enabled: false,
+
+      height: this.get('height'),
 
       toolbar: toolbarConfig,
       format_Mellomoverskrift: {element: 'h2', name: 'Mellomoverskrift'},
