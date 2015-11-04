@@ -18,9 +18,10 @@ export default Ember.Component.extend({
     },
 
     addOmrådeById: function (id) {
-      this.store.find('area', id).then(Ember.run.bind(this, function (area) {
-        this.get('model.områder').pushObject(area);
-      }));
+      const model = this.get('model');
+      if (typeof model.addOmrådeById === 'function') {
+        model.addOmrådeById(id);
+      }
     },
 
     removeOmråde: function (område) {

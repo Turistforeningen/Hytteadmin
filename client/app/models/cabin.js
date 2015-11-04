@@ -346,6 +346,12 @@ export default DS.Model.extend({
     }
   }),
 
+  addOmrådeById: function (id) {
+    this.store.find('area', id).then(Ember.run.bind(this, function (area) {
+      this.get('områder').pushObject(area);
+    }));
+  },
+
   updateNavngiving: function () {
     let navngiving = '';
 
