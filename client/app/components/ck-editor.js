@@ -41,7 +41,7 @@ export default Ember.Component.extend({
 
       toolbar: toolbarConfig,
 
-      format_tags: 'p;h2;h3'
+      format_tags: 'p;h2'
 
     });
 
