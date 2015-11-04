@@ -15,9 +15,9 @@ export default Ember.Component.extend({
     let availableToolbarItems = [
       {name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat']},
       {name: 'styles', items: ['Format']},
-      {name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Blockquote']},
-      {name: 'links', items: ['Link', 'Unlink']},
-      {name: 'insert', items: ['Table']}
+      {name: 'paragraph', items: ['NumberedList', 'BulletedList']}, // '-', 'Blockquote'
+      {name: 'links', items: ['Link', 'Unlink']}
+      // {name: 'insert', items: ['Table']}
     ];
 
     if (this.toolbar) {
