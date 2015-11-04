@@ -28,7 +28,6 @@ export default DS.Model.extend({
     'Servering',
     'Steikeovn',
     'Strømovn',
-    'Sykkel',
     'Sykkelutleie',
     'Telefon',
     'Teltplass',
