@@ -40,8 +40,8 @@ export default Ember.Component.extend({
       resize_enabled: false,
 
       toolbar: toolbarConfig,
-
-      format_tags: 'p;h2'
+      format_Mellomoverskrift: {element: 'h2', name: 'Mellomoverskrift'},
+      format_tags: 'p;Mellomoverskrift' // Really lame (but pragmatic) way to apply custom translation of the h2 el
 
     });
 
