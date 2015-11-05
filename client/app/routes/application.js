@@ -12,7 +12,7 @@ export default Ember.Route.extend({
   },
 
   beforeModel: function (transition) {
-    this.get('moment').changeLocale('no');
+    this.get('moment').changeLocale('nb');
     // TODO: ... and here!
     // console.log('route:application:beforeModel');
     this.controllerFor('session').set('previousTransition', transition);
