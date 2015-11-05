@@ -17,6 +17,14 @@ export default Ember.Component.extend({
     }
   }),
 
+  onCenterChange: Ember.observer('center', function () {
+    const centerLatLng = this.get('centerLatLng');
+    const map = this.get('map');
+    const zoom = map.getZoom();
+
+    map.setView(centerLatLng, zoom);
+  }),
+
   setupMap: function () {
     this.mapLayers = this.createMapLayers();
 
