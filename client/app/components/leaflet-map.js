@@ -10,7 +10,7 @@ export default Ember.Component.extend({
 
   bindAttributes: ['center', 'marker', 'zoom'],
 
-  centerLatLng: Ember.computed('center', {
+  centerLatLng: Ember.computed('center', 'center.[]', {
     get: function () {
       let latLng = this.toLatLng(this.get('center'));
       return latLng ? L.latLng(latLng) : undefined;
