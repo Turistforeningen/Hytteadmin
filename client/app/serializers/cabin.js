@@ -1,7 +1,12 @@
 import DS from 'ember-data';
 import ApplicationSerializer from '../serializers/application';
 
-export default ApplicationSerializer.extend({
+export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
+  // NOTE: Depends on DS.EmbeddedRecordsMixin
+  attrs: {
+    juridisk_eier: {serialize: false},
+    vedlikeholdes_av: {serialize: false}
+  },
 
   normalize: function (modelClass, resourceHash, prop) {
     var normalizedHash = resourceHash;
