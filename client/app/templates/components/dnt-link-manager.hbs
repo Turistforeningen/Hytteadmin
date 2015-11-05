@@ -15,6 +15,14 @@
         validationRules=validationRules
         removeLink="removeLink"
         }}
+      {{#if (is-equal link.type "Yr")}}
+        <tr class="info">
+          <td colspan="3">
+            <i class="icon info"></i>
+            URL-en til Yr brukes for å vise værvarsel fra Yr på UT og vises ikke som en lenke.
+          </td>
+        </tr>
+      {{/if}}
     {{/each}}
   </tbody>
   <tfoot>
