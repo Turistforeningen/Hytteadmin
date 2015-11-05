@@ -10,9 +10,9 @@ export default DS.Model.extend({
     'Ubetjent',
     'Dagshytte',
     'Nødbu',
-    'Utleie',
+    // 'Utleie', // Making cabin disappear from UT
     'Stengt',
-    'Nedlagt'
+    // 'Nedlagt' // Making cabin disappear from UT
   ],
 
   FASILITETER_CHOICES: [
