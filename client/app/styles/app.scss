@@ -83,6 +83,18 @@ table.ui.table td {
   position: relative;
 }
 
+// Add info class to tables
+.ui.table tr.info,
+.ui.table td.info {
+  box-shadow: 0px 0px 0px #a9d5de inset;
+}
+
+.ui.table tr.info,
+.ui.table td.info {
+  background: #f8ffff !important;
+  color: #276f86 !important;
+}
+
 // Keep border radius on right side if not action button is attached to the left side
 .ui.action.input:not([class*="left action"]) > .dropdown {
   border-radius: 0.28571429rem 0px 0px 0.28571429rem;
