@@ -61,4 +61,21 @@
       {{/if}}
     </div>
   </div>
+  <h3 class="ui attached header">#innendørs</h3>
+  <div class="ui attached segment">
+    <div
+      class="ui four column grid {{unless har_innendørsbilder "ui info message"}}"
+      data-category="innendørs">
+      {{#if har_innendørsbilder}}
+        {{!dnt-photo-manager photos=innendørsbilder category="innendørs}}
+        {{#each innendørsbilder as |photo index|}}
+          {{dnt-photo-manager-list-item
+            photo=photo
+            removePhoto="removePhoto"}}
+        {{/each}}
+      {{else}}
+        Ingen bilder er kategorisert som innendørsbilder. Dra og slipp et bilde her for å merke det som innendørsbilde.
+      {{/if}}
+    </div>
+  </div>
 </section>

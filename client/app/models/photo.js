@@ -27,7 +27,7 @@ export default DS.Model.extend(Validation, {
     get: function () {
       const tags = this.get('tags') || [];
       return !tags.find(function (item, index, enumerable) {
-        return ['vinter', 'sommer'].indexOf(item.toLowerCase()) !== -1;
+        return ['vinter', 'sommer', 'innendørs'].indexOf(item.toLowerCase()) !== -1;
       });
     }
   }),
@@ -46,6 +46,15 @@ export default DS.Model.extend(Validation, {
       let tags = this.get('tags') || [];
       return !!tags.find(function (item, index, enumerable) {
         return item.toLowerCase() === 'vinter';
+      });
+    }
+  }),
+
+  er_innendørsbilde: Ember.computed('tags.[]', {
+    get: function () {
+      let tags = this.get('tags') || [];
+      return !!tags.find(function (item, index, enumerable) {
+        return item.toLowerCase() === 'innendørs';
       });
     }
   }),

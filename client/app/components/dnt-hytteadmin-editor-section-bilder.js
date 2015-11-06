@@ -14,7 +14,8 @@ export default Ember.Component.extend({
 
   SESONG_CHOICES: [
     Ember.Object.create({value: 'sommer', label: 'Sommer'}),
-    Ember.Object.create({value: 'vinter', label: 'Vinter'})
+    Ember.Object.create({value: 'vinter', label: 'Vinter'}),
+    Ember.Object.create({value: 'innendørs', label: 'Innendørs'})
   ],
 
   sortableLists: [],
@@ -23,7 +24,8 @@ export default Ember.Component.extend({
     let sortableLists = [
       this.$('[data-category=""]')[0],
       this.$('[data-category="sommer"]')[0],
-      this.$('[data-category="vinter"]')[0]
+      this.$('[data-category="vinter"]')[0],
+      this.$('[data-category="innendørs"]')[0]
     ];
 
     sortableLists.forEach((item, index, enumerable) => {
@@ -66,7 +68,7 @@ export default Ember.Component.extend({
 
   categorize: function (photo, category) {
     let tags = photo.get('tags') || [];
-    tags.removeObjects(['sommer', 'vinter']);
+    tags.removeObjects(['sommer', 'vinter', 'innendørs']);
 
     if (category) {
       tags.addObject(category);
@@ -140,6 +142,19 @@ export default Ember.Component.extend({
   har_vinterbilder: Ember.computed('vinterbilder.[]', {
     get: function () {
       return this.get('vinterbilder.length') > 0;
+    }
+  }),
+
+  innendørsbilder: Ember.computed('bilder.@each.er_innendørsbilde', {
+    get: function () {
+      const bilder = this.get('bilder') || [];
+      return bilder.filterBy('er_innendørsbilde', true);
+    }
+  }),
+
+  har_innendørsbilder: Ember.computed('innendørsbilder.[]', {
+    get: function () {
+      return this.get('innendørsbilder.length') > 0;
     }
   })
 
