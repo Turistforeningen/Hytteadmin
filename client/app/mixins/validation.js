@@ -45,7 +45,7 @@ export default Ember.Mixin.create({
       Ember.set(validations, field, fieldValidations);
 
     } else {
-      delete validations.field;
+      delete validations[field];
     }
 
     this.set('validations', validations);
