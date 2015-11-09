@@ -30,23 +30,23 @@
         {{/if}}
         {{#if user.model.er_admin}}
           <a>{{if model.har_posisjon "Endre posisjon" "Sett posisjon"}}</a>
+          {{#ui-popup}}
+            <div class="field">
+              <label>Breddegrad</label>
+              {{input value=model.latitude}}
+            </div>
+            <div class="field">
+              <label>Lengdegrad</label>
+              {{input value=model.longitude}}
+            </div>
+            <div class="field">
+              <label>Høyde over havet</label>
+              {{input
+                type="number"
+                value=model.geojson.properties.altitude}}
+            </div>
+          {{/ui-popup}}
         {{/if}}
-        {{#ui-popup}}
-          <div class="field">
-            <label>Breddegrad</label>
-            {{input value=model.latitude}}
-          </div>
-          <div class="field">
-            <label>Lengdegrad</label>
-            {{input value=model.longitude}}
-          </div>
-          <div class="field">
-            <label>Høyde over havet</label>
-            {{input
-              type="number"
-              value=model.geojson.properties.altitude}}
-          </div>
-        {{/ui-popup}}
       </div>
       <div class="column">
         <h4 class="ui dividing header">Kart</h4>
