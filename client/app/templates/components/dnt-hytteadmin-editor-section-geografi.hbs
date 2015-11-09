@@ -6,7 +6,10 @@
   <div class="ui grid">
     <div class="three column row">
       <div class="column">
-        <h4 class="ui dividing header">Posisjon</h4>
+        <h4 class="ui dividing header">
+          Posisjon
+          {{#ui-help-text}}Posisjon oppgis i desimalgrader. Eks. 60.5369 (bredde) - 6.079132 (lengde){{/ui-help-text}}
+        </h4>
         {{#if model.har_posisjon}}
           <div class="ui list">
             <div class="item">
