@@ -1,4 +1,3 @@
-/* globals Sortable */
 import Ember from 'ember';
 
 export default Ember.Component.extend({
@@ -7,154 +6,82 @@ export default Ember.Component.extend({
     createPhoto: function (data) {
       this.sendAction('createPhoto', data);
     },
+
     removePhoto: function (photo, destroy) {
       this.sendAction('removePhoto', photo, destroy);
+    },
+
+    categorize: function (photo, category) {
+      const bilde = this.get('bilder').findBy('id', photo.get('id'));
+      bilde.set('kategori', category);
     }
   },
 
   SESONG_CHOICES: [
     Ember.Object.create({value: 'sommer', label: 'Sommer'}),
-    Ember.Object.create({value: 'vinter', label: 'Vinter'}),
-    Ember.Object.create({value: 'innendørs', label: 'Innendørs'})
+    Ember.Object.create({value: 'vinter', label: 'Vinter'})
   ],
 
-  sortableLists: [],
+  KATEGORI_CHOICES: [
+    Ember.Object.create({value: 'sommer', label: 'Sommer'}),
+    Ember.Object.create({value: 'vinter', label: 'Vinter'}),
+    Ember.Object.create({value: 'interiør', label: 'Innendørs'})
+  ],
 
-  setup: function () {
-    let sortableLists = [
-      this.$('[data-category=""]')[0],
-      this.$('[data-category="sommer"]')[0],
-      this.$('[data-category="vinter"]')[0],
-      this.$('[data-category="innendørs"]')[0]
-    ];
+  reorderPhotos: Ember.observer('sesong', function () {
+    const bilder = Ember.copy(this.get('bilder').toArray());
+    const kategorier = this.get('KATEGORI_CHOICES').getEach('value');
 
-    sortableLists.forEach((item, index, enumerable) => {
-      let sortable = Sortable.create(item, {
-        draggable: '.dnt-photo-manager-list-item',
-        group: 'photos',
-        onAdd: Ember.run.bind(this, this.onAdd),
-        onEnd: Ember.run.bind(this, this.onEnd)
-      });
+    let reordered = bilder.sort(function (a, b) {
+      let kategoriA = a.get('kategori');
+      let kategoriB = b.get('kategori');
 
-      this.sortableLists.addObject(sortable);
+      if (!kategoriA && !kategoriB) {
+        return 1;
+
+      } else if (!kategoriA) {
+        return 1;
+
+      } else if (!kategoriB) {
+        return -1;
+
+      } else {
+        return kategorier.indexOf(kategoriA) - kategorier.indexOf(kategoriB);
+      }
+
     });
 
-  }.on('didInsertElement'),
+    this.set('bilder', bilder);
+  }),
 
-  onEnd: function (e) {
-    let mergedLists = [];
+  sesong: 'sommer',
 
-    this.sortableLists.forEach((item, index, enumerable) => {
-      mergedLists.addObjects(item.toArray());
-    });
-
-    this.set('photosOrder', mergedLists);
-
-    let reordered = this.get('bilder').toArray().sort(function (a, b) {
-      return mergedLists.indexOf(a.get('id')) - mergedLists.indexOf(b.get('id'));
-    });
-
-    this.set('bilder', reordered);
-  },
-
-  onAdd: function (e) {
-    let item = e.item;
-    let itemId = item.dataset.id;
-    let bilde = this.get('bilder').findBy('id', itemId);
-    let category = e.to.dataset.category;
-
-    this.categorize(bilde, category);
-  },
-
-  categorize: function (photo, category) {
-    let tags = photo.get('tags') || [];
-    tags.removeObjects(['sommer', 'vinter', 'innendørs']);
-
-    if (category) {
-      tags.addObject(category);
-    }
-    photo.set('tags', tags);
-  },
-
-  sesong: Ember.computed('bilder.firstObject.tags', {
+  sesong_computed: Ember.computed('bilder.firstObject.kategori', {
     get: function () {
-      let sesonger = this.get('SESONG_CHOICES').getEach('value');
-      let sesong = sesonger.get('firstObject');
-      let tags = this.get('bilder.firstObject.tags');
-      if (tags) {
-        sesong = tags.find((item, index, enumerable) => {
-          if (sesonger.indexOf(item) > -1) {
-            return item;
-          }
-        }) || sesong;
+      let kategorier = this.get('KATEGORI_CHOICES').getEach('value');
+      const sesonger = this.get('SESONG_CHOICES').getEach('value');
+      let firstObjectKategori = this.get('bilder.firstObject.kategori');
+      let sesong;
+
+      if (sesonger.indexOf(firstObjectKategori) === -1) {
+        sesong = sesonger.get('firstObject');
+
+      } else {
+        sesong = firstObjectKategori;
       }
 
       return sesong;
-
     },
     set: function (key, value) {
-      let sesong = value || this.get('SESONG_CHOICES.firstObject.value');
-      let sesonger =  Ember.copy(this.get('SESONG_CHOICES').getEach('value'));
-      let bilder = [];
+      const kategorier = this.get('KATEGORI_CHOICES').toArray();
+      const sesong = kategorier.findBy('value', value);
 
-      while (sesong !== sesonger.get('firstObject')) {
-        sesonger.pushObject(sesonger.get('firstObject'));
-        sesonger.removeAt(0);
-      }
+      kategorier.removeObject(sesong);
+      kategorier.unshiftObject(sesong);
 
-      for (let i = 0; i < sesonger.length; i++) {
-        bilder.addObjects(this.get(sesonger[i] + 'bilder'));
-      }
+      this.set('KATEGORI_CHOICES', kategorier);
 
-      bilder.addObjects(this.get('ukategoriserte'));
-      this.set('bilder', bilder);
       return value;
-    }
-  }),
-
-  ukategoriserte: Ember.computed('bilder.@each.er_ukategorisert', {
-    get: function () {
-      const bilder = this.get('bilder') || [];
-      return bilder.filterBy('er_ukategorisert', true);
-    }
-  }),
-
-  sommerbilder: Ember.computed('bilder.@each.er_sommerbilde', {
-    get: function () {
-      const bilder = this.get('bilder') || [];
-      return bilder.filterBy('er_sommerbilde', true);
-    }
-  }),
-
-  har_sommerbilder: Ember.computed('sommerbilder.[]', {
-    get: function () {
-      return this.get('sommerbilder.length') > 0;
-    }
-  }),
-
-  vinterbilder: Ember.computed('bilder.@each.er_vinterbilde', {
-    get: function () {
-      const bilder = this.get('bilder') || [];
-      return bilder.filterBy('er_vinterbilde', true);
-    }
-  }),
-
-  har_vinterbilder: Ember.computed('vinterbilder.[]', {
-    get: function () {
-      return this.get('vinterbilder.length') > 0;
-    }
-  }),
-
-  innendørsbilder: Ember.computed('bilder.@each.er_innendørsbilde', {
-    get: function () {
-      const bilder = this.get('bilder') || [];
-      return bilder.filterBy('er_innendørsbilde', true);
-    }
-  }),
-
-  har_innendørsbilder: Ember.computed('innendørsbilder.[]', {
-    get: function () {
-      return this.get('innendørsbilder.length') > 0;
     }
   })
 

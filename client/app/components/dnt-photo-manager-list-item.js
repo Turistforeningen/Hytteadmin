@@ -21,9 +21,7 @@ export default Ember.Component.extend({
     },
 
     categorize: function (category) {
-      const tags = this.get('photo.tags') || [];
-      tags.addObject(category);
-      this.set('photo.tags', tags);
+      this.sendAction('categorize', this.get('photo'), category);
     }
   }
 

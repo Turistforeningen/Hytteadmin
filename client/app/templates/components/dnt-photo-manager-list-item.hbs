@@ -15,14 +15,21 @@
       <img class="ui fluid image" src="{{photo.img.1.url}}">
     {{/link-to}}
   </div>
-  {{#if photo.er_ukategorisert}}
+  {{#unless photo.kategori}}
     <div class="extra content">
       <div class="ui basic fluid buttons">
-        <button class="ui button" {{action "categorize" "sommer"}}>Sommer</button>
-        <button class="ui button" {{action "categorize" "vinter"}}>Vinter</button>
+        <button class="ui button" {{action "categorize" "sommer"}}>
+          <i class="orange sun icon"></i>
+        </button>
+        <button class="ui button" {{action "categorize" "vinter"}}>
+          <i class="blue cloud icon"></i>
+        </button>
+        <button class="ui button" {{action "categorize" "interiør"}}>
+          <i class="brown home icon"></i>
+        </button>
       </div>
     </div>
-  {{/if}}
+  {{/unless}}
   <div class="extra content">
     {{#unless deleteMode}}
       <span class="left floated remove">
