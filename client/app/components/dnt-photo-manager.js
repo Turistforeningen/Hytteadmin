@@ -57,8 +57,10 @@ export default Ember.Component.extend({
     const itemId = item.dataset.id;
     const bilde = this.get('photos').findBy('id', itemId);
     const category = this.get('category');
-
-    bilde.set('kategori', category);
+    // TODO: This will cause the photos array to be reordered before onEnd
+    // and the position of dragged photo will be lost
+    this.send('categorize', bilde, category);
+    // bilde.set('kategori', category);
   }
 
 });

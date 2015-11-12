@@ -28,8 +28,9 @@ export default DS.Model.extend(Validation, {
   status: DS.attr('string'),
   tags: DS.attr('array'),
   tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
+  kategori: DS.attr('string'),
 
-  kategori: Ember.computed('tags.firstObject', {
+  _kategori: Ember.computed('tags.firstObject', {
     get: function () {
       // NOTE: Use this code if a tag should only qualify as a category if first in tags array
       const firstTag = this.get('tags.firstObject');

@@ -14,6 +14,7 @@ export default Ember.Component.extend({
     categorize: function (photo, category) {
       const bilde = this.get('bilder').findBy('id', photo.get('id'));
       bilde.set('kategori', category);
+      this.reorderPhotos();
     }
   },
 
@@ -37,7 +38,7 @@ export default Ember.Component.extend({
       let kategoriB = b.get('kategori');
 
       if (!kategoriA && !kategoriB) {
-        return 1;
+        return 0; // Was 1, not sure if this is correct, but fixed uncategorized from being reversed when switching season
 
       } else if (!kategoriA) {
         return 1;
@@ -54,9 +55,30 @@ export default Ember.Component.extend({
     this.set('bilder', bilder);
   }),
 
-  sesong: 'sommer',
+  sesong: undefined,
 
-  sesong_computed: Ember.computed('bilder.firstObject.kategori', {
+  onBilderLoaded: Ember.observer('bilder.isFulfilled', function () {
+    if (this.get('bilder.isFulfilled')) {
+      if (!this.get('sesong')) {
+        this.set('sesong', this.get('bilder.firstObject.kategori'));
+      }
+      // this.reorderPhotos();
+    }
+  }),
+
+  onSesongChange: Ember.observer('sesong', function () {
+    const kategorier = this.get('KATEGORI_CHOICES').toArray();
+    const sesong = this.get('sesong');
+    const sesongObject = kategorier.findBy('value', sesong);
+
+    kategorier.removeObject(sesongObject);
+    kategorier.unshiftObject(sesongObject);
+
+    this.set('KATEGORI_CHOICES', kategorier);
+
+  }),
+
+  _sesong: Ember.computed('bilder.firstObject.kategori', {
     get: function () {
       let kategorier = this.get('KATEGORI_CHOICES').getEach('value');
       const sesonger = this.get('SESONG_CHOICES').getEach('value');
