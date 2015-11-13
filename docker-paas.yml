@@ -24,7 +24,7 @@ server:
     - DNT_CONNECT_KEY
     - DNT_API_KEY
     - NODE_ENV=production
-    - NTB_API_ENV=dev
+    - NTB_API_ENV
     - NTB_API_KEY
     - SENTRY_DSN
   command: npm start
