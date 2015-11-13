@@ -21,7 +21,9 @@ module.exports = function(environment) {
         'connect.facebook.net',
         'maps.googleapis.com',
         'maps.gstatic.com',
-        'cdn.ravenjs.com'
+        'cdn.ravenjs.com',
+        'widget.uservoice.com',
+        'by.uservoice.com'
       ].join(' '),
       'font-src': [
         '\'self\'',
@@ -50,7 +52,8 @@ module.exports = function(environment) {
         'mt3.turistforeningen.no',
         'opencache.statkart.no',
         'app.getsentry.com',
-        'sentry.app.dnt.no'
+        'sentry.app.dnt.no',
+        'widget.uservoice.com'
       ].join(' '),
       'style-src': [
         '\'self\'',
@@ -62,7 +65,8 @@ module.exports = function(environment) {
       'frame-src': [
         's-static.ak.facebook.com',
         'static.ak.facebook.com',
-        'www.facebook.com'
+        'www.facebook.com',
+        'dnt.uservoice.com'
       ].join(' ')
     },
     EmberENV: {
