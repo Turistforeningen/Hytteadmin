@@ -35,5 +35,5 @@ client:
   volumes:
     - /usr/src/app/dist
   environment:
-    - NODE_ENV=development
+    - NODE_ENV=production
   command: npm run build
