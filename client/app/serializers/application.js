@@ -120,6 +120,10 @@ export default DS.RESTSerializer.extend({
       normalizedPayload[primaryModelClass.modelName] = payload;
     }
 
+    if (id) {
+      normalizedPayload[primaryModelClass.modelName]['id'] = id;
+    }
+
     return this._super(store, primaryModelClass, normalizedPayload, id, requestType);
   },
 
