@@ -47,23 +47,7 @@ app.get('/cabin/:id', function(req, res) {
 
 app.put('/cabin/:id', function(req, res) {
   // @TODO validate user authorization
-
-  req.body.privat = req.body.privat || {};
-
-  // UT is expecting a cababin type integer property in the private scope in
-  // order to display the correct map icon for the cabin.
-  req.body.privat.hyttetype = helpers.hyttetype(
-    req.body.privat.hytteeier,
-    req.body.betjeningsgrad
-  );
-
-  // In Turadmin we have separated cabin access between private and public
-  // transportation. UT.no has not caught up with these changes, so for the time
-  // being we have to make sure the old `adkomst` filed stays populated.
-  req.body.adkomst = req.body.tilkomst.privat;
-
-  // UT.no is expecting `senger` to be an object property in the private scope.
-  req.body.privat.senger = req.body.senger;
+  req.body = helpers.utify(req.body);
 
   ntb.steder.put(req.params.id, req.body).pipe(res);
 });
