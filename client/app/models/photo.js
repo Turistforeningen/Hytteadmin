@@ -16,7 +16,7 @@ export default DS.Model.extend(Validation, {
   checksum: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   endret: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   eier: DS.attr('object'),
-  fotograf: DS.attr('object'),
+  fotograf: DS.attr('object', {defaultValue: {}}),
   geojson: DS.attr('object'),
   grupper: DS.attr('array'),
   img: DS.attr('object'),
