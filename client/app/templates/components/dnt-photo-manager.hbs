@@ -3,7 +3,10 @@
   <div class="ui four column grid {{unless categoryPhotos "ui info message"}}">
     {{#if categoryPhotos}}
       {{#each categoryPhotos as |photo index|}}
-        {{dnt-photo-manager-list-item photo=photo categorize="categorize"}}
+        {{dnt-photo-manager-list-item
+          photo=photo
+          categorize="categorize"
+          removePhoto="removePhoto"}}
       {{/each}}
     {{else}}
       Ingen bilder er kategorisert som {{if category category "ukategorisert"}}bilde.

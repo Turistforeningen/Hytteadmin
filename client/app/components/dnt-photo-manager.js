@@ -7,6 +7,10 @@ export default Ember.Component.extend({
   actions: {
     categorize: function (photo, category) {
       this.sendAction('categorize', photo, category);
+    },
+
+    removePhoto: function (photo, destroy) {
+      this.sendAction('removePhoto', photo, destroy);
     }
   },
 
