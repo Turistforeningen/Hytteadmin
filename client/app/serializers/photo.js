@@ -57,6 +57,8 @@ export default ApplicationSerializer.extend({
       }
     }
 
+    json.tags = tags;
+
     return json;
   }
 
