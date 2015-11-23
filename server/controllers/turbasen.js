@@ -31,7 +31,9 @@ app.get('/cabin', function(req, res) {
 });
 
 app.post('/cabin', function(req, res) {
-  // @TODO set private fields
+  // @TODO validate user authentication
+  req.body = helpers.utify(req.body);
+
   ntb.steder.post(req.body).pipe(res);
 });
 
