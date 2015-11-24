@@ -54,6 +54,11 @@ app.put('/cabin/:id', function(req, res) {
   ntb.steder.put(req.params.id, req.body).pipe(res);
 });
 
+app.delete('/cabin/:id', function(req, res) {
+  // @TODO validate user authorization
+
+  ntb.steder.delete(req.params.id).pipe(res);
+});
 
 app.post('/photo', function(req, res) {
   ntb.bilder.post(req.body).pipe(res);
