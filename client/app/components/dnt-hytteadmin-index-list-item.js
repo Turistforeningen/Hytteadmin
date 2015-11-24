@@ -13,6 +13,12 @@ export default Ember.Component.extend({
     }
   }),
 
+  userIsAdmin: Ember.computed('user.er_admin', {
+    get: function () {
+      return this.get('user.er_admin');
+    }
+  }),
+
   userHasAccess: Ember.computed('user', 'cabin', {
     get: function () {
       let userHasAccess = false;
