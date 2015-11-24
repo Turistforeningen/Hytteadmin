@@ -81,6 +81,39 @@ export default DS.Model.extend(Validation, {
 
       return value;
     }
-  })
+  }),
+
+  updateNavngiving: function () {
+    let navngiving = '';
+
+    // Start navngiving with the name of the photo
+    let id = this.get('id');
+    let navn = this.get('navn') || 'Bilde uten navn';
+
+    navngiving += navn;
+
+    // Add cabin eier or driver
+    let fotografNavn = this.get('fotograf.navn') || 'ukjent';
+
+    navngiving += ' av ' + fotografNavn + '.';
+
+    let lisenser = {
+      'CC BY 4.0': 'http://creativecommons.org/licenses/by/4.0/deed.no',
+      'CC BY-SA 4.0': 'http://creativecommons.org/licenses/by-sa/4.0/deed.no',
+      'CC BY-ND 4.0': 'http://creativecommons.org/licenses/by-nd/4.0/deed.no',
+      'CC BY-NC 4.0': 'http://creativecommons.org/licenses/by-nc/4.0/deed.no',
+      'CC BY-NC-SA 4.0': 'http://creativecommons.org/licenses/by-nc-sa/4.0/deed.no',
+      'CC BY-NC-ND 4.0': 'http://creativecommons.org/licenses/by-nc-nd/4.0/deed.no'
+    };
+
+    let lisens = this.get('lisens');
+
+    if (lisenser[lisens]) {
+      navngiving += ' Tilgjengelig under <a href="' + lisenser[lisens] + '" target="_blank" rel="license">' + lisens + ' lisens</a>.';
+    }
+
+    this.set('navngiving', navngiving);
+
+  }.observes('navn', 'fotograf.navn', 'fotograf.epost', 'lisens').on('ready')
 
 });
