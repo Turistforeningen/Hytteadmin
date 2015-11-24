@@ -11,6 +11,18 @@
   <td>
     <div class="ui horizontal bulleted list">
       {{#link-to 'cabins.edit' cabin.id class="item"}}Rediger{{/link-to}}
+      {{#if userIsAdmin }}
+        <a class="item">Slett</a>
+        {{#ui-popup on="click"}}
+          <p>Er du sikker på at du vil slette hytta? Dette kan ikke angres.</p>
+          <button class="ui red button" {{action "deleteCabin"}}>
+            Slett hytta
+          </button>
+          <button class="ui button close">
+            Avbryt
+          </button>
+        {{/ui-popup}}
+      {{/if}}
       {{#if cabin.er_publisert}}
         <a href="{{utUrl}}" class="item" target="_blank">UT.no</a>
       {{else}}

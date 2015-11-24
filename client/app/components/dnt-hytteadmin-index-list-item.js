@@ -7,6 +7,15 @@ export default Ember.Component.extend({
   cabin: null,
   attributeBindings: ['user', 'cabin'],
 
+  deleteMode: false,
+
+  actions: {
+    deleteCabin: function () {
+      const cabin = this.get('cabin');
+      cabin.destroyRecord();
+    }
+  },
+
   utUrl: Ember.computed('cabin.id', {
     get: function () {
       return ['//www.ut.no', 'hytte', this.get('cabin.id')].join('/');
