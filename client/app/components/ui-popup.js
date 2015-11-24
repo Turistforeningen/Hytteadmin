@@ -12,12 +12,18 @@ export default Ember.Component.extend({
     let triggerEl = this.$().prev();
     let popupEl = this.$();
 
+    let closeEl = this.$('.close');
+
     triggerEl.popup({
       inline: true,
       popup: popupEl,
       inverted: this.get('inverted'),
       on: this.get('on'),
       position: this.get('position')
+    });
+
+    closeEl.on('click', (e) => {
+      triggerEl.popup('hide');
     });
 
   }.on('didInsertElement')
