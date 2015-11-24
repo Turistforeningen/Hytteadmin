@@ -149,11 +149,11 @@
 
       <div class="ui section divider"></div>
 
-      {{dnt-hytteadmin-editor-section-geografi model=model user=user}}
-      <div class="ui section divider"></div>
-
       {{dnt-hytteadmin-editor-section-bilder bilder=model.bilder createPhoto="createPhoto" removePhoto="removePhoto"}}
       {{outlet "photos-edit"}}
+      <div class="ui section divider"></div>
+
+      {{dnt-hytteadmin-editor-section-geografi model=model user=user}}
 
     {{/ui-form}}
 
