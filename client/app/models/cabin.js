@@ -393,6 +393,17 @@ export default DS.Model.extend({
 
     this.set('navngiving', navngiving);
 
-  }.observes('navn', 'juridisk_eier.navn', 'vedlikeholdes_av.navn', 'lisens').on('ready')
+  }.observes('navn', 'juridisk_eier.navn', 'vedlikeholdes_av.navn', 'lisens').on('ready'),
+
+  updateBilderNavn: Ember.observer('navn', 'bilder.[]', 'bilder.each.isLoaded', function () {
+    const navn = this.get('navn');
+    const bilder = this.get('bilder');
+
+    bilder.forEach(function (item, index, enumerable) {
+      if (item.get('isLoaded')) {
+        item.set('navn', `Bilde fra ${navn}`);
+      }
+    });
+  })
 
 });
