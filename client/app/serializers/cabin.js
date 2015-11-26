@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 import ApplicationSerializer from '../serializers/application';
 
@@ -41,6 +42,16 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
 
   serialize: function(snapshot, options) {
     var json = this._super(snapshot, options);
+    json.privat = json.privat || {};
+
+    // Maps kontaktinfo to privat for UT suppor
+    json.privat.kontaktinfo = json.privat.kontaktinfo || {};
+    const kontaktinfo = Ember.A(Ember.copy(Ember.get(json, 'kontaktinfo')));
+    const kontaktinfoISesong = kontaktinfo.findBy('type', 'I sesong');
+    const kontaktinfoUtenomSesong = kontaktinfo.findBy('type', 'Utenom sesong');
+
+    Ember.set(json, 'privat.kontaktinfo.sesong', kontaktinfoISesong);
+    Ember.set(json, 'privat.kontaktinfo.utenom_sesong', kontaktinfoUtenomSesong);
 
     // Maps `fasiliteter` array back to object
     if (json.fasiliteter && json.fasiliteter.length) {
