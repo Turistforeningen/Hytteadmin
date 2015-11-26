@@ -23,7 +23,8 @@ module.exports = function(environment) {
         'maps.gstatic.com',
         'cdn.ravenjs.com',
         'widget.uservoice.com',
-        'by.uservoice.com'
+        'by.uservoice.com',
+        'by2.uservoice.com'
       ].join(' '),
       'font-src': [
         '\'self\'',
