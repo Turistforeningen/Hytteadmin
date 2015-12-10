@@ -20,7 +20,7 @@ export default DS.Model.extend({
       let primærgruppe;
       let grupper = this.get('grupper') || [];
 
-      if (grupper.length) {
+      if (grupper.get('length')) {
         primærgruppe = grupper.findBy('type', 'sentral') || grupper.findBy('type', 'forening') || grupper.findBy('type', 'turlag') || grupper.findBy('type', 'turgruppe');
 
         if (primærgruppe) {
