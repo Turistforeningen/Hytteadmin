@@ -90,11 +90,12 @@ module.exports = function(environment) {
       dsn: 'https://1d5112a03f0941278212feeea3a98c75@sentry.app.dnt.no/16',
       whitelistUrls: [/hytte\.app\.dnt\.no/], // Use regex if only setting domain
       serviceName: 'logger', // https://github.com/damiencaselli/ember-cli-sentry/wiki/Migration-from-1.x.x-to-2.x
-      development: true // Set to true, to disable while developing
+      development: false
     }
   };
 
   if (environment === 'development') {
+    ENV.sentry.development = true; // Set to true, to disable while developing
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
