@@ -9,7 +9,7 @@ export default Ember.Component.extend({
       this.get('photo').save().then((photo) => {
         this.send('close');
       }, (err) => {
-        this.set('hasError', true)
+        this.set('hasError', true);
       });
     },
 
