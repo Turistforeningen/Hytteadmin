@@ -67,15 +67,16 @@ export default Ember.Route.extend({
       controller.set('filterParamsObject', {});
 
     } else {
-      let primærgruppe = Ember.copy(this.controllerFor('session').get('model.primærgruppe').toJSON({
+      let primærgruppe = this.controllerFor('session').get('model.primærgruppe');
+      let primærgruppeJson = Ember.copy(primærgruppe.toJSON({
         includeId: true
       }));
 
       controller.set('filterParamsObject', {
         relation: 'vedlikeholdes_av',
         gruppe: {
-          id: primærgruppe.id,
-          navn: primærgruppe.navn
+          id: primærgruppeJson.id,
+          navn: primærgruppeJson.navn
         }
       });
     }

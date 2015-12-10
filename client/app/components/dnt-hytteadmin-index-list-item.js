@@ -42,11 +42,11 @@ export default Ember.Component.extend({
         return true;
       }
 
-      var userGroups = user.get('grupper') || [];
+      var userGroups = user.get('grupper.length') ? user.get('grupper') : [];
       var objectGroups = object.get('grupper') || [];
 
       if (user.get('gruppe.id')) {
-        userGroups.addObject(user.get('gruppe.id'));
+        userGroups.addObject(user.get('gruppe'));
       }
 
       if (userGroups.get('length') === 0) {

@@ -33,7 +33,8 @@ export default DS.Model.extend({
         }
 
       } else {
-        let gruppe = this.get('gruppe');
+        // NOTE: Not sure why content property has to be get here
+        let gruppe = this.get('gruppe.content');
         if (gruppe) {
           primærgruppe = gruppe;
         }
