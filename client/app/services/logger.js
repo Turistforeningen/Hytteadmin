@@ -1,17 +1,17 @@
 import Ember from 'ember';
 import RavenLogger from 'ember-cli-sentry/services/raven';
 
-const { computed } = Ember;
+const {computed} = Ember;
 
 export default RavenLogger.extend({
 
   unhandledPromiseErrorMessage: '',
 
-  captureException(error) {
+  captureException (error) {
     this._super(...arguments);
   },
 
-  captureMessage(message) {
+  captureMessage (message) {
     // TODO: Had to add this to ignore aborted transitions which happens if user is not logged in
     // Have the feeling that this should be handeled somewhere else, just not sure where...
     var object = arguments[1];
