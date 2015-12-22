@@ -79,6 +79,7 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
     json.grupper.addObjects([Ember.get(json, 'privat.juridisk_eier'), Ember.get(json, 'privat.vedlikeholdes_av')]);
     json.grupper.removeObject(undefined);
 
+    // Convert åpningstider date objects to formatted date string
     if (json.privat && json.privat.åpningstider && Ember.typeOf(json.privat.åpningstider) === 'array') {
       const åpningstider = json.privat.åpningstider;
       for (let i = 0; i < åpningstider.length; i++) {
