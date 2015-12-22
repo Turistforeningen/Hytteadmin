@@ -75,6 +75,8 @@ export default DS.RESTSerializer.extend({
     var json = this._super(snapshot, options);
 
     // Remove all empty properties. If API is changed back to using PATCH for saving, this should be disabled
+    // NOTE: This runs before serialize methods for model serializers, so if empties are added in those
+    // serializers, they will not be removed
     json.attributes = this.removeEmpty(json.attributes);
 
     // NOTE: This will add the relationships to JSON object... Should probably be done in a better way
