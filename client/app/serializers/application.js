@@ -23,7 +23,7 @@ export default DS.RESTSerializer.extend({
     if (type === 'array') {
       for (let i = 0; i < output.length; i++) {
         if (Ember.typeOf(output[i]) === 'object') {
-          if (Ember.keys(output[i]).length === 0) {
+          if (Object.keys(output[i]).length === 0) {
             output.splice(i, 1);
           } else if (output[i].url === 'http://') {
             output.splice(i, 1);
