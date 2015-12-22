@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 import ApplicationSerializer from '../serializers/application';
+import moment from 'moment';
 
 export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
   // NOTE: Depends on DS.EmbeddedRecordsMixin
@@ -77,6 +78,23 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
     json.grupper = json.grupper || Ember.A();
     json.grupper.addObjects([Ember.get(json, 'privat.juridisk_eier'), Ember.get(json, 'privat.vedlikeholdes_av')]);
     json.grupper.removeObject(undefined);
+
+    if (json.privat && json.privat.åpningstider && Ember.typeOf(json.privat.åpningstider) === 'array') {
+      const åpningstider = json.privat.åpningstider;
+      for (let i = 0; i < åpningstider.length; i++) {
+        let åpningstid = åpningstider[i];
+
+        if (åpningstid.fra) {
+          åpningstid.fra = moment(åpningstid.fra).format('YYYY-MM-DD');
+        }
+
+        if (åpningstid.til) {
+          åpningstid.til = moment(åpningstid.til).format('YYYY-MM-DD');
+        }
+
+        åpningstider[i] = åpningstid;
+      }
+    }
 
     return json;
   }
