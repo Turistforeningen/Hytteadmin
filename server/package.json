@@ -13,29 +13,27 @@
     "hint": "eslint index.js controllers/ db/ test/"
   },
   "dependencies": {
-    "@turistforeningen/express-error": "~1",
-    "JSONStream": "~1",
-    "body-parser": "~1",
-    "connect-redis": "~2",
+    "@turistforeningen/express-error": "^1.0.0",
+    "JSONStream": "^1.0.7",
+    "body-parser": "^1.14.2",
+    "connect-redis": "^3.0.1",
     "dnt-api": "^1.1.3",
-    "dnt-connect": "~3",
-    "event-stream": "~3",
-    "express": "~4",
-    "express-session": "~1",
-    "raven": "~0.8",
-    "redis": "~0.12",
-    "request": "~2",
-    "supervisor": "~0.7",
-    "turbasen": "~1",
+    "dnt-connect": "^3.0.2",
+    "event-stream": "^3.3.2",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "raven": "^0.9.0",
+    "redis": "^2.4.2",
+    "request": "^2.67.0",
+    "turbasen": "^1.1.1",
     "turbasen-auth": "2.0.0-rc.1"
   },
   "devDependencies": {
-    "babel-eslint": "^4.0.5",
-    "eslint": "^1.1.0",
-    "eslint-config-airbnb": "^0.0.7",
-    "eslint-plugin-react": "^3.2.2",
-    "mocha": "~2",
-    "supertest": "~1"
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^2.1.1",
+    "mocha": "^2.3.4",
+    "supertest": "^1.1.0",
+    "supervisor": "^0.9.1"
   },
   "engines": {
     "node": ">= 4.0.0"
