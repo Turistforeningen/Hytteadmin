@@ -10,7 +10,7 @@
     "test": "mocha -r test/support/env -R spec -b --check-leaks test/ test/acceptance/",
     "watch": "mocha -r test/support/env -R progress -b --check-leaks -w test/ test/acceptance/",
     "start": "supervisor index.js",
-    "hint": "eslint index.js controllers/ db/ test/"
+    "lint": "eslint index.js controllers db"
   },
   "dependencies": {
     "@turistforeningen/express-error": "^1.0.0",
