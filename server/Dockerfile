@@ -15,4 +15,4 @@ RUN apt-get -y autoclean \
 COPY . /usr/src/app
 RUN chown -R app:app /usr/src/app
 
-CMD [ "npm", "start" ]
+CMD [ "node", "index.js" ]
