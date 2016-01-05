@@ -1,15 +1,22 @@
-var express = require('express');
-var app = module.exports = express();
+/* eslint no-console: 0 */
+'use strict';
 
-var raven = require('raven').middleware.express;
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var RedisStore = require('connect-redis')(session);
+const express = require('express');
+const app = module.exports = express();
 
-require('raven').patchGlobal(process.env.SENTRY_DSN, function(err) {
-  console.error(err);
-  process.exit(1);
-});
+const raven = require('raven').middleware.express;
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const RedisStore = require('connect-redis')(session);
+
+if (process.env.SENTRY_DSN === 'production') {
+  require('raven').patchGlobal(process.env.SENTRY_DSN, function globalError(err) {
+    console.error(err);
+    console.error(err.stack);
+
+    process.exit(1);
+  });
+}
 
 app.set('json spaces', 2);
 app.set('x-powered-by', false);
@@ -20,10 +27,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({
-  store: new RedisStore({client: require('./db/redis')}),
+  store: new RedisStore({ client: require('./db/redis') }),
   secret: process.env.SECRET || 'this is not secret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
 }));
 
 app.use('/auth', require('./controllers/auth'));

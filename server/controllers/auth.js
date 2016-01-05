@@ -1,31 +1,40 @@
-var app = require('express').Router();
+'use strict';
 
-process.env.NTB_USER_AGENT = 'Hytteadmin/' + require('../package.json');
-var turbasen = require('turbasen-auth');
+const router = require('express').Router;
+const app = router();
 
-process.env.DNT_CONNECT_USER_AGENT = 'Hytteadmin/' + require('../package.json');
-var Connect = require('dnt-connect');
-var connect = new Connect(
+const userAgent = 'Hytteadmin/' + require('../package.json').version;
+process.env.NTB_USER_AGENT = userAgent;
+process.env.DNT_CONNECT_USER_AGENT = userAgent;
+process.env.DNT_API_USER_AGENT = userAgent;
+
+const Turbasen = require('turbasen-auth');
+const DntConnect = require('dnt-connect');
+const DntApi = require('dnt-api');
+
+const connect = new DntConnect(
   process.env.DNT_CONNECT_CLIENT,
   process.env.DNT_CONNECT_KEY
 );
 
-process.env.DNT_API_USER_AGENT = 'Hytteadmin/' + require('../package.json');
-var DntApi = require('dnt-api');
-var dntApi = new DntApi(process.env.DNT_API_USER_AGENT, process.env.DNT_API_KEY);
+const dntApi = new DntApi(
+  process.env.DNT_API_USER_AGENT,
+  process.env.DNT_API_KEY
+);
 
-app.get('/', function(req, res) {
+app.get('/', function authGetIndex(req, res) {
   if (req.session && req.session.user) {
     res.json(req.session.user);
   } else {
     res.status(401);
-    res.json({authenticated: false});
+    res.json({ authenticated: false });
   }
 });
 
-app.get('/login/dnt', connect.middleware('signon'), function(req, res, next) {
-  if (!req.dntConnect)  {
-    var err = new Error('DNT Connect: unknown error');
+app.get('/login/dnt', connect.middleware('signon'));
+app.get('/login/dnt', function authGetDntLogin(req, res, next) {
+  if (!req.dntConnect) {
+    const err = new Error('DNT Connect: unknown error');
     err.status = 500;
     next(err);
   }
@@ -41,22 +50,24 @@ app.get('/login/dnt', connect.middleware('signon'), function(req, res, next) {
     navn: req.dntConnect.data.fornavn + ' ' + req.dntConnect.data.etternavn,
     epost: req.dntConnect.data.epost,
     er_admin: false,
-    grupper: []
+    grupper: [],
   };
 
   next();
 });
 
-app.get('/login/dnt', function(req, res, next) {
+app.get('/login/dnt', function authGetLoginDnt(req, res) {
+  const user = {
+    bruker_sherpa_id: req.dntConnect.data.sherpa_id,
+  };
 
-  dntApi.getAssociationsFor({bruker_sherpa_id: req.dntConnect.data.sherpa_id}, function (err, statusCode, associations) {
-    var groups = [];
-    var isAdmin = false;
+  dntApi.getAssociationsFor(user, function assocCb(err, statusCode, associations) {
+    let isAdmin = false;
+    const groups = [];
 
     if (err) { throw err; }
     if (statusCode === 200) {
-
-      for (var i = 0; i < associations.length; i++) {
+      for (let i = 0; i < associations.length; i++) {
         if (associations[i].object_id) {
           groups.push(associations[i]);
         }
@@ -67,7 +78,6 @@ app.get('/login/dnt', function(req, res, next) {
 
       req.session.user.er_admin = isAdmin;
       req.session.user.grupper = groups;
-
     } else {
       throw new Error('Request to DNT API failed: ' + statusCode);
     }
@@ -76,17 +86,20 @@ app.get('/login/dnt', function(req, res, next) {
   });
 });
 
-app.post('/login/turbasen', turbasen.middleware, function(req, res, next) {
+app.post('/login/turbasen', Turbasen.middleware);
+app.post('/login/turbasen', function authPostTurbasenLogin(req, res, next) {
   if (req.turbasenAuth) {
     req.session.user = req.turbasenAuth;
     req.session.user.brukertype = 'Gruppe';
     res.status(200);
     res.json(req.session.user);
   } else {
-    req.session.destroy(function(err) {
+    req.session.destroy(function reqSessionDestroyCb(err) {
       if (!err) {
-        err = new Error('Invalid email or password');
-        err.status = 401;
+        const error = new Error('Invalid email or password');
+        error.status = 401;
+
+        return next(error);
       }
 
       return next(err);
@@ -94,13 +107,12 @@ app.post('/login/turbasen', turbasen.middleware, function(req, res, next) {
   }
 });
 
-app.post('/logout', function(req, res) {
-  req.session.destroy(function(err) {
+app.post('/logout', function authPostLogout(req, res) {
+  req.session.destroy(function reqSessionDestroyCb(err) {
     if (err) { throw err; }
 
     res.status(204).end();
   });
 });
-
 
 module.exports = app;
