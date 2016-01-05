@@ -10,6 +10,7 @@ build:
                 code: |
                     cd server
                     npm install
+                    npm run lint
                     npm test
 
         - script:
