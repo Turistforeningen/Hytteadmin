@@ -1,7 +1,7 @@
 box: iojs
 
 services:
-    - redis
+    - redis:3.0
 
 build:
     steps:
