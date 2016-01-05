@@ -12,7 +12,7 @@ www:
     - VIRTUAL_PORT=8080
 
 redis:
-  image: redis
+  image: redis:3.0
 
 server:
   build: server
