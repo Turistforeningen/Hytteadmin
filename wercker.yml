@@ -1,4 +1,4 @@
-box: iojs
+box: node:argon
 
 services:
     - redis:3.0
