@@ -1,4 +1,4 @@
-FROM iojs:slim
+FROM node:argon-slim
 
 RUN groupadd -r app && useradd -r -d /usr/src/app -g app app \
  && apt-get -y --no-install-recommends update \
