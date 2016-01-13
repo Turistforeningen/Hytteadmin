@@ -1,4 +1,4 @@
-FROM iojs:slim
+FROM node:argon-slim
 
 RUN groupadd -r app && useradd -r -d /usr/src/app -g app app
 
@@ -15,4 +15,4 @@ RUN apt-get -y autoclean \
 COPY . /usr/src/app
 RUN chown -R app:app /usr/src/app
 
-CMD [ "npm", "start" ]
+CMD [ "node", "index.js" ]

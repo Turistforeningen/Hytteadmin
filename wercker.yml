@@ -1,7 +1,7 @@
-box: iojs
+box: node:argon
 
 services:
-    - redis
+    - redis:3.0
 
 build:
     steps:
@@ -10,6 +10,7 @@ build:
                 code: |
                     cd server
                     npm install
+                    npm run lint
                     npm test
 
         - script:

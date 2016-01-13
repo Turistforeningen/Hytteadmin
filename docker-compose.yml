@@ -1,7 +1,7 @@
 www:
   build: nginx
   volumes:
-    - nginx/develop.client:/etc/nginx/conf.d/default.client
+    - ./nginx/develop.client:/etc/nginx/conf.d/default.client
   links:
     - server
     - client
@@ -12,7 +12,7 @@ www:
     - VIRTUAL_PORT=8080
 
 redis:
-  image: redis
+  image: redis:3.0
 
 server:
   build: server
@@ -26,6 +26,7 @@ server:
     - ./server/lib:/usr/src/app/lib
     - ./server/db:/usr/src/app/db
     - ./server/index.js:/usr/src/app/index.js
+    - ./server/package.json:/usr/src/app/package.json
     - ./server/test:/usr/src/app/test
   working_dir: /usr/src/app
   env_file: .env
