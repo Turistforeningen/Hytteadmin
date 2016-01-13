@@ -1,16 +1,15 @@
 <h3 class="ui top attached header">{{if category category "Ukategorisert"}}</h3>
 <div class="ui attached segment">
   <div class="ui four column grid {{unless categoryPhotos "ui info message"}}">
-    {{#if categoryPhotos}}
-      {{#each categoryPhotos as |photo index|}}
-        {{dnt-photo-manager-list-item
-          photo=photo
-          categorize="categorize"
-          removePhoto="removePhoto"}}
-      {{/each}}
-    {{else}}
+    {{#unless categoryPhotos}}
       Ingen bilder er kategorisert som {{if category category "ukategorisert"}}bilde.
       Dra og slipp et bilde her for å kategorisere det som {{if category category "ukategorisert"}}bilde.
-    {{/if}}
+    {{/unless}}
+    {{#each categoryPhotos as |photo index|}}
+      {{dnt-photo-manager-list-item
+        photo=photo
+        categorize="categorize"
+        removePhoto="removePhoto"}}
+    {{/each}}
   </div>
 </div>
