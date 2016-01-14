@@ -5,6 +5,7 @@
       Ingen bilder er kategorisert som {{if category category "ukategorisert"}}bilde.
       Dra og slipp et bilde her for å kategorisere det som {{if category category "ukategorisert"}}bilde.
     {{/unless}}
+    <!-- Removed from if conditional to prevent IE bug. Added comment to trigger deploy. -->
     {{#each categoryPhotos as |photo index|}}
       {{dnt-photo-manager-list-item
         photo=photo
