@@ -73,6 +73,17 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
       json.turkart.removeObjects([null, undefined]);
     }
 
+    // If juridisk_eier or vedlikeholdes av is missing, use the one of the two, if available, or the users primary group, which should be set in application
+    const gruppe = Ember.get(json, 'privat.juridisk_eier') || Ember.get(json, 'privat.vedlikeholdes_av') || Ember.get(json, 'grupper.firstObject');
+
+    if (!Ember.get(json, 'privat.juridisk_eier')) {
+      Ember.set(json, 'privat.juridisk_eier', gruppe);
+    }
+
+    if (!Ember.get(json, 'privat.vedlikeholdes_av')) {
+      Ember.set(json, 'privat.vedlikeholdes_av', gruppe);
+    }
+
     // Add `privat.juridisk_eier` and `privat.vedlikeholdes_av` to `grupper`, for use in access control
     // TODO: Consider if `grupper` should be emptied before adding these fields, to remove them if removed as owner or maintainer
     json.grupper = json.grupper || Ember.A();
