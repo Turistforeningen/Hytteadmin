@@ -6,6 +6,15 @@ export default Ember.Mixin.create({
   _validationRules: $.fn.form.settings.rules || {},
   _validationPrompts: $.fn.form.settings.prompts || {},
 
+  init: function() {
+    this._super.apply(this, arguments);
+
+    // Adding validation rule for GeoJSON Point
+    this.get('_validationRules').isGeoJsonPoint = function (value) {
+      return !isNaN(Ember.get(value, 'coordinates.1')) && !isNaN(Ember.get(value, 'coordinates.0'));
+    };
+  },
+
   validate: function (field) {
     if (Ember.typeOf(field) === 'string') {
       this.validateField(field);
