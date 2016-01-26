@@ -86,7 +86,7 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
 
     // Add `privat.juridisk_eier` and `privat.vedlikeholdes_av` to `grupper`, for use in access control
     // TODO: Consider if `grupper` should be emptied before adding these fields, to remove them if removed as owner or maintainer
-    json.grupper = json.grupper || Ember.A();
+    json.grupper = Ember.A();
     json.grupper.addObjects([Ember.get(json, 'privat.juridisk_eier'), Ember.get(json, 'privat.vedlikeholdes_av')]);
     json.grupper.removeObject(undefined);
 
