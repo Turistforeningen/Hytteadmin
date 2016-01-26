@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-export default DS.Model.extend({
+import Validation from '../mixins/validation';
+
+export default DS.Model.extend(Validation, {
 
   BETJENINGSGRAD_CHOICES: [
     'Betjent',
@@ -67,7 +69,7 @@ export default DS.Model.extend({
   endret: DS.attr('date'), // TODO: Add support for readonly as this is set by NTB
   fasiliteter: DS.attr('array', {defaultValue: []}),
   fylke: DS.attr('string'),
-  geojson: DS.attr('object', {defaultValue: {type: "Point", properties: {}, coordinates: []}}),
+  geojson: DS.attr('object', {defaultValue: {type: "Point", properties: {}, coordinates: []}, validationRules: [{type: 'isGeoJsonPoint'}]}),
   grupper: DS.attr('array', {defaultValue: []}),
   hyttetype: DS.attr('string'),
   kart: DS.attr('string'),

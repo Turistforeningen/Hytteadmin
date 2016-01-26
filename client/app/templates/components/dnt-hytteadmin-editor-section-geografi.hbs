@@ -28,6 +28,11 @@
         {{else}}
           Hytta har ingen posisjon.
         {{/if}}
+        {{#if model.validations.geojson}}
+          <div class="ui warning message" style="display: block;">
+            <p>Posisjon på hytta er påkrevd for at den skal vises på UT.no.</p>
+          </div>
+        {{/if}}
         {{#if user.model.er_admin}}
           <a>{{if model.har_posisjon "Endre posisjon" "Sett posisjon"}}</a>
           {{#ui-popup}}
