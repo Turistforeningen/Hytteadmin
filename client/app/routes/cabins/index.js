@@ -49,6 +49,10 @@ export default Ember.Route.extend({
     //});
   },
 
+  afterModel: function (cabins, transition) {
+    document.title = `Hytter – ${document.title}`;
+  },
+
   setupController: function (controller, model, transition) {
     controller.set('model', model);
 

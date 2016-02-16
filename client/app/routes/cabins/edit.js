@@ -7,6 +7,11 @@ export default Ember.Route.extend({
     return this.store.findRecord('cabin', params.id, {reload: true});
   },
 
+  afterModel: function (cabin, transition) {
+    const cabinNavn = cabin.get('navn') || 'Hytte uten navn';
+    document.title = `${cabinNavn} – ${document.title}`;
+  },
+
   setupController: function (controller, model) {
     controller.set('model', model);
   },
