@@ -11,24 +11,15 @@ export default ApplicationSerializer.extend({
   ],
 
   normalize: function (modelClass, resourceHash, prop) {
-    var normalizedHash = resourceHash;
-
+    const normalizedHash = resourceHash;
     const kategorier = this.get('KATEGORI_CHOICES');
-    const tags = normalizedHash.tags || [];
-    let kategori;
+    const tags = Ember.A(normalizedHash.tags || []);
 
-    for (let i = 0; i < kategorier.length; i++) {
-      if (!kategori && tags.indexOf(kategorier[i]) !== -1) {
-        kategori = kategorier[i];
-      }
-    }
+    const kategori = tags.find((item, index, enumerable) => {
+      return kategorier.indexOf(item) !== -1;
+    });
 
-    for (let i = 0; i < kategorier.length; i++) {
-      let kategoriInTags = tags.indexOf(kategorier[i]);
-      if (kategoriInTags !== -1) {
-        tags.splice(kategoriInTags, 1);
-      }
-    }
+    tags.removeObjects(kategorier);
 
     if (kategori) {
       normalizedHash.kategori = kategori;

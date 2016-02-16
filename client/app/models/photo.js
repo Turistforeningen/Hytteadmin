@@ -30,47 +30,6 @@ export default DS.Model.extend(Validation, {
   tilbyder: DS.attr('string'), // TODO: Add support for readonly as this is set by NTB
   kategori: DS.attr('string'),
 
-  _kategori: Ember.computed('tags.firstObject', {
-    get: function () {
-      // NOTE: Use this code if a tag should only qualify as a category if first in tags array
-      const firstTag = this.get('tags.firstObject');
-      const kategorier = this.get('KATEGORI_CHOICES').getEach('value');
-      let kategori;
-
-      if (firstTag && kategorier.indexOf(firstTag) !== -1) {
-        kategori = firstTag;
-      }
-
-      return kategori;
-
-      // NOTE: Use this code if any tag representing a category should only qualify as a one
-      /* const photoTags = this.get('tags') || [];
-      const kategorier = this.get('KATEGORI_CHOICES').getEach('value');
-      let kategori;
-      kategorier.forEach((item, index, enumerable) => {
-        if (!kategori && photoTags.indexOf(item) !== -1) {
-          kategori = item;
-        }
-      });
-
-      return kategori; */
-    },
-    set: function (key, value) {
-      const kategorier = this.get('KATEGORI_CHOICES').getEach('value');
-      const tags = this.get('tags') || [];
-
-      tags.removeObjects(kategorier);
-
-      if (Ember.typeOf(value) === 'string') {
-        // NOTE: Only add tag if it is a string (typically to avoid undefined)
-        tags.unshiftObject(value);
-      }
-      this.set('tags', tags);
-
-      return value;
-    }
-  }),
-
   fri_bruk: Ember.computed('lisens', {
     get: function () {
       return this.get('lisens') === 'CC BY-SA 4.0';

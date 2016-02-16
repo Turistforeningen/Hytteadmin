@@ -33,7 +33,7 @@ export default Ember.Component.extend({
     const bilder = Ember.copy(this.get('bilder').toArray());
     const kategorier = this.get('KATEGORI_CHOICES').getEach('value');
 
-    let reordered = bilder.sort(function (a, b) {
+    const reordered = bilder.sort(function (a, b) {
       let kategoriA = a.get('kategori');
       let kategoriB = b.get('kategori');
 
@@ -75,7 +75,6 @@ export default Ember.Component.extend({
     kategorier.unshiftObject(sesongObject);
 
     this.set('KATEGORI_CHOICES', kategorier);
-
   }),
 
   _sesong: Ember.computed('bilder.firstObject.kategori', {
