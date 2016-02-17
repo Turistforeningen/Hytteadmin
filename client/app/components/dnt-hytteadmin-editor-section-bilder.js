@@ -14,7 +14,7 @@ export default Ember.Component.extend({
     categorize: function (photo, category) {
       const bilde = this.get('bilder').findBy('id', photo.get('id'));
       bilde.set('kategori', category);
-      this.reorderPhotos();
+      this.reorderPhotosByCategory();
     }
   },
 
@@ -29,7 +29,7 @@ export default Ember.Component.extend({
     Ember.Object.create({value: 'interiør', label: 'Innendørs'})
   ],
 
-  reorderPhotos: Ember.observer('sesong', function () {
+  reorderPhotosByCategory: Ember.observer('sesong', function () {
     const bilder = Ember.copy(this.get('bilder').toArray());
     const kategorier = this.get('KATEGORI_CHOICES').getEach('value');
 
