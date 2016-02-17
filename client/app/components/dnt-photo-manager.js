@@ -37,6 +37,7 @@ export default Ember.Component.extend({
     const order = this.sortable.toArray();
     const photos = Ember.copy(this.get('photos').toArray()).map(function (item, index) {
       item.index = index; // Add original index to use in custom sort function
+      // http://stackoverflow.com/questions/3195941/sorting-an-array-of-objects-in-chrome
       return item;
     }) || [];
 
