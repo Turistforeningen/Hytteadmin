@@ -35,9 +35,12 @@ export default Ember.Component.extend({
 
   onEnd: function (e) {
     const order = this.sortable.toArray();
-    const photos = Ember.copy(this.get('photos').toArray()) || [];
+    const photos = Ember.copy(this.get('photos').toArray()).map(function (item, index) {
+      item.index = index; // Add original index to use in custom sort function
+      return item;
+    }) || [];
 
-    let reordered = photos.sort(function (a, b) {
+    const reordered = photos.sort(function (a, b) {
       let aId = a.get('id');
       let bId = b.get('id');
 
@@ -45,12 +48,11 @@ export default Ember.Component.extend({
       let bOrderIndex = order.indexOf(bId);
 
       if (aOrderIndex === -1 || bOrderIndex === -1) {
-        return 0;
+        return a.get('index') > b.get('index') ? 1 : -1;
 
       } else {
         return aOrderIndex - bOrderIndex;
       }
-
     });
 
     this.set('photos', reordered);
