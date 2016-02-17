@@ -97,9 +97,14 @@ export default Ember.Component.extend({
   }.observes('marker'),
 
   createMapLayers: function () {
-    var topo, summer, winter, cabin, baseLayerConf, overlayConf;
+    var kartdata, topo, summer, winter, cabin, baseLayerConf, overlayConf;
 
-    topo =  L.tileLayer('http://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}', {
+    kartdata =  L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=kartdata2&zoom={z}&x={x}&y={y}', {
+      maxZoom: 16,
+      attribution: '<a href="http://www.statkart.no/">Statens kartverk</a>'
+    });
+
+    topo =  L.tileLayer('https://opencache.statkart.no/gatekeeper/gk/gk.open_gmaps?layers=topo2&zoom={z}&x={x}&y={y}', {
       maxZoom: 16,
       attribution: '<a href="http://www.statkart.no/">Statens kartverk</a>'
     });
@@ -119,7 +124,7 @@ export default Ember.Component.extend({
       attribution: '<a href="http://www.turistforeningen.no/">DNT</a>'
     });
 
-    baseLayerConf = {'Topo 2': topo};
+    baseLayerConf = {'Kartdata 2': kartdata, 'Topo 2': topo};
     overlayConf = {
       'DNTs merkede stier': summer,
       'DNTs merkede vinterruter': winter,
