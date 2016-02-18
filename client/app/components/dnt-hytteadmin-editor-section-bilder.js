@@ -13,8 +13,34 @@ export default Ember.Component.extend({
 
     categorize: function (photo, category) {
       const bilde = this.get('bilder').findBy('id', photo.get('id'));
+      const photos = Ember.copy(this.get('bilder').toArray());
+      photos.removeObject(bilde);
+
+      if (category) {
+        const categories = this.get('KATEGORI_CHOICES').getEach('value');
+
+        const categoryIndex = categories.indexOf(category);
+        categories.splice(categoryIndex + 1);
+
+        let prevPhotoIndex;
+
+        for (let i = categories.length - 1; i > -1; i--) {
+          if (typeof prevPhotoIndex === 'undefined') {
+            let categoryPhotos = photos.filterBy('kategori', categories[i]);
+            if (categoryPhotos.length) {
+              prevPhotoIndex = photos.indexOf(categoryPhotos.objectAt(categoryPhotos.length - 1));
+            }
+          }
+        }
+
+        photos.insertAt(prevPhotoIndex + 1, bilde);
+
+      } else {
+        photos.push(bilde);
+      }
+
       bilde.set('kategori', category);
-      this.reorderPhotosByCategory();
+      this.set('bilder', photos);
     }
   },
 
