@@ -30,15 +30,20 @@ export default Ember.Component.extend({
   ],
 
   reorderPhotosByCategory: Ember.observer('sesong', function () {
-    const bilder = Ember.copy(this.get('bilder').toArray());
-    const kategorier = this.get('KATEGORI_CHOICES').getEach('value');
+    const photos = Ember.copy(this.get('bilder').toArray()).map(function (item, index) {
+      item.set('index', index); // Add original index to use in custom sort function
+      // http://stackoverflow.com/questions/3195941/sorting-an-array-of-objects-in-chrome
+      return item;
+    }) || [];
 
-    const reordered = bilder.sort(function (a, b) {
-      let kategoriA = a.get('kategori');
-      let kategoriB = b.get('kategori');
+    const categories = this.get('KATEGORI_CHOICES').getEach('value');
+
+    const reordered = photos.sort(function (a, b) {
+      const kategoriA = a.get('kategori');
+      const kategoriB = b.get('kategori');
 
       if (!kategoriA && !kategoriB) {
-        return 0; // Was 1, not sure if this is correct, but fixed uncategorized from being reversed when switching season
+        return a.get('index') > b.get('index') ? 1 : -1;
 
       } else if (!kategoriA) {
         return 1;
@@ -47,12 +52,12 @@ export default Ember.Component.extend({
         return -1;
 
       } else {
-        return kategorier.indexOf(kategoriA) - kategorier.indexOf(kategoriB);
+        return categories.indexOf(kategoriA) - categories.indexOf(kategoriB);
       }
 
     });
 
-    this.set('bilder', bilder);
+    this.set('bilder', reordered);
   }),
 
   sesong: undefined,

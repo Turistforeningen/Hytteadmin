@@ -2,8 +2,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   group: 'dnt-photo-manager',
+
   actions: {
     categorize: function (photo, category) {
       this.sendAction('categorize', photo, category);
@@ -33,41 +33,68 @@ export default Ember.Component.extend({
     }
   }),
 
-  onEnd: function (e) {
+  reorderBySortable: function () {
     const order = this.sortable.toArray();
     const photos = Ember.copy(this.get('photos').toArray()).map(function (item, index) {
-      item.index = index; // Add original index to use in custom sort function
+      item.set('index', index); // Add original index to use in custom sort function
       // http://stackoverflow.com/questions/3195941/sorting-an-array-of-objects-in-chrome
       return item;
     }) || [];
 
     const reordered = photos.sort(function (a, b) {
-      let aId = a.get('id');
-      let bId = b.get('id');
-
-      let aOrderIndex = order.indexOf(aId);
-      let bOrderIndex = order.indexOf(bId);
+      let aOrderIndex = order.indexOf(a.get('id'));
+      let bOrderIndex = order.indexOf(b.get('id'));
 
       if (aOrderIndex === -1 || bOrderIndex === -1) {
         return a.get('index') > b.get('index') ? 1 : -1;
 
       } else {
-        return aOrderIndex - bOrderIndex;
+        return aOrderIndex > bOrderIndex ? 1 : -1;
       }
     });
 
     this.set('photos', reordered);
   },
 
+  onEnd: function (e) {
+    this.reorderBySortable();
+  },
+
   onAdd: function (e) {
-    const item = e.item;
-    const itemId = item.dataset.id;
-    const bilde = this.get('photos').findBy('id', itemId);
+    const photos = Ember.copy(this.get('photos').toArray());
+    const photoId = e.item.dataset.id;
+    const photo = photos.findBy('id', photoId);
     const category = this.get('category');
-    // TODO: This will cause the photos array to be reordered before onEnd
-    // and the position of dragged photo will be lost
-    this.send('categorize', bilde, category);
-    // bilde.set('kategori', category);
+    const order = this.sortable.toArray();
+
+    if (order.length > 1) {
+      // Photo is dropped in category with other photos, need to position relative to prev or next
+      const indexInOrder = order.indexOf(photoId);
+
+      // Remove photo that will be inserted at new index, to prevent it from affecting indexes
+      photos.removeObject(photo);
+
+      if (indexInOrder > 0) {
+        // Is dropped after a photo
+        const prevPhoto = photos.findBy('id', order[indexInOrder - 1]);
+        const prevPhotoIndex = photos.indexOf(prevPhoto);
+        photos.insertAt(prevPhotoIndex + 1, photo);
+
+      } else {
+        // Is dropped first in set, put before the photo that was first in set
+        const nextPhoto = photos.findBy('id', order[indexInOrder + 1]);
+        const nextPhotoIndex = photos.indexOf(nextPhoto);
+        photos.insertAt(nextPhotoIndex, photo);
+      }
+
+      photo.set('kategori', category);
+      this.set('photos', photos);
+
+    } else {
+      // If there are no other photos in the category, the categorize action will have to be used, as there
+      // is no way to know where in the photos set to put it
+      this.send('categorize', photo, category);
+    }
   }
 
 });
