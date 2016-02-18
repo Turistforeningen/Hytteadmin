@@ -68,7 +68,7 @@ export default Ember.Component.extend({
       const kategoriA = a.get('kategori');
       const kategoriB = b.get('kategori');
 
-      if (!kategoriA && !kategoriB) {
+      if ((!kategoriA && !kategoriB) || (kategoriA === kategoriB)) {
         return a.get('index') > b.get('index') ? 1 : -1;
 
       } else if (!kategoriA) {
@@ -78,7 +78,7 @@ export default Ember.Component.extend({
         return -1;
 
       } else {
-        return categories.indexOf(kategoriA) - categories.indexOf(kategoriB);
+        return categories.indexOf(kategoriA) > categories.indexOf(kategoriB) ? 1 : -1;
       }
 
     });
