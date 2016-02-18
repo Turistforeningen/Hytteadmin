@@ -19,7 +19,7 @@ export default Ember.Component.extend({
       draggable: '.dnt-photo-manager-list-item',
       group: this.get('group'),
       onAdd: Ember.run.bind(this, this.onAdd),
-      onEnd: Ember.run.bind(this, this.onEnd)
+      onUpdate: Ember.run.bind(this, this.onSortableUpdate)
     });
 
   }.on('didInsertElement'),
@@ -56,7 +56,7 @@ export default Ember.Component.extend({
     this.set('photos', reordered);
   },
 
-  onEnd: function (e) {
+  onSortableUpdate: function (e) {
     this.reorderBySortable();
   },
 
