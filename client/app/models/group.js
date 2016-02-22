@@ -12,7 +12,7 @@ export default DS.Model.extend({
     get: function () {
       var kontaktinfo = this.get('kontaktinfo');
       if (kontaktinfo) {
-        return this.get('kontaktinfo').findBy('type', 'Primærkontakt');
+        return kontaktinfo.findBy('type', 'Primærkontakt') || kontaktinfo.get('firstObject');
       }
     }
   }),
