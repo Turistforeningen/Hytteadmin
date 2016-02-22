@@ -406,6 +406,18 @@ export default DS.Model.extend(Validation, {
         item.set('navn', `Bilde fra ${navn}`);
       }
     });
+  }),
+
+  /**
+   * Update the status for each related photo to the same as the cabin has.
+   * Does not save to server, as that is done in photo controller.
+   */
+  updateBilderStatus: Ember.observer('status', function () {
+    const status = this.get('status');
+    const bilder = this.get('bilder') || [];
+    bilder.forEach((item, index, enumerable) => {
+      item.set('status', status);
+    });
   })
 
 });
