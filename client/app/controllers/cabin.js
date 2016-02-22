@@ -71,10 +71,10 @@ export default Ember.Controller.extend({
     save: function () {
       this.get('model').save().then((response) => {
         this.get('errors').clear();
-        this.store.findRecord('cabin', response.get('id')).then(function (record) {
-          let bilder = record.get('bilder');
+        this.store.findRecord('cabin', response.get('id')).then((record) => {
+          const bilder = record.get('bilder');
           if (bilder.get('length')) {
-            bilder.forEach(function (item, index, enumerable) {
+            bilder.forEach((item, index, enumerable) => {
               // TODO: Saving item is only necessary if item.hasDirtyAttributes,
               // but that property does not seem to be catching all changes
               item.save();
