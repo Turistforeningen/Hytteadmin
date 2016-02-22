@@ -8,6 +8,15 @@ export default Ember.Component.extend({
         model.setKontaktinfoGruppeById(id);
       }
     }
+  },
+
+  init: function (e) {
+    this._super(...arguments);
+    const kontaktinfoGruppeId = this.get('model.kontaktinfo_gruppe.gruppe_id');
+
+    if (kontaktinfoGruppeId) {
+      this.send('setKontaktinfoGruppeById', kontaktinfoGruppeId);
+    }
   }
 
 });
