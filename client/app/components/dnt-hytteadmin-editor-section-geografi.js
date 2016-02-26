@@ -24,7 +24,7 @@ export default Ember.Component.extend({
       }
     },
 
-    removeOmråde: function (område) {
+    removeOmråde: function (område) {
       let områder = this.get('model.områder') || [];
       områder.removeObject(område);
     }
