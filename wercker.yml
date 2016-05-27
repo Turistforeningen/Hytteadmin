@@ -33,19 +33,13 @@ build:
 
 deploy:
     steps:
-        - add-ssh-key:
-                keyname: SSH_KEY
-                host: $SSH_HOST
-
-        - wercker/add-to-known_hosts@1.4.0:
-                hostname: $SSH_HOST
-
         - script:
-                name: start application
-                code: >
-                    ssh -l ${SSH_USER} ${SSH_HOST}
-                    COMPOSE_FILE=docker-paas.yml
-                    /var/www/config/manage.sh ${SSH_APP} update --rebuild
+            name: docker hub build
+            code: |
+                curl --verbose \
+                    -H "Content-Type: application/json" \
+                    -d "{\"source_type\": \"Branch\", \"source_name\": \"$DOCKER_TRIGGER_BRANCH\"}" \
+                    -X POST $DOCKER_TRIGGER_URL
 
     after-steps:
         - turistforeningen/slack-notifier:
