@@ -21,4 +21,4 @@ RUN chown -R app:app /usr/src/app \
  && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-CMD [ "npm", "start" ]
+CMD [ "/bin/true" ]
