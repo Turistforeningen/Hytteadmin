@@ -6,6 +6,7 @@ RUN groupadd -r app && useradd -r -d /usr/src/app -g app app \
  && mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
+VOLUME [ "/usr/src/app/dist" ]
 
 COPY package.json /usr/src/app/
 RUN npm install
