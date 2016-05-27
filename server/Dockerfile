@@ -4,6 +4,7 @@ RUN groupadd -r app && useradd -r -d /usr/src/app -g app app \
   && mkdir -p /usr/src/app
 
 WORKDIR /usr/src/app
+CMD [ "node", "index.js" ]
 
 COPY package.json /usr/src/app/
 RUN npm install
@@ -14,5 +15,3 @@ RUN apt-get -y autoclean \
 
 COPY . /usr/src/app
 RUN chown -R app:app /usr/src/app
-
-CMD [ "node", "index.js" ]
