@@ -7,6 +7,7 @@ RUN groupadd -r app && useradd -r -d /usr/src/app -g app app \
 
 WORKDIR /usr/src/app
 VOLUME [ "/usr/src/app/dist" ]
+CMD [ "/bin/true" ]
 
 COPY package.json /usr/src/app/
 RUN npm install
@@ -21,5 +22,3 @@ RUN chown -R app:app /usr/src/app \
  && apt-get -y autoclean \
  && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-CMD [ "/bin/true" ]
