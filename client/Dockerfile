@@ -21,5 +21,3 @@ RUN chown -R app:app /usr/src/app \
  && apt-get -y autoclean \
  && apt-get -y autoremove \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-VOLUME [ "/usr/src/app/dist" ]
