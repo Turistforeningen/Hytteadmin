@@ -1,6 +1,11 @@
 /* eslint no-console: 0 */
 'use strict';
 
+if (process.env.NODE_ENV === 'production') {
+  console.log('Starting newrelic application monitoring');
+  require('newrelic');
+}
+
 const express = require('express');
 const app = module.exports = express();
 
