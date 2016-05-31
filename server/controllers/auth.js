@@ -1,9 +1,10 @@
 'use strict';
 
+const version = require('../package.json').version;
 const router = require('express').Router;
 const app = router();
 
-const userAgent = 'Hytteadmin/' + require('../package.json').version;
+const userAgent = `Hytteadmin/${version}`;
 process.env.NTB_USER_AGENT = userAgent;
 process.env.DNT_CONNECT_USER_AGENT = userAgent;
 process.env.DNT_API_USER_AGENT = userAgent;
@@ -22,7 +23,7 @@ const dntApi = new DntApi(
   process.env.DNT_API_KEY
 );
 
-app.get('/', function authGetIndex(req, res) {
+app.get('/', (req, res) => {
   if (req.session && req.session.user) {
     res.json(req.session.user);
   } else {
@@ -32,11 +33,11 @@ app.get('/', function authGetIndex(req, res) {
 });
 
 app.get('/login/dnt', connect.middleware('signon'));
-app.get('/login/dnt', function authGetDntLogin(req, res, next) {
+app.get('/login/dnt', (req, res, next) => {
   if (!req.dntConnect) {
     const err = new Error('DNT Connect: unknown error');
     err.status = 500;
-    next(err);
+    return next(err);
   }
 
   if (req.dntConnect.err || !req.dntConnect.data.er_autentisert) {
@@ -45,23 +46,23 @@ app.get('/login/dnt', function authGetDntLogin(req, res, next) {
   }
 
   req.session.user = {
-    id: 'sherpa3:' + req.dntConnect.data.sherpa_id,
+    id: `sherpa3:${req.dntConnect.data.sherpa_id}`,
     brukertype: 'DNT',
-    navn: req.dntConnect.data.fornavn + ' ' + req.dntConnect.data.etternavn,
+    navn: `${req.dntConnect.data.fornavn} ${req.dntConnect.data.etternavn}`,
     epost: req.dntConnect.data.epost,
     er_admin: false,
     grupper: [],
   };
 
-  next();
+  return next();
 });
 
-app.get('/login/dnt', function authGetLoginDnt(req, res) {
+app.get('/login/dnt', (req, res) => {
   const user = {
     bruker_sherpa_id: req.dntConnect.data.sherpa_id,
   };
 
-  dntApi.getAssociationsFor(user, function assocCb(err, statusCode, associations) {
+  dntApi.getAssociationsFor(user, (err, statusCode, associations) => {
     let isAdmin = false;
     const groups = [];
 
@@ -79,7 +80,7 @@ app.get('/login/dnt', function authGetLoginDnt(req, res) {
       req.session.user.er_admin = isAdmin;
       req.session.user.grupper = groups;
     } else {
-      throw new Error('Request to DNT API failed: ' + statusCode);
+      throw new Error(`Request to DNT API failed: ${statusCode}`);
     }
 
     res.redirect('/');
@@ -87,14 +88,14 @@ app.get('/login/dnt', function authGetLoginDnt(req, res) {
 });
 
 app.post('/login/turbasen', Turbasen.middleware);
-app.post('/login/turbasen', function authPostTurbasenLogin(req, res, next) {
+app.post('/login/turbasen', (req, res, next) => {
   if (req.turbasenAuth) {
     req.session.user = req.turbasenAuth;
     req.session.user.brukertype = 'Gruppe';
     res.status(200);
     res.json(req.session.user);
   } else {
-    req.session.destroy(function reqSessionDestroyCb(err) {
+    req.session.destroy(err => {
       if (!err) {
         const error = new Error('Invalid email or password');
         error.status = 401;
@@ -107,8 +108,8 @@ app.post('/login/turbasen', function authPostTurbasenLogin(req, res, next) {
   }
 });
 
-app.post('/logout', function authPostLogout(req, res) {
-  req.session.destroy(function reqSessionDestroyCb(err) {
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
     if (err) { throw err; }
 
     res.status(204).end();
