@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha -r test/support/env -R spec -b --check-leaks test/ test/acceptance/",
-    "watch": "mocha -r test/support/env -R progress -b --check-leaks -w test/ test/acceptance/",
+    "test": "mocha -bc --check-leaks -R tap -r test/support/env test/ test/acceptance/",
+    "test:watch": "mocha -wbc --check-leaks -R progress -r test/support/env test/ test/acceptance/",
     "start": "supervisor index.js",
     "lint": "eslint index.js controllers db"
   },
