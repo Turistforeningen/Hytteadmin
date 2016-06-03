@@ -1,6 +1,7 @@
-FROM nginx:1.9
+FROM nginx:1.11
 
 RUN sed -i 's/sendfile        on/sendfile       off/g' etc/nginx/nginx.conf
+
 COPY . /usr/share/nginx/public
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY default.client /etc/nginx/conf.d/default.client
