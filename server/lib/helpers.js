@@ -36,6 +36,9 @@ module.exports.hyttetype = hyttetype;
  * @returns Object body that should replace the original req.body
  */
 const utify = function utify (body) {
+  // Trim leading and trailing spaces from cabin name
+  body.navn = body.navn.trim();
+
   body.privat = body.privat || {};
 
   // UT is expecting a cababin type integer property in the private scope in
