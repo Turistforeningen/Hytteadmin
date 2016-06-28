@@ -37,7 +37,9 @@ module.exports.hyttetype = hyttetype;
  */
 const utify = function utify (body) {
   // Trim leading and trailing spaces from cabin name
-  body.navn = body.navn.trim();
+  if (body.navn) {
+    body.navn = body.navn.trim();
+  }
 
   body.privat = body.privat || {};
 
