@@ -50,7 +50,9 @@ const utify = function utify (body) {
   // In Turadmin we have separated cabin access between private and public
   // transportation. UT.no has not caught up with these changes, so for the time
   // being we have to make sure the old `adkomst` filed stays populated.
-  body.adkomst = body.tilkomst.privat;
+  if (body.tilkomst && body.tilkomst.privat) {
+    body.adkomst = body.tilkomst.privat;
+  }
 
   // UT.no is expecting `senger` to be an object property in the private scope.
   body.privat.senger = body.senger;
