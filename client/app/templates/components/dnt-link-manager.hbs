@@ -22,6 +22,13 @@
             URL-en til Yr brukes for å vise værvarsel fra Yr på UT og vises ikke som en lenke.
           </td>
         </tr>
+      {{else if (is-equal link.type "Video")}}
+        <tr class="info">
+          <td colspan="3">
+            <i class="icon info"></i>
+            Videolenker må peke til en video på Vimeo eller Youtube for at den skal vises på UT.
+          </td>
+        </tr>
       {{else if (is-equal link.type "Annen")}}
         <tr class="info">
           <td colspan="3">

@@ -12,6 +12,7 @@ export default Ember.Component.extend({
     'Twitter',
     'Instagram',
     'Hjemmeside',
+    'Video',
     'Booking',
     'Kontaktinfo',
     'Annen'
