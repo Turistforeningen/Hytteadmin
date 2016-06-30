@@ -55,7 +55,7 @@ export default Ember.Component.extend({
 
   tittelEnabled: Ember.computed('link.type', {
     get: function () {
-      return this.get('link.type') === 'Annen';
+      return ['Video', 'Annen'].indexOf(this.get('link.type')) > -1;
     }
   }),
 
