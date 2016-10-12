@@ -53,5 +53,5 @@ client:
     - "49152:49152"
   environment:
     - NODE_ENV=development
-    - SENTRY_DSN=https://1d5112a03f0941278212feeea3a98c75@sentry.app.dnt.no/16
+    - SENTRY_DSN=https://0a174e389f194b64bcedc49ecd8bfcb5@sentry.io/83453
   command: npm start
