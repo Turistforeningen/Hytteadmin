@@ -17,7 +17,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const RedisStore = require('connect-redis')(session);
 
-if (process.env.SENTRY_DSN === 'production') {
+if (process.env.NODE_ENV === 'production') {
   patchGlobal(process.env.SENTRY_DSN, (err) => {
     /* eslint-disable no-console */
     console.error(err);
