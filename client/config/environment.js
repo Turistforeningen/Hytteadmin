@@ -13,9 +13,9 @@ module.exports = function(environment) {
         '\'unsafe-inline\'',
         '\'unsafe-eval\'',
         'turistforeningen.atlassian.net',
-        'dev.app.dnt.privat:49152',
-        'hytte.app.dnt.privat:49152',
-        'hytte.app.dnt.privat',
+        'dev.app.dnt.local:49152',
+        'hytte.app.dnt.local:49152',
+        'hytte.app.dnt.local',
         'dev.app.dnt.no',
         'use.typekit.net',
         'connect.facebook.net',
@@ -35,8 +35,8 @@ module.exports = function(environment) {
       ].join(' '),
       'connect-src': [
         '\'self\'',
-        'ws://dev.app.dnt.privat:49152',
-        'ws://hytte.app.dnt.privat:49152',
+        'ws://dev.app.dnt.local:49152',
+        'ws://hytte.app.dnt.local:49152',
         'ws.geonorge.no',
         'jotunheimr.app.dnt.no'
       ].join(' '),
