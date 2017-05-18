@@ -110,7 +110,9 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
 
     // Add tag Turpost if not existing
     var tags = Ember.get(json, 'tags') || [];
-    if (tags.indexOf('Turpost') === -1) {
+    var hytteeier = Ember.get(json, 'privat.hytteeier');
+
+    if (hytteeier === 'DNT' && tags.indexOf('Turpost') === -1) {
       tags = tags.concat(['Turpost']);
       Ember.set(json, 'tags', tags);
     }
