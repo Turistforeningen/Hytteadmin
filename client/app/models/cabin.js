@@ -21,6 +21,7 @@ export default DS.Model.extend(Validation, {
     '12v',
     '220v',
     'Badstu',
+    'Booking',
     'Båt',
     'Dusj',
     'Kano',
