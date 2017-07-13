@@ -10,7 +10,7 @@
     "bower": "bower --allow-root install",
     "build": "ember build --environment=\"production\"",
     "ember": "ember",
-    "start": "ember server --watcher polling",
+    "start": "ember server --watcher",
     "test": "ember test"
   },
   "devDependencies": {
