@@ -13,6 +13,7 @@ Router.map(function () {
         this.route('edit', {path: '/:photo_id'});
       });
     });
+    this.route('export', {path: '/eksport'});
     this.route('new', {path: '/ny'});
   });
 

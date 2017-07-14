@@ -1,0 +1,22 @@
+{{#if isLoading}}
+  <div class="ui segment" style="margin-top: 20px; height: 100px;">
+    <div class="ui active inverted dimmer">
+      <div class="ui text loader"></div>
+    </div>
+  </div>
+{{else if model}}
+  <h3 class="ui header">Alle DNT-hytter</h3>
+  <p>Her kan du laste ned en oversikt over alle DNT-hytter som CSV-fil. CSV er et fleksibelt dataformat som for eksempel kan åpnes i Excel.</p>
+  <button class="ui basic button" type="button" {{action "export"}}>
+    <i class="icon download"></i>
+    Last ned CSV
+  </button>
+{{else}}
+  <div class="ui icon info message">
+    <i class="frown icon"></i>
+    <div class="content">
+      <div class="header">Fant ingen hytter</div>
+      <p>Det skjedde en feil ved henting av hytter.</p>
+    </div>
+  </div>
+{{/if}}
