@@ -141,6 +141,12 @@ export default DS.Model.extend(Validation, {
 
   }.observes('privat.juridisk_eier'),
 
+
+  onDidLoad: Ember.on('didLoad', function () {
+    this.updateJuridiskEier();
+    this.updateVedlikeholdesAv();
+  }),
+
   updateVedlikeholdesAv: function () {
     var vedlikeholdesAvId = this.get('privat.vedlikeholdes_av');
     if (vedlikeholdesAvId) {
