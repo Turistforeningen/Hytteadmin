@@ -336,6 +336,12 @@ export default DS.Model.extend(Validation, {
     }
   }),
 
+  ut_url: Ember.computed('id', {
+    get: function () {
+      return ['https://www.ut.no', 'hytte', this.get('id')].join('/');
+    }
+  }),
+
   er_publisert: Ember.computed('status', {
     get: function () {
       return (this.get('status') === 'Offentlig') ? true : false;
