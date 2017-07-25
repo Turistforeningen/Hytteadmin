@@ -11,6 +11,45 @@
     <i class="icon download"></i>
     Last ned CSV
   </button>
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th>Hytte</th>
+        <th>Betjeningsgrad</th>
+        <th>Områder</th>
+        <th>Juridisk eier</th>
+        <th>Posisjon</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model as |cabin|}}
+        <tr>
+          <td>
+            <a href="{{cabin.ut_url}}" class="item" target="_blank">
+              {{ cabin.navn }}
+            </a>
+          </td>
+          <td>
+            {{ cabin.betjeningsgrad }}
+          </td>
+          <td>
+            {{# each cabin.områder as |område| }}
+              {{ område.navn }}{{#unless (eq område cabin.områder.lastObject)}}, {{/unless}}
+            {{/each}}
+          </td>
+          <td>
+            {{ cabin.juridisk_eier.navn }}
+          </td>
+          <td>
+            {{#if cabin.geojson.coordinates.length}}
+              {{ cabin.geojson.coordinates.[1] }},
+              {{ cabin.geojson.coordinates.[0] }}
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
 {{else}}
   <div class="ui icon info message">
     <i class="frown icon"></i>
