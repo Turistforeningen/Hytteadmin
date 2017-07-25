@@ -23,7 +23,14 @@ export default Ember.Route.extend({
       'turkart'
     ].join(',');
 
-    return this.store.query('cabin', {limit: 100, fields: fields, 'privat.hytteeier': 'DNT'})
+    var params = {
+      limit: 100,
+      fields: fields,
+      'privat.hytteeier': 'DNT',
+      status: 'Offentlig'
+    };
+
+    return this.store.query('cabin', params)
       .then(res => {
         var total = res.meta.total;
         var remaining = total - res.meta.count;
