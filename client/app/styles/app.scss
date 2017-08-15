@@ -131,3 +131,7 @@ table.ui.table td {
 .sortable-ghost {
   opacity: 0;
 }
+
+.ui.grid > .column + .divider, .ui.grid > .row > .column + .divider {
+  left: 50%;
+}
