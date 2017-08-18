@@ -84,39 +84,17 @@ export default Ember.Route.extend({
         [
           'Navn',
           'Betjeningsgrad',
-          'Byggeår',
-          'Fasiliteter',
-          'Fylke',
-          'Kart',
-          'Turkart',
-          'Hyttetype',
-          'Senger betjent',
-          'Senger ekstra',
-          'Senger selvbetjent',
-          'Senger ubetjent',
-          'Senger vinter',
-          'Tilrettelagt for',
-          'Tags',
-          'Id i Turbasen'
+          'Områder',
+          'Eier',
+          '"Posisjon (lat, lng)"'
         ].join(',')
       ].concat(arr.map(cabin => {
         return [
           '"' + cabin.get('navn'),
           cabin.get('betjeningsgrad'),
-          cabin.get('byggeår'),
-          cabin.get('fasiliteter').mapBy('type').join(', '),
-          cabin.get('fylke'),
-          cabin.get('kart'),
-          (cabin.get('turkart') || []).mapBy('navn').join(', '),
-          cabin.get('privat.hyttetype'),
-          cabin.get('privat.senger.betjent'),
-          cabin.get('privat.senger.ekstra'),
-          cabin.get('privat.senger.selvbetjent'),
-          cabin.get('privat.senger.ubetjent'),
-          cabin.get('privat.senger.vinter'),
-          (cabin.get('tilrettelegginger') || []).mapBy('type').join(', '),
-          (cabin.get('tags') || []).join(', '),
-          cabin.get('id') + '"'
+          (cabin.get('områder') || []).mapBy('navn').join(', '),
+          cabin.get('juridisk_eier.navn'),
+          cabin.get('geojson.coordinates.1') + ', ' + cabin.get('geojson.coordinates.0') + '"'
         ].join('","');
       }));
 
