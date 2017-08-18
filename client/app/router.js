@@ -13,9 +13,11 @@ Router.map(function () {
         this.route('edit', {path: '/:photo_id'});
       });
     });
+
     this.route('new', {path: '/ny'});
   });
 
+  this.route('cabins.export', {path: '/liste'});
   this.route('session.login', {path: '/logg-inn'});
   this.route('session.logout', {path: '/logg-ut'});
 });

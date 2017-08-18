@@ -141,6 +141,12 @@ export default DS.Model.extend(Validation, {
 
   }.observes('privat.juridisk_eier'),
 
+
+  onDidLoad: Ember.on('didLoad', function () {
+    this.updateJuridiskEier();
+    this.updateVedlikeholdesAv();
+  }),
+
   updateVedlikeholdesAv: function () {
     var vedlikeholdesAvId = this.get('privat.vedlikeholdes_av');
     if (vedlikeholdesAvId) {
@@ -330,6 +336,12 @@ export default DS.Model.extend(Validation, {
     }
   }),
 
+  ut_url: Ember.computed('id', {
+    get: function () {
+      return ['https://www.ut.no', 'hytte', this.get('id')].join('/');
+    }
+  }),
+
   er_publisert: Ember.computed('status', {
     get: function () {
       return (this.get('status') === 'Offentlig') ? true : false;
@@ -419,6 +431,31 @@ export default DS.Model.extend(Validation, {
     bilder.forEach((item, index, enumerable) => {
       item.set('status', status);
     });
-  })
+  }),
 
+  updateKommuneAndFylke: Ember.observer('geojson.coordinates.0', 'geojson.coordinates.1', function () {
+    var coordinates = this.get('geojson.coordinates');
+
+    if (coordinates && coordinates.length === 2) {
+
+      $.ajax({
+          type: 'POST',
+          contentType: 'application/json',
+          url: 'https://geoserver.app.dnt.no/api/v1/boundary/intersect',
+          data: JSON.stringify({geojson: {type: 'Point', coordinates: coordinates}}),
+          success: $.proxy(function (data) {
+            if (data && data.fylker && data.fylker.length > 0) {
+              this.set('fylke', data.fylker[0]);
+            }
+
+            if (data && data.kommuner && data.kommuner.length > 0) {
+              this.set('kommune', data.kommuner[0]);
+            }
+          }, this),
+          error: function (err) {
+            throw err;
+          }
+      });
+    }
+  })
 });

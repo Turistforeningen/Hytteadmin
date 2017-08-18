@@ -38,7 +38,8 @@ module.exports = function(environment) {
         'ws://dev.app.dnt.local:49152',
         'ws://hytte.app.dnt.local:49152',
         'ws.geonorge.no',
-        'jotunheimr.app.dnt.no'
+        'jotunheimr.app.dnt.no',
+        'geoserver.app.dnt.no'
       ].join(' '),
       'img-src': [
         '\'self\'',

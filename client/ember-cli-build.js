@@ -58,6 +58,11 @@ module.exports = function(defaults) {
      destDir: '/assets/sortable'
   });
 
-  return app.toTree([semanticUi, leaflet, ckeditor, Sortable]);
+  var downloadjs = new Funnel(app.bowerDirectory + '/downloadjs', {
+     include: ['download.js'],
+     destDir: '/assets/downloadjs'
+  });
+
+  return app.toTree([semanticUi, leaflet, ckeditor, Sortable, downloadjs]);
 
 };
