@@ -20,6 +20,12 @@ export default Ember.Controller.extend({
       } else if (transition.intent.url === '/logg-inn') {
         // Trying to reach login page through URL
 
+      } else if (transition.intent.url === '/liste') {
+        // Allow DNT cabins list
+
+      } else if (transition.intent.name === 'cabins.dnt') {
+        // Allow DNT cabins list
+
       } else if (transition.intent.name === 'session.logout') {
         // Allow logging out
 
