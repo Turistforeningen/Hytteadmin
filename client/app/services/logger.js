@@ -8,6 +8,10 @@ export default RavenLogger.extend({
   unhandledPromiseErrorMessage: '',
 
   captureException (error) {
+    if (error && (error.message === 'Adapter operation failed')) {
+      return false;
+    }
+
     this._super(...arguments);
   },
 
