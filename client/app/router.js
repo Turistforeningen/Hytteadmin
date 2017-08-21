@@ -17,7 +17,7 @@ Router.map(function () {
     this.route('new', {path: '/ny'});
   });
 
-  this.route('cabins.export', {path: '/liste'});
+  this.route('cabins.dnt', {path: '/liste'});
   this.route('session.login', {path: '/logg-inn'});
   this.route('session.logout', {path: '/logg-ut'});
 });
