@@ -66,7 +66,7 @@ export default Ember.Route.extend({
   },
 
   renderTemplate: function () {
-    this.render('cabins/export');
+    this.render('cabins/dnt');
 
     this.render('cabins/header-left', {
       into: 'application',
