@@ -40,7 +40,11 @@
     "ember-export-application-global": "^1.0.3",
     "ember-moment": "4.1.0",
     "ember-pikaday": "0.12.0",
-    "ember-truth-helpers": "^1.3.0"
+    "ember-truth-helpers": "^1.3.0",
+    "node-sass": "3.7.0"
+  },
+  "peerDependencies": {
+    "node-sass": "3.7.0"
   },
   "engines": {
     "node": ">= 4.0.0"

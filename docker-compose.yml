@@ -9,6 +9,9 @@ services:
     links:
       - server
       - client
+    depends_on:
+      - server
+      - client
     ports:
       - "8080"
     environment:
@@ -21,19 +24,21 @@ services:
 
   server:
     network_mode: 'bridge'
-    build: server
-    user: app
+    # build: server
+    image: node:7.8.0-alpine
+    # user: app
     links:
       - redis
     ports:
       - "8080"
     volumes:
-      - ./server/controllers:/usr/src/app/controllers
-      - ./server/lib:/usr/src/app/lib
-      - ./server/db:/usr/src/app/db
-      - ./server/index.js:/usr/src/app/index.js
-      - ./server/package.json:/usr/src/app/package.json
-      - ./server/test:/usr/src/app/test
+      - ./server:/usr/src/app
+      # - ./server/controllers:/usr/src/app/controllers
+      # - ./server/lib:/usr/src/app/lib
+      # - ./server/db:/usr/src/app/db
+      # - ./server/index.js:/usr/src/app/index.js
+      # - ./server/package.json:/usr/src/app/package.json
+      # - ./server/test:/usr/src/app/test
     working_dir: /usr/src/app
     env_file: .env
     environment:
@@ -43,17 +48,37 @@ services:
       - NODE_ENV=development
     command: npm start
 
+  # npm:
+  #   image: danlynn/ember-cli:1.13.15
+  #   volumes:
+  #     - ./client:/usr/src/app
+  #   working_dir: /usr/src/app
+  #   entrypoint: ['/usr/local/bin/npm']
+  #
+  # bower:
+  #   image: danlynn/ember-cli:1.13.15
+  #   volumes:
+  #     - ./client:/usr/src/app
+  #   working_dir: /usr/src/app
+  #   entrypoint: ['/usr/local/bin/bower', '--allow-root']
+  #
   client:
     network_mode: 'bridge'
-    build: client
+    # build: client
+    # image: danlynn/ember-cli:1.13.15
+    build:
+      context: client
+      dockerfile: Dockerfile-dev
     volumes:
-      - ./client/app:/usr/src/app/app
-      - ./client/config:/usr/src/app/config
-      - ./client/ember-cli-build.js:/usr/src/app/ember-cli-build.js
-      - ./client/public:/usr/src/app/public
-      - ./client/testem.json:/usr/src/app/testem.json
-      - ./client/tests:/usr/src/app/tests
-      - ./client/vendor:/usr/src/app/vendor
+      # - ./client/app:/usr/src/app/app
+      # - ./client/config:/usr/src/app/config
+      # - ./client/ember-cli-build.js:/usr/src/app/ember-cli-build.js
+      # - ./client/public:/usr/src/app/public
+      # - ./client/testem.json:/usr/src/app/testem.json
+      # - ./client/tests:/usr/src/app/tests
+      # - ./client/vendor:/usr/src/app/vendor
+      - ./client:/usr/src/app
+    working_dir: /usr/src/app
     ports:
       - "4200"
       - "35729:35729"
@@ -61,4 +86,4 @@ services:
     environment:
       - NODE_ENV=development
       - SENTRY_DSN=https://0a174e389f194b64bcedc49ecd8bfcb5@sentry.io/83453
-    command: npm start
+    command: ember server --watcher
