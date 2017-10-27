@@ -48,24 +48,8 @@ services:
       - NODE_ENV=development
     command: npm start
 
-  # npm:
-  #   image: danlynn/ember-cli:1.13.15
-  #   volumes:
-  #     - ./client:/usr/src/app
-  #   working_dir: /usr/src/app
-  #   entrypoint: ['/usr/local/bin/npm']
-  #
-  # bower:
-  #   image: danlynn/ember-cli:1.13.15
-  #   volumes:
-  #     - ./client:/usr/src/app
-  #   working_dir: /usr/src/app
-  #   entrypoint: ['/usr/local/bin/bower', '--allow-root']
-  #
   client:
     network_mode: 'bridge'
-    # build: client
-    # image: danlynn/ember-cli:1.13.15
     build:
       context: client
       dockerfile: Dockerfile-dev
@@ -80,10 +64,25 @@ services:
       - ./client:/usr/src/app
     working_dir: /usr/src/app
     ports:
-      - "4200"
+      - "4200:4200"
       - "35729:35729"
       - "49152:49152"
     environment:
       - NODE_ENV=development
       - SENTRY_DSN=https://0a174e389f194b64bcedc49ecd8bfcb5@sentry.io/83453
     command: ember server --watcher
+
+  # npm:
+  #   image: danlynn/ember-cli:1.13.15
+  #   volumes:
+  #     - ./client:/usr/src/app
+  #   working_dir: /usr/src/app
+  #   entrypoint: ['/usr/local/bin/npm']
+  #
+  # bower:
+  #   image: danlynn/ember-cli:1.13.15
+  #   volumes:
+  #     - ./client:/usr/src/app
+  #   working_dir: /usr/src/app
+  #   entrypoint: ['/usr/local/bin/bower', '--allow-root']
+  #
