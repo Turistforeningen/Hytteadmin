@@ -108,6 +108,18 @@ app.post('/login/turbasen', (req, res, next) => {
   }
 });
 
+app.get('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) { throw err; }
+
+    if (req.query.next) {
+      res.redirect(req.query.next);
+    } else {
+      res.redirect('/');
+    }
+  });
+});
+
 app.post('/logout', (req, res) => {
   req.session.destroy(err => {
     if (err) { throw err; }
