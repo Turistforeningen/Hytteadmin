@@ -86,9 +86,9 @@ app.get('/login/dnt', (req, res) => {
     }
 
     // Find groups that the user belongs to in Turbasen
-    ntb.grupper({'privat.brukere.id': user.bruker_sherpa_id}, function (err, result, body) {
-      if (err) {
-        console.error(`Request to Turbasen API failed: ${err.message}`);
+    ntb.grupper({ 'privat.brukere.id': user.bruker_sherpa_id }, (ntbErr, ntbRes, body) => {
+      if (ntbErr) {
+        console.error(`Request to Turbasen API failed: ${err.message}`); // eslint-disable-line no-console, max-len
       } else if (body && body.documents && body.documents.length) {
         for (let i = 0; i < body.documents.length; i++) {
           groups.push(body.documents[i]);
