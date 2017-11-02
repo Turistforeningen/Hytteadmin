@@ -4,6 +4,8 @@ const version = require('../package.json').version;
 const router = require('express').Router;
 const app = router();
 
+const ntb = require('turbasen');
+
 const userAgent = `Hytteadmin/${version}`;
 process.env.NTB_USER_AGENT = userAgent;
 process.env.DNT_CONNECT_USER_AGENT = userAgent;
@@ -62,6 +64,7 @@ app.get('/login/dnt', (req, res) => {
     bruker_sherpa_id: req.dntConnect.data.sherpa_id,
   };
 
+  // Find groups the user belongs to in Sherpa
   dntApi.getAssociationsFor(user, (err, statusCode, associations) => {
     let isAdmin = false;
     const groups = [];
@@ -78,12 +81,24 @@ app.get('/login/dnt', (req, res) => {
       }
 
       req.session.user.er_admin = isAdmin;
-      req.session.user.grupper = groups;
     } else {
       throw new Error(`Request to DNT API failed: ${statusCode}`);
     }
 
-    res.redirect('/');
+    // Find groups that the user belongs to in Turbasen
+    ntb.grupper({'privat.brukere.id': user.bruker_sherpa_id}, function (err, result, body) {
+      if (err) {
+        console.error(`Request to Turbasen API failed: ${err.message}`);
+      } else if (body && body.documents && body.documents.length) {
+        for (let i = 0; i < body.documents.length; i++) {
+          groups.push(body.documents[i]);
+        }
+      }
+
+      req.session.user.grupper = groups;
+
+      res.redirect('/');
+    });
   });
 });
 
