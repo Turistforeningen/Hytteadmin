@@ -20,8 +20,9 @@ export default DS.Model.extend({
       let primærgruppe;
       let grupper = this.get('grupper') || [];
 
+      // DNT Connect users
       if (grupper.get('length')) {
-        primærgruppe = grupper.findBy('type', 'sentral') || grupper.findBy('type', 'forening') || grupper.findBy('type', 'turlag') || grupper.findBy('type', 'turgruppe');
+        primærgruppe = grupper.findBy('type', 'sentral') || grupper.findBy('type', 'forening') || grupper.findBy('type', 'turlag') || grupper.findBy('type', 'turgruppe') || grupper.get('firstObject');
 
         if (primærgruppe) {
           return primærgruppe;
@@ -33,6 +34,7 @@ export default DS.Model.extend({
         }
 
       } else {
+        // Turbasen users
         // NOTE: Not sure why content property has to be get here
         let gruppe = this.get('gruppe.content');
         if (gruppe) {
