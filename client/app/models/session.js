@@ -15,6 +15,16 @@ export default DS.Model.extend({
     }
   }),
 
+  er_privatbruker: Ember.computed('gruppe', 'grupper.[]', {
+    get: function () {
+      let grupper = this.get('grupper') || [];
+      let gruppe = this.get('gruppe');
+
+      return (grupper.get('length') === 0) && !gruppe.get('content');
+    }
+  }),
+
+
   primærgruppe: Ember.computed('gruppe', 'grupper.[]', {
     get: function () {
       let primærgruppe;
