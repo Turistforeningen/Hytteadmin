@@ -1,1 +1,11 @@
-{{outlet}}
+{{#if session.model.er_privatbruker}}
+  <div class="ui info message">
+    <p>
+      Du er logget inn med en bruker som ikke har tilgang til å legge inn eller
+      redigere hytter. Hvis du mener dette er en feil, ta kontakt ved å klikke
+      «Spørsmål eller tilbakemeldinger?» til høyre på siden.
+    </p>
+  </div>
+{{else}}
+  {{outlet}}
+{{/if}}

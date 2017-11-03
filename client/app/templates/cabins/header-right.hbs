@@ -1,27 +1,29 @@
-{{#if model.er_publisert}}
-  <div class="ui simple dropdown item">
-    <span class="ui green circular label" style="margin-right: .7em;"><i class="cloud icon"></i></span> Publisert
-    <i class="dropdown icon"></i>
-    <div class="menu">
-      <a class="item" {{action "unpublish"}}>Avpubliser</a>
+{{#unless session.model.er_privatbruker}}
+  {{#if model.er_publisert}}
+    <div class="ui simple dropdown item">
+      <span class="ui green circular label" style="margin-right: .7em;"><i class="cloud icon"></i></span> Publisert
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" {{action "unpublish"}}>Avpubliser</a>
+      </div>
     </div>
-  </div>
-{{else}}
-  <div class="ui simple dropdown item">
-    <span class="ui yellow circular label" style="margin-right: .7em;"><i class="cloud icon"></i></span> Ikke publisert
-    <i class="dropdown icon"></i>
-    <div class="menu">
-      <a class="item" {{action "publish"}}>Publiser</a>
-    </div>
-  </div>
-{{/if}}
-<a class="item {{if model.isSaving "loading"}}" {{action "save"}} data-test-action="save">
-  <i class="save icon"></i> Lagre
-</a>
-{{#ui-popup on="hover" position="bottom center"}}
-  {{#if model.endret}}
-    Sist lagret {{moment-format model.endret "DD.MM.YYYY HH.mm"}}
   {{else}}
-    Ikke lagret
+    <div class="ui simple dropdown item">
+      <span class="ui yellow circular label" style="margin-right: .7em;"><i class="cloud icon"></i></span> Ikke publisert
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" {{action "publish"}}>Publiser</a>
+      </div>
+    </div>
   {{/if}}
-{{/ui-popup}}
+  <a class="item {{if model.isSaving "loading"}}" {{action "save"}} data-test-action="save">
+    <i class="save icon"></i> Lagre
+  </a>
+  {{#ui-popup on="hover" position="bottom center"}}
+    {{#if model.endret}}
+      Sist lagret {{moment-format model.endret "DD.MM.YYYY HH.mm"}}
+    {{else}}
+      Ikke lagret
+    {{/if}}
+  {{/ui-popup}}
+{{/unless}}

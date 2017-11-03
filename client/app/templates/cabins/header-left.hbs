@@ -1,6 +1,8 @@
-{{#link-to 'cabins.new' class="item"}}
-  <i class="plus icon"></i> Opprett ny hytte
-{{/link-to}}
+{{#unless session.model.er_privatbruker}}
+  {{#link-to 'cabins.new' class="item"}}
+    <i class="plus icon"></i> Opprett ny hytte
+  {{/link-to}}
+{{/unless}}
 {{#link-to 'cabins.dnt' class="item"}}
   <i class="list icon"></i> Alle DNT-hytter
 {{/link-to}}
