@@ -86,7 +86,9 @@ app.get('/login/dnt', (req, res) => {
     }
 
     // Find groups that the user belongs to in Turbasen
-    ntb.grupper({ 'privat.brukere.id': `sherpa3:${user.bruker_sherpa_id}` }, (ntbErr, ntbRes, body) => {
+    const query = { 'privat.brukere.id': `sherpa3:${user.bruker_sherpa_id}` };
+
+    ntb.grupper(query, (ntbErr, ntbRes, body) => {
       if (ntbErr) {
         throw new Error(`Request to Turbasen API failed: ${ntbErr.message}`);
       } else if (body && body.documents && body.documents.length) {
