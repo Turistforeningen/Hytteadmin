@@ -16,25 +16,27 @@
       </div>
     {{/if}}
     <div class="ui form">
-      <div class="field">
-        <label>Epost</label>
-        <div class="ui left icon input">
-          {{input value=email placeholder="Epost"}}
-          <i class="user icon"></i>
+      <form method="POST" action="http://admin-dev.nasjonalturbase.no/logg-inn/turbasen">
+        <div class="field">
+          <label>Epost</label>
+          <div class="ui left icon input">
+            {{input value=email placeholder="Epost" name="email"}}
+            <i class="user icon"></i>
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label>Passord</label>
-        <div class="ui left icon input">
-          {{input type="password" value=password}}
-          <i class="lock icon"></i>
+        <div class="field">
+          <label>Passord</label>
+          <div class="ui left icon input">
+            {{input type="password" value=password name="password"}}
+            <i class="lock icon"></i>
+          </div>
         </div>
-      </div>
-       {{#if isLoading}}
-        <button class="ui blue submit button disabled">Logger inn...</button>
-      {{else}}
-        <button {{action "login"}} class="ui blue submit button">Logg inn</button>
-      {{/if}}
+         {{#if isLoading}}
+          <button class="ui blue submit button disabled">Logger inn...</button>
+        {{else}}
+          <button type="submit" class="ui blue submit button">Logg inn</button>
+        {{/if}}
+      </form>
     </div>
   </div>
   <div class="ui vertical divider">
