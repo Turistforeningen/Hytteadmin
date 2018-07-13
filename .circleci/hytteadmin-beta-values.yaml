@@ -1,0 +1,129 @@
+# Beta values for hytteadmin.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+fullnameOverride: hytteadmin
+replicaCount: 1
+nginx_assets_path: "/usr/src/app/dist"
+
+# autoscaling
+autoscaling: 
+  enabled: false
+  nginx:
+    minReplicas: 1
+    maxReplicas: 2
+    targetCPUUtilizationPercentage: 70
+  server:
+    minReplicas: 1
+    maxReplicas: 2
+    targetCPUUtilizationPercentage: 70  
+
+# pod disruption budget
+disruptionBudget:
+  enabled: false
+  nginx:
+    minAvailable: 1
+  server:
+    minAvailable: 1 
+
+image:
+  server:
+    repository: eu.gcr.io/dnt-docker-registry-public/hytteadmin-server
+    tag: ""
+    pullPolicy: Always
+  redis:
+    repository: redis
+    tag: "3"
+    pullPolicy: IfNotPresent
+  client:
+    repository: eu.gcr.io/dnt-docker-registry-public/hytteadmin-client
+    tag: ""
+    pullPolicy: Always
+  nginx:
+    repository: eu.gcr.io/dnt-docker-registry-public/hytteadmin-nginx
+    tag: ""
+    pullPolicy: Always
+
+
+environment:
+  server:
+    APP_PORT: 8080
+    APP_URL: "https://hytte.beta.dnt.org"
+    DNT_API_KEY: ""
+    DNT_CONNECT_CLIENT: turadmin
+    DNT_CONNECT_KEY: ""
+    NEW_RELIC_APP_NAME: Hytteadmin
+    NEW_RELIC_LICENSE_KEY: ""
+    NEW_RELIC_LOG: stdout
+    NEW_RELIC_NO_CONFIG_FILE: true
+    NODE_ENV: production
+    NTB_API_ENV: api
+    NTB_API_KEY: ""
+    SENTRY_DSN: ""
+  client:
+    SENTRY_DSN: ""
+  nginx:
+    EXCLUDE_PORTS: "80,443"
+    FORCE_SSL: true
+    HSTS_MAX_AGE: 31536000
+    VIRTUAL_HOST: "https://hytte.app.dnt.no,http://hytte.app.dnt.no"
+    VIRTUAL_HOST_WEIGHT: 20
+    VIRTUAL_PORT: 8080
+
+service:
+  server:
+    type: ClusterIP
+    port: 8080
+  nginx:
+    type: ClusterIP
+    port: 8080
+  redis:
+    type: ClusterIP
+    port: 6379
+
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: 10m
+  hosts:
+    - hytte.beta.dnt.org
+
+  tls:
+   - secretName: hytteadmin-beta-tls
+     hosts:
+       - hytte.beta.dnt.org
+
+cert:
+  enabled: true
+  issuer: "letsencrypt-production"
+
+server_resources:
+  limits:
+    cpu: 250m
+    memory: 256Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+redis_resources:
+  limits:
+    cpu: 50m
+    memory: 64Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nginx_resources: # if the limit is low, it can cause problems for the client container npm run build
+  # limits:
+  #   cpu: 100m
+  #   memory: 256Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
