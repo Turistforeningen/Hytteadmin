@@ -145,6 +145,7 @@ workflows:
   build-publish-deploy:
     jobs:
       - build-code:
+          context: dnt-k8s-dev-beta
           filters:
             branches:
               only:
