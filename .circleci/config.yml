@@ -3,6 +3,7 @@ jobs:
   build-code: 
     docker:
       - image: node:argon
+      - image: redis:3.0
     steps:
       - checkout
       - run:
