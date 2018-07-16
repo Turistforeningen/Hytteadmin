@@ -90,12 +90,12 @@ ingress:
     - hytte.dev.dnt.org
 
   tls:
-   - secretName: hytteadmin-dev-tls
+   - secretName: dev-beta-dnt-org-tls
      hosts:
        - hytte.dev.dnt.org
 
 cert:
-  enabled: true
+  enabled: false
   issuer: "letsencrypt-production"
 
 server_resources:
