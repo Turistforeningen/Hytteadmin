@@ -19,6 +19,15 @@ jobs:
             echo $GCLOUD_DOCKER_PRIVATE_CREDENTIALS > ${HOME}/gcloud-service-key.json
             gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
       - run:
+          name: add build name to file
+          command: |
+            apt-get install -y jq
+            chmod +x .circleci/notify-slack.sh
+            TAG="1"
+            echo $TAG > ~/build-id
+            ./.circleci/notify-slack.sh info Deploy to prod workflow started with tag: $TAG
+
+      - run:
           name: Notify Slack on failure
           when: on_fail
           command: |
