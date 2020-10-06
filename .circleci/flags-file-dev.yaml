@@ -1,0 +1,9 @@
+--set-env-vars:
+  DNT_CONNECT_KEY: sm://dnt-platform/HYTTEADMIN__DEV__DNT_CONNECT_KEY
+  DNT_CONNECT_USER: hytteadmin
+  NODE_ENV: production
+  NTB_API_URL: "https://dev.legacy-ntb-api.ut.no"
+  NTB_API_KEY: sm://dnt-platform/HYTTEADMIN__DEV__NTB_API_KEY
+  ROUTING_API_URL: "https://raido.app.dnt.no"
+  SENDGRID_API_KEY: sm://dnt-platform/HYTTEADMIN__DEV__SENDGRID_API_KEY
+  ENABLE_EMAIL: "false"

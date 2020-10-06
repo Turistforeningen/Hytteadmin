@@ -1,0 +1,232 @@
+version: 2.1
+executors:
+  node:
+    docker:
+      - image: circleci/node:12.16.1
+  gcloud:
+    docker:
+      - image: google/cloud-sdk:latest
+
+jobs:
+  set-build-number-prod:
+    executor: gcloud
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Authenticate with gcloud
+          command: |
+            echo $GCLOUD_DOCKER_PRIVATE_CREDENTIALS > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+      - run:
+          name: add build name to file
+          command: |
+            apt-get install -y jq
+            chmod +x .circleci/get-build-number.sh
+            chmod +x .circleci/notify-slack.sh
+            TAG=$(./.circleci/get-build-number.sh Hytteadmin)
+            echo $TAG > ~/build-id
+            ./.circleci/notify-slack.sh info Deploy to prod workflow started with tag: $TAG
+
+      - run:
+          name: Notify Slack on failure
+          when: on_fail
+          command: |
+            chmod +x .circleci/notify-slack.sh
+            ./.circleci/notify-slack.sh false Unable to create tag
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - build-id
+
+  set-build-number-dev:
+    executor: gcloud
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Authenticate with gcloud
+          command: |
+            echo $GCLOUD_DOCKER_PRIVATE_CREDENTIALS > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+      - run:
+          name: add build name to file
+          command: |
+            apt-get install -y jq
+            chmod +x .circleci/get-build-number.sh
+            chmod +x .circleci/notify-slack.sh
+            TAG=$(./.circleci/get-build-number.sh Hytteadmin dev)
+            echo $TAG > ~/build-id
+            ./.circleci/notify-slack.sh info Deploy to prod workflow started with tag: $TAG
+
+      - run:
+          name: Notify Slack on failure
+          when: on_fail
+          command: |
+            chmod +x .circleci/notify-slack.sh
+            ./.circleci/notify-slack.sh false Unable to create tag
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - build-id
+
+  build-files:
+    executor: node
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore NPM Package Cache
+          keys:
+            - npm-packages-{{ checksum "package-lock.json" }}
+      - run:
+          name: Install dependencies
+          command: |
+            cd ~/repo/
+            npm install --ignore-scripts
+      - run:
+          name: Add files to build
+          command: |
+            cd ~/repo/
+            mkdir build
+            cp -r src build/src
+            cp -r node_modules build/node_modules
+            cp package.json build
+
+      - run:
+          name: Notify Slack on failure
+          when: on_fail
+          command: |
+            chmod +x .circleci/notify-slack.sh
+            ./.circleci/notify-slack.sh false Build files failed
+      - run:
+          name: Notify Slack on success
+          when: on_success
+          command: |
+            chmod +x .circleci/notify-slack.sh
+            ./.circleci/notify-slack.sh true Build files succeeded
+
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - build
+
+  build-image:
+    executor: gcloud
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with gcloud
+          command: |
+            echo $GCLOUD_DOCKER_PRIVATE_CREDENTIALS > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build docker image and push image to GCR
+          command: |
+            TAG=$(cat ~/repo/build-id)
+            gcloud auth configure-docker --quiet
+            docker build -t Hytteadmin .
+            docker tag Hytteadmin eu.gcr.io/dnt-docker-registry-private/Hytteadmin:latest
+            docker tag Hytteadmin eu.gcr.io/dnt-docker-registry-private/Hytteadmin:${TAG}
+            docker tag Hytteadmin eu.gcr.io/dnt-docker-registry-private/Hytteadmin:gh.$(git rev-parse --short HEAD)
+            docker push eu.gcr.io/dnt-docker-registry-private/Hytteadmin:latest
+            docker push eu.gcr.io/dnt-docker-registry-private/Hytteadmin:${TAG}
+            docker push eu.gcr.io/dnt-docker-registry-private/Hytteadmin:gh.$(git rev-parse --short HEAD)
+
+      - run:
+          name: Notify Slack on failure
+          when: on_fail
+          command: |
+            export TAG=$(cat ~/repo/build-id)
+            chmod +x .circleci/notify-slack.sh
+            ./.circleci/notify-slack.sh false Build image failed
+      - run:
+          name: Notify Slack on success
+          when: on_success
+          command: |
+            export TAG=$(cat ~/repo/build-id)
+            chmod +x .circleci/notify-slack.sh
+            ./.circleci/notify-slack.sh true Build image succeeded
+
+  deploy-to-prod:
+    executor: gcloud
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/repo
+      - run:
+          name: Authenticate with gcloud
+          command: |
+            echo $CLOUD_RUN_DEPLOYER_CREDENTIALS > ${HOME}/gcloud-service-key.json
+            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
+      - run:
+          name: Deploy Cloud Run service
+          command: |
+            cd ~/repo/.circleci
+            TAG=$(cat ~/repo/build-id)
+            GH_SHA=gh.$(git rev-parse --short HEAD)
+            export SERVICE_NAME=Hytteadmin--prod
+
+            gcloud beta run deploy Hytteadmin--prod \
+              --project dnt-app-utno-app \
+              --platform managed \
+              --region europe-north1 \
+              --allow-unauthenticated \
+              --max-instances=2 \
+              --concurrency=400 \
+              --memory=1000 \
+              --image eu.gcr.io/dnt-docker-registry-private/Hytteadmin:${TAG} \
+              --revision-suffix=${TAG} \
+              --service-account=Hytteadmin@dnt-app-utno-app.iam.gserviceaccount.com \
+              --flags-file=flags-file-prod.yaml
+
+      - run:
+          name: Notify Slack on failure
+          when: on_fail
+          command: |
+            chmod +x .circleci/notify-slack.sh
+            export TAG=$(cat ~/repo/build-id)
+            ./.circleci/notify-slack.sh false Deploy to prod failed
+      - run:
+          name: Notify Slack on success
+          when: on_success
+          command: |
+            chmod +x .circleci/notify-slack.sh
+            export TAG=$(cat ~/repo/build-id)
+            ./.circleci/notify-slack.sh true Deploy to prod succeeded :tada:
+
+workflows:
+  version: 2
+  deploy-prod:
+    jobs:
+      - set-build-number-prod:
+          context: dnt-k8s-prod
+          filters:
+            branches:
+              only: /^master$/
+      - build-files:
+          context: dnt-k8s-prod
+          filters:
+            branches:
+              only: /^master$/
+      - build-image:
+          context: dnt-k8s-prod
+          requires:
+            - build-files
+            - set-build-number-prod
+          filters:
+            branches:
+              only: /^master$/
+      - deploy-to-prod:
+          context: dnt-k8s-prod
+          requires:
+            - build-image
+          filters:
+            branches:
+              only: /^master$/
