@@ -13,20 +13,6 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - run:
-          name: Authenticate with gcloud
-          command: |
-            echo $GCLOUD_DOCKER_PRIVATE_CREDENTIALS > ${HOME}/gcloud-service-key.json
-            gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
-      - run:
-          name: add build name to file
-          command: |
-            apt-get install -y jq
-            chmod +x .circleci/get-build-number.sh
-            chmod +x .circleci/notify-slack.sh
-            TAG=$(./.circleci/get-build-number.sh Hytteadmin)
-            echo $TAG > ~/build-id
-            ./.circleci/notify-slack.sh info Deploy to prod workflow started with tag: $TAG
 
       - run:
           name: Notify Slack on failure
